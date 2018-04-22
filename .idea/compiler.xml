@@ -13,7 +13,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="iyeeku" target="1.5" />
+      <module name="iyeeku" target="1.8" />
       <module name="iyeeku-blog" target="1.8" />
       <module name="iyeeku-core" target="1.8" />
       <module name="iyeeku-user" target="1.8" />
