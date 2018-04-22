@@ -1,0 +1,132 @@
+.header-navbar {
+    min-height: 40px;
+}
+
+.header-navbar .top-banner {
+    background: -webkit-linear-gradient(left, rgba(78, 170, 76, 0.5), rgba(0, 202, 133, 0.5)), #4eaa4c;
+    background: linear-gradient(to right, rgba(78, 170, 76, 0.5), rgba(0, 202, 133, 0.5)), #4eaa4c;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    font-size: 14px;
+}
+.layout-flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    /* align-items: center; */
+}
+
+
+.layout-flex .flex-grow {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.header-navbar .top-banner .osc-logo {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    background: url(../svg/logo-osc.svg) no-repeat;
+}
+
+.header-navbar .top-banner a {
+    color: #fff;
+}
+
+
+@media screen and (min-width: 769px){
+	.sm-hide {
+    	display: inline-block;
+	}
+}
+
+.header-navbar .top-banner .menus .menu-item {
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.header-navbar .top-banner .menus .menu-item {
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.header-navbar .top-banner .menu-drop {
+    position: relative;
+}
+
+.header-navbar .top-banner .menu-drop a i.icon-svg {
+    width: 6px;
+    height: 6px;
+    vertical-align: middle;
+}
+
+
+/* .icon-arr-down-white {
+    background-image: url(data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%226%22%20height%3D%223%22…84z%22%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E);
+    width: 6px;
+    height: 3px;
+} */
+
+.icon-svg.icon-arr-down-white {
+/* 	background-image:url(${pageContext.request.contextPath}/svg/ic_arrow_down.svg) center no-repeat; */
+ 	background: url(../svg/ic_arrow_down.svg) center no-repeat;
+    background-size: contain;
+}
+
+.icon-svg {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    vertical-align: middle;
+}
+
+.header-navbar .top-banner .menu-drop .menu-drop-down {
+    display: none;
+    position: absolute;
+    left: -20px;
+    width: 150px;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+}
+
+.header-navbar .top-banner .menu-drop .menu-drop-down .drop-list{
+	margin-bottom: 0px !important;	
+}
+
+.header-navbar .top-banner .menu-drop .menu-drop-down .drop-list li {
+    color: #111111;
+}
+
+.header-navbar .top-banner .menu-drop .menu-drop-down .drop-list li a {
+    padding-left: 18px;
+    color: #111111;
+    display: block;
+    line-height: 36px;
+}
+
+.header-navbar .top-banner .name {
+    color: #fff;
+}
+
+.header-navbar .top-banner .menu-drop {
+    position: relative;
+}
+
+.header-navbar .top-banner .user-bar .user-menu:after {
+    content: "|";
+    margin-left: 8px;
+    margin-right: 5px;
+}
+
+.liActivited{
+	color: #46ad2e !important;
+	background-color: #f8f8f8;
+}
