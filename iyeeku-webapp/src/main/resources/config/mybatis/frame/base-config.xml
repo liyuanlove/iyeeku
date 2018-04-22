@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<properties>
+		<property name="dbtype" value="mysql" /><!-- 数据库类型：MySQL、Oracle -->
+		<property name="defaultDateFormat" value="yyyy-MM-dd" />
+	</properties>
+	
+	<!-- <properties> <property name="dialect" value="mysql" /> <property name="pageSqlId" 
+		value=".*Page$" /> </properties> -->
+	
+	<settings>
+		<!-- 设置超时时间，它决定驱动等待一个数据库响应的时间 -->
+		<setting name="defaultStatementTimeout" value="60000" />
+		<!-- 启用或禁用 缓存 , 如果这里禁用了缓存，则整合好的ehcache 将会失效!!!!!! -->
+		<setting name="cacheEnabled" value="true" />
+		<!-- 启用或禁用延迟加载。当禁用时, 所有关联对象都会即时加载 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+	
+		<!-- <setting name="multipleResultSetsEnabled" value="true" /> <setting 
+			name="useColumnLabel" value="true" /> <setting name="defaultExecutorType" 
+			value="REUSE" /> -->
+	</settings>
+	
+	<!-- 自定义mybatis拦截器实现 物理分页 -->
+	<!-- 实现mybatis的物理分页 -->
+	<!-- <plugins> <plugin interceptor="com.yq.yee.core.orm.interceptor.PaginationInterceptor" 
+		/> </plugins> -->
+	
+	<!-- 使用 github 的开源项目 mybatis的 分页插件pagehelper.jar, 兼容各种数据库 , 还需要下载sql解析工具jsqlparser.jar -->
+	<plugins>
+		<!-- com.github.pagehelper为PageHelper类所在包名 -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
+			<!-- PageHelper 4.0 版本后，可以自动识别所链接的数据库，下面可以不用配置了 -->
+			<!--<property name="dialect" value="mysql" />--> <!--  oracle ， mysql-->
+			<!-- !!!!!!!!!重点!!!!!!!  该参数默认为false -->
+			<!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+			<!-- 和startPage中的pageNum效果一样 -->
+			<property name="offsetAsPageNum" value="true" />
+			<!-- 该参数默认为false -->
+			<!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+			<property name="rowBoundsWithCount" value="false" />
+			<!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+			<!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型） -->
+			<property name="pageSizeZero" value="true" />
+			<!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 -->
+			<!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+			<!-- 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 -->
+			<property name="reasonable" value="false" />
+			<!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 -->
+			<!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 -->
+			<!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,不配置映射的用默认值 -->
+			<!-- 不理解该含义的前提下，不要随便复制该配置 -->
+			<property name="params" value="pageNum=start;pageSize=limit;" />
+		</plugin>
+	</plugins>
+	
+	<!--
+		<mappers> <mapper resource="/config/myBatis/app/user-sqlmap.xml"/> 
+			<mapper resource="/config/myBatis/app/category-sqlmap.xml"/>
+			<mapper resource="/config/myBatis/app/article-sqlmap.xml"/> 
+		</mappers> 
+	-->
+
+</configuration>

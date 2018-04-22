@@ -1,0 +1,83 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      classpath:config/env/dataAccessContext.xml,
+      classpath*:/config/spring/frame/*.xml,
+      classpath*:/config/spring/app/*.xml
+    </param-value>
+  </context-param>
+
+<!--  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>-->
+
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>
+      classpath:/config/env/log4j_iyeeku.xml
+    </param-value>
+  </context-param>
+
+  <!-- 注意，这里有个先后顺序 -->
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+
+  <listener>
+    <listener-class>com.iyeeku.core.webapp.ContextInit</listener-class>
+  </listener>
+
+  <!-- springMVC核心配置 -->
+  <!-- 配置spring mvc的相关内容，此处的servlet-name任意，但必须有<your servlet-name>-servlet.xml与之对应 -->
+  <servlet>
+    <servlet-name>springMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:/config/spring/frame/springmvc.xml</param-value>
+    </init-param>
+    <!-- 启动顺序，让这个Servlet随Servlet容器一起启动。 -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+  <!-- 配置过滤器，同时把所有的请求都转为utf-8编码 -->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- 配置session超时时间，单位分钟 -->
+  <session-config>
+    <session-timeout>20</session-timeout>
+  </session-config>
+
+
+
+
+
+
+</web-app>

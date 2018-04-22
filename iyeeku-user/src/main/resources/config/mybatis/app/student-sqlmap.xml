@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test1">
+	
+	<!-- 
+		整合 echo 缓存机制 , 更具实际场景确定是否需要开启缓存机制 
+		前提条件需要mybatis开启自己的缓存，在base-config-sqlmap.xml中设置，
+		如果不加上下面这个配置，就算开启了mybatis的缓存，也相当于没有启动缓存
+		如果需要针对某个方法不需要配置缓存，则在方法上控制，可以使用 useCache="false"控制
+	 -->
+	 
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+	
+	<select id="selectStudent" resultType="java.util.HashMap">
+		select * from student
+	</select>
+	
+</mapper>

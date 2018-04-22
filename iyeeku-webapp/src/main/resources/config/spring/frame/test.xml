@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- MYSQL配置 -->
+<!-- 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl"
+			value="jdbc:mysql://120.26.163.104:3306/dev_kvboo?characterEncoding=utf-8"></property>
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="feiyu2016"></property>
+		<property name="initialPoolSize" value="3"></property>
+		<property name="minPoolSize" value="3"></property>
+		<property name="maxPoolSize" value="5"></property>
+		<property name="acquireIncrement" value="3"></property>
+		<property name="maxStatements" value="8"></property>
+		<property name="maxStatementsPerConnection" value="5"></property>
+		<property name="maxIdleTime" value="1800"></property>
+	</bean> -->
+	
+	<!--  ORACLE配置  -->
+<!--	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${username}"/>
+        <property name="password" value="${passwd}"/>
+        <property name="initialPoolSize" value="5"></property>
+		<property name="minPoolSize" value="3"></property>
+		<property name="maxPoolSize" value="5"></property>
+		<property name="acquireIncrement" value="3"></property>
+		<property name="maxStatements" value="8"></property>
+		<property name="maxStatementsPerConnection" value="5"></property>
+		&lt;!&ndash; <property name="maxIdleTime" value="180"></property> &ndash;&gt;
+    </bean>-->
+
+</beans>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/iyeeku.iml" filepath="$PROJECT_DIR$/iyeeku.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iyeeku-blog/iyeeku-blog.iml" filepath="$PROJECT_DIR$/iyeeku-blog/iyeeku-blog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iyeeku-core/iyeeku-core.iml" filepath="$PROJECT_DIR$/iyeeku-core/iyeeku-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iyeeku-user/iyeeku-user.iml" filepath="$PROJECT_DIR$/iyeeku-user/iyeeku-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iyeeku-webapp/iyeeku-webapp.iml" filepath="$PROJECT_DIR$/iyeeku-webapp/iyeeku-webapp.iml" />
+    </modules>
+  </component>
+</project>
