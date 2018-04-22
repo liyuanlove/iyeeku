@@ -1,0 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript"></script>

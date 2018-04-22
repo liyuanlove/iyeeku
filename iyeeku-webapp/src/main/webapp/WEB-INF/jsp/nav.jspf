@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
+<div class="header-navbar">
+		<div class="layout-flex top-banner">
+			<div class="flex-grow">
+				<a href="${pageContext.request.contextPath}/" class="osc-logo"></a>
+				<div class="menus sm-hide">
+					<a href="${pageContext.request.contextPath}/" class="menu-item">首页</a>
+				
+					<div class="menu-item question menu-drop">
+						<a href="${pageContext.request.contextPath}/question" class="question">
+							问答 <i class="icon-svg icon-arr-down-white"></i>
+						</a>
+						<div class="question menu-drop-down">
+							<ul class="drop-list">
+								<li><a href="${pageContext.request.contextPath}/question"> 技术问答</a></li>
+								<li><a href="${pageContext.request.contextPath}/question2"> 技术分享</a></li>
+								<li><a href="${pageContext.request.contextPath}/question3"> IT大杂烩</a></li>
+								<li><a href="${pageContext.request.contextPath}/question4"> 职业生涯</a></li>
+								<li><a href="${pageContext.request.contextPath}/question5"> 站务/建议</a></li>
+							</ul>
+						</div>
+					</div>
+					<a href="${pageContext.request.contextPath}/blog" class="menu-item blog">博客</a>
+					<a href="${pageContext.request.contextPath}/news" class="menu-item news">资讯</a>
+					<a href="${pageContext.request.contextPath}/tweets" class="menu-item tweets">动弹</a>
+					<!-- <a href="#" class="menu-item event">活动</a> -->
+					<a href="#" class="menu-item testdb">题库</a>
+					<a href="#" class="menu-item diary" style="color: #FFD700">站长日记</a>
+				</div>
+				
+			</div>
+			
+			<div class="user-bar">
+				<div class="user-info">
+					<span class="name">杨旭东love</span>，您好 
+					<div class="user-menu menu-drop user-menu sm-hide">
+						<a id="MySpace" href="${pageContext.request.contextPath}/userInfo">
+							我的空间
+							<i class="icon-svg icon-arr-down-white"></i>
+						</a>
+						<div class="myspace menu-drop-down">
+							<ul class="drop-list myspace">
+								<li class="msg"><a href="${pageContext.request.contextPath}/personalBox">我的私信</a></li>
+								<!-- <li class="code"><a href="#">我分享的代码</a></li> -->
+								<li class="testdb"><a href="${pageContext.request.contextPath}/modifyPersonInfo">我的刷题</a></li>
+								<li class="blog"><a href="${pageContext.request.contextPath}/myblogs">我的博客</a></li>
+								<li class="friends"><a href="#">我关注的人</a></li>
+								<li class="favorites"><a href="#">我的收藏夹</a></li>
+								<li class="profile"><a href="${pageContext.request.contextPath}/modifyPersonInfo">个人资料修改</a></li>
+							</ul>
+						</div>
+					</div>
+					<a href="#" class="user-menu sm-hide">投递新闻</a>
+					<a href="${pageContext.request.contextPath}/register" class="user-menu sm-hide">注册</a>
+					<a href="#">退出</a>
+				</div>
+			</div>		
+	</div>
+</div>
