@@ -6,7 +6,7 @@
 
 ## 特性
 
--   基于spring + springMVC + myBatis 开发的
+-   基于spring + springMVC + myBatis 开发 ，Maven管理项目。
 -   页面设计全仿写[开源中国](https://www.oschina.net/),（UI设计太头疼，主要用于学习互联网架构知识，全仿写页面）
 -   搜索引擎使用 [ElasticSearch](http://www.elastic.co/products/elasticsearch) , 分布式服务框架使用 [Dubbo](http://dubbo.apache.org/)。
 
@@ -23,4 +23,16 @@
 ###目录结构
 
 ```bash
+├── /dist/           # 项目输出目录
+├── /iyeeku-blog/    # 博客模块
+│ ├── /src/          # 源代码
+│ │ ├── skin.less    # 全局样式
+│ │ └── vars.less    # 全局样式变量
+│ ├── /routes/       # 路由组件 
+├── package.json     # 项目信息
+├── .init.sql        # 数据脚本
+└── .pom.xml         # maven依赖配置文件
+```
+
+文件命名说明
 
