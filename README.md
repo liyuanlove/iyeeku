@@ -6,7 +6,8 @@
 
 ## 特性
 
--       基于spring + springMVC + myBatis 开发的
+-   基于spring + springMVC + myBatis 开发的
+-   页面设计全仿写[开源中国](https://www.oschina.net/),（UI设计太头疼，主要用于学习互联网架构知识，全仿写页面）
 
 ## 更新日志
 
@@ -14,7 +15,7 @@
 
 `2018-04-29`
 
--       基础环境搭建
+-   基础环境搭建
 
 ## 开发构建
 
