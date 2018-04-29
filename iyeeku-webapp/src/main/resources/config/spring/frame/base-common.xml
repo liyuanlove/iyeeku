@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--	<bean id="keyGen" class="com.yq.yee.core.webapp.tools.keygen.impl.KeyGenImpl"></bean>-->
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- <value>classpath:config/env/jdbc.properties</value> -->
+                <!--<value>config/env/iyeeku_env.properties</value>-->
+                <!--<value>config.env.iyeeku_env.properties</value>-->
+				<value>classpath:config/env/iyeeku_env.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding">
+			<value>UTF-8</value>
+		</property>
+	</bean>
+
+
+</beans>
