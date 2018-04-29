@@ -23,6 +23,11 @@
             <artifactId>iyeeku-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>iyeeku</groupId>
+            <artifactId>iyeeku-blog</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 
