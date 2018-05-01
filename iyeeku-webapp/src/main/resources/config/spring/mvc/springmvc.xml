@@ -13,20 +13,22 @@
         http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!--   注意
 		注意 springmvc.xml这个文件被加载
 		如果被spring容器当成 contextConfigLocation 参数启动
 		同时又被 springmvc DispatcherServlet 的contextConfigLocation 参数 启动
 		整个项目中一个 Controller 类 会有2个实例 
 	-->
-	
-	<!-- 扫描注解包 -->
-	<context:component-scan base-package="com.iyeeku.**.controller">
-	</context:component-scan>
 
-	<!-- 启用spring mvc 注解 -->
-	<!-- <context:annotation-config /> -->
+	<!-- 启用spring 注解 -->
+	<!--<context:annotation-config />-->
+
+	<!-- 扫描注解包 -->
+<!--	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>-->
+	<context:component-scan base-package="com.iyeeku.**.controller"></context:component-scan>
+
 
 	<!-- 开启注解方案1 -->
 	<!-- 注解方法处理 -->
