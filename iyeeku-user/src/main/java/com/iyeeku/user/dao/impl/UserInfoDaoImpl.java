@@ -23,4 +23,12 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements IUserInfoDao {
         this.LOGGER.info("UserInfoDao getAllUserInfosCount");
         return this.queryOne_myBatis("com.iyeeku.user.dao.IUserInfoDao.getAllUserInfosCount",userInfoVO);
     }
+
+    @Override
+    public void save(UserInfoVO userInfoVO) {
+        this.save_myBatis("com.iyeeku.user.dao.IUserInfoDao.save",userInfoVO);
+    }
+
+
+
 }

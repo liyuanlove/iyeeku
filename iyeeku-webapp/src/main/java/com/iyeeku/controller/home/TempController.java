@@ -1,4 +1,4 @@
-package com.iyeeku.user.controller;
+package com.iyeeku.controller.home;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,12 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class TempController {
-
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public ModelAndView toHome(){
-        System.out.println("执行到这里");
-        return new ModelAndView("home");
-    }
 
     @RequestMapping(value="/news",method=RequestMethod.GET)
     public ModelAndView toNews(){

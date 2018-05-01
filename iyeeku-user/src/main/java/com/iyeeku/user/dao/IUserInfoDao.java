@@ -10,4 +10,7 @@ public interface IUserInfoDao {
 
     public Integer getAllUserInfosCount(UserInfoVO userInfoVO);
 
+    public void save(UserInfoVO userInfoVO);
+
+
 }

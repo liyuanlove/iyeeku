@@ -1,9 +1,11 @@
-package com.iyeeku.user.controller;
+package com.iyeeku.controller.user;
 
 
 import com.iyeeku.user.service.IUserInfoService;
 import com.iyeeku.user.vo.UserInfoVO;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,26 @@ public class UserInfoController{
 
     public ModelAndView toUserInfos(){
         return null;
+    }
+
+    @RequestMapping(value = "/user/register" , method = RequestMethod.POST)
+    public void register(UserInfoVO vo){
+        this.iUserInfoService.register(vo);
+    }
+
+    @RequestMapping(value = "/user/login" , method = RequestMethod.POST)
+    public void login(HttpRequest request, HttpResponse response){
+
+    }
+
+    @RequestMapping(value = "/user/logout" , method = RequestMethod.GET)
+    public void logout(){
+
+    }
+
+    @RequestMapping(value = "/user/modifyProfile" , method = RequestMethod.POST)
+    public void modifyProfile(UserInfoVO userInfoVO){
+
     }
 
     @RequestMapping(value = "/user",method = RequestMethod.GET)

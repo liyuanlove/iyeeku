@@ -19,5 +19,9 @@
 	<select id="getAllUserInfosCount" parameterType="com.iyeeku.user.vo.UserInfoVO" resultType="java.lang.Integer">
 		select count(*) FROM IYEEKU_USERS
 	</select>
+
+	<insert id="save" parameterType="com.iyeeku.user.vo.UserInfoVO">
+
+	</insert>
 	
 </mapper>

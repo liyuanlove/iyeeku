@@ -18,4 +18,13 @@ public class UserInfoServiceImpl implements IUserInfoService {
     public List<UserInfoVO> getAllUserInfos(UserInfoVO userInfoVO) {
         return this.iUserInfoDao.getAllUserInfos(userInfoVO);
     }
+
+    @Override
+    public void register(UserInfoVO userInfoVO) {
+
+        this.iUserInfoDao.save(userInfoVO);
+
+    }
+
+
 }

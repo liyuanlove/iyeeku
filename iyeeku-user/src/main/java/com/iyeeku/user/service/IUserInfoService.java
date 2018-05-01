@@ -8,4 +8,6 @@ public interface IUserInfoService {
 
     public List<UserInfoVO> getAllUserInfos(UserInfoVO userInfoVO);
 
+    public void register(UserInfoVO userInfoVO);
+
 }
