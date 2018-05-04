@@ -22,6 +22,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-co
 		<!-- <setting name="multipleResultSetsEnabled" value="true" /> <setting 
 			name="useColumnLabel" value="true" /> <setting name="defaultExecutorType" 
 			value="REUSE" /> -->
+		<!-- 指定 MyBatis 所用日志的具体实现，未指定时将自动查找。
+		 	SLF4J，LOG4J ，LOG4J2 ， JDK_LOGGING ，COMMONS_LOGGING ，STDOUT_LOGGING ，NO_LOGGING
+		 -->
+		<!--<setting name="logImpl" value="LOG4J2" />-->
+		<!--<setting name="logPrefix" value="dao."/>-->
 	</settings>
 	
 	<!-- 自定义mybatis拦截器实现 物理分页 -->

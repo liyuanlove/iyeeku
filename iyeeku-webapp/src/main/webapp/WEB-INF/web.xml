@@ -26,17 +26,59 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>-->
 
+<!--    <context-param>
+        <param-name>isLog4jAutoInitializationDisabled</param-name>
+        <param-value>false</param-value>
+    </context-param>-->
+
+    <!--
+        log4j2 默认会找 classpath:/log4j2.xml , 可以进行如下额外配置自定义路径
+    -->
+<!--
+   log4j 1.x 配置文件参数路径
   <context-param>
     <param-name>log4jConfigLocation</param-name>
-    <param-value>
-      classpath:/config/env/log4j_iyeeku.xml
-    </param-value>
-  </context-param>
+    <param-value>classpath:/config/env/log4j_iyeeku.xml</param-value>
+  </context-param>-->
+
+  <!-- log4j2.x 配置文件参数路径 -->
+<!--  <context-param>
+    <param-name>log4jConfiguration</param-name>
+    <param-value>classpath:/config/env/log4j2.xml</param-value>
+  </context-param>-->
 
   <!-- 注意，这里有个先后顺序 -->
-  <listener>
+<!--  <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>-->
+
+  <!-- log4j2-begin -->
+<!--  <listener>
+    <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
   </listener>
+  <filter>
+    <filter-name>log4jServletFilter</filter-name>
+    <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>log4jServletFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>-->
+  <!-- log4j2-end -->
+
+  <!-- 配置logback日志框架 -->
+  <context-param>
+    <param-name>logbackConfigLocation</param-name>
+    <param-value>classpath:/config/env/logback.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+  </listener>
+
 
   <listener>
     <listener-class>com.iyeeku.core.webapp.ContextInit</listener-class>

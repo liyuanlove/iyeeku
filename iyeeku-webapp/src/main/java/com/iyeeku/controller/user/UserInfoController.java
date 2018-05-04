@@ -3,16 +3,15 @@ package com.iyeeku.controller.user;
 
 import com.iyeeku.user.service.IUserInfoService;
 import com.iyeeku.user.vo.UserInfoVO;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -31,7 +30,7 @@ public class UserInfoController{
     }
 
     @RequestMapping(value = "/user/login" , method = RequestMethod.POST)
-    public void login(HttpRequest request, HttpResponse response){
+    public void login(HttpServletRequest request , HttpServletResponse response){
 
     }
 
