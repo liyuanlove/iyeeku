@@ -90,22 +90,39 @@
 		
 	<!-- 设置不同包中类的日志级别 , 生产时使用 info -->
 	<!-- 如果additivity为true时 ，它本身的日志会回馈到root里面去 -->
-	<logger name="com.yq.yee" additivity="true">
+<!--	<logger name="com.yq.yee" additivity="true">
         <level value="DEBUG"></level>
         <appender-ref ref="APPLOGFILE" />
-        <!-- <appender-ref ref="STDOUT" /> -->
-    </logger>
+        &lt;!&ndash; <appender-ref ref="STDOUT" /> &ndash;&gt;
+    </logger>-->
     
     <!-- 设置 com.yxd.iyee 包日志  , 生产时使用 info -->
-    <logger name="com.yxd.iyee" additivity="true">
+<!--    <logger name="com.yxd.iyee" additivity="true">
         <level value="DEBUG"></level>
         <appender-ref ref="DAILYLOGFILE" />
+    </logger>-->
+
+<!--    <logger name="com.iyeeku.user.dao.impl">
+        <level value="DEBUG"></level>
+        <appender-ref ref="STDOUT"/>
+    </logger>-->
+
+   <logger name="com.springframework">
+        <level value="DEBUG"/>
     </logger>
-	    
+
+   <logger name="com">
+        <level value="DEBUG"></level>
+    </logger>
+
+    <logger name="org.mybatis">
+        <level value="DEBUG"/>
+    </logger>
+
 	<!-- 应用日志级别 -->
 	<root>
 		<level value="INFO" />
-		<appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
 	</root>
 		
 </log4j:configuration>

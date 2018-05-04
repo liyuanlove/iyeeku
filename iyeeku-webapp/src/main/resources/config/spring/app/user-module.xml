@@ -4,10 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="iUserInfoDao" class="com.iyeeku.user.dao.impl.UserInfoDaoImpl" parent="baseDao"></bean>
+<!--	<bean id="iUserInfoDao" class="com.iyeeku.user.dao.impl.UserInfoDaoImpl" parent="baseDao"></bean>
 	<bean id="iUserInfoService" class="com.iyeeku.user.service.impl.UserInfoServiceImpl">
 		<property name="iUserInfoDao" ref="iUserInfoDao"></property>
-	</bean>
+	</bean>-->
 
 
 

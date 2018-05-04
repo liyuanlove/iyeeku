@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-co
 		<!-- <setting name="multipleResultSetsEnabled" value="true" /> <setting 
 			name="useColumnLabel" value="true" /> <setting name="defaultExecutorType" 
 			value="REUSE" /> -->
+		<setting name="logImpl" value="LOG4J" />
 	</settings>
 	
 	<!-- 自定义mybatis拦截器实现 物理分页 -->

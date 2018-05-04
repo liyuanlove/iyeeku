@@ -31,9 +31,9 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	<bean id="baseDao" class="com.iyeeku.core.orm.impl.BaseDaoImpl">
+<!--	<bean id="baseDao" class="com.iyeeku.core.orm.impl.BaseDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-	</bean>
+	</bean>-->
 
 </beans>

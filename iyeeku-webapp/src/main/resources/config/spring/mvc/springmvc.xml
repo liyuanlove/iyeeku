@@ -25,8 +25,9 @@
 	<!--<context:annotation-config />-->
 
 	<!-- 扫描注解包 -->
-<!--	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
-	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>-->
+	<context:component-scan base-package="com.iyeeku.core.orm.impl"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.controller.*"></context:component-scan>
 
 

@@ -4,11 +4,12 @@ import com.iyeeku.core.orm.impl.BaseDaoImpl;
 import com.iyeeku.user.dao.IUserInfoDao;
 import com.iyeeku.user.vo.UserInfoVO;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserInfoDaoImpl extends BaseDaoImpl implements IUserInfoDao {
-
 
     private static final Logger LOGGER = Logger.getLogger(UserInfoDaoImpl.class);
 
