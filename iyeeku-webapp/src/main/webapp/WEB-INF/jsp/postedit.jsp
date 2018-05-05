@@ -196,14 +196,14 @@
 	    </div>
 	</div>
 	
-    	
+
     <div style="width: 100%;background-color: #f9f9f9;border-top: 1px solid #d1d1d1;border-bottom: 1px solid #d1d1d1;">
     	&nbsp;
     	<div class="edit-main" style="margin-top: 0px;">
     		<textarea id="editor" name="editor" rows="30" style="width: 99.4%; display: none;" class="ckeditor">
 			</textarea>
        		<script type="text/javascript">
-  				var editor=CKEDITOR.replace('editor',{customConfig:"config.js"});
+  				var editor=CKEDITOR.replace('editor',{customConfig:"config.js",codeSnippet_theme: 'monokai_sublime'});
   			</script>
     	</div>
     	
