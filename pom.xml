@@ -305,12 +305,20 @@
             <scope>test</scope>
         </dependency>-->
 
+        <!-- jcl-over-slf4j 是用来把spring 源码中大量使用到的 commmons-logging替换成 slf4j,
+          只有在添加依赖之后才能看到spring框架本身打印的日志 , 否则只能看到开发者自己打印的日志-->
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+
+<!--        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.5</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- logback 日志框架 -->
         <dependency>
@@ -319,7 +327,7 @@
             <version>1.1.7</version>
         </dependency>
 
-        <!-- logback spring 扩展 -->
+        <!-- logback-ext-spring 是由官方提供对spring的支持 -->
         <dependency>
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>

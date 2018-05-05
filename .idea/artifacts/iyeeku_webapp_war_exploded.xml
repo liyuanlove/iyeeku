@@ -52,6 +52,7 @@
           <element id="library" level="project" name="Maven: org.mybatis.caches:mybatis-ehcache:1.0.2" />
           <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache-core:2.6.5" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
+          <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.5" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.1.7" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.1.7" />
           <element id="library" level="project" name="Maven: org.logback-extensions:logback-ext-spring:0.1.4" />
