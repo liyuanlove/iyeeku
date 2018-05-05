@@ -26,7 +26,7 @@ public class UserInfoVO implements Serializable {
     private String createdchannel;
     private String updatedtime;
     private String updateduser;
-    private String updatedchannel;
+    private String updatechannel;
 
     public String getUserid() {
         return userid;
@@ -204,11 +204,11 @@ public class UserInfoVO implements Serializable {
         this.updateduser = updateduser;
     }
 
-    public String getUpdatedchannel() {
-        return updatedchannel;
+    public String getUpdatechannel() {
+        return updatechannel;
     }
 
-    public void setUpdatedchannel(String updatedchannel) {
-        this.updatedchannel = updatedchannel;
+    public void setUpdatechannel(String updatechannel) {
+        this.updatechannel = updatechannel;
     }
 }

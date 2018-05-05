@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<context:component-scan base-package="com.iyeeku.core.orm.impl"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>
+
+	<!-- 有了上面的配置，下面这个配置可以省略掉的，因为上面的配置会默认打开以下配置。
+		以下配置会默认声明了@Required、@Autowired、 @PostConstruct、@PersistenceContext、@Resource、@PreDestroy等注解。 -->
+<!--	<context:annotation-config/>-->
 
 <!--	<bean id="keyGen" class="com.yq.yee.core.webapp.tools.keygen.impl.KeyGenImpl"></bean>-->
 	

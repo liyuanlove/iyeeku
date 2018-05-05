@@ -79,20 +79,21 @@
 			
 			<div class="fh5co-tab-content" data-content="2">
 				<div class="fh5co-content-inner">
-					<form class="form-horizontal" role="form">
+					<form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/user/register" method="post">
+						<input type="hidden" name="regType" value="email"/>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<input type="text" class="form-control input-lg" placeholder="请输入邮箱">
+								<input type="text" class="form-control input-lg" name="loginname" placeholder="请输入邮箱">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-12 col-md-12">
-								<input type="text" class="form-control input-lg" placeholder="请输入昵称，至少3个字符，至多20个">
+								<input type="text" class="form-control input-lg" name="nickname" placeholder="请输入昵称，至少3个字符，至多20个">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-12 col-md-12">
-								<input type="text" class="form-control input-lg" placeholder="请输入密码，字母或特殊符号和数字结合">
+								<input type="text" class="form-control input-lg" name="passwd" placeholder="请输入密码，字母或特殊符号和数字结合">
 							</div>
 						</div>
 						<div class="form-group">
@@ -104,7 +105,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-12 col-md-12">
-								<button class="btn btn-success btn-lg btn-block">注册</button>
+								<button class="btn btn-success btn-lg btn-block" type="submit">注册</button>
 							</div>
 						</div>
 					</form>	

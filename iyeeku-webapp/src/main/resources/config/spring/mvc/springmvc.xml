@@ -25,9 +25,11 @@
 	<!--<context:annotation-config />-->
 
 	<!-- 扫描注解包 -->
-	<context:component-scan base-package="com.iyeeku.core.orm.impl"></context:component-scan>
+	<!-- 之前配置在springmvc中扫描，导致没有了 "事物" -->
+<!--	<context:component-scan base-package="com.iyeeku.core.orm.impl"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
-	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>-->
+	<!-- Spring MVC扫描 -->
 	<context:component-scan base-package="com.iyeeku.controller.*"></context:component-scan>
 
 
@@ -40,6 +42,9 @@
 		/> -->
 
 	<!-- 开启注解方案2 -->
+	<!-- 下面配置,它声明了@RequestMapping、@RequestBody、@ResponseBody等。并且，该配置默认加载很多的参数绑定方法，比如json转换解析器等。
+		并不能因为 <context:component-scan base-package="com.iyeeku.controller.*"></context:component-scan> 而可以不要，这点和spring不同。
+	-->
 	<mvc:annotation-driven />
 
 

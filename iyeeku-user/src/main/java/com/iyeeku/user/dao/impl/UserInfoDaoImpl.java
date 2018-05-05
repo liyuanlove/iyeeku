@@ -30,6 +30,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements IUserInfoDao {
     public void save(UserInfoVO userInfoVO) {
         logger.info("UserInfoDao save");
         this.save_myBatis("com.iyeeku.user.dao.IUserInfoDao.save",userInfoVO);
+        System.out.println(userInfoVO.getUserid());
     }
 
 

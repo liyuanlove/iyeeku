@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -25,7 +26,13 @@ public class UserInfoController{
     }
 
     @RequestMapping(value = "/user/register" , method = RequestMethod.POST)
-    public void register(UserInfoVO vo){
+    public void register(UserInfoVO vo,HttpServletRequest request){
+
+        String regType = request.getParameter("regType");
+
+        if("email".equals(regType)){
+            vo.setEmail(vo.getLoginname());
+        }
         this.iUserInfoService.register(vo);
     }
 

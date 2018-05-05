@@ -30,32 +30,34 @@
 			<tx:method name="criteria*" read-only="true" />
 
 			<!-- 其他方法，如save，update，insert等对数据库进行写入操作的方法 -->
-			<tx:method name="init*" read-only="false" />
-			<tx:method name="insert*" read-only="false" />
-			<tx:method name="update*" read-only="false" />
-			<tx:method name="save*" read-only="false" />
-			<tx:method name="add*" read-only="false" />
-			<tx:method name="create*" read-only="false" />
-			<tx:method name="del*" read-only="false" />
-			<tx:method name="undel*" read-only="false" />
-			<tx:method name="remove*" read-only="false" />
-			<tx:method name="batchCommit*" read-only="false" />
-			<tx:method name="syn*" read-only="false" />
-			<tx:method name="send*" read-only="false" />
-			<tx:method name="import*" read-only="false" />
-			<tx:method name="dismiss*" read-only="false" />
-			<tx:method name="retrieve*" read-only="false" />
-			<tx:method name="refer*" read-only="false"  />
-
+			<tx:method name="init*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="create*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="del*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="undel*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="remove*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="batchCommit*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="syn*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="send*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="import*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="dismiss*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="retrieve*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="refer*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="register*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
 			<!-- 流程相关方法 -->
-			<tx:method name="start*" read-only="false"  />
-			<tx:method name="commit*" read-only="false"  />
-			<tx:method name="reject*" read-only="false"  />
+			<tx:method name="start*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="commit*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="reject*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
 
 		</tx:attributes>
 	</tx:advice>
 
-	<!-- spring采用AOP进行事务控制，这里指定了凡是实现了Service结尾接口中的所有方法需要由事务进行控制 -->
+	<!-- spring采用AOP进行事务控制，这里指定了凡是实现了Service结尾接口中的所有方法需要由事务进行控制
+	  	或者这种写法  	execution(* com.**.service.*Service.*(..))
+	  -->
 	<aop:config>
 		<aop:pointcut id="serviceOperation" expression="execution(* *..*Service.*(..))" />
 		<aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" />

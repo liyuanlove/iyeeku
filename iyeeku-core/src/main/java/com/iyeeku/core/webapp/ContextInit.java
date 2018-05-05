@@ -21,7 +21,6 @@ public class ContextInit extends ContextLoaderListener {
     @Override
     public void contextInitialized(javax.servlet.ServletContextEvent context) {
         super.contextInitialized(context);
-        System.out.println("服务器启动开始!!!!!");
 
         //1.加载基础环境
         BaseInit.init(context);
