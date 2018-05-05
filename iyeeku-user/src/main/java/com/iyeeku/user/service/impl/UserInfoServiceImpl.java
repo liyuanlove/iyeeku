@@ -2,12 +2,15 @@ package com.iyeeku.user.service.impl;
 
 import com.iyeeku.user.dao.IUserInfoDao;
 import com.iyeeku.user.service.IUserInfoService;
+import com.iyeeku.user.vo.BlogInfoVO;
 import com.iyeeku.user.vo.UserInfoVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -62,6 +65,56 @@ public class UserInfoServiceImpl implements IUserInfoService {
 /*        }catch (Exception e){
 
         }*/
+
+    }
+
+    @Override
+    public void createBlog(BlogInfoVO blogInfoVO) {
+        logger.info("IUserInfoService createBlog");
+
+        String storePath = "D://";
+
+        String documentName = "test";
+        
+        storeHtml(documentName,blogInfoVO.getContent(),storePath);
+
+    }
+
+    private String storeHtml(String documentName,String content,String storePath){
+
+        FileWriter writer = null;
+
+        try{
+
+            String head = "<html><head><meta charset=\"utf-8\" /></head><body>";
+            String tail = "</body></html>";
+
+            System.out.println(content);
+
+            content = head + content + tail;
+
+            System.out.println(content);
+
+            String fileName = storePath + documentName + ".html";
+
+            writer = new FileWriter(fileName , true);
+            writer.write(content);
+
+            return fileName;
+
+        }catch (Exception ex){
+
+            ex.printStackTrace();
+            return null;
+
+        }finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
 
     }
 

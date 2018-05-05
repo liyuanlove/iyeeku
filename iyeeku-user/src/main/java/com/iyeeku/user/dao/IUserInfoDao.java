@@ -12,5 +12,4 @@ public interface IUserInfoDao {
 
     public void save(UserInfoVO userInfoVO);
 
-
 }

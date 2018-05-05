@@ -2,6 +2,7 @@ package com.iyeeku.controller.user;
 
 
 import com.iyeeku.user.service.IUserInfoService;
+import com.iyeeku.user.vo.BlogInfoVO;
 import com.iyeeku.user.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,13 @@ public class UserInfoController{
 
     @RequestMapping(value = "/user/logout" , method = RequestMethod.GET)
     public void logout(){
+
+    }
+
+    @RequestMapping(value = "/user/newblog" , method = RequestMethod.POST)
+    public void createBlog(BlogInfoVO blogInfoVO,HttpServletRequest request, HttpServletResponse response){
+
+        this.iUserInfoService.createBlog(blogInfoVO);
 
     }
 

@@ -54,7 +54,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.line_height="16px;17px;18px;19px;20px;21px;22px;23px;24px;25px;26px;"
 	// 使用zenburn的代码高亮风格样式 PS:zenburn效果就是黑色背景
 	//如果不设置着默认风格为default
-	codeSnippet_theme: 'zenburn';
+	//codeSnippet_theme: 'zenburn';
+    codeSnippet_theme: 'monokai_sublime';
 	
 //	config.line_height="20px;22px;24px;26px;28px;30px;32px;34px;36px;"
 	

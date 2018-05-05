@@ -257,11 +257,27 @@
     	<div class="sss"></div>
     	<div class="edit-main">
     		<button class="btn btn-success btn-lg" style="float: left;margin: 10px auto auto 10px;">保存草稿</button>
-    		<button class="btn btn-success btn-lg" style="float: right;margin-right: 10px;margin-top: 10px;">发布</button>
+    		<button class="btn btn-success btn-lg" style="float: right;margin-right: 10px;margin-top: 10px;" onclick="publish()">发布</button>
     	</div>
     </div>
 
 
 </body>
+
+<script type="text/javascript">
+
+
+
+	function publish(){
+	    console.info(editor.getData());
+
+	    $.post("/user/newblog",{content:editor.getData()},function (result) {
+			console.info(result);
+        })
+
+	}
+
+
+</script>
 
 </html>
