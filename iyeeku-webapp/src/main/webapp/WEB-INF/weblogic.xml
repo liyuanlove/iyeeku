@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd
+                  http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-web-app.xsd">
+  <session-descriptor>
+    <cookie-name>hzbankManageEMPJSESSIONID</cookie-name>
+  </session-descriptor>
+  <jsp-descriptor>
+    <page-check-seconds>0</page-check-seconds>
+  </jsp-descriptor>
+  <container-descriptor>
+    <resource-reload-check-secs>0</resource-reload-check-secs>
+  </container-descriptor>
+
+</weblogic-web-app>
