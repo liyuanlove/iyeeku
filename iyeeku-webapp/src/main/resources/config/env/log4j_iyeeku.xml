@@ -87,7 +87,7 @@
             	value="[%d{yyyy-MM-dd HH:mm:ss}] [%x] [%p] [%l] [%m] %n" />   
         </layout>     
     </appender>
-
+		
 	<!-- 设置不同包中类的日志级别 , 生产时使用 info -->
 	<!-- 如果additivity为true时 ，它本身的日志会回馈到root里面去 -->
 <!--	<logger name="com.yq.yee" additivity="true">
@@ -107,33 +107,21 @@
         <appender-ref ref="STDOUT"/>
     </logger>-->
 
-<!--   <logger name="com.springframework">
+   <logger name="com.springframework">
         <level value="DEBUG"/>
     </logger>
 
-    <logger name="com">
-        <level value="DEBUG"/>
+   <logger name="com">
+        <level value="DEBUG"></level>
     </logger>
 
     <logger name="org.mybatis">
         <level value="DEBUG"/>
     </logger>
 
-    <logger name="org.apache">
-        <level value="DEBUG"/>
-    </logger>-->
-
- <!--   <logger name="com.mchange">
-        <level value="DEBUG"/>
-    </logger>-->
-
-    <logger name="com.mchange.v2.async">
-        <level value="INFO"/>
-    </logger>
-
 	<!-- 应用日志级别 -->
 	<root>
-		<level value="DEBUG" />
+		<level value="INFO" />
         <appender-ref ref="STDOUT"/>
 	</root>
 		
