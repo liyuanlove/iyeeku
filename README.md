@@ -8,7 +8,7 @@
 
 ## 特性
 
--   基于spring + springMVC + myBatis 开发 ，Maven管理项目，JDK1.8，数据库：ORACLE。
+-   基于spring + springMVC + myBatis 开发 ，Maven管理项目，JDK1.8，数据库：ORACLE，开发工具 [Intellij idea](https://www.jetbrains.com/idea/)。
 -   页面设计全仿写[开源中国](https://www.oschina.net/),（UI设计太头疼，主要用于学习互联网架构知识，全仿写页面）
 -   搜索引擎使用 [ElasticSearch](http://www.elastic.co/products/elasticsearch) , 分布式服务框架使用 [Dubbo](http://dubbo.apache.org/)。
 -   富文本编辑器 [ckeditor](https://github.com/ckeditor)
