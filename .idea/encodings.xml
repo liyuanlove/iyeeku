@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iyeeku-admin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iyeeku-blog" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iyeeku-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iyeeku-user" charset="UTF-8" />

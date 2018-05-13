@@ -22,10 +22,20 @@
 	
 	<!--  ORACLE配置  -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="properties">
+			<bean class="com.iyeeku.core.security.C3P0DatasourcePropertiesFactory" factory-method="getProperties">
+				<constructor-arg type="java.lang.String">
+					<value>${passwd}</value>
+				</constructor-arg>
+				<constructor-arg type="java.lang.String">
+					<value>${run_mode}</value>
+				</constructor-arg>
+			</bean>
+		</property>
 		<property name="driverClass" value="${driverClass}"/>
 		<property name="jdbcUrl" value="${url}"/>
 		<property name="user" value="${username}"/>
-		<property name="password" value="${passwd}"/>
+		<!--<property name="password" value="${passwd}"/>-->
 		<property name="initialPoolSize" value="5"></property>
 		<property name="minPoolSize" value="3"></property>
 		<property name="maxPoolSize" value="5"></property>

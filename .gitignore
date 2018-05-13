@@ -36,6 +36,3 @@ buildNumber.properties
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
-
-# 忽略一下不要上传文件
-iyeeku-webapp/src/main/resources/config/env/iyeeku_env.properties

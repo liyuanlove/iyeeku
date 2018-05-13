@@ -13,6 +13,7 @@
         <module>iyeeku-core</module>
         <module>iyeeku-user</module>
         <module>iyeeku-blog</module>
+        <module>iyeeku-admin</module>
     </modules>
 
     <properties>
