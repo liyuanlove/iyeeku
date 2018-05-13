@@ -1,6 +1,6 @@
 package com.iyeeku.core.security;
 
-import com.iyeeku.core.utils.DesUtils;
+import com.iyeeku.core.utils.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +18,8 @@ public class C3P0DatasourcePropertiesFactory {
 
         if(PRODUCTION_MODE.equals(production)){
             try{
-                System.out.println(pwd);
-                String dec_pwd = new DesUtils().decrypt(pwd);
-                System.out.println(dec_pwd);
+                String key = System.getProperty("key");
+                String dec_pwd = SecurityUtil.decrypt(pwd,key);
                 p.setProperty(PROP_PASSWORD , dec_pwd);
             }catch (Exception e){
                 logger.error("C3P0DatasourcePropertiesFactory getProperties is error!" , e);
