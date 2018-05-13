@@ -27,5 +27,7 @@
 		INSERT INTO IYEEKU_USERS(userid,loginname,passwd,nickname,avatar,email,mobile,sex,birthday,address,signature,createdtime,createduser,createdchannel,updatedtime,updateduser,updatechannel)
 		VALUES (#{userid,jdbcType=VARCHAR},#{loginname,jdbcType=VARCHAR},#{passwd,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{avatar,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},to_timestamp(#{birthday,jdbcType=TIMESTAMP},'yyyy-mm-dd hh24:mi:ss'),#{address,jdbcType=VARCHAR},#{signature,jdbcType=VARCHAR},systimestamp,#{createduser,jdbcType=VARCHAR},#{createdchannel,jdbcType=VARCHAR},systimestamp,#{updateduser,jdbcType=VARCHAR},#{updatechannel,jdbcType=VARCHAR})
 	</insert>
-	
+
+
+
 </mapper>
