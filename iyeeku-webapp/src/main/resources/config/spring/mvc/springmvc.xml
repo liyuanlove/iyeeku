@@ -68,7 +68,7 @@
 
 
 	<!-- Spring MVC JSON配置 , 配置spring MVC JSON配置，需要相关json包 -->
-	<bean
+<!--	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -94,7 +94,7 @@
 				</bean>
 			</list>
 		</property>
-	</bean>
+	</bean>-->
 
 	<!-- 文件上传配置 -->
 	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 

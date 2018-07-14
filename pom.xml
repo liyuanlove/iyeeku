@@ -24,21 +24,6 @@
 
     <dependencies>
 
-        <!-- mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.1</version>
-        </dependency>
-
-        <!-- mybatis-spring -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>1.3.1</version>
-        </dependency>
-
-
         <!-- ********************************* Spring JAR包 ************************************ -->
         <!-- spring-context -->
         <dependency>
@@ -132,14 +117,12 @@
         </dependency>
 
         <!-- spring-test -->
-        <!--
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>4.3.10.RELEASE</version>
             <scope>test</scope>
         </dependency>
-        -->
 
         <!-- spring-tx -->
         <dependency>
@@ -179,12 +162,40 @@
 
 
 
+        <!-- ************** mybatis jar包 ， mybatis spring 整合jar 包 ***************** -->
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
+        <!-- mybatis-spring -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <!-- ********************************* END ************************************ -->
+
+
+
+        <!-- *************************  数据库连接池jar包 c3p0 , mchange *************  -->
         <!-- c3p0数据库连接池jar包 -->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>mchange-commons-java</artifactId>
+            <version>0.2.11</version>
+        </dependency>
+        <!-- *********************************** END ********************************** -->
+
+
 
         <!-- ********************************** 数据库驱动包 ***************************  -->
         <!-- mysql驱动包 -->
@@ -201,36 +212,6 @@
             <version>11.2.0.1.0</version>
         </dependency>
         <!-- *******************************  END ********************************************  -->
-
-
-
-
-
-        <!-- log4j 1.x 版本日志框架 -->
-<!--        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>-->
-
-        <!-- log4j 2.x 版本框架 -->
-<!--        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.10.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.10.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-web</artifactId>
-            <version>2.9.1</version>
-        </dependency>-->
-
 
 
 
@@ -278,8 +259,10 @@
             <artifactId>jackson-mapper-lgpl</artifactId>
             <version>1.9.13</version>
         </dependency>
-        <!-- *****************************************  END ********************************************  -->
+        <!-- *****************************************  END ***************************************  -->
 
+
+        <!-- ************************ mybatis 整合 ehcache jar包 ************************** -->
         <dependency>
             <groupId>org.mybatis.caches</groupId>
             <artifactId>mybatis-ehcache</artifactId>
@@ -291,11 +274,19 @@
             <artifactId>ehcache-core</artifactId>
             <version>2.6.5</version>
         </dependency>
+        <!-- *****************************************  END ***************************************  -->
+
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
+            <version>1.7.25</version>
         </dependency>
 
         <!-- slf4j 配合使用 log4j日志框架 的jar包 , 使用 logback ,就不用使用这个, logback 的jar包与 slf4j-log4j12冲突-->
@@ -335,6 +326,32 @@
             <version>0.1.4</version>
         </dependency>
 
+
+        <!-- log4j 1.x 版本日志框架 -->
+        <!--        <dependency>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                    <version>1.2.17</version>
+                </dependency>-->
+
+        <!-- log4j 2.x 版本框架 -->
+        <!--        <dependency>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-api</artifactId>
+                    <version>2.10.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-core</artifactId>
+                    <version>2.10.0</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-web</artifactId>
+                    <version>2.9.1</version>
+                </dependency>-->
+
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
@@ -365,6 +382,19 @@
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.9</version>
+        </dependency>
+
 
     </dependencies>
 
