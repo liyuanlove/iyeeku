@@ -2,34 +2,52 @@ package com.iyeeku.ext.role.vo;
 
 import com.iyeeku.core.vo.BaseVO;
 
+import java.util.Date;
+
 public class PFRole extends BaseVO {
 
     private static final long serialVersionUID = 1L;
 
     private String jsbh;
+
     private String jsmc;
+
     private String jslx;
+
     private String jszt;
+
     private String jsms;
+
     private String cjr;
-    private String cjsj;
+
+    private Date cjsj;
+
     private String zhxgr;
-    private String zhxgsj;
-    private String jsqz;
+
+    private Date zhxgsj;
+
+    private Short jsqz;
+
     private String jlzt;
-    private String kzzd11;
-    private String kzzd12;
-    private String kzzd13;
-    private String kzzd14;
-    private String kzzd15;
-    private String kzzd16;
+
+    private String kzzd1;
+
+    private String kzzd2;
+
+    private String kzzd3;
+
+    private String kzzd4;
+
+    private String kzzd5;
+
+    private String kzzd6;
 
     public String getJsbh() {
         return jsbh;
     }
 
     public void setJsbh(String jsbh) {
-        this.jsbh = jsbh;
+        this.jsbh = jsbh == null ? null : jsbh.trim();
     }
 
     public String getJsmc() {
@@ -37,7 +55,7 @@ public class PFRole extends BaseVO {
     }
 
     public void setJsmc(String jsmc) {
-        this.jsmc = jsmc;
+        this.jsmc = jsmc == null ? null : jsmc.trim();
     }
 
     public String getJslx() {
@@ -45,7 +63,7 @@ public class PFRole extends BaseVO {
     }
 
     public void setJslx(String jslx) {
-        this.jslx = jslx;
+        this.jslx = jslx == null ? null : jslx.trim();
     }
 
     public String getJszt() {
@@ -53,7 +71,7 @@ public class PFRole extends BaseVO {
     }
 
     public void setJszt(String jszt) {
-        this.jszt = jszt;
+        this.jszt = jszt == null ? null : jszt.trim();
     }
 
     public String getJsms() {
@@ -61,7 +79,7 @@ public class PFRole extends BaseVO {
     }
 
     public void setJsms(String jsms) {
-        this.jsms = jsms;
+        this.jsms = jsms == null ? null : jsms.trim();
     }
 
     public String getCjr() {
@@ -69,14 +87,14 @@ public class PFRole extends BaseVO {
     }
 
     public void setCjr(String cjr) {
-        this.cjr = cjr;
+        this.cjr = cjr == null ? null : cjr.trim();
     }
 
-    public String getCjsj() {
+    public Date getCjsj() {
         return cjsj;
     }
 
-    public void setCjsj(String cjsj) {
+    public void setCjsj(Date cjsj) {
         this.cjsj = cjsj;
     }
 
@@ -85,22 +103,22 @@ public class PFRole extends BaseVO {
     }
 
     public void setZhxgr(String zhxgr) {
-        this.zhxgr = zhxgr;
+        this.zhxgr = zhxgr == null ? null : zhxgr.trim();
     }
 
-    public String getZhxgsj() {
+    public Date getZhxgsj() {
         return zhxgsj;
     }
 
-    public void setZhxgsj(String zhxgsj) {
+    public void setZhxgsj(Date zhxgsj) {
         this.zhxgsj = zhxgsj;
     }
 
-    public String getJsqz() {
+    public Short getJsqz() {
         return jsqz;
     }
 
-    public void setJsqz(String jsqz) {
+    public void setJsqz(Short jsqz) {
         this.jsqz = jsqz;
     }
 
@@ -109,55 +127,55 @@ public class PFRole extends BaseVO {
     }
 
     public void setJlzt(String jlzt) {
-        this.jlzt = jlzt;
+        this.jlzt = jlzt == null ? null : jlzt.trim();
     }
 
-    public String getKzzd11() {
-        return kzzd11;
+    public String getKzzd1() {
+        return kzzd1;
     }
 
-    public void setKzzd11(String kzzd11) {
-        this.kzzd11 = kzzd11;
+    public void setKzzd1(String kzzd1) {
+        this.kzzd1 = kzzd1 == null ? null : kzzd1.trim();
     }
 
-    public String getKzzd12() {
-        return kzzd12;
+    public String getKzzd2() {
+        return kzzd2;
     }
 
-    public void setKzzd12(String kzzd12) {
-        this.kzzd12 = kzzd12;
+    public void setKzzd2(String kzzd2) {
+        this.kzzd2 = kzzd2 == null ? null : kzzd2.trim();
     }
 
-    public String getKzzd13() {
-        return kzzd13;
+    public String getKzzd3() {
+        return kzzd3;
     }
 
-    public void setKzzd13(String kzzd13) {
-        this.kzzd13 = kzzd13;
+    public void setKzzd3(String kzzd3) {
+        this.kzzd3 = kzzd3 == null ? null : kzzd3.trim();
     }
 
-    public String getKzzd14() {
-        return kzzd14;
+    public String getKzzd4() {
+        return kzzd4;
     }
 
-    public void setKzzd14(String kzzd14) {
-        this.kzzd14 = kzzd14;
+    public void setKzzd4(String kzzd4) {
+        this.kzzd4 = kzzd4 == null ? null : kzzd4.trim();
     }
 
-    public String getKzzd15() {
-        return kzzd15;
+    public String getKzzd5() {
+        return kzzd5;
     }
 
-    public void setKzzd15(String kzzd15) {
-        this.kzzd15 = kzzd15;
+    public void setKzzd5(String kzzd5) {
+        this.kzzd5 = kzzd5 == null ? null : kzzd5.trim();
     }
 
-    public String getKzzd16() {
-        return kzzd16;
+    public String getKzzd6() {
+        return kzzd6;
     }
 
-    public void setKzzd16(String kzzd16) {
-        this.kzzd16 = kzzd16;
+    public void setKzzd6(String kzzd6) {
+        this.kzzd6 = kzzd6 == null ? null : kzzd6.trim();
     }
 
 }

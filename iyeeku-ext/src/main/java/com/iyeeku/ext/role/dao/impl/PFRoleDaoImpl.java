@@ -17,8 +17,32 @@ public class PFRoleDaoImpl extends BaseDaoImpl implements IPFRoleDao {
     @Override
     public List<PFRole> findAllRoles() {
         this.logger.info("PFRoleDaoImpl findAllRoles");
-        return null;
+        List<PFRole> list = this.queryAll_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findAllRoles");
+        return list;
     }
 
+    @Override
+    public PFRole findRoleByJsbh(String jsbh) {
+        this.logger.info("PFRoleDaoImpl findRoleByJsbh");
+        return this.queryOne_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findRoleByJsbh",jsbh);
+    }
+
+    @Override
+    public void saveRole(PFRole role) {
+        this.logger.info("PFRoleDaoImpl saveRole");
+        this.save_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.saveRole",role);
+    }
+
+    @Override
+    public void updateRole(PFRole role) {
+        this.logger.info("PFRoleDaoImpl updateRole");
+        this.update_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.updateRole",role);
+    }
+
+    @Override
+    public void deleteRole(String jsbh) {
+        this.logger.info("PFRoleDaoImpl deleteRole");
+        this.delete_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.deleteRole",jsbh);
+    }
 
 }

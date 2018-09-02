@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.role.dao.IPFRoleDao">
+
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+	<resultMap id="BaseResultMap" type="com.iyeeku.ext.role.vo.PFRole" >
+		<id column="JSBH" property="jsbh" jdbcType="VARCHAR" />
+		<result column="JSMC" property="jsmc" jdbcType="VARCHAR" />
+		<result column="JSLX" property="jslx" jdbcType="CHAR" />
+		<result column="JSZT" property="jszt" jdbcType="CHAR" />
+		<result column="JSMS" property="jsms" jdbcType="VARCHAR" />
+		<result column="CJR" property="cjr" jdbcType="CHAR" />
+		<result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+		<result column="ZHXGR" property="zhxgr" jdbcType="CHAR" />
+		<result column="ZHXGSJ" property="zhxgsj" jdbcType="TIMESTAMP" />
+		<result column="JSQZ" property="jsqz" jdbcType="DECIMAL" />
+		<result column="JLZT" property="jlzt" jdbcType="CHAR" />
+		<result column="KZZD1" property="kzzd1" jdbcType="VARCHAR" />
+		<result column="KZZD2" property="kzzd2" jdbcType="VARCHAR" />
+		<result column="KZZD3" property="kzzd3" jdbcType="VARCHAR" />
+		<result column="KZZD4" property="kzzd4" jdbcType="VARCHAR" />
+		<result column="KZZD5" property="kzzd5" jdbcType="VARCHAR" />
+		<result column="KZZD6" property="kzzd6" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="findAllRoles" resultMap="BaseResultMap">
+		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
+		from PF_ROLE
+	</select>
+
+	<select id="findRoleByJsbh" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
+		from PF_ROLE
+		where JSBH = #{jsbh,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="saveRole" parameterType="com.iyeeku.ext.role.vo.PFRole">
+	insert into PF_ROLE (JSBH, JSMC, JSLX,
+      JSZT, JSMS, CJR, CJSJ,
+      ZHXGR, ZHXGSJ, JSQZ,
+      JLZT, KZZD1, KZZD2, KZZD3,
+      KZZD4, KZZD5, KZZD6
+      )
+    values (#{jsbh,jdbcType=VARCHAR}, #{jsmc,jdbcType=VARCHAR}, #{jslx,jdbcType=CHAR},
+      #{jszt,jdbcType=CHAR}, #{jsms,jdbcType=VARCHAR}, #{cjr,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP},
+      #{zhxgr,jdbcType=CHAR}, #{zhxgsj,jdbcType=TIMESTAMP}, #{jsqz,jdbcType=DECIMAL},
+      #{jlzt,jdbcType=CHAR}, #{kzzd1,jdbcType=VARCHAR}, #{kzzd2,jdbcType=VARCHAR}, #{kzzd3,jdbcType=VARCHAR},
+      #{kzzd4,jdbcType=VARCHAR}, #{kzzd5,jdbcType=VARCHAR}, #{kzzd6,jdbcType=VARCHAR}
+      )
+	</insert>
+
+	<update id="updateRole" parameterType="com.iyeeku.ext.role.vo.PFRole">
+		update PF_ROLE
+		<set >
+			<if test="jsmc != null" >
+				JSMC = #{jsmc,jdbcType=VARCHAR},
+			</if>
+			<if test="jslx != null" >
+				JSLX = #{jslx,jdbcType=CHAR},
+			</if>
+			<if test="jszt != null" >
+				JSZT = #{jszt,jdbcType=CHAR},
+			</if>
+			<if test="jsms != null" >
+				JSMS = #{jsms,jdbcType=VARCHAR},
+			</if>
+			<if test="cjr != null" >
+				CJR = #{cjr,jdbcType=CHAR},
+			</if>
+			<if test="cjsj != null" >
+				CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zhxgr != null" >
+				ZHXGR = #{zhxgr,jdbcType=CHAR},
+			</if>
+			<if test="zhxgsj != null" >
+				ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jsqz != null" >
+				JSQZ = #{jsqz,jdbcType=DECIMAL},
+			</if>
+			<if test="jlzt != null" >
+				JLZT = #{jlzt,jdbcType=CHAR},
+			</if>
+			<if test="kzzd1 != null" >
+				KZZD1 = #{kzzd1,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd2 != null" >
+				KZZD2 = #{kzzd2,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd3 != null" >
+				KZZD3 = #{kzzd3,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd4 != null" >
+				KZZD4 = #{kzzd4,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd5 != null" >
+				KZZD5 = #{kzzd5,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd6 != null" >
+				KZZD6 = #{kzzd6,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where JSBH = #{jsbh,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteRole" parameterType="java.lang.String">
+		DELETE * FROM PF_ROLE WHERE JSBH = #{VALUE}
+	</delete>
+	
+</mapper>

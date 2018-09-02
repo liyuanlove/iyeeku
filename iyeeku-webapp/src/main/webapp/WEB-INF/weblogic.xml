@@ -13,5 +13,5 @@
     <resource-reload-check-secs>0</resource-reload-check-secs>
   </container-descriptor>
   <!-- weblogic服务器部署程序，直接通过IP访问（即URL中去掉工程名） -->
-  <context-root>/</context-root>
+  <context-root>/iyeeku-webapp</context-root>
 </weblogic-web-app>
