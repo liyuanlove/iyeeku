@@ -6,10 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="iyeeku-admin" />
-        <module name="iyeeku-blog" />
         <module name="iyeeku-core" />
-        <module name="iyeeku-user" />
+        <module name="iyeeku-ext" />
         <module name="iyeeku-webapp" />
       </profile>
     </annotationProcessing>
@@ -18,8 +16,12 @@
       <module name="iyeeku-admin" target="1.8" />
       <module name="iyeeku-blog" target="1.8" />
       <module name="iyeeku-core" target="1.8" />
+      <module name="iyeeku-ext" target="1.8" />
+      <module name="iyeeku-test" target="1.8" />
       <module name="iyeeku-user" target="1.8" />
       <module name="iyeeku-webapp" target="1.8" />
+      <module name="iyeekudouble" target="1.8" />
+      <module name="iyeekutest" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

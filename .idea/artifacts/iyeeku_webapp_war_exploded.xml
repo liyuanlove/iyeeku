@@ -10,14 +10,8 @@
           <element id="archive" name="iyeeku-core-1.0-SNAPSHOT.jar">
             <element id="module-output" name="iyeeku-core" />
           </element>
-          <element id="archive" name="iyeeku-user-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="iyeeku-user" />
-          </element>
-          <element id="archive" name="iyeeku-blog-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="iyeeku-blog" />
-          </element>
-          <element id="archive" name="iyeeku-admin-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="iyeeku-admin" />
+          <element id="archive" name="iyeeku-ext-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="iyeeku-ext" />
           </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.10.RELEASE" />

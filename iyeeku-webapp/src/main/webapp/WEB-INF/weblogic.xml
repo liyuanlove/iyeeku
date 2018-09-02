@@ -12,5 +12,6 @@
   <container-descriptor>
     <resource-reload-check-secs>0</resource-reload-check-secs>
   </container-descriptor>
-
+  <!-- weblogic服务器部署程序，直接通过IP访问（即URL中去掉工程名） -->
+  <context-root>/</context-root>
 </weblogic-web-app>

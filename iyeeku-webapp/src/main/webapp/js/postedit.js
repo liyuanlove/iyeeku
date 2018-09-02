@@ -1,9 +1,0 @@
-
-
-
-	
-// Document on load.
-$(function(){
-
-});
-	
