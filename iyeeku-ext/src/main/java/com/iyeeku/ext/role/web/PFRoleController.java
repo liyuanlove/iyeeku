@@ -36,13 +36,15 @@ public class PFRoleController {
     }
 
     @RequestMapping(value = "add")
-    public void add(HttpServletRequest request, PFRole role){
+    @ResponseBody
+    public String add(HttpServletRequest request, PFRole role){
         this.logger.info("PFRoleController addRole");
         String jsmc = request.getParameter("jsmc");
         System.out.println("JSMC " + jsmc);
         System.out.println("角色名称: " + role.getJsmc());
         System.out.println("角色描述: " + role.getJsms());
         this.iPFRoleService.saveRole(role);
+        return "ok";
     }
 
     @RequestMapping(value = "update" , method = RequestMethod.POST)
@@ -52,9 +54,11 @@ public class PFRoleController {
     }
 
     @RequestMapping(value = "delete" , method = RequestMethod.POST)
-    public void delete(String jsbh){
+    @ResponseBody
+    public String delete(String jsbh){
         this.logger.info("PFRoleController delete");
         this.iPFRoleService.deleteRole(jsbh);
+        return "ok";
     }
 
     @RequestMapping(value = "getRoleByJsbh" , method = RequestMethod.POST)

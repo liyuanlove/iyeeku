@@ -8,7 +8,7 @@
 
 <body>
 <div style="width: 100%;">
-    <div class="mini-toolbar" style="border-bottom:0;padding:0px;">
+    <div class="mini-toolbar" style="border-bottom:0;padding:2px;">
         <table style="width:100%;">
             <tr>
                 <td style="width:100%;">
@@ -17,26 +17,30 @@
                     <a class="mini-button" iconCls="icon-remove" onclick="remove()">删除</a>
                 </td>
                 <td style="white-space:nowrap;">
-                    <input id="key" class="mini-textbox" emptyText="请输入姓名" style="width:150px;" onenter="onKeyEnter"/>
+                    <input id="key" class="mini-textbox" emptyText="请输入角色名" style="width:150px;" onenter="onKeyEnter"/>
                     <a class="mini-button" onclick="search()">查询</a>
                 </td>
             </tr>
         </table>
     </div>
 </div>
+
+<!--撑满页面-->
+<div class="mini-fit">
 <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" allowResize="true"
      url="${pageContext.request.contextPath}/role/findAllRoleInfos"  idField="id" multiSelect="true"
 >
     <div property="columns">
         <div type="checkcolumn"></div>
         <div type="indexcolumn"></div>
+        <div field="jsbh" width="120" headerAlign="center" allowSort="false" visible="false">角色编号</div>
         <div field="jsmc" width="120" headerAlign="center" allowSort="false">角色名称</div>
         <div field="jslx" width="120" headerAlign="center" allowSort="false">角色类型</div>
         <div field="jszt" width="120" headerAlign="center" allowSort="false">角色状态</div>
         <div field="jsms" width="120" headerAlign="center" allowSort="false">角色描述</div>
     </div>
 </div>
-
+</div>
 
 <script type="text/javascript">
     mini.parse();
@@ -44,7 +48,7 @@
     var grid = mini.get("datagrid1");
     grid.load();
 
-    var menu = new ColumnsMenu(grid);
+    //var menu = new ColumnsMenu(grid);
 
     function add() {
 
@@ -52,15 +56,31 @@
             targetWindow: window,
             //url: bootPATH + "roleForm",
             url: "${pageContext.request.contextPath}/role/roleForm",
-            title: "新增角色", width: 600, height: 400,
+            title: "新增角色", width: 540, height: 300,
             onload: function () {
                 var iframe = this.getIFrameEl();
                 var data = { action: "new" };
-                iframe.contentWindow.SetData(data);
+               // iframe.contentWindow.SetData(data);
             },
             ondestroy: function (action) {
-                grid.reload();
+                if( action == "ok") {
+                    showTips("角色添加成功","success");
+                    grid.reload();
+                }
             }
+        });
+    }
+
+    function showTips(Msg,state) {
+        var x = "center";
+        var y = "top";
+        var state = state;
+        mini.showTips({
+            content: "<b>成功</b> <br/>"+Msg,
+            state: state,
+            x: x,
+            y: y,
+            timeout: 3000
         });
     }
 
@@ -94,23 +114,32 @@
 
         var rows = grid.getSelecteds();
         if (rows.length > 0) {
-            if (confirm("确定删除选中记录？")) {
-                var ids = [];
-                for (var i = 0, l = rows.length; i < l; i++) {
-                    var r = rows[i];
-                    ids.push(r.id);
-                }
-                var id = ids.join(',');
-                grid.loading("操作中，请稍后......");
-                $.ajax({
-                    url: "../data/AjaxService.aspx?method=RemoveEmployees&id=" +id,
-                    success: function (text) {
-                        grid.reload();
-                    },
-                    error: function () {
+
+            mini.confirm("确定删除记录？", "确定？",
+                function (action) {
+                    if (action == "ok") {
+
+                        var jsbh = rows[0].jsbh;
+                        grid.loading("操作中，请稍后......");
+                        $.ajax({
+                            url: "${pageContext.request.contextPath}/role/delete",
+                            type: "post",
+                            data: {jsbh:jsbh} ,
+                            success: function (text) {
+                                if(text == "ok") {
+                                    //mini.alert("记录已删除！");
+                                    showTips("角色删除成功","danger");
+                                    grid.reload();
+                                }
+                            },
+                            error: function () {
+
+                            }
+                        });
                     }
-                });
-            }
+                }
+            );
+
         } else {
             alert("请选中一条记录");
         }
