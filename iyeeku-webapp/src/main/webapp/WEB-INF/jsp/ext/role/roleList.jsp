@@ -3,7 +3,6 @@
 <head>
     <title>角色列表</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
-
 </head>
 
 <body>
@@ -17,7 +16,7 @@
                     <a class="mini-button" iconCls="icon-remove" onclick="remove()">删除</a>
                 </td>
                 <td style="white-space:nowrap;">
-                    <input id="key" class="mini-textbox" emptyText="请输入角色名" style="width:150px;" onenter="onKeyEnter"/>
+                    <input id="jsmc" class="mini-textbox" emptyText="请输入角色名" style="width:150px;" onenter="onKeyEnter"/>
                     <a class="mini-button" onclick="search()">查询</a>
                 </td>
             </tr>
@@ -29,6 +28,7 @@
 <div class="mini-fit">
 <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" allowResize="true"
      url="${pageContext.request.contextPath}/role/findAllRoleInfos"  idField="id" multiSelect="true"
+     pageSize="10"
 >
     <div property="columns">
         <div type="checkcolumn"></div>
@@ -145,8 +145,8 @@
         }
     }
     function search() {
-        var key = mini.get("key").getValue();
-        grid.load({ key: key });
+        var jsmc = mini.get("jsmc").getValue();
+        grid.load({ jsmc: jsmc });
     }
     function onKeyEnter(e) {
         search();

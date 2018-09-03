@@ -124,5 +124,5 @@
 		<level value="INFO" />
         <appender-ref ref="STDOUT"/>
 	</root>
-		
+
 </log4j:configuration>

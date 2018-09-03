@@ -1,5 +1,7 @@
 package com.iyeeku.ext.role.web;
 
+import com.iyeeku.core.mvc.handlermapping.FunctionDesc;
+import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.role.service.IPFRoleService;
 import com.iyeeku.ext.role.vo.PFRole;
 import org.slf4j.Logger;
@@ -12,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/role")
@@ -23,11 +25,11 @@ public class PFRoleController {
     @Resource(name = "iPFRoleService")
     private IPFRoleService iPFRoleService;
 
-    @RequestMapping( value = "/test" , method = RequestMethod.GET)
+    @FunctionDesc("测试执行到这里")
+    @ResponseBody
     public void testRequest(){
         this.logger.info("PFRoleController testRequest");
-        this.iPFRoleService.findAllRoles();
-        System.out.println("执行到这里");
+        System.out.println("执行到这里1111111111111111");
     }
 
     @RequestMapping(value = "list" , method = RequestMethod.GET)
@@ -69,9 +71,9 @@ public class PFRoleController {
 
     @RequestMapping(value = "findAllRoleInfos" , method = RequestMethod.POST)
     @ResponseBody
-    public List<PFRole> findAllRoleInfos(){
+    public Map<String , Object> findAllRoleInfos(PFRole role, Pagination pagination){
         this.logger.info("PFRoleController findAllRoleInfos");
-        return this.iPFRoleService.findAllRoles();
+        return this.iPFRoleService.findAllRoleInfos(role,pagination);
     }
 
     @RequestMapping(value = "roleForm" , method = RequestMethod.GET)

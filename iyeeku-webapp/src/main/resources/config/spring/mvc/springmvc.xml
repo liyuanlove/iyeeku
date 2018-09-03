@@ -72,8 +72,8 @@
 
 
 	<!-- Spring MVC JSON配置 , 配置spring MVC JSON配置，需要相关json包 -->
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+	<!--<bean class="com.iyeeku.core.mvc.handlermapping.IyeekuRequestMappingHandlerMapping"/>-->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">

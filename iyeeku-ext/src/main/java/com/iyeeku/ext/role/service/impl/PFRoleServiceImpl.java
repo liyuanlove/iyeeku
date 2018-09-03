@@ -1,6 +1,7 @@
 package com.iyeeku.ext.role.service.impl;
 
 import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.role.dao.IPFRoleDao;
 import com.iyeeku.ext.role.service.IPFRoleService;
 import com.iyeeku.ext.role.vo.PFRole;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("iPFRoleService")
 public class PFRoleServiceImpl implements IPFRoleService {
@@ -21,9 +24,23 @@ public class PFRoleServiceImpl implements IPFRoleService {
     private IPFRoleDao iPFRoleDao;
 
     @Override
-    public List<PFRole> findAllRoles() {
+    public Map<String , Object> findAllRoleInfos(PFRole role , Pagination pagination) {
         this.logger.info("PFRoleServiceImpl findAllRoles");
-        return this.iPFRoleDao.findAllRoles();
+        if(role.getJsmc() != null && role.getJsmc() != ""){
+            role.setJsmc("%"+role.getJsmc()+"%");
+        }
+
+        System.out.println("pagination.getPageIndex() ==>> " + pagination.getPageIndex());
+        System.out.println("pagination.getPageSize() ==>> " + pagination.getPageSize());
+
+        List<PFRole> data = this.iPFRoleDao.findAllRoles(role , pagination.getPageIndex() , pagination.getPageSize());
+        Integer total = this.iPFRoleDao.findAllInfosCount(role);
+
+        Map<String , Object> result = new HashMap<>();
+        result.put("data",data);
+        result.put("total",total);
+
+        return result;
     }
 
     @Override

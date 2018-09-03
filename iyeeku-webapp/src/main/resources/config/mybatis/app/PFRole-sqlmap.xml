@@ -24,10 +24,21 @@
 		<result column="KZZD6" property="kzzd6" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<select id="findAllRoles" resultMap="BaseResultMap">
+	<select id="findAllRoles" parameterType="com.iyeeku.ext.role.vo.PFRole" resultMap="BaseResultMap">
 		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
-		from PF_ROLE
+		from PF_ROLE WHERE 1=1
+		<if test="jsmc != null">
+			AND JSMC LIKE #{jsmc,jdbcType=VARCHAR}
+		</if>
 	</select>
+
+    <select id="findAllInfosCount" parameterType="com.iyeeku.ext.role.vo.PFRole" resultType="java.lang.Integer">
+        select COUNT(1)
+        from PF_ROLE WHERE 1=1
+        <if test="jsmc != null">
+            AND JSMC LIKE #{jsmc,jdbcType=VARCHAR}
+        </if>
+    </select>
 
 	<select id="findRoleByJsbh" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6

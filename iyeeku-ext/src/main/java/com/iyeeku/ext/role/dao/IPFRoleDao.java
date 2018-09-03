@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface IPFRoleDao {
 
-    public List<PFRole> findAllRoles();
+    public List<PFRole> findAllRoles(PFRole role , int offSet , int pageSize);
+
+    public Integer findAllInfosCount(PFRole role);
 
     public PFRole findRoleByJsbh(String jsbh);
 

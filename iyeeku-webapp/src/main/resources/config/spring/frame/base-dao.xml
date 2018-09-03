@@ -16,7 +16,7 @@
 				classpath:/config/mybatis/frame/base-config.xml
 			</value>
 		</property>
-		<!-- 拦截器可以配置到这里，同样可以配置到config文件中 -->
+		<!-- 拦截器可以配置到这里，同样可以配置到config文件中 , 比如分页插件配置 -->
 		<!-- 
 		<property name="plugins">
 			<array>

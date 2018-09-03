@@ -15,10 +15,16 @@ public class PFRoleDaoImpl extends BaseDaoImpl implements IPFRoleDao {
     private final Logger logger = LoggerFactory.getLogger(PFRoleDaoImpl.class);
 
     @Override
-    public List<PFRole> findAllRoles() {
+    public List<PFRole> findAllRoles(PFRole role , int offSet , int pageSize) {
         this.logger.info("PFRoleDaoImpl findAllRoles");
-        List<PFRole> list = this.queryAll_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findAllRoles");
+        List<PFRole> list = this.queryAll_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findAllRoles",role , offSet , pageSize);
         return list;
+    }
+
+    @Override
+    public Integer findAllInfosCount(PFRole role) {
+        this.logger.info("PFRoleDaoImpl findAllInfoCount");
+        return this.queryOne_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findAllInfosCount",role);
     }
 
     @Override
