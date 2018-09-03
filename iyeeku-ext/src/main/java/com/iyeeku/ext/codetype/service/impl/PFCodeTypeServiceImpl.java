@@ -1,13 +1,63 @@
 package com.iyeeku.ext.codetype.service.impl;
 
+import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.vo.Pagination;
+import com.iyeeku.ext.codetype.dao.PFCodeTypeDao;
 import com.iyeeku.ext.codetype.service.PFCodeTypeService;
+import com.iyeeku.ext.codetype.vo.PFCodeTypeVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service
 public class PFCodeTypeServiceImpl implements PFCodeTypeService {
 
     private final Logger logger = LoggerFactory.getLogger(PFCodeTypeServiceImpl.class);
 
+    @Autowired
+    private PFCodeTypeDao pfCodeTypeDao;
 
+    @Override
+    public Map<String, Object> findAllTypes(PFCodeTypeVO codeTypeVO, Pagination pagination) {
+        this.logger.info("PFCodeTypeServiceImpl ");
 
+        List<PFCodeTypeVO> data = this.pfCodeTypeDao.findAllTypes(codeTypeVO,pagination.getPageIndex(),pagination.getPageSize());
+        int total = this.pfCodeTypeDao.findAllTypesCount(codeTypeVO);
+
+        Map<String ,Object> result = new HashMap<>();
+        result.put("data",data);
+        result.put("total",total);
+
+        return result;
+    }
+
+    @Override
+    public PFCodeTypeVO findCodeTypeByZj(String zj) {
+        this.logger.info("PFCodeTypeServiceImpl ");
+        return this.pfCodeTypeDao.findCodeTypeByZj(zj);
+    }
+
+    @Override
+    public void save(PFCodeTypeVO vo) {
+        this.logger.info("PFCodeTypeServiceImpl ");
+        vo.setZj(UUIDGenerator.generate(""));
+        this.pfCodeTypeDao.save(vo);
+    }
+
+    @Override
+    public void update(PFCodeTypeVO vo) {
+        this.logger.info("PFCodeTypeServiceImpl ");
+        this.pfCodeTypeDao.update(vo);
+    }
+
+    @Override
+    public void delete(PFCodeTypeVO vo) {
+        this.logger.info("PFCodeTypeServiceImpl ");
+        this.pfCodeTypeDao.delete(vo);
+    }
 }

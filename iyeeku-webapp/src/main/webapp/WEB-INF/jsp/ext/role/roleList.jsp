@@ -26,20 +26,20 @@
 
 <!--撑满页面-->
 <div class="mini-fit">
-<div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" allowResize="true"
-     url="${pageContext.request.contextPath}/role/findAllRoleInfos"  idField="id" multiSelect="true"
-     pageSize="10"
->
-    <div property="columns">
-        <div type="checkcolumn"></div>
-        <div type="indexcolumn"></div>
-        <div field="jsbh" width="120" headerAlign="center" allowSort="false" visible="false">角色编号</div>
-        <div field="jsmc" width="120" headerAlign="center" allowSort="false">角色名称</div>
-        <div field="jslx" width="120" headerAlign="center" allowSort="false">角色类型</div>
-        <div field="jszt" width="120" headerAlign="center" allowSort="false">角色状态</div>
-        <div field="jsms" width="120" headerAlign="center" allowSort="false">角色描述</div>
+    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" allowResize="true"
+        url="${pageContext.request.contextPath}/role/findAllRoleInfos"  idField="id" multiSelect="true"
+        pageSize="10"
+    >
+        <div property="columns">
+            <div type="checkcolumn"></div>
+            <div type="indexcolumn"></div>
+            <div field="jsbh" width="120" headerAlign="center" allowSort="false" visible="false">角色编号</div>
+            <div field="jsmc" width="120" headerAlign="center" allowSort="false">角色名称</div>
+            <div field="jslx" width="120" headerAlign="center" allowSort="false">角色类型</div>
+            <div field="jszt" width="120" headerAlign="center" allowSort="false">角色状态</div>
+            <div field="jsms" width="120" headerAlign="center" allowSort="false">角色描述</div>
+        </div>
     </div>
-</div>
 </div>
 
 <script type="text/javascript">

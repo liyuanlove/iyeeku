@@ -4,6 +4,32 @@
 
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
+	<resultMap id="codeTypeResultMap" type="com.iyeeku.ext.codetype.vo.PFCodeTypeVO" >
+		<id column="ZJ" property="zj" jdbcType="CHAR" />
+		<result column="SJLXBH" property="sjlxbh" jdbcType="VARCHAR" />
+		<result column="SJLXMC" property="sjlxmc" jdbcType="VARCHAR" />
+		<result column="SJLXMS" property="sjlxms" jdbcType="VARCHAR" />
+		<result column="PXH" property="pxh" jdbcType="DECIMAL" />
+		<result column="JLZT" property="jlzt" jdbcType="CHAR" />
+		<result column="SFZCCJ" property="sfzccj" jdbcType="CHAR" />
+		<result column="MBLX" property="mblx" jdbcType="CHAR" />
+	</resultMap>
 
+	<select id="findAllTypes" resultMap="codeTypeResultMap" parameterType="com.iyeeku.ext.codetype.vo.PFCodeTypeVO" >
+		select ZJ, SJLXBH, SJLXMC, SJLXMS, PXH, JLZT, SFZCCJ, MBLX from PF_CODETYPE
+	</select>
+
+	<select id="findAllTypesCount" resultType="int" parameterType="com.iyeeku.ext.codetype.vo.PFCodeTypeVO">
+		select COUNT(*) from PF_CODETYPE
+	</select>
+
+	<insert id="save" parameterType="com.iyeeku.ext.codetype.vo.PFCodeTypeVO" >
+		insert into PF_CODETYPE (ZJ, SJLXBH, SJLXMC,
+		SJLXMS, PXH, JLZT, SFZCCJ,
+		MBLX)
+		values (#{zj,jdbcType=CHAR}, #{sjlxbh,jdbcType=VARCHAR}, #{sjlxmc,jdbcType=VARCHAR},
+		#{sjlxms,jdbcType=VARCHAR}, #{pxh,jdbcType=DECIMAL}, #{jlzt,jdbcType=CHAR}, #{sfzccj,jdbcType=CHAR},
+		#{mblx,jdbcType=CHAR})
+	</insert>
 	
 </mapper>
