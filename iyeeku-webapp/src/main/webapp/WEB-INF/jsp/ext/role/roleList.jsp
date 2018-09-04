@@ -53,7 +53,7 @@
     function add() {
 
         mini.open({
-            targetWindow: window,
+            //targetWindow: window,
             //url: bootPATH + "roleForm",
             url: "${pageContext.request.contextPath}/role/roleForm",
             title: "新增角色", width: 540, height: 300,

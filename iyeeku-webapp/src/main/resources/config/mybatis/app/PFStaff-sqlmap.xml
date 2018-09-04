@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.staff.dao.PFStaffDao">
+
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+	<resultMap id="staffBaseResultMap" type="com.iyeeku.ext.staff.vo.PFStaffVO" >
+		<id column="YHBH" property="yhbh" jdbcType="CHAR" />
+		<result column="RYBH" property="rybh" jdbcType="CHAR" />
+		<result column="EUIPZJ" property="euipzj" jdbcType="VARCHAR" />
+		<result column="RLZYID" property="rlzyid" jdbcType="CHAR" />
+		<result column="YHDLM" property="yhdlm" jdbcType="VARCHAR" />
+		<result column="NOTESID" property="notesid" jdbcType="CHAR" />
+		<result column="GYH" property="gyh" jdbcType="CHAR" />
+		<result column="YHMC" property="yhmc" jdbcType="VARCHAR" />
+		<result column="XMQP" property="xmqp" jdbcType="VARCHAR" />
+		<result column="SSJG" property="ssjg" jdbcType="CHAR" />
+		<result column="SSJGBH" property="ssjgbh" jdbcType="CHAR" />
+		<result column="SSJGDY" property="ssjgdy" jdbcType="VARCHAR" />
+		<result column="XB" property="xb" jdbcType="CHAR" />
+		<result column="YHLX" property="yhlx" jdbcType="VARCHAR" />
+		<result column="GLYJB" property="glyjb" jdbcType="VARCHAR" />
+		<result column="RZRQ" property="rzrq" jdbcType="TIMESTAMP" />
+		<result column="JYCD" property="jycd" jdbcType="CHAR" />
+		<result column="SDSJ" property="sdsj" jdbcType="TIMESTAMP" />
+		<result column="GRZJLX" property="grzjlx" jdbcType="CHAR" />
+		<result column="SFZH" property="sfzh" jdbcType="VARCHAR" />
+		<result column="SR" property="sr" jdbcType="TIMESTAMP" />
+		<result column="DHHM" property="dhhm" jdbcType="VARCHAR" />
+		<result column="YJ" property="yj" jdbcType="VARCHAR" />
+		<result column="DZ" property="dz" jdbcType="VARCHAR" />
+		<result column="SDLX" property="sdlx" jdbcType="CHAR" />
+		<result column="NOTES邮箱" property="notes邮箱" jdbcType="VARCHAR" />
+		<result column="YZBM" property="yzbm" jdbcType="VARCHAR" />
+		<result column="BGSDHZX" property="bgsdhzx" jdbcType="VARCHAR" />
+		<result column="BGSDHIP" property="bgsdhip" jdbcType="VARCHAR" />
+		<result column="CZHM" property="czhm" jdbcType="VARCHAR" />
+		<result column="BGSDZ" property="bgsdz" jdbcType="VARCHAR" />
+		<result column="JTDH" property="jtdh" jdbcType="VARCHAR" />
+		<result column="ZT" property="zt" jdbcType="CHAR" />
+		<result column="JLZT" property="jlzt" jdbcType="CHAR" />
+		<result column="ZW" property="zw" jdbcType="VARCHAR" />
+		<result column="X" property="x" jdbcType="VARCHAR" />
+		<result column="YWMC" property="ywmc" jdbcType="VARCHAR" />
+		<result column="YGZT" property="ygzt" jdbcType="CHAR" />
+		<result column="YGXS" property="ygxs" jdbcType="CHAR" />
+		<result column="PXH" property="pxh" jdbcType="DECIMAL" />
+		<result column="CJR" property="cjr" jdbcType="CHAR" />
+		<result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+		<result column="ZHXGR" property="zhxgr" jdbcType="CHAR" />
+		<result column="ZHXGSJ" property="zhxgsj" jdbcType="TIMESTAMP" />
+		<result column="KZZD1" property="kzzd1" jdbcType="VARCHAR" />
+		<result column="KZZD2" property="kzzd2" jdbcType="VARCHAR" />
+		<result column="KZZD3" property="kzzd3" jdbcType="VARCHAR" />
+		<result column="KZZD4" property="kzzd4" jdbcType="VARCHAR" />
+		<result column="KZZD5" property="kzzd5" jdbcType="VARCHAR" />
+		<result column="KZZD6" property="kzzd6" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="findAllStaffInfos" resultMap="staffBaseResultMap">
+		SELECT YHBH, RYBH, EUIPZJ, RLZYID, YHDLM, NOTESID, GYH, YHMC, XMQP, SSJG, SSJGBH, SSJGDY,
+    	XB, YHLX, GLYJB, RZRQ, JYCD, SDSJ, GRZJLX, SFZH, SR, DHHM, YJ, DZ, SDLX, NOTES邮箱,
+    	YZBM, BGSDHZX, BGSDHIP, CZHM, BGSDZ, JTDH, ZT, JLZT, ZW, X, YWMC, YGZT, YGXS, PXH,
+    	CJR, CJSJ, ZHXGR, ZHXGSJ, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
+    	FROM PF_STAFF
+	</select>
+
+	<select id="findStaffByYhbh" parameterType="java.lang.String" resultType="com.iyeeku.ext.staff.vo.PFStaffVO">
+		SELECT YHBH, RYBH, EUIPZJ, RLZYID, YHDLM, NOTESID, GYH, YHMC, XMQP, SSJG, SSJGBH, SSJGDY,
+		XB, YHLX, GLYJB, RZRQ, JYCD, SDSJ, GRZJLX, SFZH, SR, DHHM, YJ, DZ, SDLX, NOTES邮箱,
+		YZBM, BGSDHZX, BGSDHIP, CZHM, BGSDZ, JTDH, ZT, JLZT, ZW, X, YWMC, YGZT, YGXS, PXH,
+		CJR, CJSJ, ZHXGR, ZHXGSJ, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
+		FROM PF_STAFF WHERE JLZT = '1' AND YHBH = #{VALUE,jdbcType=CHAR}
+	</select>
+
+	<insert id="save" parameterType="com.iyeeku.ext.staff.vo.PFStaffVO" >
+		insert into PF_STAFF (YHBH, RYBH, EUIPZJ,
+		RLZYID, YHDLM, NOTESID, GYH,
+		YHMC, XMQP, SSJG, SSJGBH,
+		SSJGDY, XB, YHLX, GLYJB,
+		RZRQ, JYCD, SDSJ,
+		GRZJLX, SFZH, SR, DHHM,
+		YJ, DZ, SDLX, NOTES邮箱,
+		YZBM, BGSDHZX, BGSDHIP,
+		CZHM, BGSDZ, JTDH,
+		ZT, JLZT, ZW, X,
+		YWMC, YGZT, YGXS, PXH,
+		CJR, CJSJ, ZHXGR, ZHXGSJ,
+		KZZD1, KZZD2, KZZD3,
+		KZZD4, KZZD5, KZZD6
+		)
+		values (#{yhbh,jdbcType=CHAR}, #{rybh,jdbcType=CHAR}, #{euipzj,jdbcType=VARCHAR},
+		#{rlzyid,jdbcType=CHAR}, #{yhdlm,jdbcType=VARCHAR}, #{notesid,jdbcType=CHAR}, #{gyh,jdbcType=CHAR},
+		#{yhmc,jdbcType=VARCHAR}, #{xmqp,jdbcType=VARCHAR}, #{ssjg,jdbcType=CHAR}, #{ssjgbh,jdbcType=CHAR},
+		#{ssjgdy,jdbcType=VARCHAR}, #{xb,jdbcType=CHAR}, #{yhlx,jdbcType=VARCHAR}, #{glyjb,jdbcType=VARCHAR},
+		#{rzrq,jdbcType=TIMESTAMP}, #{jycd,jdbcType=CHAR}, #{sdsj,jdbcType=TIMESTAMP},
+		#{grzjlx,jdbcType=CHAR}, #{sfzh,jdbcType=VARCHAR}, #{sr,jdbcType=TIMESTAMP}, #{dhhm,jdbcType=VARCHAR},
+		#{yj,jdbcType=VARCHAR}, #{dz,jdbcType=VARCHAR}, #{sdlx,jdbcType=CHAR}, #{notes邮箱,jdbcType=VARCHAR},
+		#{yzbm,jdbcType=VARCHAR}, #{bgsdhzx,jdbcType=VARCHAR}, #{bgsdhip,jdbcType=VARCHAR},
+		#{czhm,jdbcType=VARCHAR}, #{bgsdz,jdbcType=VARCHAR}, #{jtdh,jdbcType=VARCHAR},
+		#{zt,jdbcType=CHAR}, #{jlzt,jdbcType=CHAR}, #{zw,jdbcType=VARCHAR}, #{x,jdbcType=VARCHAR},
+		#{ywmc,jdbcType=VARCHAR}, #{ygzt,jdbcType=CHAR}, #{ygxs,jdbcType=CHAR}, #{pxh,jdbcType=DECIMAL},
+		#{cjr,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP}, #{zhxgr,jdbcType=CHAR}, #{zhxgsj,jdbcType=TIMESTAMP},
+		#{kzzd1,jdbcType=VARCHAR}, #{kzzd2,jdbcType=VARCHAR}, #{kzzd3,jdbcType=VARCHAR},
+		#{kzzd4,jdbcType=VARCHAR}, #{kzzd5,jdbcType=VARCHAR}, #{kzzd6,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.iyeeku.ext.staff.vo.PFStaffVO" >
+		update PF_STAFF
+		<set >
+			<if test="rybh != null" >
+				RYBH = #{rybh,jdbcType=CHAR},
+			</if>
+			<if test="euipzj != null" >
+				EUIPZJ = #{euipzj,jdbcType=VARCHAR},
+			</if>
+			<if test="rlzyid != null" >
+				RLZYID = #{rlzyid,jdbcType=CHAR},
+			</if>
+			<if test="yhdlm != null" >
+				YHDLM = #{yhdlm,jdbcType=VARCHAR},
+			</if>
+			<if test="notesid != null" >
+				NOTESID = #{notesid,jdbcType=CHAR},
+			</if>
+			<if test="gyh != null" >
+				GYH = #{gyh,jdbcType=CHAR},
+			</if>
+			<if test="yhmc != null" >
+				YHMC = #{yhmc,jdbcType=VARCHAR},
+			</if>
+			<if test="xmqp != null" >
+				XMQP = #{xmqp,jdbcType=VARCHAR},
+			</if>
+			<if test="ssjg != null" >
+				SSJG = #{ssjg,jdbcType=CHAR},
+			</if>
+			<if test="ssjgbh != null" >
+				SSJGBH = #{ssjgbh,jdbcType=CHAR},
+			</if>
+			<if test="ssjgdy != null" >
+				SSJGDY = #{ssjgdy,jdbcType=VARCHAR},
+			</if>
+			<if test="xb != null" >
+				XB = #{xb,jdbcType=CHAR},
+			</if>
+			<if test="yhlx != null" >
+				YHLX = #{yhlx,jdbcType=VARCHAR},
+			</if>
+			<if test="glyjb != null" >
+				GLYJB = #{glyjb,jdbcType=VARCHAR},
+			</if>
+			<if test="rzrq != null" >
+				RZRQ = #{rzrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jycd != null" >
+				JYCD = #{jycd,jdbcType=CHAR},
+			</if>
+			<if test="sdsj != null" >
+				SDSJ = #{sdsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="grzjlx != null" >
+				GRZJLX = #{grzjlx,jdbcType=CHAR},
+			</if>
+			<if test="sfzh != null" >
+				SFZH = #{sfzh,jdbcType=VARCHAR},
+			</if>
+			<if test="sr != null" >
+				SR = #{sr,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dhhm != null" >
+				DHHM = #{dhhm,jdbcType=VARCHAR},
+			</if>
+			<if test="yj != null" >
+				YJ = #{yj,jdbcType=VARCHAR},
+			</if>
+			<if test="dz != null" >
+				DZ = #{dz,jdbcType=VARCHAR},
+			</if>
+			<if test="sdlx != null" >
+				SDLX = #{sdlx,jdbcType=CHAR},
+			</if>
+			<if test="notes邮箱 != null" >
+				NOTES邮箱 = #{notes邮箱,jdbcType=VARCHAR},
+			</if>
+			<if test="yzbm != null" >
+				YZBM = #{yzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="bgsdhzx != null" >
+				BGSDHZX = #{bgsdhzx,jdbcType=VARCHAR},
+			</if>
+			<if test="bgsdhip != null" >
+				BGSDHIP = #{bgsdhip,jdbcType=VARCHAR},
+			</if>
+			<if test="czhm != null" >
+				CZHM = #{czhm,jdbcType=VARCHAR},
+			</if>
+			<if test="bgsdz != null" >
+				BGSDZ = #{bgsdz,jdbcType=VARCHAR},
+			</if>
+			<if test="jtdh != null" >
+				JTDH = #{jtdh,jdbcType=VARCHAR},
+			</if>
+			<if test="zt != null" >
+				ZT = #{zt,jdbcType=CHAR},
+			</if>
+			<if test="jlzt != null" >
+				JLZT = #{jlzt,jdbcType=CHAR},
+			</if>
+			<if test="zw != null" >
+				ZW = #{zw,jdbcType=VARCHAR},
+			</if>
+			<if test="x != null" >
+				X = #{x,jdbcType=VARCHAR},
+			</if>
+			<if test="ywmc != null" >
+				YWMC = #{ywmc,jdbcType=VARCHAR},
+			</if>
+			<if test="ygzt != null" >
+				YGZT = #{ygzt,jdbcType=CHAR},
+			</if>
+			<if test="ygxs != null" >
+				YGXS = #{ygxs,jdbcType=CHAR},
+			</if>
+			<if test="pxh != null" >
+				PXH = #{pxh,jdbcType=DECIMAL},
+			</if>
+			<if test="cjr != null" >
+				CJR = #{cjr,jdbcType=CHAR},
+			</if>
+			<if test="cjsj != null" >
+				CJSJ = #{cjsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zhxgr != null" >
+				ZHXGR = #{zhxgr,jdbcType=CHAR},
+			</if>
+			<if test="zhxgsj != null" >
+				ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="kzzd1 != null" >
+				KZZD1 = #{kzzd1,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd2 != null" >
+				KZZD2 = #{kzzd2,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd3 != null" >
+				KZZD3 = #{kzzd3,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd4 != null" >
+				KZZD4 = #{kzzd4,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd5 != null" >
+				KZZD5 = #{kzzd5,jdbcType=VARCHAR},
+			</if>
+			<if test="kzzd6 != null" >
+				KZZD6 = #{kzzd6,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where YHBH = #{yhbh,jdbcType=CHAR}
+	</update>
+
+	<delete id="delete" parameterType="com.iyeeku.ext.staff.vo.PFStaffVO">
+		DELETE FROM PF_STAFF WHERE YHBH = #{yhbh,jdbcType=CHAR}
+	</delete>
+
+</mapper>

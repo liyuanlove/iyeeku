@@ -2,6 +2,8 @@ package com.iyeeku.ext.codetype.service.impl;
 
 import com.iyeeku.core.utils.UUIDGenerator;
 import com.iyeeku.core.vo.Pagination;
+import com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao;
+import com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO;
 import com.iyeeku.ext.codetype.dao.PFCodeTypeDao;
 import com.iyeeku.ext.codetype.service.PFCodeTypeService;
 import com.iyeeku.ext.codetype.vo.PFCodeTypeVO;
@@ -21,6 +23,9 @@ public class PFCodeTypeServiceImpl implements PFCodeTypeService {
 
     @Autowired
     private PFCodeTypeDao pfCodeTypeDao;
+
+    @Autowired
+    private PFCodeInfoDao pfCodeInfoDao;
 
     @Override
     public Map<String, Object> findAllTypes(PFCodeTypeVO codeTypeVO, Pagination pagination) {
@@ -46,6 +51,7 @@ public class PFCodeTypeServiceImpl implements PFCodeTypeService {
     public void save(PFCodeTypeVO vo) {
         this.logger.info("PFCodeTypeServiceImpl ");
         vo.setZj(UUIDGenerator.generate(""));
+        vo.setJlzt("1");
         this.pfCodeTypeDao.save(vo);
     }
 
@@ -56,8 +62,14 @@ public class PFCodeTypeServiceImpl implements PFCodeTypeService {
     }
 
     @Override
-    public void delete(PFCodeTypeVO vo) {
+    public void delete(PFCodeTypeVO codeTypeVO) {
         this.logger.info("PFCodeTypeServiceImpl ");
-        this.pfCodeTypeDao.delete(vo);
+        this.pfCodeTypeDao.delete(codeTypeVO);
+
+        PFCodeInfoVO codeInfoVO = new PFCodeInfoVO();
+        codeInfoVO.setSjlx(codeTypeVO.getZj());
+
+        this.pfCodeInfoDao.delete(codeInfoVO);
+
     }
 }

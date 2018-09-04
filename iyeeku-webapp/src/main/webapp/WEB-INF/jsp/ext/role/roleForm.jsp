@@ -22,7 +22,8 @@
             </td>
             <td style="width:100px;">角色类型：</td>
             <td style="width:150px;">
-                <input id="jslx" name="jslx" class="mini-textbox" required="true" style="width:80%;" />
+                <input id="jslx" name="jslx" class="mini-combobox" required="true" style="width:80%;"
+                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict?dictId=roleType"/>
             </td>
         </tr>
         <tr>
@@ -32,7 +33,8 @@
             </td>
             <td>角色状态：</td>
             <td>
-                <input id="jszt" name="jszt" class="mini-textbox" required="true" style="width: 80%;" />
+                <input id="jszt" name="jszt" class="mini-combobox" required="true" style="width: 80%;"
+                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict?dictId=roleState" />
             </td>
         </tr>
         <tr>

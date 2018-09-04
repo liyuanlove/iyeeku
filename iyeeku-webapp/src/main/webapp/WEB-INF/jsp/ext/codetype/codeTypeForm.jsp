@@ -25,6 +25,7 @@
 
 <body>
     <div class="mini-fit">
+        <input class="mini-hidden" name="pageType" id="pageType" value="query">
         <form id="codeTypeForm" method="post" style="padding-left: 8px;">
             <div style="padding-left: 8px;padding-bottom: 5px;padding-right: 10px;">
                 <table style="table-layout: fixed;width: 100%;">
@@ -36,8 +37,8 @@
                   </colgroup>
                     <tr>
                         <td colspan="4">
-                            <input name="zj" class="mini-hidden"/>
-                            <input name="jlzt" class="mini-hidden"/>
+                            <input name="zj" id="zj" class="mini-hidden"/>
+                            <input name="jlzt" id="jlzt" class="mini-hidden"/>
                         </td>
                     </tr>
                     <tr>
@@ -45,7 +46,7 @@
                         <td>
                             <input name="sjlxbh" class="mini-textbox" required="true" vtype="rangeChar:1,64">
                         </td>
-                        <td class="even">码表名称</td>
+                        <td class="odd">码表名称</td>
                         <td>
                             <input name="sjlxmc" class="mini-textbox" required="true" vtype="rangeChar:0,64">
                         </td>
@@ -55,7 +56,7 @@
                         <td>
                             <input name="pxh" class="mini-textbox" vtype="int;rangeChar:0,8">
                         </td>
-                        <td class="even">是否支持层级</td>
+                        <td class="odd">是否支持层级</td>
                         <td>
                             <select name="sfzccj" class="mini-radiobuttonlist" onvaluechanged="valueChange(this)">
                                 <option value="1">是</option>
@@ -96,12 +97,20 @@
     }
 
     function SaveData() {
-
         form.validate();
         if (form.isValid() == false) return;
+
+        var url = "${pageContext.request.contextPath}/codetype/add";
+
+        var pageType = mini.get("pageType").getValue();
+
+        if( pageType == "edit" ){
+            url = "${pageContext.request.contextPath}/codetype/update";
+        }
+
         var data = form.getData();      //获取表单多个控件的数据
         $.ajax({
-            url: "${pageContext.request.contextPath}/codetype/add",
+            url: url,
             type: "post",
             data: data ,
             success: function (text) {
@@ -112,6 +121,36 @@
                 CloseWindow();
             }
         });
+    }
+
+    function valueChange (e) {
+
+        var newData = form.getData();
+        var name = e.name;
+        var value = e.value;
+
+        if(e._calendar != null){
+            value = mini.formatDate(value,"${_TIMESTAPPATTERN}");
+        }
+        newData[name] = value;
+        var newDataJson = mini.encode(newData);
+    }
+
+    function SetData(data) {
+        //跨页面传递的数据对象，克隆后才可以安全使用
+        data = mini.clone(data);
+        mini.get("pageType").setValue(data.action);
+        if (data.action == "edit") {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/codetype/getCodeTypeByZj?zj="+data.id,
+                cache: false,
+                success: function (text) {
+                    var o = mini.decode(text);
+                    form.setData(o);
+                    form.setChanged(false);
+                }
+            });
+        }
     }
 
     function onCancel(e) {

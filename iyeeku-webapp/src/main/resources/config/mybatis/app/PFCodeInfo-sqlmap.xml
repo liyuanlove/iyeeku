@@ -4,6 +4,114 @@
 
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
+	<resultMap id="codeInfoBaseResultMap" type="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
+		<id column="ZJ" property="zj" jdbcType="CHAR" />
+		<result column="MBLXBH" property="mblxbh" jdbcType="VARCHAR" />
+		<result column="MBTMZ" property="mbtmz" jdbcType="VARCHAR" />
+		<result column="SJLX" property="sjlx" jdbcType="VARCHAR" />
+		<result column="MBTMMS" property="mbtmms" jdbcType="VARCHAR" />
+		<result column="SJSXSY" property="sjsxsy" jdbcType="DECIMAL" />
+		<result column="GJDBM" property="gjdbm" jdbcType="VARCHAR" />
+		<result column="FJDBM" property="fjdbm" jdbcType="VARCHAR" />
+		<result column="BMJB" property="bmjb" jdbcType="DECIMAL" />
+		<result column="QLJ" property="qlj" jdbcType="VARCHAR" />
+		<result column="SFKJ" property="sfkj" jdbcType="CHAR" />
+		<result column="SJSYGJHXX" property="sjsygjhxx" jdbcType="VARCHAR" />
+		<result column="JLZT" property="jlzt" jdbcType="CHAR" />
+		<result column="KZZD" property="kzzd" jdbcType="VARCHAR" />
+	</resultMap>
 
-	
+	<select id="findAllInfosByCodeType" parameterType="java.lang.String" resultMap="codeInfoBaseResultMap">
+		SELECT ZJ, MBLXBH, MBTMZ, SJLX, MBTMMS, SJSXSY, GJDBM, FJDBM, BMJB, QLJ, SFKJ, SJSYGJHXX, JLZT, KZZD
+		FROM PF_CODEINFO WHERE JLZT = '1' AND SJLX = #{VALUE,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findCodeInfoByZj" parameterType="java.lang.String" resultMap="codeInfoBaseResultMap">
+		SELECT ZJ, MBLXBH, MBTMZ, SJLX, MBTMMS, SJSXSY, GJDBM, FJDBM, BMJB, QLJ, SFKJ, SJSYGJHXX, JLZT, KZZD
+		FROM PF_CODEINFO WHERE JLZT = '1' AND ZJ = #{VALUE,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="save" parameterType="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
+		insert into PF_CODEINFO (ZJ, MBLXBH, MBTMZ,
+		SJLX, MBTMMS, SJSXSY,
+		GJDBM, FJDBM, BMJB,
+		QLJ, SFKJ, SJSYGJHXX,
+		JLZT, KZZD)
+		values (#{zj,jdbcType=CHAR}, #{mblxbh,jdbcType=VARCHAR}, #{mbtmz,jdbcType=VARCHAR},
+		#{sjlx,jdbcType=VARCHAR}, #{mbtmms,jdbcType=VARCHAR}, #{sjsxsy,jdbcType=DECIMAL},
+		#{gjdbm,jdbcType=VARCHAR}, #{fjdbm,jdbcType=VARCHAR}, #{bmjb,jdbcType=DECIMAL},
+		#{qlj,jdbcType=VARCHAR}, #{sfkj,jdbcType=CHAR}, #{sjsygjhxx,jdbcType=VARCHAR},
+		#{jlzt,jdbcType=CHAR}, #{kzzd,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="update" parameterType="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
+		update PF_CODEINFO
+		<set >
+			<if test="mblxbh != null" >
+				MBLXBH = #{mblxbh,jdbcType=VARCHAR},
+			</if>
+			<if test="mbtmz != null" >
+				MBTMZ = #{mbtmz,jdbcType=VARCHAR},
+			</if>
+			<if test="sjlx != null" >
+				SJLX = #{sjlx,jdbcType=VARCHAR},
+			</if>
+			<if test="mbtmms != null" >
+				MBTMMS = #{mbtmms,jdbcType=VARCHAR},
+			</if>
+			<if test="sjsxsy != null" >
+				SJSXSY = #{sjsxsy,jdbcType=DECIMAL},
+			</if>
+			<if test="gjdbm != null" >
+				GJDBM = #{gjdbm,jdbcType=VARCHAR},
+			</if>
+			<if test="fjdbm != null" >
+				FJDBM = #{fjdbm,jdbcType=VARCHAR},
+			</if>
+			<if test="bmjb != null" >
+				BMJB = #{bmjb,jdbcType=DECIMAL},
+			</if>
+			<if test="qlj != null" >
+				QLJ = #{qlj,jdbcType=VARCHAR},
+			</if>
+			<if test="sfkj != null" >
+				SFKJ = #{sfkj,jdbcType=CHAR},
+			</if>
+			<if test="sjsygjhxx != null" >
+				SJSYGJHXX = #{sjsygjhxx,jdbcType=VARCHAR},
+			</if>
+			<if test="jlzt != null" >
+				JLZT = #{jlzt,jdbcType=CHAR},
+			</if>
+			<if test="kzzd != null" >
+				KZZD = #{kzzd,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ZJ = #{zj,jdbcType=CHAR}
+	</update>
+
+	<delete id="delete" parameterType="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
+		delete from PF_CODEINFO
+		where 1=1
+		<if test="zj != null">
+			AND ZJ = #{zj,jdbcType=CHAR}
+		</if>
+		<if test="sjlx != null" >
+			AND SJLX = #{sjlx,jdbcType=VARCHAR}
+		</if>
+	</delete>
+
+	<resultMap id="directoryBaseResultMap" type="com.iyeeku.ext.directory.vo.DirectoryVO" >
+		<result column="MBLXBH" property="id" jdbcType="VARCHAR" />
+		<result column="MBTMZ" property="text" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="findCodeInfosByCodeType" parameterType="map" resultMap="directoryBaseResultMap">
+		SELECT i.MBLXBH,i.MBTMZ FROM PF_CODEINFO i
+		WHERE i.SJLX = (SELECT zj FROM PF_CODETYPE WHERE JLZT = '1' AND SJLXBH = #{codetype , jdbcType=VARCHAR}) AND JLZT = '1'
+		<if test="sjsxsyOrder == 'TRUE'">
+			ORDER BY i.SJSXSY ASC
+		</if>
+	</select>
+
 </mapper>

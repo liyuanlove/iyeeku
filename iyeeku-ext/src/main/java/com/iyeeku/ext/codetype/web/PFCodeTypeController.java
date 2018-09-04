@@ -41,6 +41,13 @@ public class PFCodeTypeController {
         return this.pfCodeTypeService.findAllTypes(codeTypeVO,pagination);
     }
 
+    @RequestMapping(value = "/getCodeTypeByZj")
+    @ResponseBody
+    public PFCodeTypeVO getCodeTypeByZj(String zj){
+        this.logger.info("PFCodeTypeController getCodeTypeByZj");
+        return this.pfCodeTypeService.findCodeTypeByZj(zj);
+    }
+
     @RequestMapping(value = "/add" , method = RequestMethod.POST)
     @ResponseBody
     public void save(PFCodeTypeVO codeTypeVO){
@@ -53,6 +60,13 @@ public class PFCodeTypeController {
     public void update(PFCodeTypeVO codeTypeVO){
         this.logger.info("PFCodeTypeController update");
         this.pfCodeTypeService.update(codeTypeVO);
+    }
+
+    @RequestMapping(value = "/delete" , method = RequestMethod.POST)
+    @ResponseBody
+    public void delete(PFCodeTypeVO codeTypeVO){
+        this.logger.info("PFCodeTypeController delete");
+        this.pfCodeTypeService.delete(codeTypeVO);
     }
 
 }

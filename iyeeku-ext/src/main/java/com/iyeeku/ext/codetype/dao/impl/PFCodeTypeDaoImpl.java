@@ -53,7 +53,7 @@ public class PFCodeTypeDaoImpl extends BaseDaoImpl implements PFCodeTypeDao {
     @Override
     public void delete(PFCodeTypeVO vo) {
         this.logger.info("PFCodeTypeDaoImpl delete");
-        this.delete_myBatis("com.iyeeku.ext.codetype.dao.PFCodeTypeDao",vo);
+        this.delete_myBatis("com.iyeeku.ext.codetype.dao.PFCodeTypeDao.delete",vo);
     }
 
 }

@@ -1,19 +1,13 @@
-/*
-package com.iyeeku.core.orm.interceptor;
 
-import java.sql.Connection;
-import java.util.Map;
-import java.util.Properties;
+package com.iyeeku.core.orm.interceptor;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.reflection.DefaultReflectorFactory;
 import org.apache.ibatis.reflection.MetaObject;
+import org.apache.ibatis.reflection.ReflectorFactory;
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory;
@@ -21,16 +15,21 @@ import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
 
-@Intercepts({ @Signature(type = StatementHandler.class , method = "prepare" , args = { Connection.class }) })
+import java.sql.Connection;
+import java.util.Map;
+import java.util.Properties;
+
+@Intercepts({ @Signature(type = StatementHandler.class , method = "prepare" , args = { Connection.class ,Integer.class}) })
 public class PaginationInterceptor implements Interceptor {
 
     private static final ObjectFactory DEFAULT_OBJECT_FACTORY = new DefaultObjectFactory();
     private static final ObjectWrapperFactory DEFAULT_OBJECT_WRAPPER_FACTORY = new DefaultObjectWrapperFactory();
+    private static final ReflectorFactory DEFAULT_REFLECTOR_FACTORY = new DefaultReflectorFactory();
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         StatementHandler statementHandler = (StatementHandler)invocation.getTarget();
-        MetaObject metaStatementHandler = MetaObject.forObject(statementHandler, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY);
+        MetaObject metaStatementHandler = MetaObject.forObject(statementHandler, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY,DEFAULT_REFLECTOR_FACTORY);
         //MetaObject metaStatementHandler = MetaObject.forObject(statementHandler, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY);
         //MetaObject.forObject(statementHandler ,)
 
@@ -41,12 +40,12 @@ public class PaginationInterceptor implements Interceptor {
 
         while( metaStatementHandler.hasGetter("h") ){
             Object object = metaStatementHandler.getValue("h");
-            metaStatementHandler = MetaObject.forObject(object, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY);
+            metaStatementHandler = MetaObject.forObject(object, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY,DEFAULT_REFLECTOR_FACTORY);
         }
 
         while (metaStatementHandler.hasGetter("target")) {
             Object object = metaStatementHandler.getValue("target");
-            metaStatementHandler = MetaObject.forObject(object, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY);
+            metaStatementHandler = MetaObject.forObject(object, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY,DEFAULT_REFLECTOR_FACTORY);
         }
 
         BoundSql boundSql = (BoundSql) metaStatementHandler.getValue("delegate.boundSql");
@@ -76,18 +75,17 @@ public class PaginationInterceptor implements Interceptor {
 
         }else if(dbType.equals("oracle")){
 
-*/
-/*	    	sbSql.append("SELECT * ");
+	    	sbSql.append("SELECT * ");
 	    	sbSql.append("FROM (SELECT ROWNUM RN,NOPAGESQL.* ");
 	    	sbSql.append("FROM (").append(sql).append(") NOPAGESQL ");
 	    	sbSql.append("WHERE ROWNUM <= ").append(rowBounds.getLimit()).append(") ");
-	    	sbSql.append("WHERE RN >= ").append(rowBounds.getOffset());*//*
+	    	sbSql.append("WHERE RN >= ").append(rowBounds.getOffset());
 
 
-            sbSql.append("select * from ( select temp.*, rownum row_id from (");
-            sbSql.append(sql);
-            sbSql.append(") temp where rownum <= ").append(rowBounds.getLimit());
-            sbSql.append(") where row_id > ").append(rowBounds.getOffset());
+           // sbSql.append("select * from ( select temp.*, rownum row_id from (");
+            //sbSql.append(sql);
+            //sbSql.append(") temp where rownum <= ").append(rowBounds.getLimit());
+            //sbSql.append(") where row_id > ").append(rowBounds.getOffset());
 
             metaStatementHandler.setValue("delegate.boundSql.sql", sbSql.toString());
 
@@ -127,4 +125,4 @@ public class PaginationInterceptor implements Interceptor {
 
 
 }
-*/
+

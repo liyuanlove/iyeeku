@@ -23,6 +23,10 @@
 		select COUNT(*) from PF_CODETYPE
 	</select>
 
+	<select id="findCodeTypeByZj" resultMap="codeTypeResultMap" parameterType="java.lang.String" >
+		select ZJ, SJLXBH, SJLXMC, SJLXMS, PXH, JLZT, SFZCCJ, MBLX from PF_CODETYPE WHERE JLZT = '1' AND ZJ = #{VALUE ,jdbcType=CHAR}
+	</select>
+
 	<insert id="save" parameterType="com.iyeeku.ext.codetype.vo.PFCodeTypeVO" >
 		insert into PF_CODETYPE (ZJ, SJLXBH, SJLXMC,
 		SJLXMS, PXH, JLZT, SFZCCJ,
@@ -31,5 +35,37 @@
 		#{sjlxms,jdbcType=VARCHAR}, #{pxh,jdbcType=DECIMAL}, #{jlzt,jdbcType=CHAR}, #{sfzccj,jdbcType=CHAR},
 		#{mblx,jdbcType=CHAR})
 	</insert>
+
+	<delete id="delete" parameterType="com.iyeeku.ext.codetype.vo.PFCodeTypeVO" >
+		delete from PF_CODETYPE where ZJ = #{zj,jdbcType=CHAR}
+	</delete>
+
+	<update id="update" parameterType="com.iyeeku.ext.codetype.vo.PFCodeTypeVO" >
+		update PF_CODETYPE
+		<set >
+			<if test="sjlxbh != null" >
+				SJLXBH = #{sjlxbh,jdbcType=VARCHAR},
+			</if>
+			<if test="sjlxmc != null" >
+				SJLXMC = #{sjlxmc,jdbcType=VARCHAR},
+			</if>
+			<if test="sjlxms != null" >
+				SJLXMS = #{sjlxms,jdbcType=VARCHAR},
+			</if>
+			<if test="pxh != null" >
+				PXH = #{pxh,jdbcType=DECIMAL},
+			</if>
+			<if test="jlzt != null" >
+				JLZT = #{jlzt,jdbcType=CHAR},
+			</if>
+			<if test="sfzccj != null" >
+				SFZCCJ = #{sfzccj,jdbcType=CHAR},
+			</if>
+			<if test="mblx != null" >
+				MBLX = #{mblx,jdbcType=CHAR},
+			</if>
+		</set>
+		where ZJ = #{zj,jdbcType=CHAR}
+	</update>
 	
 </mapper>
