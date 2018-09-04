@@ -80,8 +80,10 @@
         //menu
         var menu = new Menu("#mainMenu", {
             itemclick: function (item) {
+                //console.info();
                 if (!item.children) {
                     activeTab(item);
+                    $(this).blur()
                 }
             }
         });

@@ -10,6 +10,7 @@
 <head>
     <title>码表条目表单</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
 
     <style type="text/css">
         .odd{

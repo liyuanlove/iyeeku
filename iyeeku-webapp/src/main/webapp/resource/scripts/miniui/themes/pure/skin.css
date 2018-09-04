@@ -383,11 +383,14 @@ body .mini-error .mini-textboxlist-border
 }
 html body .mini-grid-row-hover
 {
-    background: #f1f8fd;
+    /*background: #f1f8fd;*/
+    background: #9cfdf2;
 }
 html body .mini-grid-row-selected
 {
-    background: #eef4f9;
+    /*background: #eef4f9;*/
+    background: #9cfdf2;
+
 }
 html body .mini-grid .mini-grid-cell-selected
 {

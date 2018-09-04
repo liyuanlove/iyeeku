@@ -3,6 +3,7 @@
 <head>
     <title>角色列表</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
 </head>
 
 <body>
