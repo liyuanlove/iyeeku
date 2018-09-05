@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.function.dao.PFResMenuDao">
+
+	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+
+	<resultMap id="resMenuBaseResultMap" type="com.iyeeku.ext.function.vo.PFResMenuVO" >
+		<id column="CDBH" property="cdbh" jdbcType="CHAR" />
+		<result column="CDBM" property="cdbm" jdbcType="VARCHAR" />
+		<result column="CDMC" property="cdmc" jdbcType="VARCHAR" />
+		<result column="CDURL" property="cdurl" jdbcType="VARCHAR" />
+		<result column="SJCDBH" property="sjcdbh" jdbcType="VARCHAR" />
+		<result column="CDSXH" property="cdsxh" jdbcType="DECIMAL" />
+		<result column="CDTP" property="cdtp" jdbcType="VARCHAR" />
+		<result column="SFXDLJ" property="sfxdlj" jdbcType="CHAR" />
+		<result column="CDDKCKSZWZ" property="cddkckszwz" jdbcType="VARCHAR" />
+		<result column="CDZXKJBH" property="cdzxkjbh" jdbcType="VARCHAR" />
+		<result column="CDSFKY" property="cdsfky" jdbcType="CHAR" />
+		<result column="CDSFKJ" property="cdsfkj" jdbcType="CHAR" />
+		<result column="CDDKFS" property="cddkfs" jdbcType="CHAR" />
+		<result column="CDLX" property="cdlx" jdbcType="CHAR" />
+	</resultMap>
+
+	<select id="findAllMenu" resultMap="resMenuBaseResultMap" parameterType="com.iyeeku.ext.function.vo.PFResMenuVO">
+		SELECT CDBH, CDBM, CDMC, CDURL, SJCDBH, CDSXH, CDTP, SFXDLJ, CDDKCKSZWZ, CDZXKJBH, CDSFKY, CDSFKJ, CDDKFS, CDLX FROM PF_RESMENU
+		WHERE 1=1
+		<if test="cdmc != null and cdmc != ''"> AND CDMC = #{cdbm,jdbcType=VARCHAR}</if>
+		<if test="cdbh != null and cdbh != ''"> AND CDBH = #{cdbh,jdbcType=CHAR}</if>
+        START WITH SJCDBH = 'DEFAULT_MENUTREE_ROOT' CONNECT BY PRIOR CDBH = SJCDBH ORDER SIBLINGS BY CDSXH ASC
+	</select>
+
+    <resultMap id="baseListRtnMap" type="com.iyeeku.ext.function.vo.PFResMenuVO">
+        <id column="CDBH" property="cdbh" jdbcType="CHAR" />
+        <result column="CDBM" property="cdbm" jdbcType="VARCHAR" />
+        <result column="CDMC" property="cdmc" jdbcType="VARCHAR" />
+        <result column="CDURL" property="cdurl" jdbcType="VARCHAR" />
+        <result column="SJCDBH" property="sjcdbh" jdbcType="VARCHAR" />
+        <result column="CDSXH" property="cdsxh" jdbcType="DECIMAL" />
+        <result column="CDTP" property="cdtp" jdbcType="VARCHAR" />
+        <result column="SFXDLJ" property="sfxdlj" jdbcType="CHAR" />
+        <result column="CDDKCKSZWZ" property="cddkckszwz" jdbcType="VARCHAR" />
+        <result column="CDZXKJBH" property="cdzxkjbh" jdbcType="VARCHAR" />
+        <result column="CDSFKY" property="cdsfky" jdbcType="CHAR" />
+        <result column="CDSFKJ" property="cdsfkj" jdbcType="CHAR" />
+        <result column="CDDKFS" property="cddkfs" jdbcType="CHAR" />
+        <result column="CDLX" property="cdlx" jdbcType="CHAR" />
+        <collection column="CDBH" property="children" ofType="com.iyeeku.ext.function.vo.PFResMenuVO" javaType="java.util.ArrayList" select="findAll"></collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="baseListRtnMap" parameterType="java.lang.String">
+        SELECT * FROM PF_RESMENU WHERE SJCDBH = #{VALUE} order by cdsxh asc
+    </select>
+
+    <select id="find" resultMap="baseListRtnMap">
+        SELECT * FROM PF_RESMENU WHERE SJCDBH = 'DEFAULT_MENUTREE_ROOT' order by cdsxh asc
+    </select>
+
+</mapper>

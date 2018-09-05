@@ -1,8 +1,10 @@
 package com.iyeeku.ext.role.vo;
 
 import com.iyeeku.core.vo.BaseVO;
+import com.iyeeku.ext.function.vo.PFResMenuVO;
 
 import java.util.Date;
+import java.util.List;
 
 public class PFRole extends BaseVO {
 
@@ -41,6 +43,8 @@ public class PFRole extends BaseVO {
     private String kzzd5;
 
     private String kzzd6;
+
+    private List<PFResMenuVO> menuList;
 
     public String getJsbh() {
         return jsbh;
@@ -176,6 +180,14 @@ public class PFRole extends BaseVO {
 
     public void setKzzd6(String kzzd6) {
         this.kzzd6 = kzzd6 == null ? null : kzzd6.trim();
+    }
+
+    public List<PFResMenuVO> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<PFResMenuVO> menuList) {
+        this.menuList = menuList;
     }
 
 }

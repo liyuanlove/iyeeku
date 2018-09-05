@@ -1,6 +1,7 @@
 ﻿[
     { "id": "xtgl", iconCls: "fa fa-desktop", text: "系统管理", children: [
         { "id": "xzgl", iconCls: "fa fa-leaf", text: "行政管理", url: "pages/1.html" },
+        { "id": "cdpz", iconCls: "fa fa-leaf", text: "菜单配置", url: "/menu/list" },
         { "id": "sjzd", iconCls: "fa fa-book", text: "数据字典", url: "/codetype/list" },
         { "id": "djbm", iconCls: "fa fa-barcode", text: "单据编码", url: "pages/1.html" },
         { "id": "xtgn", iconCls: "fa fa-navicon", text: "系统功能", url: "pages/1.html" },

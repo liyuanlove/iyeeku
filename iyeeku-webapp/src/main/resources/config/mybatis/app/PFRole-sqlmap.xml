@@ -119,5 +119,22 @@
 	<delete id="deleteRole" parameterType="java.lang.String">
 		DELETE FROM PF_ROLE WHERE JSBH = #{VALUE}
 	</delete>
+
+	<resultMap id="roleModel" type="com.iyeeku.ext.role.vo.PFRole">
+		<id column="JSBH" property="jsbh" jdbcType="VARCHAR" />
+		<result column="JSMC" property="jsmc" jdbcType="VARCHAR" />
+		<collection property="menuList" ofType="java.util.HashMap" javaType="java.util.List">
+			<id column="CDBH" property="cdbh" jdbcType="CHAR" />
+			<result column="CDMC" property="cdmc" jdbcType="VARCHAR" />
+			<result column="SJCDBH" property="sjcdbh" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+	<select id="findMenuByRole" resultMap="roleModel">
+		select ic.sqdxbh as jsbh,r.jsmc,me.cdbh,me.cdmc,me.sjcdbh from PF_ARCGRANT ic
+		LEFT OUTER join PF_ROLE r on r.jsbh = ic.sqdxbh
+		left outer join PF_RESMENU me on me.cdbh = ic.sqzybm
+		where ic.sqzylx = 'CD' and r.jsbh = 'A82970D7A9FE65763E373F76EA31B4A1'
+	</select>
 	
 </mapper>

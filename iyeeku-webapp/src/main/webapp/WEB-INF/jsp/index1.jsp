@@ -67,9 +67,9 @@
             </div>
         </div>
         <div id="tabsButtons">
-            <a class="tabsBtn"><i class="fa fa-home"></i></a>
-            <a class="tabsBtn"><i class="fa fa-refresh"></i></a>
-            <a class="tabsBtn"><i class="fa fa-remove"></i></a>
+            <a class="tabsBtn"><i class="fa fa-home" onclick="backHomeTab()"></i></a>
+            <a class="tabsBtn"><i class="fa fa-refresh" onclick="refreshCurrentTab()"></i></a>
+            <a class="tabsBtn"><i class="fa fa-remove" onclick="removeCurrentTab()"></i></a>
             <a class="tabsBtn"><i class="fa fa-arrows-alt"></i></a>
         </div>
     </div>
@@ -83,7 +83,6 @@
         var tabs = mini.get("mainTabs");
         var tab = tabs.getTab(item.id);
         if (!tab) {
-            console.info(item.url);
             tab = { name: item.id, title: item.text, url: item.url, iconCls: item.iconCls, showCloseButton: true };
             tab = tabs.addTab(tab);
         }
@@ -92,12 +91,8 @@
 
     $(function () {
 
-        //menu
         var menu = new Menu("#mainMenu", {
             itemclick: function (item) {
-
-                console.info(item);
-
                 if (!item.children) {
                     activeTab(item);
                 }
@@ -109,10 +104,9 @@
         new MenuTip(menu);
 
         $.ajax({
-            url: "/frame1/data/menu.txt",
+            url: "${pageContext.request.contextPath}/menu/12",
             success: function (text) {
                 var data = mini.decode(text);
-                console.info(data);
                 menu.loadData(data);
             }
         })
@@ -133,6 +127,30 @@
             $(".dropdown").removeClass("open");
         });
     });
+    
+    function backHomeTab() {
+        var tabs = top.mini.get("mainTabs");
+        var tab = tabs.getTab("index");
+        if (!tab) {
+            //tab = { name: item.id, title: item.text, url: item.url, iconCls: item.iconCls, showCloseButton: true };
+            //tab = tabs.addTab(tab);
+        }
+        tabs.activeTab(tab);
+    }
+    
+    function refreshCurrentTab() {
+        var tab = mini.get("mainTabs").getActiveTab();
+        if(tab){
+            mini.get("mainTabs").reloadTab(tab);
+        }
+    }
+
+    function removeCurrentTab(){
+        var tab = mini.get("mainTabs").getActiveTab();
+        if(tab){
+            mini.get("mainTabs").removeTab(tab);
+        }
+    }
 
 </script>
 
