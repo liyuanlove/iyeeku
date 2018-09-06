@@ -29,6 +29,33 @@
         START WITH SJCDBH = 'DEFAULT_MENUTREE_ROOT' CONNECT BY PRIOR CDBH = SJCDBH ORDER SIBLINGS BY CDSXH ASC
 	</select>
 
+
+    <resultMap id="resMenuBaseResultMap111" type="com.iyeeku.ext.function.vo.PFResMenuVO" >
+        <id column="CDBH" property="cdbh" jdbcType="CHAR" />
+        <result column="CDBM" property="cdbm" jdbcType="VARCHAR" />
+        <result column="CDMC" property="cdmc" jdbcType="VARCHAR" />
+        <result column="CDURL" property="cdurl" jdbcType="VARCHAR" />
+        <result column="SJCDBH" property="sjcdbh" jdbcType="VARCHAR" />
+        <result column="SJCDMC" property="sjcdmc" jdbcType="VARCHAR" />
+        <result column="CDSXH" property="cdsxh" jdbcType="DECIMAL" />
+        <result column="CDTP" property="cdtp" jdbcType="VARCHAR" />
+        <result column="SFXDLJ" property="sfxdlj" jdbcType="CHAR" />
+        <result column="CDDKCKSZWZ" property="cddkckszwz" jdbcType="VARCHAR" />
+        <result column="CDZXKJBH" property="cdzxkjbh" jdbcType="VARCHAR" />
+        <result column="CDSFKY" property="cdsfky" jdbcType="CHAR" />
+        <result column="CDSFKJ" property="cdsfkj" jdbcType="CHAR" />
+        <result column="CDDKFS" property="cddkfs" jdbcType="CHAR" />
+        <result column="CDLX" property="cdlx" jdbcType="CHAR" />
+    </resultMap>
+
+    <select id="findMenuByCdbh" parameterType="java.lang.String" resultMap="resMenuBaseResultMap111">
+        SELECT i.CDBH, i.CDBM, i.CDMC, i.CDURL, i.SJCDBH, o.cdmc as SJCDMC, i.CDSXH, i.CDTP, i.SFXDLJ,
+        i.CDDKCKSZWZ, i.CDZXKJBH, i.CDSFKY, i.CDSFKJ, i.CDDKFS, i.CDLX FROM PF_RESMENU i
+        left join PF_RESMENU o on i.sjcdbh = o.cdbh
+		WHERE i.CDBH = #{VALUE,jdbcType=CHAR}
+    </select>
+
+
     <resultMap id="baseListRtnMap" type="com.iyeeku.ext.function.vo.PFResMenuVO">
         <id column="CDBH" property="cdbh" jdbcType="CHAR" />
         <result column="CDBM" property="cdbm" jdbcType="VARCHAR" />
@@ -54,5 +81,8 @@
     <select id="find" resultMap="baseListRtnMap">
         SELECT * FROM PF_RESMENU WHERE SJCDBH = 'DEFAULT_MENUTREE_ROOT' order by cdsxh asc
     </select>
+
+
+
 
 </mapper>

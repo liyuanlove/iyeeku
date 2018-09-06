@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.function.dao.PFResUrlDao">
+
+	<resultMap id="BaseResultMap" type="com.iyeeku.ext.function.vo.PFResUrlVO" >
+		<id column="URLBH" property="urlbh" jdbcType="CHAR" />
+		<result column="URLBM" property="urlbm" jdbcType="VARCHAR" />
+		<result column="URLLJ" property="urllj" jdbcType="VARCHAR" />
+		<result column="URLMS" property="urlms" jdbcType="VARCHAR" />
+		<result column="URLLX" property="urllx" jdbcType="CHAR" />
+	</resultMap>
+
+
+	<select id="findAllUrls" resultMap="BaseResultMap">
+		SELECT URLBH, URLBM, URLLJ, URLMS, URLLX FROM PF_RESURL
+	</select>
+
+
+
+
+
+</mapper>

@@ -59,7 +59,7 @@
                         <a class="mini-button" iconCls="icon-addnew" enabled="false" id="infoAdd" onclick="addInfo()">新增</a>
                         <a class="mini-button" iconCls="icon-edit" enabled="false" id="infoEdit" onclick="editInfo()">修改</a>
                         <a class="mini-button" iconCls="icon-remove" enabled="false" id="infoRemove" onclick="removeInfo()">删除</a>
-                        <a class="mini-button" iconCls="icon-reload" onclick="reload(1)">刷新缓存</a>
+                        <a class="mini-button" iconCls="icon-reload" onclick="refreshDict(1)">刷新缓存</a>
                     </td>
                     <td style="white-space:nowrap;">
                         <input id="key2" class="mini-textbox" emptyText="请输入条目编号或条目值" style="width:150px;" onenter="onKeyEnter"/>
@@ -324,6 +324,19 @@
             x: x,
             y: y,
             timeout: 3000
+        });
+    }
+    
+    function refreshDict() {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/directory/refreshDict/roleState",
+            type: "post",
+            success: function (text) {
+                showTips("缓存刷新成功","success");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText);
+            }
         });
     }
 

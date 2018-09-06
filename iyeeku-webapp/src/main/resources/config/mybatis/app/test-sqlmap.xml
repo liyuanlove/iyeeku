@@ -9,7 +9,7 @@
 		如果需要针对某个方法不需要配置缓存，则在方法上控制，可以使用 useCache="false"控制
 	 -->
 	 
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
 	
 
 	

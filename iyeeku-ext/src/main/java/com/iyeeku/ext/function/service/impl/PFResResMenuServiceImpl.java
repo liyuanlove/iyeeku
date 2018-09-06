@@ -23,4 +23,9 @@ public class PFResResMenuServiceImpl implements PFResMenuService {
     public List<PFResMenuVO> findAll(String sjcdbh) {
         return this.pfResMenuDao.findAll(sjcdbh);
     }
+
+    @Override
+    public PFResMenuVO findMenuByCdbh(String cdbh) {
+        return this.pfResMenuDao.findMenuByCdbh(cdbh);
+    }
 }

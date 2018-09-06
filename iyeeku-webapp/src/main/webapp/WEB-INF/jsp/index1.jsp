@@ -104,7 +104,7 @@
         new MenuTip(menu);
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/menu/12",
+            url: "${pageContext.request.contextPath}/menu/navMenu",
             success: function (text) {
                 var data = mini.decode(text);
                 menu.loadData(data);

@@ -19,4 +19,9 @@ public class PFResResMenuDaoImpl extends BaseDaoImpl implements PFResMenuDao {
     public List<PFResMenuVO> findAll(String sjcdbh) {
         return this.queryAll_myBatis("com.iyeeku.ext.function.dao.PFResMenuDao.findAll",sjcdbh);
     }
+
+    @Override
+    public PFResMenuVO findMenuByCdbh(String cdbh) {
+        return this.queryOne_myBatis("com.iyeeku.ext.function.dao.PFResMenuDao.findMenuByCdbh" , cdbh) ;
+    }
 }

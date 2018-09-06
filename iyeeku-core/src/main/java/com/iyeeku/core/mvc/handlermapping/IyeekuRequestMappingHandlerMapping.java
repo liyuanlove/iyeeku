@@ -1,5 +1,6 @@
 package com.iyeeku.core.mvc.handlermapping;
 
+import com.iyeeku.core.context.URLScanCacheUtil;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,8 @@ import java.util.Set;
 
 public class IyeekuRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
 
+
+
     @Override
     protected void registerHandlerMethod(Object handler, Method method, RequestMappingInfo mapping) {
         super.registerHandlerMethod(handler, method, mapping);
@@ -19,18 +22,30 @@ public class IyeekuRequestMappingHandlerMapping extends RequestMappingHandlerMap
         Set<String> patterns = getMappingPathPatterns(mapping);
         for (String pattern : patterns){
             if(!getPathMatcher().isPattern(pattern)){
-                FunctionDesc funDesc = AnnotationUtils.findAnnotation(method , FunctionDesc.class);
+/*                FunctionDesc funDesc = AnnotationUtils.findAnnotation(method , FunctionDesc.class);
+                RequestMapping reqMap = AnnotationUtils.findAnnotation(method,RequestMapping.class);
                 if(funDesc != null){
-                    System.out.println(funDesc.value());
-                }else {
 
+
+                }else {
+                    if (reqMap != null){
+
+                    }
+                }*/
+
+                RequestMapping reqMap = AnnotationUtils.findAnnotation(method,RequestMapping.class);
+                if (reqMap != null){
+                    URLScanCacheUtil.addURL( pattern , reqMap.name() );
+                } else {
+                    URLScanCacheUtil.addURL( pattern , "" );
                 }
+
             }
         }
 
     }
 
-    @Override
+ /*   @Override
     protected RequestMappingInfo getMappingForMethod(Method method, Class<?> handlerType) {
 
         RequestMappingInfo info = null;
@@ -61,7 +76,7 @@ public class IyeekuRequestMappingHandlerMapping extends RequestMappingHandlerMap
            info = new RequestMappingInfo(info.getPatternsCondition() , new RequestMethodsRequestCondition(new RequestMethod[]{ RequestMethod.POST}) , info.getParamsCondition() , info.getHeadersCondition() , info.getConsumesCondition() , info.getProducesCondition() , info.getCustomCondition());
         }
         return info;
-    }
+    }*/
 
     protected RequestMappingInfo createMethodRequestMappingInfo(Method method , RequestCondition<?> condition){
         if(method != null){
@@ -85,6 +100,7 @@ public class IyeekuRequestMappingHandlerMapping extends RequestMappingHandlerMap
         return null;
     }
 
+
     private boolean getPostMappingInfo(Method method){
         if(null == method){
             return false;
@@ -95,5 +111,7 @@ public class IyeekuRequestMappingHandlerMapping extends RequestMappingHandlerMap
         }
         return false;
     }
+
+
 
 }

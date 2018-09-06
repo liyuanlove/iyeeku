@@ -33,6 +33,10 @@ public class PFResMenuVO {
 
     private String cdlx;
 
+    /*========================  extends ====================*/
+
+    private String sjcdmc;
+
     private List<PFResMenuVO> children = new ArrayList<>();
 
     public String getCdbh() {
@@ -153,6 +157,14 @@ public class PFResMenuVO {
 
     public void setChildren(List<PFResMenuVO> children) {
         this.children = children;
+    }
+
+    public String getSjcdmc() {
+        return sjcdmc;
+    }
+
+    public void setSjcdmc(String sjcdmc) {
+        this.sjcdmc = sjcdmc;
     }
 
 }

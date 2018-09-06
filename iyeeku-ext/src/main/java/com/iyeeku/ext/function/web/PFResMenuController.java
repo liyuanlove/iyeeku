@@ -30,12 +30,14 @@ public class PFResMenuController {
         return new ModelAndView("ext/menu/menuMain");
     }
 
-    @RequestMapping( value = "/findAllMenu" , method = RequestMethod.POST)
+
+
+    @RequestMapping( value = "/findAllMenu" , method = RequestMethod.POST , name = "查询所有菜单")
     @ResponseBody
     public Map<String , Object> findAllMenu(){
         this.logger.info("PFMenuController findAllMenus");
 
-        //TODO 注意这里，开始 缓存后，有BUG 
+        //TODO 注意这里，开启 缓存后，有BUG
         List<PFResMenuVO> list = this.pfResMenuService.findAllMenu();
 
         PFResMenuVO menuVO = new PFResMenuVO();
@@ -61,44 +63,31 @@ public class PFResMenuController {
         return menuMap;
     }
 
-    @RequestMapping(value = "/menu")
+    @RequestMapping(value = "/add" , method = RequestMethod.POST , name = "新增菜单")
     @ResponseBody
-    public List<Map<String ,Object>> menu(){
-        List<PFResMenuVO> list = this.pfResMenuService.findAllMenu();
+    public void add(PFResMenuVO resMenuVO){
 
-        String temParentID = "";
-        String tmpCdbh = "";
-
-        List<Map<String,Object>> rtnList = new ArrayList<>();
-        Map<String ,Object> rtnMap = null;
-        for (PFResMenuVO resMenuVO : list){
-
-            rtnMap = new HashMap<>();
-
-            temParentID = resMenuVO.getSjcdbh();
-            tmpCdbh = resMenuVO.getCdbh();
-
-            if("DEFAULT_MENUTREE_ROOT".equals(resMenuVO.getSjcdbh())){
-
-                //{ "id": "xtgl", iconCls: "fa fa-desktop", text: "系统管理", children: [
-
-                rtnMap.put("id",resMenuVO.getCdbh());
-                rtnMap.put("iconCls","fa fa-desktop");
-                //rtnMap.put
-
-            }
-
-
-
-
-        }
-
-        return null;
     }
 
-    @RequestMapping(value = "/12")
+    @RequestMapping(value = "/update" , method = RequestMethod.POST , name = "更新菜单信息")
     @ResponseBody
-    public List<Map<String,Object>> testMenu(){
+    public void update(PFResMenuVO resMenuVO){
+
+    }
+
+
+
+
+
+    @RequestMapping(value = "/getMenuInfoByCdbh" , method = RequestMethod.POST , name = "根据菜单编号查询菜单信息")
+    @ResponseBody
+    public PFResMenuVO getMenuInfoByCdbh(String cdbh){
+        return this.pfResMenuService.findMenuByCdbh(cdbh);
+    }
+
+    @RequestMapping(value = "/navMenu" , name = "查询导航菜单")
+    @ResponseBody
+    public List<Map<String,Object>> navMenu(){
         List<PFResMenuVO> list = this.pfResMenuService.findAll("DEFAULT_MENUTREE_ROOT");
         System.out.println(list);
         return walkMenuTreeData(list);

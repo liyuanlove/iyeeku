@@ -73,7 +73,7 @@
   <!-- 配置logback日志框架 -->
   <context-param>
     <param-name>logbackConfigLocation</param-name>
-    <param-value>classpath:/config/env/logback.xml</param-value>
+    <param-value>classpath:/config/log/logback.xml</param-value>
   </context-param>
   <listener>
     <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>

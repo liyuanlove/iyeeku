@@ -10,4 +10,6 @@ public interface PFResMenuService {
 
     public abstract List<PFResMenuVO> findAll(String sjcdbh);
 
+    public abstract PFResMenuVO findMenuByCdbh(String cdbh);
+
 }

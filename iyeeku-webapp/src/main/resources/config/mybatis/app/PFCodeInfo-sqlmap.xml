@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao">
 
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
 
 	<resultMap id="codeInfoBaseResultMap" type="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
 		<id column="ZJ" property="zj" jdbcType="CHAR" />
