@@ -30,35 +30,38 @@ public class PFResUrlServiceImpl implements PFResUrlService {
         Map<String,String> processData = processInitUrlData(initUrlData);
 
         processData.forEach((k ,v ) -> System.out.println("URL：" + k + " , DESC：" + v));
-
-        // 从已经入库的数据中 分离出 普通url 和 模块url
+        // 从已经入库的数据中 分离出 "所有url" 和 "模块url"
         Set<String> existUrls = new HashSet<>();
         Set<String> existModuleUrls = new HashSet<>();
         List<PFResUrlVO> resUrlVOList = this.pfResUrlDao.findAllUrls();
         for (PFResUrlVO resUrlVO : resUrlVOList){
             String url = resUrlVO.getUrllj();
             existUrls.add(url);
-            String moduleUrl = url.substring(0,url.indexOf("/",1)) + "/**/*";
-            if (!existModuleUrls.contains(moduleUrl)){
-                existModuleUrls.add(moduleUrl);
+            if(url.indexOf("/",1) > 1){
+                String moduleUrl = url.substring(0,url.indexOf("/",1)) + "/**/*";
+                if (!existModuleUrls.contains(moduleUrl)){
+                    existModuleUrls.add(moduleUrl);
+                }
             }
         }
 
         this.logger.info("已经入库列表：\t\n{}");
 
-        // 从所有扫描的所有controller方法url数据中  分离出 普通url 和 模块url
+        // 从所有扫描的所有controller方法url数据中  分离出 "所有url" 和 "模块url"
         Set<String> initUrls = new HashSet<>();
         Set<String> initModuleUrls = new HashSet<>();
         Set<String> initSets = processData.keySet();
         for (String initUrl : initSets){
             String url = initUrl + "";   // + ".do" 可以转换URL
             initUrls.add(url);
-            String moduleUrl = url.substring(0,url.indexOf("/",1)) + "/**/*";
-            if (!initModuleUrls.contains(moduleUrl)){
-                initModuleUrls.add(moduleUrl);
+            if ( url.indexOf("/",1) > -1){
+                String moduleUrl = url.substring(0,url.indexOf("/",1)) + "/**/*";
+                if (!initModuleUrls.contains(moduleUrl)){
+                    initModuleUrls.add(moduleUrl);
+                }
             }
         }
-        Set<String> allInitUrls = new HashSet<>();  //将 分离出 普通url 和 模块url 合并到一起
+        Set<String> allInitUrls = new HashSet<>();  //将 分离出 "所有url" 和 "模块url" 合并到一起
         allInitUrls.addAll(initUrls);
         allInitUrls.addAll(initModuleUrls);
         this.logger.info("扫描列表：\t\n{}");
@@ -72,27 +75,63 @@ public class PFResUrlServiceImpl implements PFResUrlService {
 
         for (Iterator<String> it = initUrls.iterator(); it.hasNext(); ){
             String url = it.next();
-            String moduleUrl = url.substring(0,url.indexOf("/",1)) + "/**/*";
 
-            if ( (!addModuleUrls.contains(moduleUrl)) && ( !existModuleUrls.contains(moduleUrl)) ){ //把新增加的 模块url保存到数据库中
+            if ( url.indexOf("/",1) > -1) {
 
-                urlVO = new PFResUrlVO();
-                urlVO.setUrlbh(UUIDGenerator.generate(""));
-                urlVO.setUrlbm("");
-                urlVO.setUrllj(moduleUrl);
-                urlVO.setUrlms("该模块下的所有功能");
-                urlVO.setUrllx("0");
+                String moduleUrl = url.substring(0, url.indexOf("/", 1)) + "/**/*";
 
-                // 做save操作
+                if ((!addModuleUrls.contains(moduleUrl)) && (!existModuleUrls.contains(moduleUrl))) { //把新增加的 模块url保存到数据库中
+                    addModuleUrls.add(moduleUrl);
 
+                    urlVO = new PFResUrlVO();
+                    urlVO.setUrlbh(UUIDGenerator.generate(""));
+                    urlVO.setUrlbm("");
+                    urlVO.setUrllj(moduleUrl);
+                    urlVO.setUrlms("该模块下的所有功能");
+                    urlVO.setUrllx("0");
+                    // 做save操作
+                    this.pfResUrlDao.addUrl(urlVO);
+                }
             }
 
-
+            urlVO = new PFResUrlVO();
+            urlVO.setUrllj(url);
+            urlVO.setUrlms(processData.get(url));
+            urlVO.setUrllx("0");
+            if (addUrls.contains(url)){
+                urlVO.setUrlbh(UUIDGenerator.generate(""));
+                // 做save操作
+                this.pfResUrlDao.addUrl(urlVO);
+            } else {
+                // 做update操作 （根据URL路径更新）
+                this.pfResUrlDao.updateUrlByLj(urlVO);
+            }
         }
 
+        this.logger.info("新增列表：\t\n{}");
 
+        // 这个以后做个配置，刷新URL时，是否需要删除URL信息和授权信息
+        if (true) {
 
+            Set<String> delUrls = new HashSet<>();
+            delUrls.addAll(existUrls);
+            delUrls.removeAll(initModuleUrls);
+            delUrls.removeAll(initUrls);
 
+            for (Iterator<String> iterator = delUrls.iterator(); iterator.hasNext(); ) {
+                String url = iterator.next();
+                urlVO = new PFResUrlVO();
+                urlVO.setUrllx(url);
+                urlVO.setUrllx("0");
+                // 做删除操作 根据url路径
+                this.pfResUrlDao.deleteUrlByLj(urlVO);
+            }
+            this.logger.info("删除列表：\t\n{}");
+
+            List<String> grantedUrlList = new ArrayList<>();
+            //List<>
+
+        }
 
 
     }
@@ -100,7 +139,7 @@ public class PFResUrlServiceImpl implements PFResUrlService {
     private Map<String,String> processInitUrlData(Map<String,String> initUrlData){
         Map<String,String> processData = new HashMap<>();
         String url = "";
-        for (Map.Entry<String,String> entry : processData.entrySet()){
+        for (Map.Entry<String,String> entry : initUrlData.entrySet()){
             url = entry.getKey();
             if((url.indexOf("{") > -1) || (url.indexOf("}") > -1)){
                this.logger.info("url like %{% or %}%");  //过滤掉类似  /xxx/xxx/{} 这种形式的 url

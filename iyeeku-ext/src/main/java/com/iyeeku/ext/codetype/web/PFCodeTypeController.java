@@ -24,12 +24,12 @@ public class PFCodeTypeController {
     @Autowired
     private PFCodeTypeService pfCodeTypeService;
 
-    @RequestMapping(value = "list" , method = RequestMethod.GET)
+    @RequestMapping(value = "list" , method = RequestMethod.GET , name = "码表配置主页面")
     public ModelAndView list(){
         return new ModelAndView("ext/codetype/codetypePage");
     }
 
-    @RequestMapping(value = "/form1")
+    @RequestMapping(value = "/form1" , name = "码表信息录取表单")
     public ModelAndView form1(){
         return new ModelAndView("ext/codetype/codeTypeForm");
     }
@@ -41,28 +41,28 @@ public class PFCodeTypeController {
         return this.pfCodeTypeService.findAllTypes(codeTypeVO,pagination);
     }
 
-    @RequestMapping(value = "/getCodeTypeByZj")
+    @RequestMapping(value = "/getCodeTypeByZj" , name = "根据主键查询码值")
     @ResponseBody
     public PFCodeTypeVO getCodeTypeByZj(String zj){
         this.logger.info("PFCodeTypeController getCodeTypeByZj");
         return this.pfCodeTypeService.findCodeTypeByZj(zj);
     }
 
-    @RequestMapping(value = "/add" , method = RequestMethod.POST)
+    @RequestMapping(value = "/add" , method = RequestMethod.POST , name = "码值新增")
     @ResponseBody
     public void save(PFCodeTypeVO codeTypeVO){
         this.logger.info("PFCodeTypeController save");
         this.pfCodeTypeService.save(codeTypeVO);
     }
 
-    @RequestMapping(value = "/update" , method = RequestMethod.POST)
+    @RequestMapping(value = "/update" , method = RequestMethod.POST , name = "码值修改")
     @ResponseBody
     public void update(PFCodeTypeVO codeTypeVO){
         this.logger.info("PFCodeTypeController update");
         this.pfCodeTypeService.update(codeTypeVO);
     }
 
-    @RequestMapping(value = "/delete" , method = RequestMethod.POST)
+    @RequestMapping(value = "/delete" , method = RequestMethod.POST , name = "码值删除")
     @ResponseBody
     public void delete(PFCodeTypeVO codeTypeVO){
         this.logger.info("PFCodeTypeController delete");

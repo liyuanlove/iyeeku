@@ -48,6 +48,7 @@
 			<tx:method name="retrieve*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
 			<tx:method name="refer*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
 			<tx:method name="register*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
+			<tx:method name="reload*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
 			<!-- 流程相关方法 -->
 			<tx:method name="start*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>
 			<tx:method name="commit*" propagation="REQUIRED" read-only="false" rollback-for="Exception"/>

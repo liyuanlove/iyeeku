@@ -32,12 +32,12 @@ public class PFRoleController {
         System.out.println("执行到这里1111111111111111");
     }
 
-    @RequestMapping(value = "list" , method = RequestMethod.GET)
+    @RequestMapping(value = "list" , method = RequestMethod.GET , name = "角色管理主页面")
     public ModelAndView roleList(){
         return new ModelAndView("ext/role/roleList");
     }
 
-    @RequestMapping(value = "add")
+    @RequestMapping(value = "add" , name = "角色添加")
     @ResponseBody
     public String add(HttpServletRequest request, PFRole role){
         this.logger.info("PFRoleController addRole");
@@ -49,13 +49,13 @@ public class PFRoleController {
         return "ok";
     }
 
-    @RequestMapping(value = "update" , method = RequestMethod.POST)
+    @RequestMapping(value = "update" , method = RequestMethod.POST , name = "角色更新")
     public void update(PFRole role){
         this.logger.info("PFRoleController update");
         this.iPFRoleService.updateRole(role);
     }
 
-    @RequestMapping(value = "delete" , method = RequestMethod.POST)
+    @RequestMapping(value = "delete" , method = RequestMethod.POST , name = "角色删除")
     @ResponseBody
     public String delete(String jsbh){
         this.logger.info("PFRoleController delete");
@@ -76,7 +76,7 @@ public class PFRoleController {
         return this.iPFRoleService.findAllRoleInfos(role,pagination);
     }
 
-    @RequestMapping(value = "roleForm" , method = RequestMethod.GET)
+    @RequestMapping(value = "roleForm" , method = RequestMethod.GET , name = "跳转到角色表单")
     public ModelAndView roleForm(){
         return new ModelAndView("ext/role/roleForm");
     }

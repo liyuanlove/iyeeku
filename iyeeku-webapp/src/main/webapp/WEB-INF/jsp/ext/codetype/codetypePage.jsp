@@ -329,7 +329,7 @@
     
     function refreshDict() {
         $.ajax({
-            url: "${pageContext.request.contextPath}/directory/refreshDict/roleState",
+            url: "${pageContext.request.contextPath}/directory/refreshDictAll",
             type: "post",
             success: function (text) {
                 showTips("缓存刷新成功","success");

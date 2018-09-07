@@ -51,4 +51,11 @@ public class PFCodeInfoDaoImpl extends BaseDaoImpl implements PFCodeInfoDao {
         this.logger.info("PFCodeInfoDaoImpl findCodeInfosByCodeType");
         return this.queryAll_myBatis("com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao.findCodeInfosByCodeType",param);
     }
+
+    @Override
+    public List<Map<String, String>> findCodeInfoCacheDataByCodeType(String codetype) {
+        this.logger.info("PFCodeInfoDaoImpl findCodeInfoCacheDataByCodeType");
+        return this.queryAll_myBatis("com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao.findCodeInfoCacheDataByCodeType",codetype);
+    }
+
 }

@@ -8,10 +8,11 @@
         1、peerDiscovery，提供者方式，有两种方式：自动发现(automatic)、手动配置(manual)
         2、rmiUrls，手动方式时提供者的地址，多个的话用|隔开
     -->
-    <cacheManagerPeerProviderFactory
+
+<!--    <cacheManagerPeerProviderFactory
             class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
             properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:40002/cachetest"
-    />
+    />-->
 
     <!--
     配置监听器
@@ -67,7 +68,6 @@
     <!-- 字典缓存,(码值缓存，如果12小时未访问，缓存也会失效) -->
     <cache name="dictionaryCache" maxEntriesLocalHeap="10000" eternal="false"
            timeToIdleSeconds="43200" timeToLiveSeconds="43200">
-
         <cacheEventListenerFactory
                 class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
                 properties="replicateAsynchronously=false, replicatePuts=true,
@@ -75,8 +75,6 @@
                             replicateUpdatesViaCopy=true, replicateRemovals=true" />
         <bootstrapCacheLoaderFactory
                 class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
-
-
     </cache>
 
 </ehcache>

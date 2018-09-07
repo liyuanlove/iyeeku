@@ -114,4 +114,11 @@
 		</if>
 	</select>
 
+	<select id="findCodeInfoCacheDataByCodeType" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT i.mblxbh AS "id",i.mbtmz AS "text" from PF_CODEINFO i
+		LEFT JOIN PF_CODETYPE t ON i.sjlx = t.zj
+		WHERE t.sjlxbh = #{VALUE ,jdbcType=VARCHAR} AND t.jlzt = '1' AND i.jlzt = '1'
+		ORDER BY i.sjsxsy ASC
+	</select>
+	
 </mapper>

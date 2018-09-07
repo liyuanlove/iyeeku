@@ -56,4 +56,8 @@ public class PFCodeTypeDaoImpl extends BaseDaoImpl implements PFCodeTypeDao {
         this.delete_myBatis("com.iyeeku.ext.codetype.dao.PFCodeTypeDao.delete",vo);
     }
 
+    @Override
+    public List<String> findAllSjlxbh() {
+        return this.queryAll_myBatis("com.iyeeku.ext.codetype.dao.PFCodeTypeDao.findAllSjlxbh");
+    }
 }

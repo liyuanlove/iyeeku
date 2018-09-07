@@ -2,6 +2,7 @@ package com.iyeeku.core.orm;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public interface IBaseDao {
 
@@ -34,6 +35,8 @@ public interface IBaseDao {
     public abstract int save_Jdbc(String sql, Object[] values);
 
     public abstract int update_Jdbc(String sql , Object[] values);
+
+    public abstract List<Map<String,Object>> queryAll_Jdbc(String sql);
 
 
 

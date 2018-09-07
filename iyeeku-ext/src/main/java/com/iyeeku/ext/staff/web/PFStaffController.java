@@ -22,26 +22,34 @@ public class PFStaffController {
     @Autowired
     private PFStaffService pfStaffService;
 
-    @RequestMapping(value = "/list" , method = RequestMethod.GET)
+    @RequestMapping(value = "/list" , method = RequestMethod.GET , name = "员工管理主页面")
     public ModelAndView list(){
         return new ModelAndView("ext/staff/staffList");
     }
 
-    @RequestMapping(value = "/form1")
+    @RequestMapping(value = "/form1" , name = "员工信息录取Form表单")
     public ModelAndView form1(){
         return new ModelAndView("ext/staff/staffForm");
     }
 
-    @RequestMapping(value = "/add" , method = RequestMethod.POST)
+    @RequestMapping(value = "/add" , method = RequestMethod.POST , name = "员工新增")
     @ResponseBody
     public void add(PFStaffVO staffVO){
         this.logger.info("PFStaffController add");
         this.pfStaffService.save(staffVO);
     }
 
+    @RequestMapping(value = "/update" , method = RequestMethod.POST , name = "员工修改")
+    @ResponseBody
+    public void update(PFStaffVO staffVO){
+        this.logger.info("PFStaffController update");
+        this.pfStaffService.update(staffVO);
+    }
+
     @RequestMapping(value = "/findAllInfos")
     @ResponseBody
     public List<PFStaffVO> findAllInfos(){
+
         return this.pfStaffService.findAllStaffInfos();
     }
 

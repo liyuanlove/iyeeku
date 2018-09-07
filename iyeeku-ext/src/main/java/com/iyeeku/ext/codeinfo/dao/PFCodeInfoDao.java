@@ -20,5 +20,7 @@ public interface PFCodeInfoDao {
 
     public abstract List<DirectoryVO> findCodeInfosByCodeType(Map<String,String> param);
 
+    public abstract List<Map<String,String>> findCodeInfoCacheDataByCodeType(String codetype);
+
 
 }

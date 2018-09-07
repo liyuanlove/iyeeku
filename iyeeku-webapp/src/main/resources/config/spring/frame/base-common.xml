@@ -10,6 +10,8 @@
 	<context:component-scan base-package="com.iyeeku.core.orm.impl"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.core.cache"></context:component-scan>
+	<bean class="com.iyeeku.core.context.ContextUtil"/>
 
 	<!-- 有了上面的配置，下面这个配置可以省略掉的，因为上面的配置会默认打开以下配置。
 		以下配置会默认声明了@Required、@Autowired、 @PostConstruct、@PersistenceContext、@Resource、@PreDestroy等注解。 -->

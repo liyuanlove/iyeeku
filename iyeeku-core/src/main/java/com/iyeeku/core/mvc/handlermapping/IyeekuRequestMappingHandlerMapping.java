@@ -26,7 +26,6 @@ public class IyeekuRequestMappingHandlerMapping extends RequestMappingHandlerMap
                 RequestMapping reqMap = AnnotationUtils.findAnnotation(method,RequestMapping.class);
                 if(funDesc != null){
 
-
                 }else {
                     if (reqMap != null){
 

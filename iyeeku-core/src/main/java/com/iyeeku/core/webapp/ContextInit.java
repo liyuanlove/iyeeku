@@ -25,6 +25,9 @@ public class ContextInit extends ContextLoaderListener {
         //1.加载基础环境
         BaseInit.init(context);
 
+        //2.加载码表缓存
+
+
     }
 
     @Override

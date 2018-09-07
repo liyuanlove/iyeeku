@@ -10,13 +10,28 @@
 		<result column="URLLX" property="urllx" jdbcType="CHAR" />
 	</resultMap>
 
-
 	<select id="findAllUrls" resultMap="BaseResultMap">
 		SELECT URLBH, URLBM, URLLJ, URLMS, URLLX FROM PF_RESURL
 	</select>
 
+	<insert id="addUrl" parameterType="com.iyeeku.ext.function.vo.PFResUrlVO">
+		insert into PF_RESURL (URLBH, URLBM, URLLJ,
+		URLMS, URLLX)
+		values (#{urlbh,jdbcType=CHAR}, #{urlbm,jdbcType=VARCHAR}, #{urllj,jdbcType=VARCHAR},
+		#{urlms,jdbcType=VARCHAR}, #{urllx,jdbcType=CHAR})
+	</insert>
 
+	<update id="updateUrlByLj" parameterType="com.iyeeku.ext.function.vo.PFResUrlVO">
+		UPDATE PF_RESURL
+		<set>
+			URLBM=#{urlbm,jdbcType=VARCHAR}, URLMS=#{urlms,jdbcType=VARCHAR}
+		</set>
+		WHERE URLLJ=#{urllj,jdbcType=VARCHAR} AND URLLX=#{urllx,jdbcType=CHAR}
+	</update>
 
+	<delete id="deleteUrlByLj" parameterType="com.iyeeku.ext.function.vo.PFResUrlVO">
+		DELETE FROM PF_RESURL WHERE URLLJ=#{urllj,jdbcType=VARCHAR} AND URLLX=#{urllx,jdbcType=CHAR}
+	</delete>
 
 
 </mapper>

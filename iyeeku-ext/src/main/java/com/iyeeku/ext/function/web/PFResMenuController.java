@@ -25,11 +25,10 @@ public class PFResMenuController {
     @Autowired
     private PFResMenuService pfResMenuService;
 
-    @RequestMapping(value = "/list" , method = RequestMethod.GET)
+    @RequestMapping(value = "/list" , method = RequestMethod.GET , name = "菜单配置主页面")
     public ModelAndView list(){
         return new ModelAndView("ext/menu/menuMain");
     }
-
 
 
     @RequestMapping( value = "/findAllMenu" , method = RequestMethod.POST , name = "查询所有菜单")
@@ -76,9 +75,6 @@ public class PFResMenuController {
     }
 
 
-
-
-
     @RequestMapping(value = "/getMenuInfoByCdbh" , method = RequestMethod.POST , name = "根据菜单编号查询菜单信息")
     @ResponseBody
     public PFResMenuVO getMenuInfoByCdbh(String cdbh){
@@ -89,7 +85,6 @@ public class PFResMenuController {
     @ResponseBody
     public List<Map<String,Object>> navMenu(){
         List<PFResMenuVO> list = this.pfResMenuService.findAll("DEFAULT_MENUTREE_ROOT");
-        System.out.println(list);
         return walkMenuTreeData(list);
     }
 

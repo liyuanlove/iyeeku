@@ -6,10 +6,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
+@Repository
 public class BaseDaoImpl extends SqlSessionDaoSupport implements IBaseDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -80,6 +83,11 @@ public class BaseDaoImpl extends SqlSessionDaoSupport implements IBaseDao {
         }else{
             return this.getSqlSession().selectList(sql,param);
         }
+    }
+
+    @Override
+    public List<Map<String,Object>> queryAll_Jdbc(String sql) {
+        return this.jdbcTemplate.queryForList(sql);
     }
 
     public int save_Jdbc(String sql, Object[] values) {

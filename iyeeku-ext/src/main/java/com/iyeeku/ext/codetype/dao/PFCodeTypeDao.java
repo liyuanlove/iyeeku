@@ -14,6 +14,8 @@ public interface PFCodeTypeDao {
 
     public abstract PFCodeTypeVO findCodeTypeByZj(String zj);
 
+    public abstract List<String> findAllSjlxbh();
+
     public abstract void save(PFCodeTypeVO vo);
 
     public abstract void update(PFCodeTypeVO vo);

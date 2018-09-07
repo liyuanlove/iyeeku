@@ -33,14 +33,16 @@
 	<context:component-scan base-package="com.iyeeku.controller.*"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.ext.**.web"></context:component-scan>
 
-	<!-- https://www.cnblogs.com/zhaoyue1215/p/9267584.html -->
 	<!--
+		https://www.cnblogs.com/zhaoyue1215/p/9267584.html
 	 1、Spring MVC 的Controller方法上使用 @Cacheable 注解，编译运行都没问题，但在调接口的时候发现接口没走缓存，最简单的判断方式就是在本地启服务，方法里打断点，可以发现每次都能进入断点，而如果走缓存的话，是不会进断点的。
 　　		查了很多资料，一直没解决，最终想到了Spring 使用@Cacheable添加缓存是基于面向切面的思想做的，实际上就是使用Java动态代理，创建实例的时候注入的是代理对象，
 		在代理对象里调用实际的对象，这样就可以在实际的方法执行前，处理一下缓存的逻辑：没有找到缓存就往下执行，执行完把结果加入到缓存中；找到缓存则直接返回缓存的结果，不调用执行实际的方法。
 　　		然后去看了一下spring mvc的配置文件，添加上了 aop 相关的配置，重启测试，果然缓存生效了，只有第一次进了断点，后面都直接有结果，没进断点。
+
+		重重:: 若将缓存控制到controller 层面 , 需要开 如下 AOP
 	 -->
-	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	<!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
 	<!-- <context:component-scan base-package="com.iyeeku.ext.**.web"></context:component-scan> -->
 
