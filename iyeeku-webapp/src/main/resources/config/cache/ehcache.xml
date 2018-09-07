@@ -9,10 +9,10 @@
         2、rmiUrls，手动方式时提供者的地址，多个的话用|隔开
     -->
 
-<!--    <cacheManagerPeerProviderFactory
+    <cacheManagerPeerProviderFactory
             class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
             properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:40002/cachetest"
-    />-->
+    />
 
     <!--
     配置监听器

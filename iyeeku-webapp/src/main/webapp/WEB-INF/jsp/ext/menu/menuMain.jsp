@@ -38,7 +38,7 @@
                         <td style="width:100%;">
                             <a class="mini-button" iconCls="icon-addnew" onclick="addMenu()">新增</a>
                             <a class="mini-button" iconCls="icon-edit" onclick="edit()" enabled="false" id="delBtn">删除</a>
-                            <a class="mini-button" iconCls="icon-remove" onclick="remove()" enabled="false" id="saveBtn">保存</a>
+                            <a class="mini-button" iconCls="icon-remove" onclick="submitForm()" enabled="false" id="saveBtn">保存</a>
                         </td>
                         <td style="white-space:nowrap;">
                             <a class="mini-button" id="refreshUrl" onclick="refreshUrl()">刷新URL</a>
@@ -221,15 +221,34 @@
         var tree = mini.get("tree1");
         var tNode = tree.getSelectedNode();
         if(tNode == null){
-
+            alert("请选择节点");
+            return;
         }
+        if((tree.getValue(false) == null) || (tree.getValue(false) == "")){
+            alert("xxxxx");
+            return;
+        }
+        if(tNode.cdurl != null){
+            alert("不能新增");
+            return;
+        }
+        var newNode = {};
+        var node = tree.addNode(newNode , "add" , tNode);
+        tree.setNodeText( newNode , "新建菜单");
+        tree.selectNode(newNode); // 选中新建了的节点
+        if (tNode){
+            tree.expandNode(tNode);  //展开节点
+        }
+        var parentNode = tree.getParentNode(newNode);
+
+        mini.get("relationUrl").disable();
+
 
     }
 
     //页面传递JSON数据，数据从后台获取
     function setMenuData(node) {
         var cdbh = node.id;  //获取菜单编号
-        console.info(cdbh);
         if(!cdbh){
             cdbh = "";
         }
@@ -241,7 +260,6 @@
             cache: false,
             success: function (text) {
                 var o = mini.decode(text);
-                //console.info(o);
                 var form = new mini.Form("#form1"); //普通form 转换为mini的form
 
                 var sjcdmc = mini.get("sjcdbh");
@@ -298,6 +316,13 @@
         mini.get("relationUrl").disable();
     }
 
+    function submitForm() {
+        form.validate();
+        if(!form.isValid()){
+            return;
+        }
+    }
+    
     //设置可编辑
     function setInputModel() {
         var fields = form.getFields();
@@ -325,8 +350,22 @@
         $.ajax({
             url: "${pageContext.request.contextPath}/url/refreshUrl",
             success: function (text) {
-
+                showTips("URL刷新成功","success");
             }
+        });
+    }
+
+
+    function showTips(Msg,state) {
+        var x = "center";
+        var y = "top";
+        var state = state;
+        mini.showTips({
+            content: "<b>成功</b> <br/>"+Msg,
+            state: state,
+            x: x,
+            y: y,
+            timeout: 3000
         });
     }
 
