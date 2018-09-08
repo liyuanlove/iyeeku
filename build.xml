@@ -20,6 +20,7 @@
     <property name="jre.dir" value="D:\Program Files\Java\jdk1.8.0_66\jre"/>
 
     <property name="build.dir.core" value="${basedir}/build/iyeeku-core"/>
+    <property name="build.dir.ext" value="${basedir}/build/iyeeku-ext"/>
 
 
     <path id="project.classpath">
@@ -42,28 +43,42 @@
 
     <target name="clear" description="清理旧文件">
         <delete dir="${build.dir.core}"/>
+        <delete dir="${build.dir.ext}"/>
         <delete file="${dist.dir}/${webapp.name}.war"/>
     </target>
 
     <target name="init" depends="clear" description="创建初始化目录结构">
+        <mkdir dir="${lib.dir}/build/jar"/>
         <mkdir dir="${build.dir.core}/classes"/>
+        <mkdir dir="${build.dir.ext}/classes"/>
     </target>
 
     <target name="complieIyeekuCore" depends="init" description="编译java文件">
-        <echo message="begin complieIyeekuCoreJar"/>
+        <echo message="begin complieIyeekuCore"/>
         <javac srcdir="${src.core.dir}" destdir="${build.dir.core}/classes"
             includeantruntime="false" nowarn="on"
             source="1.8" target="1.8" deprecation="true" debug="true"
                encoding="UTF-8" classpathref="project.classpath">
             <compilerarg line="-Xlint:unchecked" />
         </javac>
-        <echo message="end complieIyeekuCoreJar..." />
+        <echo message="end complieIyeekuCore..." />
+    </target>
+
+    <target name="complieIyeekuExt" depends="complieIyeeku-CoreJar" description="编译iyeeku-ext包java文件">
+        <echo message="begin complieIyeekuExt"/>
+        <javac srcdir="${src.ext.dir}" destdir="${build.dir.ext}/classes"
+               includeantruntime="false" nowarn="on"
+               source="1.8" target="1.8" deprecation="true" debug="true"
+               encoding="UTF-8" classpathref="project.classpath">
+            <compilerarg line="-Xlint:unchecked" />
+        </javac>
+        <echo message="end complieIyeekuExt..."/>
     </target>
 
     <!-- 将class文件打成 jar包 -->
     <!-- iyeeku-core 编译成功的class打包成jar包 -->
     <target name="complieIyeeku-CoreJar" depends="complieIyeekuCore" description="将class文件打成jar包">
-        <jar jarfile="${lib.dir}/iyeeku-core.jar">
+        <jar jarfile="${lib.dir}/build/jar/iyeeku-core.jar">
             <fileset dir="${build.dir.core}/classes">
                 <include name="**/*.class"/>
             </fileset>
@@ -76,7 +91,21 @@
     </target>
 
 
-    <target name="0 - default" depends="complieIyeeku-CoreJar" description="将工程打成war包">
+    <target name="complieIyeeku-ExtJar" depends="complieIyeekuExt" description="将class文件打成jar包">
+        <jar jarfile="${lib.dir}/build/jar/iyeeku-ext.jar">
+            <fileset dir="${build.dir.ext}/classes">
+                <include name="**/*.class"/>
+            </fileset>
+            <fileset dir="${src.ext.dir}/main/resources">
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
+                <include name="**/*.sql" />
+            </fileset>
+        </jar>
+    </target>
+
+
+    <target name="0 - default" depends="complieIyeeku-ExtJar" description="将工程打成war包">
         <echo message="begin war..."/>
         <war destfile="${dist.dir}/${webapp.name}.war"
             basedir="${webRoot.dir}"
