@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant"
+         name="iyeeku" default="0 - default" basedir=".">
+    <description>Builds, tests, and runs the project iyeeku.</description>
+
+    <!-- 配置开发环境 -->
+    <property environment="env"/>
+    <property name="webapp.name" value="iyeeku"/>
+    <property name="catalina.home" value="D:\apache-tomcat-8.5.28"/>
+    <property name="dist.dir" value="${basedir}/dist"/>
+    <property name="webRoot.dir" value="${basedir}/iyeeku-webapp/src/main/webapp"/>
+    <property name="src.dir" value="${basedir}/iyeeku-webapp/src"/>
+    <property name="src.core.dir" value="${basedir}/iyeeku-core/src"/>
+    <property name="src.ext.dir" value="${basedir}/iyeeku-ext/src"/>
+    <!-- maven-ant-tasks 下载maven依赖jar包的存放路径  -->
+    <property name="lib.dir" location=""/>
+    <!-- 如果自己手动导入的jar包 -->
+    <!--<property name="lib.dir" value="xxxProject/lib"/>-->
+    <property name="jre.dir" value="D:\Program Files\Java\jdk1.8.0_66\jre"/>
+
+    <property name="build.dir.core" value="${basedir}/build/iyeeku-core"/>
+
+
+    <path id="project.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+        <!-- 添加jre类路径 -->
+        <fileset dir="${jre.dir}/lib">
+            <include name="*.jar" />
+        </fileset>
+        <!-- 添加tomcat类路径 -->
+        <fileset dir="${catalina.home}/lib">
+            <include name="*.jar" />
+        </fileset>
+        <!-- ant lib包  -->
+<!--        <fileset dir="${ant.dir}">
+            <include name="**/*.jar" />
+        </fileset>-->
+    </path>
+
+    <target name="clear" description="清理旧文件">
+        <delete dir="${build.dir.core}"/>
+        <delete file="${dist.dir}/${webapp.name}.war"/>
+    </target>
+
+    <target name="init" depends="clear" description="创建初始化目录结构">
+        <mkdir dir="${build.dir.core}/classes"/>
+    </target>
+
+    <target name="complieIyeekuCore" depends="init" description="编译java文件">
+        <echo message="begin complieIyeekuCoreJar"/>
+        <javac srcdir="${src.core.dir}" destdir="${build.dir.core}/classes"
+            includeantruntime="false" nowarn="on"
+            source="1.8" target="1.8" deprecation="true" debug="true"
+               encoding="UTF-8" classpathref="project.classpath">
+            <compilerarg line="-Xlint:unchecked" />
+        </javac>
+        <echo message="end complieIyeekuCoreJar..." />
+    </target>
+
+    <!-- 将class文件打成 jar包 -->
+    <!-- iyeeku-core 编译成功的class打包成jar包 -->
+    <target name="complieIyeeku-CoreJar" depends="complieIyeekuCore" description="将class文件打成jar包">
+        <jar jarfile="${lib.dir}/iyeeku-core.jar">
+            <fileset dir="${build.dir.core}/classes">
+                <include name="**/*.class"/>
+            </fileset>
+            <fileset dir="${src.core.dir}/main/resources">
+                <include name="**/*.xml" />
+                <include name="**/*.properties" />
+                <include name="**/*.sql" />
+            </fileset>
+        </jar>
+    </target>
+
+
+    <target name="0 - default" depends="complieIyeeku-CoreJar" description="将工程打成war包">
+        <echo message="begin war..."/>
+        <war destfile="${dist.dir}/${webapp.name}.war"
+            basedir="${webRoot.dir}"
+            webxml="${webRoot.dir}/WEB-INF/web.xml">
+            <lib dir="${lib.dir}"/>
+
+            <fileset dir="${webRoot.dir}">
+                <include name="***.*"/>
+            </fileset>
+        </war>
+
+
+    </target>
+
+
+
+
+
+
+</project>

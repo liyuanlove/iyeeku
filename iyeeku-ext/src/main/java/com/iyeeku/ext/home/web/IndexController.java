@@ -8,14 +8,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    @RequestMapping(value = "/index1",method = RequestMethod.GET)
     public ModelAndView index(){
         return new ModelAndView("index");
     }
 
-    @RequestMapping(value = "/index1",method = RequestMethod.GET , name = "打开管理系统主页")
+    @RequestMapping(value = "/index",method = RequestMethod.GET , name = "打开管理系统主页")
     public ModelAndView index1(){
         return new ModelAndView("index1");
+    }
+
+    @RequestMapping(value = "/home",method = RequestMethod.GET , name = "控制台首页")
+    public ModelAndView home(){
+        return new ModelAndView("home");
     }
 
 }

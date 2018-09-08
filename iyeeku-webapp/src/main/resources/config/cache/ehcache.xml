@@ -77,4 +77,15 @@
                 class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
     </cache>
 
+    <cache name="appBaseCache" maxEntriesLocalHeap="10000" eternal="false"
+           timeToIdleSeconds="43200" timeToLiveSeconds="43200">
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+                properties="replicateAsynchronously=false, replicatePuts=true,
+                            replicatePutsViaCopy=true, replicateUpdates=true,
+                            replicateUpdatesViaCopy=true, replicateRemovals=true" />
+        <bootstrapCacheLoaderFactory
+                class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+    </cache>
+
 </ehcache>

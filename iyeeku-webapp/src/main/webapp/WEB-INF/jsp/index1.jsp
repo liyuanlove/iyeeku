@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>主页导航1</title>
+    <title>XXX管理系统</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/res/third-party/scrollbar/jquery.mCustomScrollbar.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resource/res/third-party/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -32,7 +32,7 @@
     </div>
     <ul class="nav navbar-nav">
         <li><a id="toggle"><span class="fa fa-bars" ></span></a></li>
-        <li class="icontop"><a href="#"><i class="fa fa-hand-pointer-o"></i><span >系统演示</span></a></li>
+        <li class="icontop"><a href="#" onclick="loadTab()"><i class="fa fa-hand-pointer-o"></i><span >开发日志</span></a></li>
         <li class="icontop"><a href="#"><i class="fa fa-puzzle-piece"></i><span >开发文档</span></a></li>
         <li class="icontop"><a href="#"><i class="fa fa-sort-amount-asc"></i><span >人力资源</span></a></li>
         <li class="icontop"><a href="#"><i class="fa  fa-cog"></i><span >系统设置</span></a></li>
@@ -62,7 +62,7 @@
     <div class="main">
         <div id="mainTabs" class="mini-tabs main-tabs" activeIndex="0" style="height:100%;" plain="false"
              buttons="#tabsButtons" arrowPosition="side" >
-            <div name="index" iconCls="fa-android" title="控制台">
+            <div name="index" iconCls="fa-android" title="首页" url="/page/list">
                 MiniUI导航框架
             </div>
         </div>
@@ -79,6 +79,13 @@
 </body>
 
 <script type="text/javascript">
+
+    function loadTab() {
+        var item = { id : "developLogPage", text : "开发日志" ,
+            url : "/develop/list" , iconCls : ""};
+        activeTab(item);
+    }
+
     function activeTab(item) {
         var tabs = mini.get("mainTabs");
         var tab = tabs.getTab(item.id);
@@ -151,6 +158,7 @@
             mini.get("mainTabs").removeTab(tab);
         }
     }
+
 
 </script>
 
