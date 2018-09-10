@@ -77,21 +77,24 @@
                                             <tr>
                                                 <td align="right">菜单打开方式：</td>
                                                 <td align="left">
-                                                    <input id="cddkfs" name="cddkfs" class="mini-textbox" style="width: 180px;">
+                                                    <input id="cddkfs" name="cddkfs" class="mini-combobox" style="width: 180px;"
+                                                           textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/menuOpenType"
+                                                           onvaluechanged="checkValueChanged(this)">
                                                 </td>
                                                 <td align="right">菜单路径：</td>
                                                 <td align="left">
-                                                    <input id="cdurl" name="cdurl" class="mini-textbox" style="width: 180px;">
+                                                    <input id="cdurl" name="cdurl" class="mini-buttonedit" style="width: 180px;" onbuttonclick="onButtonEditUrl" selectOnFocus="true" allowInput="false">
+                                                    <input id="wbcdurl" name="wbcdurl" class="mini-textbox" style="width: 160px;display: none;" required="true" vtype="rangeChar:2,255" allowInput="true">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td align="right">同级菜单顺序号：</td>
                                                 <td align="left">
-                                                    <input id="cdsxh" name="cdsxh" class="mini-spinner" style="width: 180px;" required="true" vtype="int;rangeChar:0,8" allowInput="false">
+                                                    <input id="cdsxh" name="cdsxh" class="mini-spinner" style="width: 180px;" required="true" vtype="int;rangeChar:0,8" allowInput="false" onvaluechanged="checkValueChanged(this)">
                                                 </td>
                                                 <td align="right">是否相对路径：</td>
                                                 <td align="left">
-                                                    <input id="sfxdlj" name="sfxdlj" class="mini-checkbox" value="true" trueValue="1" falseValue="0" checked="true" readonly="false">
+                                                    <input id="sfxdlj" name="sfxdlj" class="mini-checkbox" value="true" trueValue="1" falseValue="0" checked="true" readonly="false" onvaluechanged="checkValueChanged(this)">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -101,17 +104,18 @@
                                                 </td>
                                                 <td align="right">是否启用：</td>
                                                 <td align="left">
-                                                    <input id="cdsfky" name="cdsfky" class="mini-checkbox" value="true" trueValue="1" falseValue="0" checked="true" readonly="false">
+                                                    <input id="cdsfky" name="cdsfky" class="mini-checkbox" value="true" trueValue="1" falseValue="0" checked="true" readonly="false" onvaluechanged="checkValueChanged(this)">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td align="right">菜单类型：</td>
                                                 <td align="left">
-                                                    <input id="cdlx" name="cdlx" class="mini-combobox" style="width: 180px;" allowInput="false">
+                                                    <input id="cdlx" name="cdlx" class="mini-combobox" style="width: 180px;" allowInput="false" required="true"
+                                                           textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/menuType">
                                                 </td>
                                                 <td align="right">是否可见：</td>
                                                 <td align="left">
-                                                    <input id="cdsfkj" name="cdsfkj" class="mini-checkbox" value="true" trueValue="1" falseValue="0" checked="true" readonly="false">
+                                                    <input id="cdsfkj" name="cdsfkj" class="mini-checkbox" value="true" trueValue="1" falseValue="0" checked="true" readonly="false" onvaluechanged="checkValueChanged(this)">
                                                 </td>
                                             </tr>
                                         </table>
@@ -225,11 +229,11 @@
             return;
         }
         if((tree.getValue(false) == null) || (tree.getValue(false) == "")){
-            alert("xxxxx");
+            alert("请先保存");
             return;
         }
         if(tNode.cdurl != null){
-            alert("不能新增");
+            alert("该菜单有对应的菜单路径，不能添加子菜单！");
             return;
         }
         var newNode = {};
@@ -240,7 +244,7 @@
             tree.expandNode(tNode);  //展开节点
         }
         var parentNode = tree.getParentNode(newNode);
-
+        changeCDURL("cddkfs","0",null);
         mini.get("relationUrl").disable();
 
 
@@ -306,7 +310,63 @@
                 }
             }
         });
+        controlBtnState();
+    }
 
+    function checkValueChanged(e) {
+        changeCDURL(e.name,e.value,null);
+        var oldData = mini.encode(oldFormData);
+        var formData = form.getData();
+        formData[e.name] = e.value;
+        var newData = mini.encode(formData);
+        if(oldData == newData){
+            mini.get("saveBtn").disable();
+        }else{
+            mini.get("saveBtn").enable();
+        }
+    }
+
+    function changeCDURL(name,value,url) {
+        if(name == "cddkfs"){
+            if(value == "0"){
+                document.getElementById("cdurl").style.display="";
+                document.getElementById("wbcdurl").style.display="none";
+                if (url != null){
+                    mini.get("cdurl").setText(url);
+                    mini.get("cdurl").setValue(url);
+                }else{
+                    mini.get("cdurl").setText("");
+                    mini.get("cdurl").setValue(null);
+                }
+            } else {
+                document.getElementById("wbcdurl").style.display="";
+                document.getElementById("cdurl").style.display="none";
+                if (url != null){
+                    mini.get("wbcdurl").setValue(url);
+                }else{
+                    mini.get("wbcdurl").setValue(null);
+                }
+            }
+
+        }
+
+    }
+
+    function onButtonEditUrl(e) {
+        var btnEdit = this;
+        mini.open({
+            url: "${pageContext.request.contextPath}/menu/menuPathForm",
+            title: "URL选择", width: 600, height: 480,
+            onload: function () {
+            },
+            ondestroy: function (action) {
+                if( action != null && action != "cancel"){
+                    btnEdit.setText(action.urllj);
+                    btnEdit.setValue(action.urllj);
+                    checkValueChanged(e);
+                }
+            }
+        });
     }
 
     // 设置按钮不可用
@@ -321,6 +381,21 @@
         if(!form.isValid()){
             return;
         }
+
+        var data = form.getData();      //获取表单多个控件的数据
+        $.ajax({
+            url: "/menu/saveOrUpdate",
+            type: "post",
+            data: data ,
+            success: function (text) {
+                location.reload(); //重新刷新当前页面
+                                    //重新刷新菜单缓存
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText);
+            }
+        });
+
     }
     
     //设置可编辑

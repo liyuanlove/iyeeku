@@ -25,6 +25,15 @@ public class PFResUrlServiceImpl implements PFResUrlService {
     private PFResMenuDao pfResMenuDao;
 
     @Override
+    public List<PFResUrlVO> findNotMenuUrl(String key) {
+        Map<String,String> map = new HashMap<>();
+        if(key != null && !"".equals(key)){
+            map.put("key" , "%"+key+"%");
+        }
+        return this.pfResUrlDao.findNotMenuUrl(map);
+    }
+
+    @Override
     public void reloadAllUrlData(Map<String, String> initUrlData) {
         this.logger.info("开发处理url...");
         Map<String,String> processData = processInitUrlData(initUrlData);

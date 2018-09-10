@@ -58,7 +58,7 @@
                             <td align="right">教育程度：</td>
                             <td align="left">
                                 <input name="jycd" class="mini-combobox" allowinput="false"
-                                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict?dictId=staffJycd"/>
+                                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/staffJycd"/>
                             </td>
                         </tr>
                         <tr>
@@ -85,7 +85,7 @@
                             <td align="right">个人证件类型：</td>
                             <td align="left">
                                 <input name="grzjlx" class="mini-combobox" allowinput="false"
-                                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict?dictId=staffGrzjlx"/>
+                                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/staffGrzjlx"/>
                             </td>
                             <td align="right">证件号码：</td>
                             <td align="left">

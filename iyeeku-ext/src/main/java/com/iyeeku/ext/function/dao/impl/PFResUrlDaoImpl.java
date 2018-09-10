@@ -6,6 +6,7 @@ import com.iyeeku.ext.function.vo.PFResUrlVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PFResUrlDaoImpl extends BaseDaoImpl implements PFResUrlDao {
@@ -13,6 +14,11 @@ public class PFResUrlDaoImpl extends BaseDaoImpl implements PFResUrlDao {
     @Override
     public List<PFResUrlVO> findAllUrls() {
         return this.queryAll_myBatis("com.iyeeku.ext.function.dao.PFResUrlDao.findAllUrls");
+    }
+
+    @Override
+    public List<PFResUrlVO> findNotMenuUrl(Map<String, String> map) {
+        return this.queryAll_myBatis("com.iyeeku.ext.function.dao.PFResUrlDao.findNotMenuUrl",map);
     }
 
     @Override

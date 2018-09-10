@@ -82,7 +82,38 @@
         SELECT * FROM PF_RESMENU WHERE SJCDBH = 'DEFAULT_MENUTREE_ROOT' order by cdsxh asc
     </select>
 
+    <insert id="insert" parameterType="com.iyeeku.ext.function.vo.PFResMenuVO" >
+        insert into PF_RESMENU (CDBH, CDBM, CDMC,
+        CDURL, SJCDBH, CDSXH,
+        CDTP, SFXDLJ, CDDKCKSZWZ,
+        CDZXKJBH, CDSFKY, CDSFKJ,
+        CDDKFS, CDLX)
+        values (#{cdbh,jdbcType=CHAR}, #{cdbm,jdbcType=VARCHAR}, #{cdmc,jdbcType=VARCHAR},
+        #{cdurl,jdbcType=VARCHAR}, #{sjcdbh,jdbcType=VARCHAR}, #{cdsxh,jdbcType=DECIMAL},
+        #{cdtp,jdbcType=VARCHAR}, #{sfxdlj,jdbcType=CHAR}, #{cddkckszwz,jdbcType=VARCHAR},
+        #{cdzxkjbh,jdbcType=VARCHAR}, #{cdsfky,jdbcType=CHAR}, #{cdsfkj,jdbcType=CHAR},
+        #{cddkfs,jdbcType=CHAR}, #{cdlx,jdbcType=CHAR})
+    </insert>
 
+    <update id="update" parameterType="com.iyeeku.ext.function.vo.PFResMenuVO" >
+        update PF_RESMENU
+        <set >
+            <if test="cdbm != null" >CDBM = #{cdbm,jdbcType=VARCHAR},</if>
+            <if test="cdmc != null" >CDMC = #{cdmc,jdbcType=VARCHAR},</if>
+            <if test="cdurl != null" >CDURL = #{cdurl,jdbcType=VARCHAR},</if>
+            <if test="sjcdbh != null" >SJCDBH = #{sjcdbh,jdbcType=VARCHAR},</if>
+            <if test="cdsxh != null" >CDSXH = #{cdsxh,jdbcType=DECIMAL},</if>
+            <if test="cdtp != null" >CDTP = #{cdtp,jdbcType=VARCHAR},</if>
+            <if test="sfxdlj != null" >SFXDLJ = #{sfxdlj,jdbcType=CHAR},</if>
+            <if test="cddkckszwz != null" >CDDKCKSZWZ = #{cddkckszwz,jdbcType=VARCHAR},</if>
+            <if test="cdzxkjbh != null" >CDZXKJBH = #{cdzxkjbh,jdbcType=VARCHAR},</if>
+            <if test="cdsfky != null" >CDSFKY = #{cdsfky,jdbcType=CHAR},</if>
+            <if test="cdsfkj != null" >CDSFKJ = #{cdsfkj,jdbcType=CHAR},</if>
+            <if test="cddkfs != null" >CDDKFS = #{cddkfs,jdbcType=CHAR},</if>
+            <if test="cdlx != null" >CDLX = #{cdlx,jdbcType=CHAR},</if>
+        </set>
+        where CDBH = #{cdbh,jdbcType=CHAR}
+    </update>
 
 
 </mapper>

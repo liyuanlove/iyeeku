@@ -1,7 +1,9 @@
 package com.iyeeku.ext.function.web;
 
 import com.iyeeku.ext.function.service.PFResMenuService;
+import com.iyeeku.ext.function.service.PFResUrlService;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
+import com.iyeeku.ext.function.vo.PFResUrlVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,31 @@ public class PFResMenuController {
 
     @Autowired
     private PFResMenuService pfResMenuService;
+    @Autowired
+    private PFResUrlService pfResUrlService;
 
     @RequestMapping(value = "/list" , method = RequestMethod.GET , name = "菜单配置主页面")
     public ModelAndView list(){
         return new ModelAndView("ext/menu/menuMain");
     }
 
+
+    @RequestMapping( value = "/findNotMenuUrl" , method = RequestMethod.POST , name = "菜单选择弹出框list数据")
+    @ResponseBody
+    public Map<String ,Object> findNotMenuUrl(String key){
+        Map<String,Object> rtnMap = new HashMap<>();
+        List<PFResUrlVO> list = this.pfResUrlService.findNotMenuUrl(key);
+        rtnMap.put("data",list);
+        rtnMap.put("total",Integer.valueOf(list.size()));
+        return rtnMap;
+    }
+
+
+    @RequestMapping(value = "/saveOrUpdate" , method = RequestMethod.POST , name = "菜单表单保存操作")
+    @ResponseBody
+    public void saveOrUpdate(PFResMenuVO menuVO){
+        this.pfResMenuService.saveOrUpdate(menuVO);
+    }
 
     @RequestMapping( value = "/findAllMenu" , method = RequestMethod.POST , name = "查询所有菜单")
     @ResponseBody
@@ -72,6 +93,11 @@ public class PFResMenuController {
     @ResponseBody
     public void update(PFResMenuVO resMenuVO){
 
+    }
+
+    @RequestMapping(value = "/menuPathForm" , method = RequestMethod.GET , name = "菜单路径选择弹出URL列表")
+    public ModelAndView menuPathForm(){
+        return new ModelAndView("ext/menu/menuPathForm");
     }
 
 

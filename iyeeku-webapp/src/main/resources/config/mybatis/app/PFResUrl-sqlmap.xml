@@ -14,6 +14,14 @@
 		SELECT URLBH, URLBM, URLLJ, URLMS, URLLX FROM PF_RESURL
 	</select>
 
+	<select id="findNotMenuUrl" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT URLBH, URLBM, URLLJ, URLMS, URLLX FROM PF_RESURL
+		WHERE URLLJ NOT IN (SELECT CDURL FROM PF_RESMENU WHERE CDURL IS NOT NULL)
+		AND URLBH NOT IN (SELECT URLBH FROM PF_RESURL WHERE URLLJ LIKE '%/**/*')
+		<if test="key != null"> AND URLLJ LIKE #{key}</if>
+		ORDER BY URLLJ ASC
+	</select>
+
 	<insert id="addUrl" parameterType="com.iyeeku.ext.function.vo.PFResUrlVO">
 		insert into PF_RESURL (URLBH, URLBM, URLLJ,
 		URLMS, URLLX)

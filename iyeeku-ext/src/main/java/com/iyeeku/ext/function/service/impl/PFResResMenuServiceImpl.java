@@ -1,5 +1,6 @@
 package com.iyeeku.ext.function.service.impl;
 
+import com.iyeeku.core.utils.UUIDGenerator;
 import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.service.PFResMenuService;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
@@ -28,4 +29,17 @@ public class PFResResMenuServiceImpl implements PFResMenuService {
     public PFResMenuVO findMenuByCdbh(String cdbh) {
         return this.pfResMenuDao.findMenuByCdbh(cdbh);
     }
+
+    @Override
+    public void saveOrUpdate(PFResMenuVO menuVO) {
+        if (menuVO.getCdurl() == null || "".equals(menuVO.getCdbh())){
+
+            menuVO.setCdbh(UUIDGenerator.generate(""));
+            this.pfResMenuDao.insert(menuVO);
+
+        }else{
+            this.pfResMenuDao.update(menuVO);
+        }
+    }
+
 }

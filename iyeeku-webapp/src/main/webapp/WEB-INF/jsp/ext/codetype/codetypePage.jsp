@@ -186,7 +186,7 @@
         var row = grid_codeType.getSelected();
         if(row){
             mini.open({
-                targetWindow: window,
+                // targetWindow: window,
                 url: "${pageContext.request.contextPath}/codetype/form1",
                 title: "修改码表", width: 600, height: 240,
                 onload: function () {

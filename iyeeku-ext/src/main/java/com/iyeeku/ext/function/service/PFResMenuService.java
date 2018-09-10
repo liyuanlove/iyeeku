@@ -12,4 +12,6 @@ public interface PFResMenuService {
 
     public abstract PFResMenuVO findMenuByCdbh(String cdbh);
 
+    public abstract void saveOrUpdate(PFResMenuVO menuVO);
+
 }
