@@ -1,6 +1,5 @@
 package com.iyeeku.ext.role.web;
 
-import com.iyeeku.core.mvc.handlermapping.FunctionDesc;
 import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.role.service.IPFRoleService;
 import com.iyeeku.ext.role.vo.PFRole;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -25,31 +23,20 @@ public class PFRoleController {
     @Resource(name = "iPFRoleService")
     private IPFRoleService iPFRoleService;
 
-    @FunctionDesc("测试执行到这里")
-    @ResponseBody
-    public void testRequest(){
-        this.logger.info("PFRoleController testRequest");
-        System.out.println("执行到这里1111111111111111");
-    }
-
     @RequestMapping(value = "list" , method = RequestMethod.GET , name = "角色管理主页面")
     public ModelAndView roleList(){
         return new ModelAndView("ext/role/roleList");
     }
 
-    @RequestMapping(value = "add" , name = "角色添加")
+    @RequestMapping(value = "add" , method = RequestMethod.POST , name = "角色添加")
     @ResponseBody
-    public String add(HttpServletRequest request, PFRole role){
+    public void add(PFRole role){
         this.logger.info("PFRoleController addRole");
-        String jsmc = request.getParameter("jsmc");
-        System.out.println("JSMC " + jsmc);
-        System.out.println("角色名称: " + role.getJsmc());
-        System.out.println("角色描述: " + role.getJsms());
         this.iPFRoleService.saveRole(role);
-        return "ok";
     }
 
     @RequestMapping(value = "update" , method = RequestMethod.POST , name = "角色更新")
+    @ResponseBody
     public void update(PFRole role){
         this.logger.info("PFRoleController update");
         this.iPFRoleService.updateRole(role);
@@ -57,13 +44,13 @@ public class PFRoleController {
 
     @RequestMapping(value = "delete" , method = RequestMethod.POST , name = "角色删除")
     @ResponseBody
-    public String delete(String jsbh){
+    public void delete(String jsbh){
         this.logger.info("PFRoleController delete");
         this.iPFRoleService.deleteRole(jsbh);
-        return "ok";
     }
 
-    @RequestMapping(value = "getRoleByJsbh" , method = RequestMethod.POST)
+    @RequestMapping(value = "getRoleByJsbh" , method = RequestMethod.POST , name = "根据JSBH查找角色信息")
+    @ResponseBody
     public PFRole detail(String jsbh){
         this.logger.info("PFRoleController detail");
         return this.iPFRoleService.findRoleByJsbh(jsbh);
@@ -80,5 +67,14 @@ public class PFRoleController {
     public ModelAndView roleForm(){
         return new ModelAndView("ext/role/roleForm");
     }
+
+    @RequestMapping(value = "viewStaff" , method = RequestMethod.GET , name = "查询用户信息")
+    public ModelAndView viewStaff(){ return new ModelAndView("ext/role/viewStaff");}
+
+    @RequestMapping(value = "addStaff" , method = RequestMethod.GET , name = "角色添加用户")
+    public ModelAndView addStaff(){ return new ModelAndView("ext/role/addStaff");}
+
+    @RequestMapping(value = "removeStaff" , method = RequestMethod.GET , name = "角色删除用户")
+    public ModelAndView removeStaff(){ return new ModelAndView("ext/role/removeStaff");}
 
 }

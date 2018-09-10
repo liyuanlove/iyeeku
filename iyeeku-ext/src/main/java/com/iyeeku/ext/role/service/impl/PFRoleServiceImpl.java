@@ -54,6 +54,7 @@ public class PFRoleServiceImpl implements IPFRoleService {
         this.logger.info("PFRoleServiceImpl saveRole");
         role.setJsbh(UUIDGenerator.generate(""));
         role.setCjsj(new Date());
+        role.setJlzt("1");
         this.iPFRoleDao.saveRole(role);
     }
 

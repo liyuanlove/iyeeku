@@ -10,9 +10,7 @@
 	 -->
 	 
 	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-	
 
-	
 	<select id="selectStudent" resultType="java.util.HashMap">
 		select * from student
 	</select>

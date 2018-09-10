@@ -14,8 +14,11 @@
 </head>
 <body>
 <div class="mini-fit">
-<div class="mini-fit" id="form1">
-    <table border="0" cellpadding="1" cellspacing="2" style="width:100%;table-layout:fixed;">
+    <input class="mini-hidden" name="pageType" id="pageType" value="query">
+    <form id="form1">
+        <input id="jlzt" name="jlzt" class="mini-hidden">
+        <input id="jsbh" name="jsbh" class="mini-hidden">
+        <table border="0" cellpadding="1" cellspacing="2" style="width:100%;table-layout:fixed;">
         <tr>
             <td style="width:100px;">角色名称：</td>
             <td style="width:150px;">
@@ -44,9 +47,8 @@
                 <input name="jsms" class="mini-textarea" style="width: 90%;height:60px;"/>
             </td>
         </tr>
-    </table>
-
-</div>
+        </table>
+    </form>
 </div>
 
 <div class="mini-toolbar" style="text-align:center;padding-top:8px;padding-bottom:8px;" borderStyle="border:0;">
@@ -65,23 +67,21 @@
     }
 
     function SaveData() {
-        //提交表单数据
-        //var form = new mini.Form("#form1");
-
         form.validate();
         if (form.isValid() == false) return;
 
+        var url = "${pageContext.request.contextPath}/role/add";
+        var pageType = mini.get("pageType").getValue();
+        if( pageType == "edit" ){
+            url = "${pageContext.request.contextPath}/role/update";
+        }
         var data = form.getData();      //获取表单多个控件的数据
-        var json = mini.encode(data);   //序列化成JSON
         $.ajax({
-            url: "${pageContext.request.contextPath}/role/add",
+            url: url,
             type: "post",
-            //data: { submitData: json },
             data: data ,
             success: function (text) {
-                if(text == "ok"){
-                    CloseWindow("ok");
-                }
+                CloseWindow("ok");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText);
@@ -89,6 +89,24 @@
             }
         });
 
+    }
+
+    function SetData(data) {
+        //跨页面传递的数据对象，克隆后才可以安全使用
+        data = mini.clone(data);
+        mini.get("pageType").setValue(data.action);
+        if (data.action == "edit") {
+            $.ajax({
+                url: "/role/getRoleByJsbh",
+                type: 'post',
+                data: { jsbh : data.jsbh },
+                success: function (text) {
+                    var o = mini.decode(text);
+                    form.setData(o);
+                    form.setChanged(false);
+                }
+            });
+        }
     }
 
     function onCancel(e) {

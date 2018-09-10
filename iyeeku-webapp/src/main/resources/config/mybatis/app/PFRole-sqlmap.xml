@@ -43,7 +43,7 @@
 	<select id="findRoleByJsbh" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
 		from PF_ROLE
-		where JSBH = #{jsbh,jdbcType=VARCHAR}
+		where JSBH = #{jsbh,jdbcType=VARCHAR} AND JLZT = '1'
 	</select>
 
 	<insert id="saveRole" parameterType="com.iyeeku.ext.role.vo.PFRole">
@@ -64,54 +64,22 @@
 	<update id="updateRole" parameterType="com.iyeeku.ext.role.vo.PFRole">
 		update PF_ROLE
 		<set >
-			<if test="jsmc != null" >
-				JSMC = #{jsmc,jdbcType=VARCHAR},
-			</if>
-			<if test="jslx != null" >
-				JSLX = #{jslx,jdbcType=CHAR},
-			</if>
-			<if test="jszt != null" >
-				JSZT = #{jszt,jdbcType=CHAR},
-			</if>
-			<if test="jsms != null" >
-				JSMS = #{jsms,jdbcType=VARCHAR},
-			</if>
-			<if test="cjr != null" >
-				CJR = #{cjr,jdbcType=CHAR},
-			</if>
-			<if test="cjsj != null" >
-				CJSJ = #{cjsj,jdbcType=TIMESTAMP},
-			</if>
-			<if test="zhxgr != null" >
-				ZHXGR = #{zhxgr,jdbcType=CHAR},
-			</if>
-			<if test="zhxgsj != null" >
-				ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP},
-			</if>
-			<if test="jsqz != null" >
-				JSQZ = #{jsqz,jdbcType=DECIMAL},
-			</if>
-			<if test="jlzt != null" >
-				JLZT = #{jlzt,jdbcType=CHAR},
-			</if>
-			<if test="kzzd1 != null" >
-				KZZD1 = #{kzzd1,jdbcType=VARCHAR},
-			</if>
-			<if test="kzzd2 != null" >
-				KZZD2 = #{kzzd2,jdbcType=VARCHAR},
-			</if>
-			<if test="kzzd3 != null" >
-				KZZD3 = #{kzzd3,jdbcType=VARCHAR},
-			</if>
-			<if test="kzzd4 != null" >
-				KZZD4 = #{kzzd4,jdbcType=VARCHAR},
-			</if>
-			<if test="kzzd5 != null" >
-				KZZD5 = #{kzzd5,jdbcType=VARCHAR},
-			</if>
-			<if test="kzzd6 != null" >
-				KZZD6 = #{kzzd6,jdbcType=VARCHAR},
-			</if>
+			<if test="jsmc != null" >JSMC = #{jsmc,jdbcType=VARCHAR},</if>
+			<if test="jslx != null" >JSLX = #{jslx,jdbcType=CHAR},</if>
+			<if test="jszt != null" >JSZT = #{jszt,jdbcType=CHAR},</if>
+			<if test="jsms != null" >JSMS = #{jsms,jdbcType=VARCHAR},</if>
+			<if test="cjr != null" >CJR = #{cjr,jdbcType=CHAR},</if>
+			<if test="cjsj != null" >CJSJ = #{cjsj,jdbcType=TIMESTAMP},</if>
+			<if test="zhxgr != null" >ZHXGR = #{zhxgr,jdbcType=CHAR},</if>
+			<if test="zhxgsj != null" >ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP},</if>
+			<if test="jsqz != null" >JSQZ = #{jsqz,jdbcType=DECIMAL},</if>
+			<if test="jlzt != null" >JLZT = #{jlzt,jdbcType=CHAR},</if>
+			<if test="kzzd1 != null" >KZZD1 = #{kzzd1,jdbcType=VARCHAR},</if>
+			<if test="kzzd2 != null" >KZZD2 = #{kzzd2,jdbcType=VARCHAR},</if>
+			<if test="kzzd3 != null" >KZZD3 = #{kzzd3,jdbcType=VARCHAR},</if>
+			<if test="kzzd4 != null" >KZZD4 = #{kzzd4,jdbcType=VARCHAR},</if>
+			<if test="kzzd5 != null" >KZZD5 = #{kzzd5,jdbcType=VARCHAR},</if>
+			<if test="kzzd6 != null" >KZZD6 = #{kzzd6,jdbcType=VARCHAR},</if>
 		</set>
 		where JSBH = #{jsbh,jdbcType=VARCHAR}
 	</update>

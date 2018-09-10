@@ -102,9 +102,7 @@
         if (form.isValid() == false) return;
 
         var url = "${pageContext.request.contextPath}/codetype/add";
-
         var pageType = mini.get("pageType").getValue();
-
         if( pageType == "edit" ){
             url = "${pageContext.request.contextPath}/codetype/update";
         }

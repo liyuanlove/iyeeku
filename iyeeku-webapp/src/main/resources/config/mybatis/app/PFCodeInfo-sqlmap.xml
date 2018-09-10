@@ -47,45 +47,19 @@
 	<update id="update" parameterType="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
 		update PF_CODEINFO
 		<set >
-			<if test="mblxbh != null" >
-				MBLXBH = #{mblxbh,jdbcType=VARCHAR},
-			</if>
-			<if test="mbtmz != null" >
-				MBTMZ = #{mbtmz,jdbcType=VARCHAR},
-			</if>
-			<if test="sjlx != null" >
-				SJLX = #{sjlx,jdbcType=VARCHAR},
-			</if>
-			<if test="mbtmms != null" >
-				MBTMMS = #{mbtmms,jdbcType=VARCHAR},
-			</if>
-			<if test="sjsxsy != null" >
-				SJSXSY = #{sjsxsy,jdbcType=DECIMAL},
-			</if>
-			<if test="gjdbm != null" >
-				GJDBM = #{gjdbm,jdbcType=VARCHAR},
-			</if>
-			<if test="fjdbm != null" >
-				FJDBM = #{fjdbm,jdbcType=VARCHAR},
-			</if>
-			<if test="bmjb != null" >
-				BMJB = #{bmjb,jdbcType=DECIMAL},
-			</if>
-			<if test="qlj != null" >
-				QLJ = #{qlj,jdbcType=VARCHAR},
-			</if>
-			<if test="sfkj != null" >
-				SFKJ = #{sfkj,jdbcType=CHAR},
-			</if>
-			<if test="sjsygjhxx != null" >
-				SJSYGJHXX = #{sjsygjhxx,jdbcType=VARCHAR},
-			</if>
-			<if test="jlzt != null" >
-				JLZT = #{jlzt,jdbcType=CHAR},
-			</if>
-			<if test="kzzd != null" >
-				KZZD = #{kzzd,jdbcType=VARCHAR},
-			</if>
+			<if test="mblxbh != null" >MBLXBH = #{mblxbh,jdbcType=VARCHAR},</if>
+			<if test="mbtmz != null" >MBTMZ = #{mbtmz,jdbcType=VARCHAR},</if>
+			<if test="sjlx != null" >SJLX = #{sjlx,jdbcType=VARCHAR},</if>
+			<if test="mbtmms != null" >MBTMMS = #{mbtmms,jdbcType=VARCHAR},</if>
+			<if test="sjsxsy != null" >SJSXSY = #{sjsxsy,jdbcType=DECIMAL},</if>
+			<if test="gjdbm != null" >GJDBM = #{gjdbm,jdbcType=VARCHAR},</if>
+			<if test="fjdbm != null" >FJDBM = #{fjdbm,jdbcType=VARCHAR},</if>
+			<if test="bmjb != null" >BMJB = #{bmjb,jdbcType=DECIMAL},</if>
+			<if test="qlj != null" >QLJ = #{qlj,jdbcType=VARCHAR},</if>
+			<if test="sfkj != null" >SFKJ = #{sfkj,jdbcType=CHAR},</if>
+			<if test="sjsygjhxx != null" >SJSYGJHXX = #{sjsygjhxx,jdbcType=VARCHAR},</if>
+			<if test="jlzt != null" >JLZT = #{jlzt,jdbcType=CHAR},</if>
+			<if test="kzzd != null" >KZZD = #{kzzd,jdbcType=VARCHAR},</if>
 		</set>
 		where ZJ = #{zj,jdbcType=CHAR}
 	</update>
@@ -93,12 +67,8 @@
 	<delete id="delete" parameterType="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
 		delete from PF_CODEINFO
 		where 1=1
-		<if test="zj != null">
-			AND ZJ = #{zj,jdbcType=CHAR}
-		</if>
-		<if test="sjlx != null" >
-			AND SJLX = #{sjlx,jdbcType=VARCHAR}
-		</if>
+		<if test="zj != null"> AND ZJ = #{zj,jdbcType=CHAR}</if>
+		<if test="sjlx != null" > AND SJLX = #{sjlx,jdbcType=VARCHAR}</if>
 	</delete>
 
 	<resultMap id="directoryBaseResultMap" type="com.iyeeku.ext.directory.vo.DirectoryVO" >
