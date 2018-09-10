@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -76,5 +77,13 @@ public class PFRoleController {
 
     @RequestMapping(value = "removeStaff" , method = RequestMethod.GET , name = "角色删除用户")
     public ModelAndView removeStaff(){ return new ModelAndView("ext/role/removeStaff");}
+
+    @RequestMapping(value = "listStaff" , method = RequestMethod.POST , name = "角色用户列表查询list")
+    @ResponseBody
+    public Map<String,Object> listStaff(String jsbh,Pagination pagination){
+        Map<String,Object> map = new HashMap<>();
+        System.out.println();
+        return null;
+    }
 
 }
