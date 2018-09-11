@@ -3,6 +3,7 @@ package com.iyeeku.ext.role.dao.impl;
 import com.iyeeku.core.orm.impl.BaseDaoImpl;
 import com.iyeeku.ext.role.dao.IPFRoleDao;
 import com.iyeeku.ext.role.vo.PFRole;
+import com.iyeeku.ext.staff.vo.PFStaffVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -49,6 +50,16 @@ public class PFRoleDaoImpl extends BaseDaoImpl implements IPFRoleDao {
     public void deleteRole(String jsbh) {
         this.logger.info("PFRoleDaoImpl deleteRole");
         this.delete_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.deleteRole",jsbh);
+    }
+
+    @Override
+    public List<PFStaffVO> findListStaff(String jsbh, int offSet, int pageSize) {
+        return this.queryAll_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findListStaff",jsbh,offSet,pageSize);
+    }
+
+    @Override
+    public int findListStaffCount(String jsbh) {
+        return this.queryOne_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findListStaffCount",jsbh);
     }
 
 }

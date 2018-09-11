@@ -197,8 +197,8 @@
     }
 
     function viewStaff() {
-        var rows = grid.getSelecteds();
-        if (rows.length > 0) {
+        var row = grid.getSelected();
+        if (row) {
             mini.open({
                 url: "${pageContext.request.contextPath}/role/viewStaff",
                 title: "用户信息", width: 650, height: 400,
@@ -234,8 +234,8 @@
     }
 
     var roleStates , roleTypes;
-    $.getJSON("/directory/loadDict1/roleState",null,function (data) {roleStates = data;})
-    $.getJSON("/directory/loadDict1/roleType",null,function (data) {roleTypes = data;})
+    $.getJSON("/directory/loadDict1/roleState",null,function (data) {roleStates = data;});
+    $.getJSON("/directory/loadDict1/roleType",null,function (data) {roleTypes = data;});
 
     function jslxRenderer(e) {
         for ( var i = 0 , l = roleTypes.length ; i < l ; i++){

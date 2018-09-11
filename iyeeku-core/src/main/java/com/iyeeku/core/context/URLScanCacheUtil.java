@@ -15,8 +15,4 @@ public class URLScanCacheUtil {
         return HANDLER_URL;
     }
 
-    public static void printAllURL(){
-        HANDLER_URL.forEach((k ,v ) -> System.out.println("URL：" + k + " , DESC：" + v));
-    }
-
 }

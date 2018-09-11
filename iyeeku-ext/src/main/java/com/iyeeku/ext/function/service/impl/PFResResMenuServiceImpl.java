@@ -5,9 +5,11 @@ import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.service.PFResMenuService;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PFResResMenuServiceImpl implements PFResMenuService {
@@ -33,13 +35,16 @@ public class PFResResMenuServiceImpl implements PFResMenuService {
     @Override
     public void saveOrUpdate(PFResMenuVO menuVO) {
         if (menuVO.getCdurl() == null || "".equals(menuVO.getCdbh())){
-
             menuVO.setCdbh(UUIDGenerator.generate(""));
             this.pfResMenuDao.insert(menuVO);
-
         }else{
             this.pfResMenuDao.update(menuVO);
         }
+    }
+
+    @Cacheable(value = "appBaseCache" , key = "#p0")
+    public List<Map<String, Object>> getNavMenuDataFromCache(String key) {
+        return null;
     }
 
 }

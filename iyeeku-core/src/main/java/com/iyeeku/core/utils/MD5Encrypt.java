@@ -54,6 +54,9 @@ public class MD5Encrypt {
         return new String(str);
     }
 
+    public static void main(String[] args) throws Exception{
+        System.out.println(MD5Encrypt.md5("123456"));
+    }
 
 
 }

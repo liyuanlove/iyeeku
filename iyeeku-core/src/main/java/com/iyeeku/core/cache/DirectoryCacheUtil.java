@@ -35,7 +35,7 @@ public class DirectoryCacheUtil {
 
     @PostConstruct
     public void initDirectoryCacheUtil(){
-        logger.info("初始字段缓存工具类 : DirectoryCacheUtil");
+        logger.info("初始字典缓存工具类 : DirectoryCacheUtil");
         cache = cacheManager.getCache(CACHE_NAME);
         if (cache == null){
             logger.error("未找到名为 : "+ CACHE_NAME + "的缓存");
@@ -70,7 +70,7 @@ public class DirectoryCacheUtil {
                 }
             }
         }
-        logger.info("缓存初始化成功...");
+        logger.info("字典缓存初始化成功...");
     }
 
     public static List<Map<String,String>> loadDictFromCache(String dictId){

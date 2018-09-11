@@ -35,10 +35,9 @@ public class PFResUrlServiceImpl implements PFResUrlService {
 
     @Override
     public void reloadAllUrlData(Map<String, String> initUrlData) {
-        this.logger.info("开发处理url...");
+        this.logger.info("开始处理url...");
         Map<String,String> processData = processInitUrlData(initUrlData);
-
-        processData.forEach((k ,v ) -> System.out.println("URL：" + k + " , DESC：" + v));
+        //processData.forEach((k ,v ) -> System.out.println("URL：" + k + " , DESC：" + v));
         // 从已经入库的数据中 分离出 "所有url" 和 "模块url"
         Set<String> existUrls = new HashSet<>();
         Set<String> existModuleUrls = new HashSet<>();
@@ -137,11 +136,11 @@ public class PFResUrlServiceImpl implements PFResUrlService {
             }
             this.logger.info("删除列表：\t\n{}");
 
+            //删除授权列表中的信息
             List<String> grantedUrlList = new ArrayList<>();
             //List<>
 
         }
-
 
     }
 
@@ -151,7 +150,7 @@ public class PFResUrlServiceImpl implements PFResUrlService {
         for (Map.Entry<String,String> entry : initUrlData.entrySet()){
             url = entry.getKey();
             if((url.indexOf("{") > -1) || (url.indexOf("}") > -1)){
-               this.logger.info("url like %{% or %}%");  //过滤掉类似  /xxx/xxx/{} 这种形式的 url
+               this.logger.info("url like %{% or %}%");   //过滤掉类似  /xxx/xxx/{} 这种形式的 url
             }else {
                 processData.put(url + "" , entry.getValue()); //这里如果 url+".do" , 那么方法扫描出来的全是 .do 的形式
             }

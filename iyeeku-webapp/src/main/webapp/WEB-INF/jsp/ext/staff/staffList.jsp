@@ -66,9 +66,9 @@
                     <div field="yhbh" width="50" headerAlign="center" allowSort="false" visible="false">员工编号</div>
                     <div field="yhmc" width="100" headerAlign="center" autoEscape="true" allowSort="true">员工名称</div>
                     <div field="yhdlm" width="120" headerAlign="center" autoEscape="true" allowSort="true">员工登录名</div>
-                    <div field="ssjgbh" width="120" headerAlign="center" allowSort="true">所属机构名称</div>
+                    <div field="ssjgbh" width="120" headerAlign="center" allowSort="true" renderer="ssjgmcRenderer">所属机构名称</div>
                     <div field="notesid" width="60" headerAlign="center" allowSort="true">notesid</div>
-                    <div field="zt" width="100" headerAlign="center" allowSort="true">员工状态</div>
+                    <div field="zt" width="100" headerAlign="center" allowSort="true" renderer="yhztRenderer">员工状态</div>
                     <div field="sdsj" width="120" headerAlign="center" allowSort="true">锁定时间</div>
                 </div>
             </div>
@@ -121,6 +121,23 @@
             }
         });
     }
+
+    var staffStates;
+    $.getJSON("/directory/loadDict1/staffState",null,function (data) {staffStates = data;});
+
+    function yhztRenderer(e) {
+        for ( var i = 0 , l = staffStates.length ; i < l ; i++){
+            var v = staffStates[i];
+            if(v.id == e.value) return v.text;
+        }
+        return "";
+    }
+
+    function ssjgmcRenderer(e) {
+        if(e.value == "" || e.value == null) return "暂无";
+    }
+
+
 
     function showTips(Msg,state) {
         var x = "center";

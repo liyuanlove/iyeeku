@@ -1,5 +1,6 @@
 package com.iyeeku.core.startup;
 
+import com.iyeeku.core.cache.AppBaseCacheUtil;
 import com.iyeeku.core.cache.DirectoryCacheUtil;
 import com.iyeeku.core.utils.ContextUtil;
 import com.iyeeku.core.utils.PropertyMgr;
@@ -26,6 +27,8 @@ public class BaseInit {
 
                 //加载字典缓存
                 DirectoryCacheUtil.initDirectoryCache();
+                //加载系统基础缓存
+                AppBaseCacheUtil.initAppBaseCache();
 
                 //加载缓存jdbcTemplate
                 //IBaseDao baseDao = ctx.getBean(BaseDaoImpl.class);

@@ -104,5 +104,26 @@
 		left outer join PF_RESMENU me on me.cdbh = ic.sqzybm
 		where ic.sqzylx = 'CD' and r.jsbh = 'A82970D7A9FE65763E373F76EA31B4A1'
 	</select>
+
+
+	<resultMap id="findListStaffResultMap" type="com.iyeeku.ext.staff.vo.PFStaffVO">
+		<result column="YHBH" property="yhbh" jdbcType="CHAR" />
+		<result column="YHMC" property="yhmc" jdbcType="VARCHAR" />
+		<result column="NOTESID" property="notesid" jdbcType="CHAR" />
+	</resultMap>
+
+	<select id="findListStaff" parameterType="java.lang.String" resultMap="findListStaffResultMap">
+		SELECT s.yhbh,s.yhmc,s.notesid FROM PF_STAFF s
+		LEFT JOIN PF_ROLE_STAFF rs ON rs.yhbh = s.yhbh
+		WHERE rs.JSBH = #{VALUE} AND rs.JLZT = '1' AND s.JLZT = '1'
+	</select>
+	
+	<select id="findListStaffCount" parameterType="java.lang.String" resultType="int">
+		SELECT count(s.yhbh) FROM PF_STAFF s
+		LEFT JOIN PF_ROLE_STAFF rs ON rs.yhbh = s.yhbh
+		WHERE rs.JSBH = #{VALUE} AND rs.JLZT = '1' AND s.JLZT = '1'
+	</select>
+
+
 	
 </mapper>

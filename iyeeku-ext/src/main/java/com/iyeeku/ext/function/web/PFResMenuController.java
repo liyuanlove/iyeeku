@@ -110,8 +110,10 @@ public class PFResMenuController {
     @RequestMapping(value = "/navMenu" , name = "查询导航菜单")
     @ResponseBody
     public List<Map<String,Object>> navMenu(){
-        List<PFResMenuVO> list = this.pfResMenuService.findAll("DEFAULT_MENUTREE_ROOT");
-        return walkMenuTreeData(list);
+        //List<PFResMenuVO> list = this.pfResMenuService.findAll("DEFAULT_MENUTREE_ROOT");
+        //return walkMenuTreeData(list);
+        // 以上方法调用页可以，暂时充缓存中取值
+        return this.pfResMenuService.getNavMenuDataFromCache("navMenu");
     }
 
     private List<Map<String,Object>> walkMenuTreeData(List<PFResMenuVO> list){
