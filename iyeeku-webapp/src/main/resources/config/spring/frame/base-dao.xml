@@ -17,12 +17,12 @@
 			</value>
 		</property>
 		<!-- 拦截器可以配置到这里，同样可以配置到config文件中 , 比如分页插件配置(实现 物理分页 , mybatis RowsBounds默认是逻辑分页  ) -->
-<!--		<property name="plugins">
+		<property name="plugins">
 			<array>
 				<bean class="com.iyeeku.core.orm.interceptor.PaginationInterceptor">
 				</bean>
 			</array>
-		</property>-->
+		</property>
 	</bean>
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

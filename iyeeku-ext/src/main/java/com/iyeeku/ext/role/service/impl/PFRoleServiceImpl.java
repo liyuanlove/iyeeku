@@ -3,11 +3,13 @@ package com.iyeeku.ext.role.service.impl;
 import com.iyeeku.core.utils.UUIDGenerator;
 import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.role.dao.IPFRoleDao;
-import com.iyeeku.ext.role.service.IPFRoleService;
+import com.iyeeku.ext.role.service.PFRoleService;
 import com.iyeeku.ext.role.vo.PFRole;
+import com.iyeeku.ext.staff.service.PFStaffService;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,25 +19,30 @@ import java.util.List;
 import java.util.Map;
 
 @Service("iPFRoleService")
-public class PFRoleServiceImpl implements IPFRoleService {
+public class PFRoleServiceImpl implements PFRoleService {
 
     private final Logger logger = LoggerFactory.getLogger(PFRoleServiceImpl.class);
 
     @Resource(name="iPFRoleDao")
     private IPFRoleDao iPFRoleDao;
 
+    @Autowired
+    private PFStaffService pfStaffService;
+
     @Override
     public Map<String , Object> findAllRoleInfos(PFRole role , Pagination pagination) {
         this.logger.info("PFRoleServiceImpl findAllRoles");
-        if(role.getJsmc() != null && role.getJsmc() != ""){
-            role.setJsmc("%"+role.getJsmc()+"%");
-        }
-        List<PFRole> data = this.iPFRoleDao.findAllRoles(role , pagination.getPageIndex() , pagination.getPageSize());
+        List<PFRole> data = this.iPFRoleDao.findAllRoles(role , pagination.getPageIndex()*pagination.getPageSize() , pagination.getPageSize());
         Integer total = this.iPFRoleDao.findAllInfosCount(role);
         Map<String , Object> result = new HashMap<>();
         result.put("data",data);
         result.put("total",total);
         return result;
+    }
+
+    @Override
+    public Map<String, Object> getListNotAddedStaff(Map<String, String> map, Pagination pagination) {
+        return this.pfStaffService.getListNotAddedStaff(map,pagination);
     }
 
     @Override

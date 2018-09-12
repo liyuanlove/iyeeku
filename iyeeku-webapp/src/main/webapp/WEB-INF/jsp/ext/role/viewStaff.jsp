@@ -21,7 +21,7 @@
         <div property="columns">
             <div type="indexcolumn" width="30" headerAlign="center">序号</div>
             <div field="yhmc" width="100" headerAlign="center" allowSort="true">员工名称</div>
-            <div field="ssjgmc" width="240" headerAlign="center" allowSort="true">所属机构名称</div>
+            <div field="ssjgmc" width="240" headerAlign="center" allowSort="true" renderer="ssjgmcRenderer">所属机构名称</div>
             <div field="notesid" width="100" headerAlign="center" allowSort="true">NotesID</div>
         </div>
     </div>
@@ -40,6 +40,10 @@
 
     function SetData(data) {
         grid.load({jsbh:data.jsbh});
+    }
+
+    function ssjgmcRenderer(e) {
+        if(e.value == "" || e.value == null) return "暂无归属部门";
     }
 
     function onCancel(e) {

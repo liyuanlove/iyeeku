@@ -27,17 +27,19 @@
 	<select id="findAllRoles" parameterType="com.iyeeku.ext.role.vo.PFRole" resultMap="BaseResultMap">
 		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
 		from PF_ROLE WHERE 1=1
-		<if test="jsmc != null">
-			AND JSMC LIKE #{jsmc,jdbcType=VARCHAR}
-		</if>
+		<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc,jdbcType=VARCHAR}||'%'</if>
+		<if test="jslx != null and jslx != ''"> AND JSLX = #{jslx,jdbcType=CHAR}</if>
+		<if test="jszt != null and jszt != ''"> AND JSZT = #{jszt,jdbcType=CHAR}</if>
+		AND JLZT = '1'
 	</select>
 
     <select id="findAllInfosCount" parameterType="com.iyeeku.ext.role.vo.PFRole" resultType="java.lang.Integer">
         select COUNT(1)
         from PF_ROLE WHERE 1=1
-        <if test="jsmc != null">
-            AND JSMC LIKE #{jsmc,jdbcType=VARCHAR}
-        </if>
+		<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc,jdbcType=VARCHAR}||'%'</if>
+		<if test="jslx != null and jslx != ''"> AND JSLX = #{jslx,jdbcType=CHAR}</if>
+		<if test="jszt != null and jszt != ''"> AND JSZT = #{jszt,jdbcType=CHAR}</if>
+		AND JLZT = '1'
     </select>
 
 	<select id="findRoleByJsbh" parameterType="java.lang.String" resultMap="BaseResultMap">

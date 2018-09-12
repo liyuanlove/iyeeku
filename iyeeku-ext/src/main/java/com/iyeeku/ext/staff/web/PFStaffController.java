@@ -1,5 +1,6 @@
 package com.iyeeku.ext.staff.web;
 
+import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.staff.service.PFStaffService;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
 import org.slf4j.Logger;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/staff")
@@ -48,9 +49,8 @@ public class PFStaffController {
 
     @RequestMapping(value = "/findAllInfos")
     @ResponseBody
-    public List<PFStaffVO> findAllInfos(){
-
-        return this.pfStaffService.findAllStaffInfos();
+    public Map<String,Object> findAllInfos(PFStaffVO staffVO , Pagination pagination){
+        return this.pfStaffService.findAllStaffs(staffVO,pagination);
     }
 
 }

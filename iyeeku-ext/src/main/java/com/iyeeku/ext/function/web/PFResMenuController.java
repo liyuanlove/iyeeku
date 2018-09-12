@@ -116,7 +116,7 @@ public class PFResMenuController {
         return this.pfResMenuService.getNavMenuDataFromCache("navMenu");
     }
 
-    private List<Map<String,Object>> walkMenuTreeData(List<PFResMenuVO> list){
+/*    private List<Map<String,Object>> walkMenuTreeData(List<PFResMenuVO> list){
         List<Map<String,Object>> rtnList = new ArrayList<>();
         Map<String ,Object> rtnMap = null;
         for (PFResMenuVO resMenuVO : list){
@@ -136,7 +136,7 @@ public class PFResMenuController {
             }
         }
         return rtnList;
-    }
+    }*/
 
 
 

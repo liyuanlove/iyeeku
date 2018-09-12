@@ -1,5 +1,6 @@
 package com.iyeeku.ext.codeinfo.web;
 
+import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.codeinfo.service.PFCodeInfoService;
 import com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO;
 import org.slf4j.Logger;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/codeinfo")
@@ -30,9 +31,9 @@ public class PFCodeInfoController {
 
     @RequestMapping(value = "/findAllInfos" , method = RequestMethod.POST)
     @ResponseBody
-    public List<PFCodeInfoVO> findAllInfosByCodeType(String codetype){
+    public Map<String,Object> findAllInfosByCodeType(String codetype , Pagination pagination){
         this.logger.info("PFCodeInfoController findAllInfosByCodeType");
-        return this.pfCodeInfoService.findAllInfosByCodeType(codetype);
+        return this.pfCodeInfoService.findAllInfosByCodeType(codetype,null ,pagination);
     }
 
     @RequestMapping(value = "/add" , method = RequestMethod.POST)

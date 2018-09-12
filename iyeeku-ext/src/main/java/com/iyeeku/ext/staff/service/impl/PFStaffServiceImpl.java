@@ -1,6 +1,7 @@
 package com.iyeeku.ext.staff.service.impl;
 
 import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.staff.dao.PFStaffDao;
 import com.iyeeku.ext.staff.service.PFStaffService;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PFStaffServiceImpl implements PFStaffService {
@@ -19,6 +22,30 @@ public class PFStaffServiceImpl implements PFStaffService {
 
     @Autowired
     private PFStaffDao pfStaffDao;
+
+    @Override
+    public Map<String, Object> findAllStaffs(PFStaffVO staffVO, Pagination pagination) {
+        Map<String , Object> result = new HashMap<>();
+
+        List<PFStaffVO> list = this.pfStaffDao.findAllStaffs(staffVO ,
+                pagination.getPageIndex()*pagination.getPageSize() , pagination.getPageSize());
+        int count = this.pfStaffDao.findAllStaffsCount(staffVO);
+
+        result.put("data" , list);
+        result.put("total" , count);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> getListNotAddedStaff(Map<String, String> map, Pagination pagination) {
+        List<PFStaffVO> list = this.pfStaffDao.findListNotAddedStaff(map ,
+                pagination.getPageIndex() * pagination.getPageSize() , pagination.getPageSize());
+        int count = this.pfStaffDao.findListNotAddedStaffCount(map);
+        Map<String , Object> result = new HashMap<>();
+        result.put("data" , list);
+        result.put("total" , count);
+        return result;
+    }
 
     @Override
     public List<PFStaffVO> findAllStaffInfos() {

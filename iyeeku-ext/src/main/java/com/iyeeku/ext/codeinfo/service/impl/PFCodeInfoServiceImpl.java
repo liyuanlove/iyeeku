@@ -1,6 +1,7 @@
 package com.iyeeku.ext.codeinfo.service.impl;
 
 import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao;
 import com.iyeeku.ext.codeinfo.service.PFCodeInfoService;
 import com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO;
@@ -9,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PFCodeInfoServiceImpl implements PFCodeInfoService {
@@ -37,6 +40,21 @@ public class PFCodeInfoServiceImpl implements PFCodeInfoService {
     public void update(PFCodeInfoVO codeInfoVO) {
         this.logger.info("PFCodeInfoServiceImpl update");
         this.pfCodeInfoDao.update(codeInfoVO);
+    }
+
+    @Override
+    public Map<String, Object> findAllInfosByCodeType(String codetype, PFCodeInfoVO codeInfoVO, Pagination pagination) {
+        Map<String,String> param = new HashMap<>();
+        param.put("sjlx" , codetype);
+
+        List<PFCodeInfoVO> list = this.pfCodeInfoDao.findCodeInfosByCodeType(param,
+                pagination.getPageIndex() * pagination.getPageSize() , pagination.getPageSize());
+        int count = this.pfCodeInfoDao.findCodeInfoCountByCodeType(param);
+
+        Map<String , Object> result = new HashMap<>();
+        result.put("data" , list);
+        result.put("total" , count);
+        return result;
     }
 
     @Override

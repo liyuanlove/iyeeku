@@ -57,8 +57,7 @@
         <div class="mini-fit">
             <div id="datagrid_staff" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" borderStyle="border:0px" allowResize="true" multiSelect="false"
                  url="${pageContext.request.contextPath}/staff/findAllInfos" onrowclick="" onload="" allowUnselect="false" sortMode="client"
-                 allowResize="true"
-                 pageSize="10"
+                 allowResize="true" pageSize="10"
             >
                 <div property="columns">
                     <div type="checkcolumn"></div>
@@ -134,10 +133,8 @@
     }
 
     function ssjgmcRenderer(e) {
-        if(e.value == "" || e.value == null) return "暂无";
+        if(e.value == "" || e.value == null) return "暂无归属部门";
     }
-
-
 
     function showTips(Msg,state) {
         var x = "center";

@@ -31,12 +31,13 @@ public class PFCodeTypeServiceImpl implements PFCodeTypeService {
     public Map<String, Object> findAllTypes(PFCodeTypeVO codeTypeVO, Pagination pagination) {
         this.logger.info("PFCodeTypeServiceImpl ");
 
-        List<PFCodeTypeVO> data = this.pfCodeTypeDao.findAllTypes(codeTypeVO,pagination.getPageIndex(),pagination.getPageSize());
-        int total = this.pfCodeTypeDao.findAllTypesCount(codeTypeVO);
+        List<PFCodeTypeVO> list = this.pfCodeTypeDao.findAllTypes(codeTypeVO ,
+                pagination.getPageIndex() * pagination.getPageSize() , pagination.getPageSize());
+        int count = this.pfCodeTypeDao.findAllTypesCount(codeTypeVO);
 
         Map<String ,Object> result = new HashMap<>();
-        result.put("data",data);
-        result.put("total",total);
+        result.put("data", list);
+        result.put("total",count);
 
         return result;
     }

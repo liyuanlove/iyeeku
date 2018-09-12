@@ -7,12 +7,37 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PFStaffDaoImpl extends BaseDaoImpl implements PFStaffDao {
 
     private final Logger logger = LoggerFactory.getLogger(PFStaffDaoImpl.class);
+
+
+    @Override
+    public List<PFStaffVO> findAllStaffs(PFStaffVO staffVO, int offSet, int pageSize) {
+        this.logger.info("PFStaffDaoImpl findAllStaffs");
+        return this.queryAll_myBatis("com.iyeeku.ext.staff.dao.PFStaffDao.findAllStaffs" , staffVO , offSet , pageSize);
+    }
+
+    @Override
+    public int findAllStaffsCount(PFStaffVO staffVO) {
+        this.logger.info("PFStaffDaoImpl findAllStaffsCount");
+        return this.queryOne_myBatis("com.iyeeku.ext.staff.dao.PFStaffDao.findAllStaffsCount" , staffVO);
+    }
+
+    @Override
+    public List<PFStaffVO> findListNotAddedStaff(Map<String, String> map, int offSet, int pageSize) {
+        return this.queryAll_myBatis("com.iyeeku.ext.staff.dao.PFStaffDao.findListNotAddedStaff" , map , offSet , pageSize);
+    }
+
+    @Override
+    public int findListNotAddedStaffCount(Map<String, String> map) {
+        return this.queryOne_myBatis("com.iyeeku.ext.staff.dao.PFStaffDao.findListNotAddedStaffCount" , (Serializable) map);
+    }
 
     @Override
     public List<PFStaffVO> findAllStaffInfos() {

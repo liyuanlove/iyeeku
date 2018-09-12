@@ -40,8 +40,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <a class="mini-button" iconCls="icon-search" id="addBtn" onclick="">查询</a>
-                        <a class="mini-button" iconCls="icon-reload" id="resetBtn" onclick="">重置</a>
+                        <a class="mini-button" iconCls="icon-search" id="addBtn" onclick="advancedSearch()">查询</a>
+                        <a class="mini-button" iconCls="icon-reload" id="resetBtn" onclick="advancedReset()">重置</a>
                     </td>
                 </tr>
             </table>
@@ -54,11 +54,11 @@
                 <tr>
                     <td style="width:100%;">
                         <a class="mini-button" iconCls="icon-add" onclick="add()">增加</a>
-                        <a class="mini-button" iconCls="icon-add" onclick="edit()">编辑</a>
-                        <a class="mini-button" iconCls="icon-remove" onclick="remove()">删除</a>
+                        <a class="mini-button" iconCls="icon-add" id="editBtn" onclick="edit()">编辑</a>
+                        <a class="mini-button" iconCls="icon-remove" id="removeBtn" onclick="remove()">删除</a>
                         <span class="separator"></span>
                         <a class="mini-button" iconCls="icon-goto" id="viewStaffBtn" onclick="viewStaff()">查看用户</a>
-                        <a class="mini-button" iconCls="icon-addnew"id="addStaffBtn" onclick="edit()">分配用户</a>
+                        <a class="mini-button" iconCls="icon-addnew"id="addStaffBtn" onclick="addStaff()">分配用户</a>
                         <a class="mini-button" iconCls="icon-remove" id="removeStaffBtn" onclick="remove()">删除用户</a>
                     </td>
                     <td style="white-space:nowrap;">
@@ -72,10 +72,10 @@
 
         <div class="mini-fit">
             <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" allowResize="true"
-                 url="${pageContext.request.contextPath}/role/findAllRoleInfos"  idField="id" multiSelect="true" pageSize="10"
+                 url="${pageContext.request.contextPath}/role/findAllRoleInfos"  idField="id" multiSelect="false" pageSize="10"
+                 onload="controlBtnState()" onselectionchanged="onSelectionChanged"
             >
                 <div property="columns">
-                    <div type="checkcolumn"></div>
                     <div type="indexcolumn"></div>
                     <div field="jsbh" width="120" headerAlign="center" allowSort="false" visible="false">角色编号</div>
                     <div field="jsmc" width="120" headerAlign="center" allowSort="false">角色名称</div>
@@ -112,6 +112,25 @@
         }
     }
 
+
+    function controlBtnState() {
+        mini.get("editBtn").disable();
+        mini.get("removeBtn").disable();
+        mini.get("viewStaffBtn").disable();
+        mini.get("addStaffBtn").disable();
+        mini.get("removeStaffBtn").disable();
+    }
+
+    function onSelectionChanged(e) {
+        var row = grid.getSelected();
+        if(row){
+            mini.get("editBtn").enable();
+            mini.get("removeBtn").enable();
+            mini.get("viewStaffBtn").enable();
+            mini.get("addStaffBtn").enable();
+            mini.get("removeStaffBtn").enable();
+        }
+    }
 
     function add() {
         mini.open({
@@ -213,10 +232,46 @@
             mini.alert("请先选择一条记录");
         }
     }
+    
+    
+    function addStaff() {
+        var row = grid.getSelected();
+        if(row){
+            if ( row.jszt == '2'){
+                mini.alert("锁定的角色不可用分配用户!");
+                return;
+            }
+            mini.open({
+                url: "${pageContext.request.contextPath}/role/addStaff",
+                title: "用户信息", width: 650, height: 400,
+                onload: function () {
+                    var iframe = this.getIFrameEl();
+                    var data = {jsbh : row.jsbh};
+                    iframe.contentWindow.SetData(data);
+                },
+                ondestroy: null
+            });
+        }else{
+            mini.alert("请先选择一条记录");
+        }
+    }
 
     function search() {
         var key = mini.get("key").getValue();
         grid.load({ jsmc: key });
+    }
+
+    function advancedSearch() {
+        var jsmc = mini.get("jsmc").getValue();
+        var jslx = mini.get("jslx").getValue();
+        var jszt = mini.get("jszt").getValue();
+        grid.load({"jsmc":jsmc , "jslx":jslx , "jszt":jszt})
+    }
+
+    function advancedReset() {
+        var jsmc = mini.get("jsmc").setValue("");
+        var jslx = mini.get("jslx").setValue("");
+        var jszt = mini.get("jszt").setValue("");
     }
 
     function onKeyEnter(e) {

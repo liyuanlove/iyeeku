@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iyeeku.ext.rolestaff.dao.PFRoleStaffDao">
 
+    <resultMap id="BaseResultMap" type="com.iyeeku.ext.rolestaff.vo.PFRoleStaffVO" >
+        <id column="ZJ" property="zj" jdbcType="VARCHAR" />
+        <result column="YHBH" property="yhbh" jdbcType="CHAR" />
+        <result column="JSBH" property="jsbh" jdbcType="VARCHAR" />
+        <result column="JLZT" property="jlzt" jdbcType="CHAR" />
+        <result column="CJR" property="cjr" jdbcType="CHAR" />
+        <result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+        <result column="ZHXGR" property="zhxgr" jdbcType="CHAR" />
+        <result column="ZHXGSJ" property="zhxgsj" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="findRoleStaffByYhbhAndJsbh" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT ZJ, YHBH, JSBH, JLZT, CJR, CJSJ, ZHXGR, ZHXGSJ FROM PF_ROLE_STAFF
+        WHERE YHBH = #{yhbh,jdbcType=CHAR} AND JSBH = #{jsbh,jdbcType=VARCHAR} AND JLZT = '1'
+    </select>
+
+    <insert id="insert" parameterType="com.iyeeku.ext.rolestaff.vo.PFRoleStaffVO" >
+        insert into PF_ROLE_STAFF (ZJ, YHBH, JSBH,JLZT, CJR, CJSJ, ZHXGR,ZHXGSJ)
+        values (#{zj,jdbcType=VARCHAR}, #{yhbh,jdbcType=CHAR}, #{jsbh,jdbcType=VARCHAR},
+        #{jlzt,jdbcType=CHAR}, #{cjr,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP}, #{zhxgr,jdbcType=CHAR},
+        #{zhxgsj,jdbcType=TIMESTAMP})
+    </insert>
+
+
 
 	
 </mapper>

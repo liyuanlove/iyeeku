@@ -20,6 +20,22 @@
 		<result column="JLZT" property="jlzt" jdbcType="CHAR" />
 		<result column="KZZD" property="kzzd" jdbcType="VARCHAR" />
 	</resultMap>
+	
+	<select id="findCodeInfosByCodeType11" parameterType="java.util.Map" resultMap="codeInfoBaseResultMap">
+		SELECT ZJ, MBLXBH, MBTMZ, SJLX, MBTMMS, SJSXSY, GJDBM, FJDBM, BMJB, QLJ, SFKJ, SJSYGJHXX, JLZT, KZZD
+		FROM PF_CODEINFO WHERE SJLX = #{sjlx,jdbcType=VARCHAR} AND JLZT = '1'
+		<if test="mblxbh != null and mblxbh != ''"> AND MBLXBH LIKE  concat('%',#{mblxbh},'%')</if>
+		<if test="mbtmz != null and mbtmz !=''"> AND MBTMZ LIKE concat('%',#{mbtmz},'%')</if>
+		ORDER BY SJSXSY ASC
+	</select>
+
+	<select id="findCodeInfoCountByCodeType11" parameterType="java.util.Map" resultType="int">
+		SELECT count(ZJ) FROM PF_CODEINFO
+		WHERE SJLX = #{sjlx,jdbcType=VARCHAR} AND JLZT = '1'
+		<if test="mblxbh != null and mblxbh != ''"> AND MBLXBH LIKE concat('%',#{mblxbh},'%')</if>
+		<if test="mbtmz != null and mbtmz !=''"> AND MBTMZ LIKE concat('%',#{mbtmz},'%')</if>
+	</select>
+
 
 	<select id="findAllInfosByCodeType" parameterType="java.lang.String" resultMap="codeInfoBaseResultMap">
 		SELECT ZJ, MBLXBH, MBTMZ, SJLX, MBTMMS, SJSXSY, GJDBM, FJDBM, BMJB, QLJ, SFKJ, SJSYGJHXX, JLZT, KZZD

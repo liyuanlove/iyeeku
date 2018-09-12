@@ -4,7 +4,7 @@ import com.iyeeku.core.vo.BaseVO;
 
 import java.util.Date;
 
-public class PFRoleStaff extends BaseVO {
+public class PFRoleStaffVO extends BaseVO {
 
     private String zj;
 

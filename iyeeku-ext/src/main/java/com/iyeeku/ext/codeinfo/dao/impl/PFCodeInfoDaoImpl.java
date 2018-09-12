@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -58,4 +59,13 @@ public class PFCodeInfoDaoImpl extends BaseDaoImpl implements PFCodeInfoDao {
         return this.queryAll_myBatis("com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao.findCodeInfoCacheDataByCodeType",codetype);
     }
 
+    @Override
+    public List<PFCodeInfoVO> findCodeInfosByCodeType(Map<String, String> map, int offSet, int pageSize) {
+        return this.queryAll_myBatis("com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao.findCodeInfosByCodeType11" , map , offSet , pageSize);
+    }
+
+    @Override
+    public int findCodeInfoCountByCodeType(Map<String, String> map) {
+        return this.queryOne_myBatis("com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao.findCodeInfoCountByCodeType11" , (Serializable) map);
+    }
 }

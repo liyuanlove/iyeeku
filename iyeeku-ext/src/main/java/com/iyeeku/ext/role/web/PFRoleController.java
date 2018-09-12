@@ -1,10 +1,13 @@
 package com.iyeeku.ext.role.web;
 
 import com.iyeeku.core.vo.Pagination;
-import com.iyeeku.ext.role.service.IPFRoleService;
+import com.iyeeku.ext.role.service.PFRoleService;
 import com.iyeeku.ext.role.vo.PFRole;
+import com.iyeeku.ext.rolestaff.service.PFRoleStaffService;
+import com.iyeeku.ext.rolestaff.vo.PFRoleStaffVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -21,11 +25,13 @@ public class PFRoleController {
     private final Logger logger  = LoggerFactory.getLogger(PFRoleController.class);
 
     @Resource(name = "iPFRoleService")
-    private IPFRoleService iPFRoleService;
+    private PFRoleService iPFRoleService;
+    @Autowired
+    private PFRoleStaffService pfRoleStaffService;
 
     @RequestMapping(value = "list" , method = RequestMethod.GET , name = "角色管理主页面")
     public ModelAndView roleList(){
-        return new ModelAndView("ext/role/roleList");
+        return new ModelAndView("ext/role/roleMain");
     }
 
     @RequestMapping(value = "add" , method = RequestMethod.POST , name = "角色添加")
@@ -81,6 +87,34 @@ public class PFRoleController {
     @ResponseBody
     public Map<String,Object> listStaff(String jsbh,Pagination pagination){
         return this.iPFRoleService.findAllRoleStaffInfos(jsbh,pagination);
+    }
+
+    @RequestMapping(value = "listNotAddedStaff" , method = RequestMethod.POST , name = "查询未分配给角色的用户信息")
+    @ResponseBody
+    public Map<String,Object> listNotAddedStaff(String jsbh, String yhmc ,String ssjg , String bhzjg , Pagination pagination){
+        Map<String,String> param = new HashMap<>();
+        param.put("jsbh" , jsbh);
+        param.put("yhmc" , yhmc);
+        //param.put("ssjg" , ssjg);
+        //param.put("bhzjg" , bhzjg);
+        return this.iPFRoleService.getListNotAddedStaff(param,pagination);
+    }
+
+    @RequestMapping(value = "comfirmAddStaff" , method = RequestMethod.POST , name = "为用户添加角色")
+    @ResponseBody
+    public void comfirmAddStaff(String yhbhList , String jsbh){
+        this.logger.info("为用户添加角色 , 用户编号：{ " + yhbhList + " }" );
+        String[] ids = yhbhList.split(",");
+        for (String yhbh : ids){
+            if (!this.pfRoleStaffService.hasUnverifidRecord(yhbh , jsbh)){
+                PFRoleStaffVO roleStaffVO = new PFRoleStaffVO();
+                roleStaffVO.setYhbh(yhbh);
+                roleStaffVO.setJsbh(jsbh);
+                this.pfRoleStaffService.saveRoleStaff(roleStaffVO);
+            }
+        }
+
+
     }
 
 }

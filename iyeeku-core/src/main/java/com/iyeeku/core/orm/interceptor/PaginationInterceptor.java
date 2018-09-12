@@ -19,6 +19,11 @@ import java.sql.Connection;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * args = { Connection.class ,Integer.class})
+ * 注意，这里有个坑， mybatis3.4以上版本 分页插件这里需要加  Integer.class
+ *
+ */
 @Intercepts({ @Signature(type = StatementHandler.class , method = "prepare" , args = { Connection.class ,Integer.class}) })
 public class PaginationInterceptor implements Interceptor {
 
@@ -75,11 +80,16 @@ public class PaginationInterceptor implements Interceptor {
 
         }else if(dbType.equals("oracle")){
 
-	    	sbSql.append("SELECT * ");
-	    	sbSql.append("FROM (SELECT ROWNUM RN,NOPAGESQL.* ");
-	    	sbSql.append("FROM (").append(sql).append(") NOPAGESQL ");
-	    	sbSql.append("WHERE ROWNUM <= ").append(rowBounds.getLimit()).append(") ");
-	    	sbSql.append("WHERE RN >= ").append(rowBounds.getOffset());
+            sbSql.append("select * from ( select row_.*, rownum rownum_ from ( ");
+            sbSql.append(sql);
+            sbSql.append(" ) row_ ) where rownum_ > ").append(rowBounds.getOffset())
+                    .append(" and rownum_ <= ").append(rowBounds.getOffset() + rowBounds.getLimit());
+
+	    	//sbSql.append("SELECT * ");
+	    	//sbSql.append("FROM (SELECT ROWNUM RN,NOPAGESQL.* ");
+	    	//sbSql.append("FROM (").append(sql).append(") NOPAGESQL ");
+	    	//sbSql.append("WHERE ROWNUM <= ").append(rowBounds.getLimit()).append(") ");
+	    	//sbSql.append("WHERE RN >= ").append(rowBounds.getOffset());
 
 
            // sbSql.append("select * from ( select temp.*, rownum row_id from (");
@@ -97,12 +107,11 @@ public class PaginationInterceptor implements Interceptor {
 
 
         }
-        System.out.println("********************************************************************");
-        System.out.println(sbSql);
-        System.out.println("********************************************************************");
-
+        //System.out.println("********************************************************************");
+        //System.out.println(sbSql);
+        //System.out.println("********************************************************************");
         // 将执行权交给下一个拦截器
-        return invocation;
+        return invocation.proceed();
     }
 
 

@@ -16,6 +16,10 @@ public interface PFCodeInfoDao {
 
     public abstract List<PFCodeInfoVO> findAllInfosByCodeType(String codetype);
 
+    public abstract List<PFCodeInfoVO> findCodeInfosByCodeType(Map<String, String> map, int offSet , int pageSize);
+
+    public abstract int findCodeInfoCountByCodeType(Map<String, String> map);
+
     public abstract PFCodeInfoVO findCodeInfoByZj(String zj);
 
     public abstract List<DirectoryVO> findCodeInfosByCodeType(Map<String,String> param);
