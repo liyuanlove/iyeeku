@@ -2,16 +2,14 @@
 
 项目说明
     
-        该项目个人用于实战学习互联网开发一些技术，微服务设计等等.......
+        该项目个人用于实战学习互联网开发一些常用技术,搜索,缓存，微服务设计等等.......
 
 演示地址 
 
 ## 特性
 
 -   基于spring + springMVC + myBatis 开发 ，Maven管理项目，JDK1.8，数据库：ORACLE，开发工具 [Intellij idea](https://www.jetbrains.com/idea/)。
--   页面设计全仿写[开源中国](https://www.oschina.net/),（UI设计太头疼，主要用于学习互联网架构知识，全仿写页面）
--   搜索引擎使用 [ElasticSearch](http://www.elastic.co/products/elasticsearch) , 分布式服务框架使用 [Dubbo](http://dubbo.apache.org/)。
--   富文本编辑器 [ckeditor](https://github.com/ckeditor)
+
 ## 更新日志
 
 ### 1.1.0
@@ -25,15 +23,25 @@
 ### 目录结构
 
 ```bash
-├── /dist/           # 项目输出目录
-├── /iyeeku-blog/    # 博客模块
-│ ├── /src/          # 源代码
-│ │ ├── skin.less    # 全局样式
-│ │ └── vars.less    # 全局样式变量
-│ ├── /routes/       # 路由组件 
-├── package.json     # 项目信息
-├── .init.sql        # 数据脚本
-└── .pom.xml         # maven依赖配置文件
+├── /dist/            # 项目打包输出目录 (github过滤)
+├── /build/           # 项目编译过程文件输出目录 (github过滤)
+├── /iyeeku-core/     # 项目搭建核心模块代码包
+│ ├── /src/          # 代码夹
+│ │ ├── /java       # 源代码
+│ │ └── /resources  # 资源文件
+├── /iyeeku-ext/      # 项目基础功能模块代码包（用户，角色，菜单，系统配置等基础功能）
+│ ├── /src/          # 代码夹
+│ │ ├── /java       # 源代码
+│ │ └── /resources  # 资源文件
+├── /iyeeku-webapp/   # web功能模块代码包
+│ ├── /src/          # 代码夹
+│ │ ├── /java       # 源代码
+│ │ ├── /resources  # 资源文件
+│ │ ├── /webapp     # web根目录
+├── .build.xml        # Ant打包build.xml文件
+├── .init.sql         # 数据脚本
+├── .README.md        # README.md
+└── .pom.xml          # maven依赖配置文件
 ```
 
 文件命名说明
