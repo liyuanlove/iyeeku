@@ -6,6 +6,8 @@ public interface PFRoleStaffService {
 
     public abstract void saveRoleStaff(PFRoleStaffVO roleStaff);
 
+    public abstract void deleteRoleStaff(PFRoleStaffVO roleStaffVO);
+
     public abstract boolean hasUnverifidRecord(String yhbh , String jsbh);
 
 }

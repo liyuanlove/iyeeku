@@ -29,6 +29,11 @@ public class PFRoleStaffServiceImpl implements PFRoleStaffService {
     }
 
     @Override
+    public void deleteRoleStaff(PFRoleStaffVO roleStaffVO) {
+        this.pfRoleStaffDao.deleteByYhbhAndJsbh(roleStaffVO.getYhbh() , roleStaffVO.getJsbh());
+    }
+
+    @Override
     public boolean hasUnverifidRecord(String yhbh, String jsbh) {
         List<PFRoleStaffVO> list = this.pfRoleStaffDao.findRoleStaffByYhbhAndJsbh(yhbh,jsbh);
         if ( list != null && list.size() > 0 ){

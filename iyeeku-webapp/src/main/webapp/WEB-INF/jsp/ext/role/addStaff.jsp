@@ -104,8 +104,7 @@
                         type: "post",
                         data: { "yhbhList" : yhbhList , "jsbh" : jsbh } ,
                         success: function (text) {
-                            CloseWindow("cancel");
-                            showTips("角色分配成功","success");
+                            CloseWindow("ok");
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert(jqXHR.responseText);
@@ -134,19 +133,6 @@
         if (window.CloseOwnerWindow)
             return window.CloseOwnerWindow(action);
         else window.close();
-    }
-
-    function showTips(Msg,state) {
-        var x = "center";
-        var y = "top";
-        var state = state;
-        mini.showTips({
-            content: "<b>成功</b> <br/>"+Msg,
-            state: state,
-            x: x,
-            y: y,
-            timeout: 3000
-        });
     }
 
 </script>

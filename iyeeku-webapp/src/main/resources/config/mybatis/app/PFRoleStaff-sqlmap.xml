@@ -25,6 +25,10 @@
         #{zhxgsj,jdbcType=TIMESTAMP})
     </insert>
 
+    <delete id="deleteByYhbhAndJsbh" parameterType="java.util.Map">
+        DELETE FROM PF_ROLE_STAFF WHERE YHBH = #{yhbh,jdbcType=CHAR} AND JSBH = #{jsbh,jdbcType=VARCHAR} AND JLZT = '1'
+    </delete>
+
 
 
 	

@@ -81,8 +81,7 @@
 	</update>
 
 	<delete id="delete" parameterType="com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO" >
-		delete from PF_CODEINFO
-		where 1=1
+		delete from PF_CODEINFO WHERE 1=1
 		<if test="zj != null"> AND ZJ = #{zj,jdbcType=CHAR}</if>
 		<if test="sjlx != null" > AND SJLX = #{sjlx,jdbcType=VARCHAR}</if>
 	</delete>
@@ -106,5 +105,5 @@
 		WHERE t.sjlxbh = #{VALUE ,jdbcType=VARCHAR} AND t.jlzt = '1' AND i.jlzt = '1'
 		ORDER BY i.sjsxsy ASC
 	</select>
-	
+
 </mapper>

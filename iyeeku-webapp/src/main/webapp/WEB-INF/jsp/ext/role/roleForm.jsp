@@ -13,57 +13,92 @@
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
 </head>
 <body>
+
+<input class="mini-hidden" name="pageType" id="pageType" value="query">
 <div class="mini-fit">
-    <input class="mini-hidden" name="pageType" id="pageType" value="query">
     <form id="form1">
-        <input id="jlzt" name="jlzt" class="mini-hidden">
-        <input id="jsbh" name="jsbh" class="mini-hidden">
-        <table border="0" cellpadding="1" cellspacing="2" style="width:100%;table-layout:fixed;">
-        <tr>
-            <td style="width:100px;">角色名称：</td>
-            <td style="width:150px;">
-                <input id="jsmc" name="jsmc" class="mini-textbox" required="true" style="width:80%;" />
-            </td>
-            <td style="width:100px;">角色类型：</td>
-            <td style="width:150px;">
-                <input id="jslx" name="jslx" class="mini-combobox" required="true" style="width:80%;"
-                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/roleType"/>
-            </td>
-        </tr>
-        <tr>
-            <td>角色权重：</td>
-            <td>
-                <input id="jsqz" name="jsqz" class="mini-spinner" style="width:80%;" />
-            </td>
-            <td>角色状态：</td>
-            <td>
-                <input id="jszt" name="jszt" class="mini-combobox" required="true" style="width: 80%;"
-                       textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/roleState" />
-            </td>
-        </tr>
-        <tr>
-            <td >角色描述：</td>
-            <td colspan="3" >
-                <input name="jsms" class="mini-textarea" style="width: 90%;height:60px;"/>
-            </td>
-        </tr>
-        </table>
+        <div>
+            <table style="table-layout: fixed;" width="100%;">
+                <colgroup>
+                    <col width="35%">
+                    <col width="65%">
+                </colgroup>
+                <tr>
+                    <td style="padding-bottom: 5px;" colspan="2">
+                        <input name="jsbh" class="mini-hidden">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">角色名称：</td>
+                    <td align="left">
+                        <input id="jsmc" name="jsmc" class="mini-textbox" emptyText="请输入角色名称" required="true" width="140" vtype="rangeChar:1.64" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">角色类型：</td>
+                    <td align="left">
+                        <input id="jslx" name="jslx" class="mini-combobox" required="true" width="140"
+                               textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/roleType"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">角色权重：</td>
+                    <td align="left">
+                        <input id="jsqz" name="jsqz" class="mini-spinner" width="140" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">角色状态：</td>
+                    <td align="left">
+                        <input id="jszt" name="jszt" class="mini-combobox" required="true" width="140"
+                               textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/roleState" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">角色描述：</td>
+                    <td align="left">
+                        <input name="jsms" class="mini-textarea" width="140" vtype="rangeChar:0,128"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </form>
 </div>
 
-<div class="mini-toolbar" style="text-align:center;padding-top:8px;padding-bottom:8px;" borderStyle="border:0;">
-    <a class="mini-button" style="width:60px;" onclick="onOk()">确定</a>
-    <span style="display:inline-block;width:25px;"></span>
+<div class="mini-toolbar" style="text-align:center;padding-top:10px;padding-bottom:10px;" borderStyle="border-left:0;border-bottom:0;border-right:0;">
     <a class="mini-button" style="width:60px;" onclick="onCancel()">取消</a>
+    <span style="display:inline-block;width:25px;"></span>
+    <a class="mini-button" style="width:60px;" id="okBtn" onclick="onOk()" enabled="false">确定</a>
 </div>
 
 <script type="text/javascript">
     mini.parse();
 
     var form = new mini.Form("#form1");
+
+    var oldFormData;
+    if(!oldFormData){
+        oldFormData = form.getData();
+    }
+
+    $("#form1 :input.mini-textbox-input").keyup(ctrlOkBtn);
+    $("#form1 :input.mini-textbox-input").change(ctrlOkBtn);
     
     function onOk() {
         SaveData();
+    }
+    
+    function ctrlOkBtn() {
+        var oldData = mini.encode(oldFormData);
+        var formData = form.getData();
+        var name = $(this).attr("name");
+        formData[name] = $(this).val();
+        var newData = mini.encode(formData);
+        if ( oldData == newData ){
+            mini.get("okBtn").disable();
+        }else{
+            mini.get("okBtn").enable();
+        }
     }
 
     function SaveData() {
@@ -104,6 +139,7 @@
                     var o = mini.decode(text);
                     form.setData(o);
                     form.setChanged(false);
+                    oldFormData = form.getData();
                 }
             });
         }

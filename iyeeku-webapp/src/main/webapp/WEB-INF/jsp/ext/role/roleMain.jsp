@@ -59,7 +59,7 @@
                         <span class="separator"></span>
                         <a class="mini-button" iconCls="icon-goto" id="viewStaffBtn" onclick="viewStaff()">查看用户</a>
                         <a class="mini-button" iconCls="icon-addnew"id="addStaffBtn" onclick="addStaff()">分配用户</a>
-                        <a class="mini-button" iconCls="icon-remove" id="removeStaffBtn" onclick="remove()">删除用户</a>
+                        <a class="mini-button" iconCls="icon-remove" id="removeStaffBtn" onclick="removeStaff()">删除用户</a>
                     </td>
                     <td style="white-space:nowrap;">
                         <input id="key" class="mini-textbox" emptyText="请输入角色名" style="width:150px;" onenter="onKeyEnter"/>
@@ -135,7 +135,7 @@
     function add() {
         mini.open({
             url: "${pageContext.request.contextPath}/role/roleForm",
-            title: "新增角色", width: 540, height: 300,
+            title: "新增角色", width: 300, height: 300,
             onload: function () {
                 var iframe = this.getIFrameEl();
                 var data = { action: "new"};
@@ -150,25 +150,12 @@
         });
     }
 
-    function showTips(Msg,state) {
-        var x = "center";
-        var y = "top";
-        var state = state;
-        mini.showTips({
-            content: "<b>成功</b> <br/>"+Msg,
-            state: state,
-            x: x,
-            y: y,
-            timeout: 3000
-        });
-    }
-
     function edit() {
         var row = grid.getSelected();
         if (row) {
             mini.open({
                 url: "${pageContext.request.contextPath}/role/roleForm",
-                title: "编辑员工", width: 600, height: 400,
+                title: "修改角色", width: 300, height: 300,
                 onload: function () {
                     var iframe = this.getIFrameEl();
                     var data = { action: "edit", jsbh : row.jsbh};
@@ -232,8 +219,7 @@
             mini.alert("请先选择一条记录");
         }
     }
-    
-    
+
     function addStaff() {
         var row = grid.getSelected();
         if(row){
@@ -249,12 +235,40 @@
                     var data = {jsbh : row.jsbh};
                     iframe.contentWindow.SetData(data);
                 },
-                ondestroy: null
+                ondestroy: function (action) {
+                    if (action == "ok"){
+                        showTips("角色添加成功","success");
+                    }
+                }
             });
         }else{
             mini.alert("请先选择一条记录");
         }
     }
+
+
+    function removeStaff() {
+        var row = grid.getSelected();
+        if(row){
+            mini.open({
+                url: "${pageContext.request.contextPath}/role/removeStaff",
+                title: "用户信息", width: 650, height: 400,
+                onload: function () {
+                    var iframe = this.getIFrameEl();
+                    var data = {jsbh : row.jsbh};
+                    iframe.contentWindow.SetData(data);
+                },
+                ondestroy: function (action) {
+                    if(action == "ok"){
+                        showTips("角色移除成功","success");
+                    }
+                }
+            });
+        }else{
+            mini.alert("请先选择一条记录");
+        }
+    }
+
 
     function search() {
         var key = mini.get("key").getValue();
@@ -305,6 +319,19 @@
             var v = roleStates[i];
             if(v.id == e.value) return v.text;
         }
+    }
+
+    function showTips(Msg,state) {
+        var x = "center";
+        var y = "top";
+        var state = state;
+        mini.showTips({
+            content: "<b>成功</b> <br/>"+Msg,
+            state: state,
+            x: x,
+            y: y,
+            timeout: 3000
+        });
     }
 
 

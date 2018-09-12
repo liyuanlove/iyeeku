@@ -28,8 +28,6 @@
 </div>
 
 <div class="mini-toolbar" style="text-align:center;padding-top:8px;padding-bottom:8px;" borderStyle="border-left:0;border-bottom:0;border-right:0;">
-    <a class="mini-button" style="width:60px;" id="btnOk" onclick="onOk()">确定</a>
-    <span style="display:inline-block;width:25px;"></span>
     <a class="mini-button" style="width:60px;" onclick="onCancel()">取消</a>
 </div>
 </body>

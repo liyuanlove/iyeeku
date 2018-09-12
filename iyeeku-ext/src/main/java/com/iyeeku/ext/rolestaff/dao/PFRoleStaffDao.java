@@ -8,6 +8,8 @@ public interface PFRoleStaffDao {
 
     public abstract void insert(PFRoleStaffVO roleStaffVO);
 
+    public abstract void deleteByYhbhAndJsbh(String yhbh , String jsbh);
+
     public abstract List<PFRoleStaffVO> findRoleStaffByYhbhAndJsbh(String yhbh , String jsbh);
 
 

@@ -22,6 +22,14 @@ public class PFRoleStaffDaoImpl extends BaseDaoImpl implements PFRoleStaffDao {
     }
 
     @Override
+    public void deleteByYhbhAndJsbh(String yhbh, String jsbh) {
+        Map<String,String> param = new HashMap<>();
+        param.put("yhbh" , yhbh);
+        param.put("jsbh" , jsbh);
+        this.delete_myBatis("com.iyeeku.ext.rolestaff.dao.PFRoleStaffDao.deleteByYhbhAndJsbh" , param);
+    }
+
+    @Override
     public List<PFRoleStaffVO> findRoleStaffByYhbhAndJsbh(String yhbh, String jsbh) {
         Map<String,String> param = new HashMap<>();
         param.put("yhbh" , yhbh);

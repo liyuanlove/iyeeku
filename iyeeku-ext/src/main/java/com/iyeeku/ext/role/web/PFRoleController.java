@@ -113,8 +113,21 @@ public class PFRoleController {
                 this.pfRoleStaffService.saveRoleStaff(roleStaffVO);
             }
         }
-
-
     }
+
+    @RequestMapping(value = "comfirmRemoveStaff" , method = RequestMethod.POST , name = "移除用户拥有的角色")
+    @ResponseBody
+    public void comfirmRemoveStaff(String yhbhList , String jsbh){
+        String[] ids = yhbhList.split(",");
+        for (String yhbh : ids){
+            if (this.pfRoleStaffService.hasUnverifidRecord(yhbh,jsbh)){
+                PFRoleStaffVO roleStaffVO = new PFRoleStaffVO();
+                roleStaffVO.setYhbh(yhbh);
+                roleStaffVO.setJsbh(jsbh);
+                this.pfRoleStaffService.deleteRoleStaff(roleStaffVO);
+            }
+        }
+    }
+
 
 }
