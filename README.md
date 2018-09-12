@@ -2,7 +2,7 @@
 
 项目说明
     
-        该项目编写目的：用于个人实战学习互联网开发一些常用技术：搜索、缓存、微服务等,系统设计,知识存储等。。。
+        该项目编写目的：用于个人工作之余实战学习互联网开发一些常用技术：搜索、缓存、微服务等,解决方案,系统设计,知识储备等。。。
 
 演示地址 
 
@@ -10,7 +10,7 @@
 
 -   基于Spring + SpringMVC + MyBatis 开发 ，Maven管理项目，JDK1.8，数据库：ORACLE，开发工具 [Intellij idea](https://www.jetbrains.com/idea/)。
 -   分布式缓存框架 [Ehcache](http://www.ehcache.org/)和 [Redis](https://redis.io/) ，分布式服务框架使用 [Dubbo](http://dubbo.apache.org/)。
--   消息队列服务 [ActiveMQ](http://activemq.apache.org/)
+-   消息队列服务 [ActiveMQ](http://activemq.apache.org/) , 搜索 [ElasticSearch](http://www.elastic.co/products/elasticsearch)
 -   前端框架 [jQuery MiniUI](http://www.miniui.com/demo/#src=datagrid/celledit.html)
 
 ## 更新日志
