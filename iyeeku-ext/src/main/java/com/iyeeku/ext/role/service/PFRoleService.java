@@ -14,6 +14,8 @@ public interface PFRoleService {
 
     public abstract Map<String , Object> getListNotAddedStaff(Map<String,String> map , Pagination pagination);
 
+    public abstract Map<String , Object> getListNotAddedRole(String yhbh , String jsmc , Pagination pagination);
+
     public abstract PFRole findRoleByJsbh(String jsbh);
 
     public abstract void saveRole(PFRole role);

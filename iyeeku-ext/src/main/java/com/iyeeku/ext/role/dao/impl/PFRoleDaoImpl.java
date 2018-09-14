@@ -8,7 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository("iPFRoleDao")
 public class PFRoleDaoImpl extends BaseDaoImpl implements IPFRoleDao {
@@ -26,6 +29,22 @@ public class PFRoleDaoImpl extends BaseDaoImpl implements IPFRoleDao {
     public Integer findAllInfosCount(PFRole role) {
         this.logger.info("PFRoleDaoImpl findAllInfoCount");
         return this.queryOne_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findAllInfosCount",role);
+    }
+
+    @Override
+    public List<PFRole> findListNotAddedRole(String yhbh, String jsmc, int offSet, int pageSize) {
+        Map<String,String> map = new HashMap<>();
+        map.put("yhbh" , yhbh);
+        map.put("jsmc" , jsmc);
+        return this.queryAll_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findListNotAddedRole" , map , offSet , pageSize);
+    }
+
+    @Override
+    public int findListNotAddedRoleCount(String yhbh, String jsmc) {
+        Map<String,String> map = new HashMap<>();
+        map.put("yhbh" , yhbh);
+        map.put("jsmc" , jsmc);
+        return this.queryOne_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findListNotAddedRoleCount" ,(Serializable)map);
     }
 
     @Override

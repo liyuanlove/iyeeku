@@ -37,7 +37,7 @@ public class PFResUrlServiceImpl implements PFResUrlService {
     public void reloadAllUrlData(Map<String, String> initUrlData) {
         this.logger.info("开始处理url...");
         Map<String,String> processData = processInitUrlData(initUrlData);
-        //processData.forEach((k ,v ) -> System.out.println("URL：" + k + " , DESC：" + v));
+        processData.forEach((k ,v ) -> System.out.println("URL：" + k + " , DESC：" + v));
         // 从已经入库的数据中 分离出 "所有url" 和 "模块url"
         Set<String> existUrls = new HashSet<>();
         Set<String> existModuleUrls = new HashSet<>();

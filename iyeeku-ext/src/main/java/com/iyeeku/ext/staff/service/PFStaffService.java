@@ -12,6 +12,8 @@ public interface PFStaffService {
 
     public Map<String, Object> getListNotAddedStaff(Map<String, String> map, Pagination pagination);
 
+    public abstract Map<String,Object> getListNotAddedRole(String yhbh , String jsmc , Pagination pagination);
+
     public abstract List<PFStaffVO> findAllStaffInfos();
 
     public abstract PFStaffVO findStaffByYhbh(String yhbh);

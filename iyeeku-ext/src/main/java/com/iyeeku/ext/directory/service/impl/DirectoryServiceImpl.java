@@ -63,8 +63,27 @@ public class DirectoryServiceImpl implements DirectoryService {
 
     @Cacheable(value = "dictionaryCache" , key = "#str+'_'+#p0")
     public List<Map<String,String>> findInfoListByCodeType1(String codetype){
-        Map<String,String> param = new HashMap<>();
+/*        Map<String,String> param = new HashMap<>();
         param.put("codetype",codetype);
+        param.put("sjsxsyOrder","TRUE");
+        List<DirectoryVO> directoryVOS = this.pfCodeInfoDao.findCodeInfosByCodeType(param);
+
+        List<Map<String,String>> rtnList = new ArrayList<>();
+        Map<String,String> rtnMap;
+        for (DirectoryVO vo : directoryVOS){
+            rtnMap = new HashMap<>();
+            rtnMap.put("id" , vo.getId());
+            rtnMap.put("text", vo.getText());
+            rtnList.add(rtnMap);
+        }
+        return rtnList;*/
+        return null;
+    }
+
+    @Cacheable(value = "dictionaryCache" , key = "#p0")
+    public List<Map<String, String>> loadDictFromCacheByKey(String key) {
+        Map<String,String> param = new HashMap<>();
+        param.put("codetype",key);
         param.put("sjsxsyOrder","TRUE");
         List<DirectoryVO> directoryVOS = this.pfCodeInfoDao.findCodeInfosByCodeType(param);
 
@@ -78,8 +97,6 @@ public class DirectoryServiceImpl implements DirectoryService {
         }
         return rtnList;
     }
-
-
 
     /**
      * @CachePut

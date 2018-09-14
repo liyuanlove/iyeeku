@@ -17,4 +17,6 @@ public interface DirectoryService {
 
     public abstract List<Map<String,String>> findInfoListByCodeType1(String codetype);
 
+    public abstract List<Map<String,String>> loadDictFromCacheByKey(String key);
+
 }

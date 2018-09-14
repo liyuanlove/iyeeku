@@ -46,6 +46,12 @@ public class PFRoleServiceImpl implements PFRoleService {
     }
 
     @Override
+    public Map<String, Object> getListNotAddedRole(String yhbh, String jsmc, Pagination pagination) {
+        
+        return null;
+    }
+
+    @Override
     public Map<String, Object> findAllRoleStaffInfos(String jsbh, Pagination pagination) {
         Map<String,Object> result = new HashMap<>();
         List<PFStaffVO> data = this.iPFRoleDao.findListStaff(jsbh,pagination.getPageIndex(),pagination.getPageSize());

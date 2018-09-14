@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="true"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false"
          monitoring="autodetect" dynamicConfig="true">
 
     <!--
@@ -9,8 +9,7 @@
         2、rmiUrls，手动方式时提供者的地址，多个的话用|隔开
     -->
 
-    <cacheManagerPeerProviderFactory
-            class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+    <cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
             properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:40002/cachetest"
     />
 
@@ -20,8 +19,7 @@
         2、port 端口
         3、socketTimeoutMillis socket子模块的超时时间，默认是2000ms
     -->
-    <cacheManagerPeerListenerFactory
-            class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+    <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
             properties="hostName=127.0.0.1, port=40001, socketTimeoutMillis=2000"
     />
 

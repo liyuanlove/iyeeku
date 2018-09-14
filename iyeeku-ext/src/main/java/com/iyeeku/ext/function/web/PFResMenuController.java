@@ -100,6 +100,16 @@ public class PFResMenuController {
         return new ModelAndView("ext/menu/menuPathForm");
     }
 
+    @RequestMapping(value = "/menuRelationUrlForm" , method = RequestMethod.GET , name = "菜单关联URL")
+    public ModelAndView menuRelationUrlForm(){
+        return new ModelAndView("ext/menu/menuRelationUrl");
+    }
+
+    @RequestMapping(value = "/menuTree" , method = RequestMethod.GET , name = "上级菜单名称弹出菜单树")
+    public ModelAndView menuTree(){
+        return new ModelAndView("ext/menu/menuTree");
+    }
+
 
     @RequestMapping(value = "/getMenuInfoByCdbh" , method = RequestMethod.POST , name = "根据菜单编号查询菜单信息")
     @ResponseBody

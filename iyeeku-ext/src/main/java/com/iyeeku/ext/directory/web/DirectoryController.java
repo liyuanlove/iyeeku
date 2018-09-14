@@ -26,13 +26,13 @@ public class DirectoryController {
 
     @RequestMapping(value = "/loadDict/{dictId}" , method = RequestMethod.GET , name = "根据码值查找详情")
     @ResponseBody
-    public List<DirectoryVO> loadDict(@PathVariable String dictId){
+    public List<Map<String,String>> loadDict(@PathVariable String dictId){
         this.logger.info("DirectoryController loadDict");
         System.out.println("dictId ==>> " + dictId);
         if (dictId == null || "".equals(dictId)){
             return null;
         }else {
-            return this.directoryService.findInfoListByCodeType(dictId , null);
+            return this.directoryService.loadDictFromCacheByKey(dictId);
         }
     }
 
@@ -44,7 +44,7 @@ public class DirectoryController {
         if (dictId == null || "".equals(dictId)){
             return null;
         }else {
-            return DirectoryCacheUtil.loadDictFromCache(dictId);
+            return this.directoryService.loadDictFromCacheByKey(dictId);
         }
     }
 

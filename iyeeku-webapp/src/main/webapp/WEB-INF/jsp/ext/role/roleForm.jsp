@@ -37,21 +37,21 @@
                 <tr>
                     <td align="right">角色类型：</td>
                     <td align="left">
-                        <input id="jslx" name="jslx" class="mini-combobox" required="true" width="140"
-                               textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/roleType"/>
+                        <input id="jslx" name="jslx" class="mini-combobox" required="true" width="140" onvaluechanged="checkValueChanged(this);"
+                               textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict/roleType"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">角色权重：</td>
                     <td align="left">
-                        <input id="jsqz" name="jsqz" class="mini-spinner" width="140" />
+                        <input id="jsqz" name="jsqz" class="mini-spinner" width="140" onvaluechanged="checkValueChanged(this);" />
                     </td>
                 </tr>
                 <tr>
                     <td align="right">角色状态：</td>
                     <td align="left">
-                        <input id="jszt" name="jszt" class="mini-combobox" required="true" width="140"
-                               textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/roleState" />
+                        <input id="jszt" name="jszt" class="mini-combobox" required="true" width="140" onvaluechanged="checkValueChanged(this);"
+                               textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict/roleState" />
                     </td>
                 </tr>
                 <tr>
@@ -93,6 +93,26 @@
         var formData = form.getData();
         var name = $(this).attr("name");
         formData[name] = $(this).val();
+        var newData = mini.encode(formData);
+        if ( oldData == newData ){
+            mini.get("okBtn").disable();
+        }else{
+            mini.get("okBtn").enable();
+        }
+    }
+
+    function checkValueChanged(e) {
+        //如果角色类型是系统保留，角色状态一定是正常，且不能修改
+        if(mini.get("jslx").getValue() == '4'){
+            mini.get("jszt").setValue("1");
+            mini.get("jszt").setReadOnly(true);
+        }else{
+            mini.get("jszt").setReadOnly(false);
+        }
+        //控制确定按钮状态
+        var oldData = mini.encode(oldFormData);
+        var formData = form.getData();
+        formData[e.name] = e.value;
         var newData = mini.encode(formData);
         if ( oldData == newData ){
             mini.get("okBtn").disable();

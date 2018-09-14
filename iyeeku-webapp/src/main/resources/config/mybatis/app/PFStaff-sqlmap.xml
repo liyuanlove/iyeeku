@@ -65,6 +65,7 @@
     	<if test="yhdlm != null and yhdlm != ''"> AND YHDLM = #{yhdlm}</if>
 		<if test="yhmc != null and yhmc != ''"> AND YHMC = #{yhmc}</if>
 		<if test="notesid != null and notesid !=''"> AND NOTESID = #{notesid}</if>
+		<if test="zt != null and zt !=''"> AND ZT = #{zt}</if>
 		AND JLZT = '1'
 	</select>
 
@@ -73,6 +74,7 @@
 		<if test="yhdlm != null and yhdlm != ''"> AND YHDLM = #{yhdlm}</if>
 		<if test="yhmc != null and yhmc != ''"> AND YHMC = #{yhmc}</if>
 		<if test="notesid != null and notesid !=''"> AND NOTESID = #{notesid}</if>
+		<if test="zt != null and zt !=''"> AND ZT = #{zt}</if>
 		AND JLZT = '1'
 	</select>
 
@@ -107,7 +109,7 @@
 		XB, YHLX, GLYJB, RZRQ, JYCD, SDSJ, GRZJLX, SFZH, SR, DHHM, YJ, DZ, SDLX, NOTES邮箱,
 		YZBM, BGSDHZX, BGSDHIP, CZHM, BGSDZ, JTDH, ZT, JLZT, ZW, X, YWMC, YGZT, YGXS, PXH,
 		CJR, CJSJ, ZHXGR, ZHXGSJ, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
-		FROM PF_STAFF WHERE JLZT = '1' AND YHBH = #{VALUE,jdbcType=CHAR}
+		FROM PF_STAFF WHERE YHBH = #{VALUE,jdbcType=CHAR} AND JLZT = '1'
 	</select>
 
 	<insert id="save" parameterType="com.iyeeku.ext.staff.vo.PFStaffVO" >

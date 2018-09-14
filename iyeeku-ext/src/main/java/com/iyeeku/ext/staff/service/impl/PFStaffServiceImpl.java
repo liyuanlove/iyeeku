@@ -37,6 +37,12 @@ public class PFStaffServiceImpl implements PFStaffService {
     }
 
     @Override
+    public Map<String, Object> getListNotAddedRole(String yhbh, String jsmc, Pagination pagination) {
+
+        return null;
+    }
+
+    @Override
     public Map<String, Object> getListNotAddedStaff(Map<String, String> map, Pagination pagination) {
         List<PFStaffVO> list = this.pfStaffDao.findListNotAddedStaff(map ,
                 pagination.getPageIndex() * pagination.getPageSize() , pagination.getPageSize());

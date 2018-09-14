@@ -41,6 +41,12 @@ public class PFRoleController {
         this.iPFRoleService.saveRole(role);
     }
 
+    @RequestMapping(value = "commonPermissionList" , method = RequestMethod.POST , name = "查找公共权限")
+    @ResponseBody
+    public Map<String,Object> commonPermissionList(Pagination pagination){
+        return null;
+    }
+
     @RequestMapping(value = "update" , method = RequestMethod.POST , name = "角色更新")
     @ResponseBody
     public void update(PFRole role){
@@ -74,13 +80,13 @@ public class PFRoleController {
         return new ModelAndView("ext/role/roleForm");
     }
 
-    @RequestMapping(value = "viewStaff" , method = RequestMethod.GET , name = "查询用户信息")
+    @RequestMapping(value = "viewStaff" , method = RequestMethod.GET , name = "角色查询已分配用户信息页面")
     public ModelAndView viewStaff(){ return new ModelAndView("ext/role/viewStaff");}
 
-    @RequestMapping(value = "addStaff" , method = RequestMethod.GET , name = "角色添加用户")
+    @RequestMapping(value = "addStaff" , method = RequestMethod.GET , name = "角色添加用户页面")
     public ModelAndView addStaff(){ return new ModelAndView("ext/role/addStaff");}
 
-    @RequestMapping(value = "removeStaff" , method = RequestMethod.GET , name = "角色删除用户")
+    @RequestMapping(value = "removeStaff" , method = RequestMethod.GET , name = "角色删除用户页面")
     public ModelAndView removeStaff(){ return new ModelAndView("ext/role/removeStaff");}
 
     @RequestMapping(value = "listStaff" , method = RequestMethod.POST , name = "角色用户列表查询list")

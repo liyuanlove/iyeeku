@@ -9,6 +9,10 @@ public interface IPFRoleDao {
 
     public abstract List<PFRole> findAllRoles(PFRole role , int offSet , int pageSize);
 
+    public abstract List<PFRole> findListNotAddedRole(String yhbh,String jsmc,int offSet , int pageSize);
+
+    public abstract int findListNotAddedRoleCount(String yhbh , String jsmc);
+
     public abstract Integer findAllInfosCount(PFRole role);
 
     public abstract PFRole findRoleByJsbh(String jsbh);

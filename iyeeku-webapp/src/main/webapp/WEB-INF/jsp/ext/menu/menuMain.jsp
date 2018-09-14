@@ -78,7 +78,7 @@
                                                 <td align="right">菜单打开方式：</td>
                                                 <td align="left">
                                                     <input id="cddkfs" name="cddkfs" class="mini-combobox" style="width: 180px;"
-                                                           textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/menuOpenType"
+                                                           textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict/menuOpenType"
                                                            onvaluechanged="checkValueChanged(this)">
                                                 </td>
                                                 <td align="right">菜单路径：</td>
@@ -111,7 +111,7 @@
                                                 <td align="right">菜单类型：</td>
                                                 <td align="left">
                                                     <input id="cdlx" name="cdlx" class="mini-combobox" style="width: 180px;" allowInput="false" required="true"
-                                                           textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict1/menuType">
+                                                           textField="text" valueField="id"  url="${pageContext.request.contextPath}/directory/loadDict/menuType">
                                                 </td>
                                                 <td align="right">是否可见：</td>
                                                 <td align="left">

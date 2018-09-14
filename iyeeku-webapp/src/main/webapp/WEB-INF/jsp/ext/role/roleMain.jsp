@@ -27,14 +27,14 @@
                     <td>角色类型：</td>
                     <td>
                         <input name="jslx" id="jslx" class="mini-combobox" width="120px"
-                               textField="text" valueField="id"  url="/directory/loadDict1/roleType">
+                               textField="text" valueField="id"  url="/directory/loadDict/roleType">
                     </td>
                 </tr>
                 <tr>
                     <td>角色状态：</td>
                     <td>
                         <input name="jszt" id="jszt" class="mini-combobox" width="120px"
-                               textField="text" valueField="id"  url="/directory/loadDict1/roleState">
+                               textField="text" valueField="id"  url="/directory/loadDict/roleState">
                     </td>
                 </tr>
                 <tr>
@@ -303,8 +303,8 @@
     }
 
     var roleStates , roleTypes;
-    $.getJSON("/directory/loadDict1/roleState",null,function (data) {roleStates = data;});
-    $.getJSON("/directory/loadDict1/roleType",null,function (data) {roleTypes = data;});
+    $.getJSON("/directory/loadDict/roleState",null,function (data) {roleStates = data;});
+    $.getJSON("/directory/loadDict/roleType",null,function (data) {roleTypes = data;});
 
     function jslxRenderer(e) {
         for ( var i = 0 , l = roleTypes.length ; i < l ; i++){
