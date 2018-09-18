@@ -15,4 +15,10 @@
     <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager"  ref="ehCacheManagerFactory"/>
     </bean>
+
+<!--    <bean id="cacheUtil" class="com.iyeeku.core.cache.CacheUtil" init-method="init">
+        <property name="cacheManager" ref="ehCacheManager"/>
+    </bean>-->
+
+
 </beans>

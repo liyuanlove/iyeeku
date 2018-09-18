@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../../common/tag_res.jsp"%>
 <html>
 <head>
     <title>Title</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
+    <sec:csrfMetaTags/>
+    <%@ include file="../../common/jscss_res.jsp"%>
 </head>
 <body>
     <div class="mini-toolbar" style="text-align:left;height: 35px;">
@@ -118,21 +119,6 @@
 
     function ssjgmcRenderer(e) {
         if(e.value == "" || e.value == null) return "暂无归属部门";
-    }
-
-    function onCancel(e) {
-        CloseWindow("cancel");
-    }
-
-    function CloseWindow(action) {
-        if (action == "close" && form.isChanged()) {
-            if (confirm("数据被修改了，是否先保存？")) {
-                return false;
-            }
-        }
-        if (window.CloseOwnerWindow)
-            return window.CloseOwnerWindow(action);
-        else window.close();
     }
 
 </script>

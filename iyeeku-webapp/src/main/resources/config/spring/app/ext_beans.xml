@@ -4,7 +4,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="IyeekuExtUserDetailsDao" class="com.iyeeku.ext.security.dao.IyeekuExtUserDetailsDaoImpl"/>
+	<bean id="iyeekuExtUserDetailsDao" class="com.iyeeku.ext.security.dao.impl.IyeekuExtUserDetailsDaoImpl"/>
+
+	<bean id="iyeekuSecurityMetadataSourceDao" class="com.iyeeku.ext.security.dao.impl.IyeekuExtSecurityMetadataSourceDaoImpl"/>
 
 
 </beans>

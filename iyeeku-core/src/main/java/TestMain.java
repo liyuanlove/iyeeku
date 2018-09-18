@@ -1,5 +1,4 @@
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import com.iyeeku.core.utils.UUIDGenerator;
 
 public class TestMain {
 
@@ -9,19 +8,19 @@ public class TestMain {
         String date = "Thu Sep 13 2018";
 
         //SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd yyyy HH:mm:ss z" , Locale.US);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd yyyy" , Locale.US);
+/*        SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd yyyy" , Locale.US);
         try {
             dateFormat.parse(date);
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
 
 
 /*        String url = "/index";
         System.out.println(url.indexOf("/",1));*/
 
-/*        for (int i=0 ; i < 11 ; i++)
-            System.out.println(UUIDGenerator.generate(""));*/
+        for (int i=0 ; i < 11 ; i++)
+            System.out.println(UUIDGenerator.generate(""));
 
     }
 

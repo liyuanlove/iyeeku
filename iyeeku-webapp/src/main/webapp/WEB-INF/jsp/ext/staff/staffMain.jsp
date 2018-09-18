@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../../common/tag_res.jsp"%>
 <html>
 <head>
+    <sec:csrfMetaTags/>
     <title>用户信息管理主页面</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
+    <%@ include file="../../common/jscss_res.jsp"%>
 </head>
 <body>
 
@@ -412,20 +413,6 @@
     function ssjgmcRenderer(e) {
         if(e.value == "" || e.value == null) return "暂无归属部门";
     }
-
-    function showTips(Msg,state) {
-        var x = "center";
-        var y = "top";
-        var state = state;
-        mini.showTips({
-            content: "<b>成功</b> <br/>"+Msg,
-            state: state,
-            x: x,
-            y: y,
-            timeout: 3000
-        });
-    }
-
 
 </script>
 

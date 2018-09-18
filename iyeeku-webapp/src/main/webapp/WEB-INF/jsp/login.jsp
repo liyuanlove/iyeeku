@@ -14,5 +14,12 @@
 
 <h2>登陆页面</h2>
 
+<form action="/j_spring_security_check" method="get">
+    <p>j_username: <input type="text" name="j_username" /></p>
+    <p>j_password: <input type="text" name="j_password" /></p>
+    <input type="hidden" name="j_usertype" value="StaffCode"/><!-- StaffCode , NotesID -->
+    <input type="submit" value="Submit" />
+</form>
+
 </body>
 </html>

@@ -152,7 +152,7 @@ public class PFResUrlServiceImpl implements PFResUrlService {
             if((url.indexOf("{") > -1) || (url.indexOf("}") > -1)){
                this.logger.info("url like %{% or %}%");   //过滤掉类似  /xxx/xxx/{} 这种形式的 url
             }else {
-                processData.put(url + "" , entry.getValue()); //这里如果 url+".do" , 那么方法扫描出来的全是 .do 的形式
+                processData.put(url + ".do" , entry.getValue()); //这里如果 url+".do" , 那么方法扫描出来的全是 .do 的形式
             }
         }
         List<PFResMenuVO> menuVOList = this.pfResMenuDao.findAllMenu();

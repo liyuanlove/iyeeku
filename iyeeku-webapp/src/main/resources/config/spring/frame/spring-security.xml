@@ -4,6 +4,7 @@
         xmlns:p="http://www.springframework.org/schema/p"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:sec="http://www.springframework.org/schema/security"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans.xsd
           http://www.springframework.org/schema/context
@@ -13,70 +14,97 @@
 
 
     <!-- 不需要权限访问的 -->
-    <http pattern="/resource/**/*.*" security="none"/>
-    <http pattern="/common/**/*.*" security="none"/>
-    <http pattern="/frame/**/*.*" security="none"/>
-    <http pattern="/frame1/**/*.*" security="none"/>
-    <http pattern="/directory/**/*.*" security="none"/>
-    <http pattern="/WEB-INF/jsp/login.jsp" security="none"/>
-
+    <sec:http pattern="/resource/**/*.*" security="none"/>
+    <sec:http pattern="/common/**/*.*" security="none"/>
+    <sec:http pattern="/frame/**/*.*" security="none"/>
+    <sec:http pattern="/frame1/**/*.*" security="none"/>
+    <sec:http pattern="/directory/**/*" security="none"/>
+    <sec:http pattern="/favicon.ico" security="none"/>
+    <sec:http pattern="/WEB-INF/jsp/login" security="none"/>
     <!-- 登陆页面，登陆重定向页面，忘记密码页面不过滤 -->
-    <http pattern="/login/login" security="none"/>
-    <http pattern="/login/redirect" security="none"/>
+    <sec:http pattern="/login/login" security="none"/>
+    <sec:http pattern="/login/redirect" security="none"/>
 
     <!--以上部分可根据自己的需求设定那些事不需要拦截的，然后直接放行就ok了-->
 
 
-    <http auto-config="true">
+    <sec:http use-expressions="true" auto-config="true">
+        <!-- SpringSecurityiFrame'X-Frame-Options'to'deny'报错的解决方法 -->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
         <!-- 没有权限跳转页面 -->
-        <access-denied-handler error-page="/common/access"/>
-        <!-- 校验登陆可以访问 -->
-        <intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
-<!--        <form-login login-page="/login/login"
-                    login-processing-url="/login/logincheck"
-                    authentication-failure-handler-ref="failureHandler"
-                    authentication-success-handler-ref="successHandler"/>
-        <logout logout-url="/login/logout" logout-success-url="/login/loginpage"/>-->
+        <sec:access-denied-handler error-page="/common/accessDenied"/>
 
-        <!-- session 不做处理 -->
-<!--        <session-management invalid-session-url="/login/loginpage"
-                            session-fixation-protection="none"/>-->
+        <sec:form-login login-page="/login/login"
+                        authentication-failure-url="/login/login?error=true"
+                        default-target-url="/login/main"/>
+        <sec:logout invalidate-session="true" logout-success-url="/login/login"/>
 
+        <sec:session-management invalid-session-url="/login/sessionTimeout"/>
+        <sec:custom-filter ref="iyeekuLoginProcessingFilter" before="FORM_LOGIN_FILTER"/>
+        <sec:custom-filter ref="iyeekuFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
+        <sec:csrf request-matcher-ref="defaultRequiresCsrfMatches" token-repository-ref="csrfTokenReposity"/>
 
         <!-- 1、注释此过滤器，不再验证是否有访问权限(访问所有资源不再判断是否具有权限)
             2、注释此过滤器，并更改max-sessions="9999",可用一个账号登陆9999次,
             并且不再验证是否有访问权限(访问所有资源不再判断是否具有权限) -->
+    </sec:http>
+
+    <!-- csrfMatcher -->
+    <beans:bean id="defaultRequiresCsrfMatches" class="com.iyeeku.core.security.csrf.IyeekuRequiresCsrfMatches"/>
+    <beans:bean id="csrfTokenReposity" class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository"/>
 
 
+    <beans:bean id="iyeekuLoginProcessingFilter" class="com.iyeeku.core.security.IyeekuLoginProcessingFilter">
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+        <beans:property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"/>
+    </beans:bean>
 
-    </http>
+    <beans:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <beans:property name="defaultTargetUrl" value="/login/main"/>
+        <beans:property name="alwaysUseDefaultTargetUrl" value="true"/>
+    </beans:bean>
+
+    <!-- 认证管理器 -->
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider ref="iyeekuAuthenticationProvider"/>
+    </sec:authentication-manager>
+
+    <beans:bean id="iyeekuAuthenticationProvider" class="com.iyeeku.core.security.IyeekuAuthenticationProvider">
+        <beans:property name="iyeekuUserDetailsService" ref="userServiceManager"/>
+        <beans:property name="passwordEncoder" ref="passwordEncoder"/>
+        <beans:property name="hideUserNotFoundExceptions" value="false"/>
+    </beans:bean>
+
+    <!-- 一个自定义的Filter,必须包含必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性 -->
+    <beans:bean id="iyeekuFilterSecurityInterceptor" class="com.iyeeku.core.security.IyeekuFilterSecurityInterceptor">
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+        <beans:property name="accessDecisionManager" ref="accessDescisionManager"/>
+        <beans:property name="securityMetadataSource" ref="securityMetadataSource"/>
+    </beans:bean>
 
     <!-- 资源源数据定义 -->
     <beans:bean id="securityMetadataSource" class="com.iyeeku.core.security.IyeekuSecurityMetadataSource">
-
+        <beans:constructor-arg name="loginCheck" value="true"/>
+        <beans:constructor-arg name="urlCheck" value="true"/>
     </beans:bean>
     <!-- 访问决策器 -->
-    <beans:bean id="accessDescisionManager" class="com.iyeeku.core.security.IyeekuAccessDescisionManager">
+    <beans:bean id="accessDescisionManager" class="com.iyeeku.core.security.IyeekuAccessDescisionManager"/>
 
-    </beans:bean>
-    <beans:bean id="userServiceDetail" class="com.iyeeku.core.security.IyeekuUserDetailsService">
-        <beans:property name="userDetailsDao" ref="IyeekuExtUserDetailsDao"/>
-    </beans:bean>
-
-    <beans:bean id="IyeekuFilterSecurityInterceptor" class="com.iyeeku.core.security.IyeekuFilterSecurityInterceptor">
-
+    <beans:bean id="userServiceManager" class="com.iyeeku.core.security.IyeekuUserDetailsService">
+        <beans:property name="userDetailsDao" ref="iyeekuExtUserDetailsDao"/>
     </beans:bean>
 
-    <authentication-manager alias="authenticationManager" erase-credentials="false">
+
+<!--    <authentication-manager alias="authenticationManager" erase-credentials="false">
         <authentication-provider user-service-ref="userServiceDetail">
             <password-encoder ref="passwordEncoder"></password-encoder>
         </authentication-provider>
-    </authentication-manager>
-
+    </authentication-manager>-->
 
     <!-- SHA加密方式 -->
     <beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
-
 
 
 

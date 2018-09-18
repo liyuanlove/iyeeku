@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.core.security">
+
+	<resultMap id="security_result" type="java.util.HashMap">
+		<result column="YHBH" property="YHBH" javaType="string"/>
+		<result column="YHMC" property="YHMC" javaType="string"/>
+		<result column="YHDLM" property="YHDLM" javaType="string"/>
+		<result column="NOTESID" property="NOTESID" javaType="string"/>
+		<result column="ZT" property="ZT" javaType="string"/>
+		<result column="DLMM" property="DLMM" javaType="string"/>
+		<result column="ZHGQSJ" property="ZHGQSJ" javaType="java.sql.Timestamp"/>
+		<result column="MMGQSJ" property="MMGQSJ" javaType="java.sql.Timestamp"/>
+		<result column="MMYZ" property="MMYZ" javaType="string"/>
+		<result column="ZJ" property="ZJ" javaType="string"/>
+		<result column="JGMC" property="JGMC" javaType="string"/>
+		<result column="XZCXLJ" property="XZCXLJ" javaType="string"/>
+		<result column="JSBH" property="JSBH" javaType="string"/>
+		<result column="JSZT" property="JSZT" javaType="string"/>
+		<result column="RS_JLZT" property="RS_JLZT" javaType="string"/>
+		<result column="R_JLZT" property="R_JLZT" javaType="string"/>
+	</resultMap>
+	
+	<select id="findStaffRole" resultMap="security_result" parameterType="java.util.HashMap">
+		select s.yhbh , s.yhmc , s.yhdlm , s.notesid , s.zt , a.dlmm , a.zhgqsj , a.mmgqsj , a.mmyz ,
+		rs.jsbh , r.jszt , rs.jlzt RS_JLZT , r.jlzt R_JLZT
+		from PF_STAFF s left join PF_ARCUSERAUTH a ON a.yhbh = s.yhbh
+		left join PF_ROLE_STAFF rs on a.yhbh = rs.yhbh
+		left join PF_ROLE r on rs.jsbh = r.jsbh
+		where s.jlzt = '1' and a.jlzt = '1'
+		<if test="YHDLM != null"> AND s.YHDLM = #{YHDLM}</if>
+		<if test="NOTESID != null"> AND s.NOTESID = #{NOTESID}</if>
+		<if test="YHBH != null"> AND s.YHBH = #{YHBH}</if>
+		<if test="loginType != null or loginName != null"> AND 1=2</if>
+	</select>
+
+	<select id="findUrlRole" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select u.urllj,g.sqdxbh roleid from PF_RESURL u
+		left join PF_ARCGRANT g on u.urlbh = g.sqzybm
+		left join PF_ROLE r on r.jsbh = g.sqdxbh
+		where g.sqzylx = 'LJ' and g.jlzt = '1' and r.jszt = '1'
+		order by u.urlbm
+	</select>
+	
+</mapper>

@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../../common/tag_res.jsp"%>
 <html>
 <head>
+    <sec:csrfMetaTags/>
     <title>码表主页</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
+    <%@ include file="../../common/jscss_res.jsp"%>
 </head>
 <body>
 <!-- 左右布局方式 -->
@@ -312,19 +313,6 @@
         }else{
             return "否";
         }
-    }
-
-    function showTips(Msg,state) {
-        var x = "center";
-        var y = "top";
-        var state = state;
-        mini.showTips({
-            content: "<b>成功</b> <br/>"+Msg,
-            state: state,
-            x: x,
-            y: y,
-            timeout: 3000
-        });
     }
     
     function refreshDict() {

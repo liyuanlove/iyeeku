@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../../common/tag_res.jsp"%>
 <html>
 <head>
+    <sec:csrfMetaTags/>
     <title>码表条目表单</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
+    <%@ include file="../../common/jscss_res.jsp"%>
 
     <style type="text/css">
         .odd{
@@ -155,21 +156,6 @@
         }
         newData[name] = value;
         var newDataJson = mini.encode(newData);
-    }
-
-    function onCancel(e) {
-        CloseWindow("cancel");
-    }
-
-    function CloseWindow(action) {
-        if (action == "close" && form.isChanged()) {
-            if (confirm("数据被修改了，是否先保存？")) {
-                return false;
-            }
-        }
-        if (window.CloseOwnerWindow)
-            return window.CloseOwnerWindow(action);
-        else window.close();
     }
 
 </script>

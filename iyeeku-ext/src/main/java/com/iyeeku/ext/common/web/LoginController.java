@@ -14,4 +14,14 @@ public class LoginController {
         return new ModelAndView("login");
     }
 
+    @RequestMapping(value = "main" , method = RequestMethod.GET , name = "主页面")
+    public ModelAndView main(){
+        return new ModelAndView("index1");
+    }
+
+    @RequestMapping(value = "sessionTimeout" , method = RequestMethod.GET , name = "session超时页面")
+    public ModelAndView sessionTimeout(){
+        return new ModelAndView("sessionTimeout");
+    }
+
 }

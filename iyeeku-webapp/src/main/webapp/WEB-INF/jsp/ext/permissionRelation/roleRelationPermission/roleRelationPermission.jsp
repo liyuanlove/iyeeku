@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../../../common/tag_res.jsp"%>
 <html>
 <head>
+    <sec:csrfMetaTags/>
     <title>角色分配权限主页面</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/scripts/boot.js"></script>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resource/scripts/miniui/themes/pure/skin.css">
+    <%@ include file="../../../common/jscss_res.jsp"%>
 </head>
 <body>
 <!--  -->

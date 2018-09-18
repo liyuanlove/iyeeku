@@ -9,9 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/common")
 public class CommonController {
 
-    @RequestMapping(value = "access" , method = RequestMethod.GET , name = "跳转到没有访问权限页面")
+    @RequestMapping(value = "accessDenied" , method = RequestMethod.GET , name = "跳转到没有访问权限页面")
     public ModelAndView access(){
-        return new ModelAndView("access");
+        return new ModelAndView("accessDenied");
     }
 
 }
