@@ -1,6 +1,6 @@
 package com.iyeeku.core.security;
 
-import com.iyeeku.core.utils.SecurityUtil;
+import com.iyeeku.core.util.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

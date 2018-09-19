@@ -1,6 +1,7 @@
 package com.iyeeku.ext.staff.service.impl;
 
-import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.context.ContextUtil;
+import com.iyeeku.core.util.UUIDGenerator;
 import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.staff.dao.PFStaffDao;
 import com.iyeeku.ext.staff.service.PFStaffService;
@@ -69,6 +70,8 @@ public class PFStaffServiceImpl implements PFStaffService {
     public void save(PFStaffVO staffVO) {
         this.logger.info("PFStaffServiceImpl save");
         staffVO.setYhbh(UUIDGenerator.generate("").substring(0,9));
+        staffVO.setCjr(ContextUtil.getLoginUser().getUserId());
+        staffVO.setCjsj(new Date());
         staffVO.setJlzt("1");
         staffVO.setRzrq(new Date());
         this.pfStaffDao.save(staffVO);
@@ -77,6 +80,8 @@ public class PFStaffServiceImpl implements PFStaffService {
     @Override
     public void update(PFStaffVO staffVO) {
         this.logger.info("PFStaffServiceImpl update");
+        staffVO.setZhxgr(ContextUtil.getLoginUser().getUserId());
+        staffVO.setZhxgsj(new Date());
         this.pfStaffDao.update(staffVO);
     }
 

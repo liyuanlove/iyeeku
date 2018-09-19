@@ -17,4 +17,6 @@ public interface PFResMenuService {
 
     public abstract List<Map<String,Object>> getNavMenuDataFromCache(String key);
 
+    public abstract List<PFResMenuVO> findGrantedMenu(Map<String,Object> map);
+
 }

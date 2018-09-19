@@ -3,6 +3,7 @@ package com.iyeeku.ext.security.dao.impl;
 import com.iyeeku.core.orm.impl.BaseDaoImpl;
 import com.iyeeku.core.security.IyeekuUserInfo;
 import com.iyeeku.core.security.dao.IyeekuUserDetailsDao;
+import com.iyeeku.ext.common.util.IyeekuExtConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -85,8 +86,10 @@ public class IyeekuExtUserDetailsDaoImpl extends BaseDaoImpl implements IyeekuUs
                 }
             }
 
-            GrantedAuthority role_anonymous = new SimpleGrantedAuthority("R99999998");
+            // 这里授予用户“公共权限角色”
+            GrantedAuthority role_anonymous = new SimpleGrantedAuthority(IyeekuExtConstants.ROLE_ANONYMOUS_CODE);
             authorities.add(role_anonymous);
+
             for (Map record : list){
                 System.out.println(record);
                 if ( (yhbh.equals(record.get("YHBH"))) && ("1".equals(record.get("RS_JLZT"))) &&
@@ -94,7 +97,7 @@ public class IyeekuExtUserDetailsDaoImpl extends BaseDaoImpl implements IyeekuUs
                         (!StringUtils.isEmpty(record.get("JSBH"))) &&
                         ("1".equals(record.get("JSZT")))){
                     GrantedAuthority oneAuthority = new SimpleGrantedAuthority((String) record.get("JSBH"));
-                    authorities.add(oneAuthority);
+                    authorities.add(oneAuthority); //将用户所拥有的角色编号添加到 authorities 中
                 }
             }
         }

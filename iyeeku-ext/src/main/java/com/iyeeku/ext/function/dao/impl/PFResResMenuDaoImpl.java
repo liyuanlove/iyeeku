@@ -6,6 +6,7 @@ import com.iyeeku.ext.function.vo.PFResMenuVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PFResResMenuDaoImpl extends BaseDaoImpl implements PFResMenuDao {
@@ -18,6 +19,11 @@ public class PFResResMenuDaoImpl extends BaseDaoImpl implements PFResMenuDao {
     @Override
     public List<PFResMenuVO> findAll(String sjcdbh) {
         return this.queryAll_myBatis("com.iyeeku.ext.function.dao.PFResMenuDao.findAll",sjcdbh);
+    }
+
+    @Override
+    public List<PFResMenuVO> findGrantedMenu(Map map) {
+        return this.queryAll_myBatis("com.iyeeku.ext.function.dao.PFResMenuDao.findGrantedMenu" , map);
     }
 
     @Override

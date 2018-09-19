@@ -1,4 +1,4 @@
-package com.iyeeku.core.utils;
+package com.iyeeku.core.util;
 
 import javax.crypto.Cipher;
 import java.security.Key;

@@ -98,6 +98,7 @@
 
     $(function () {
 
+        var menuJson = ${menuJson};
         var menu = new Menu("#mainMenu", {
             itemclick: function (item) {
                 if (!item.children) {
@@ -105,18 +106,20 @@
                 }
             }
         });
+        menu.loadData(menuJson);
+
 
         $(".sidebar").mCustomScrollbar({ autoHideScrollbar: true });
 
         new MenuTip(menu);
 
-        $.ajax({
-            url: "${pageContext.request.contextPath}/menu/navMenu",
+/*        $.ajax({
+            url: "/menu/navMenu",
             success: function (text) {
                 var data = mini.decode(text);
                 menu.loadData(data);
             }
-        })
+        })*/
 
         //toggle
         $("#toggle, .sidebar-toggle").click(function () {

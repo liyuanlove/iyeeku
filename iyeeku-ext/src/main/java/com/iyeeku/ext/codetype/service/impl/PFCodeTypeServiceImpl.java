@@ -1,6 +1,6 @@
 package com.iyeeku.ext.codetype.service.impl;
 
-import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.util.UUIDGenerator;
 import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.codeinfo.dao.PFCodeInfoDao;
 import com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO;

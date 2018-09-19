@@ -1,4 +1,4 @@
-package com.iyeeku.core.utils;
+package com.iyeeku.core.util;
 
 import java.net.InetAddress;
 import java.security.SecureRandom;

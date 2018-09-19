@@ -1,4 +1,4 @@
-import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.util.UUIDGenerator;
 
 public class TestMain {
 

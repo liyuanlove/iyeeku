@@ -41,8 +41,7 @@ public class IyeekuLoginProcessingFilter extends AbstractAuthenticationProcessin
         IyeekuUsernamePasswordAuthenticationToken authRquest = null;
         if(loginType == null || ("form".equalsIgnoreCase(loginType))){
             this.logger.debug("本地认证");
-
-
+            
             String username = request.getParameter(getUserNameParameter());
             String password = request.getParameter(getPasswordParameter());
             String usertype = request.getParameter(getUserTypeParameter());

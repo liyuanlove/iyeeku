@@ -1,4 +1,4 @@
-package com.iyeeku.core.utils;
+package com.iyeeku.core.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

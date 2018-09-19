@@ -4,7 +4,7 @@
 
 	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
 
-	<resultMap id="BaseResultMap" type="com.iyeeku.ext.role.vo.PFRole" >
+	<resultMap id="BaseResultMap" type="com.iyeeku.ext.role.vo.PFRoleVO" >
 		<id column="JSBH" property="jsbh" jdbcType="VARCHAR" />
 		<result column="JSMC" property="jsmc" jdbcType="VARCHAR" />
 		<result column="JSLX" property="jslx" jdbcType="CHAR" />
@@ -24,7 +24,7 @@
 		<result column="KZZD6" property="kzzd6" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<select id="findAllRoles" parameterType="com.iyeeku.ext.role.vo.PFRole" resultMap="BaseResultMap">
+	<select id="findAllRoles" parameterType="com.iyeeku.ext.role.vo.PFRoleVO" resultMap="BaseResultMap">
 		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
 		from PF_ROLE WHERE 1=1
 		<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc,jdbcType=VARCHAR}||'%'</if>
@@ -33,7 +33,7 @@
 		AND JLZT = '1'
 	</select>
 
-    <select id="findAllInfosCount" parameterType="com.iyeeku.ext.role.vo.PFRole" resultType="java.lang.Integer">
+    <select id="findAllInfosCount" parameterType="com.iyeeku.ext.role.vo.PFRoleVO" resultType="java.lang.Integer">
         select COUNT(1)
         from PF_ROLE WHERE 1=1
 		<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc,jdbcType=VARCHAR}||'%'</if>
@@ -48,7 +48,7 @@
 		where JSBH = #{jsbh,jdbcType=VARCHAR} AND JLZT = '1'
 	</select>
 
-	<insert id="saveRole" parameterType="com.iyeeku.ext.role.vo.PFRole">
+	<insert id="saveRole" parameterType="com.iyeeku.ext.role.vo.PFRoleVO">
 	insert into PF_ROLE (JSBH, JSMC, JSLX,
       JSZT, JSMS, CJR, CJSJ,
       ZHXGR, ZHXGSJ, JSQZ,
@@ -63,7 +63,7 @@
       )
 	</insert>
 
-	<update id="updateRole" parameterType="com.iyeeku.ext.role.vo.PFRole">
+	<update id="updateRole" parameterType="com.iyeeku.ext.role.vo.PFRoleVO">
 		update PF_ROLE
 		<set >
 			<if test="jsmc != null" >JSMC = #{jsmc,jdbcType=VARCHAR},</if>
@@ -90,7 +90,7 @@
 		DELETE FROM PF_ROLE WHERE JSBH = #{VALUE}
 	</delete>
 
-	<resultMap id="roleModel" type="com.iyeeku.ext.role.vo.PFRole">
+	<resultMap id="roleModel" type="com.iyeeku.ext.role.vo.PFRoleVO">
 		<id column="JSBH" property="jsbh" jdbcType="VARCHAR" />
 		<result column="JSMC" property="jsmc" jdbcType="VARCHAR" />
 		<collection property="menuList" ofType="java.util.HashMap" javaType="java.util.List">

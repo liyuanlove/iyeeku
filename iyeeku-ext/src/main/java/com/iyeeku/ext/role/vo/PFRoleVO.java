@@ -6,7 +6,7 @@ import com.iyeeku.ext.function.vo.PFResMenuVO;
 import java.util.Date;
 import java.util.List;
 
-public class PFRole extends BaseVO {
+public class PFRoleVO extends BaseVO {
 
     private static final long serialVersionUID = 1L;
 

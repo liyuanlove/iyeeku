@@ -1,4 +1,4 @@
-package com.iyeeku.core.utils;
+package com.iyeeku.core.util;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

@@ -1,6 +1,7 @@
 package com.iyeeku.ext.function.service.impl;
 
-import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.util.UUIDGenerator;
+import com.iyeeku.ext.common.util.IyeekuExtConstants;
 import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.service.PFResMenuService;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
@@ -42,6 +43,24 @@ public class PFResResMenuServiceImpl implements PFResMenuService {
         }else{
             this.pfResMenuDao.update(menuVO);
         }
+    }
+
+    @Override
+    public List<PFResMenuVO> findGrantedMenu(Map<String, Object> map) {
+
+        Map oursMap = new HashMap();
+        List<String> roles = new ArrayList<>();
+        roles.add(IyeekuExtConstants.ROLE_ANONYMOUS_CODE);
+        oursMap.put("list" , roles);
+        List<PFResMenuVO> roleMenus = this.pfResMenuDao.findGrantedMenu(map);
+        List<PFResMenuVO> oursMenus = this.pfResMenuDao.findGrantedMenu(oursMap);
+
+        List<PFResMenuVO> menuLists = new ArrayList<>();
+        menuLists.addAll(roleMenus);
+        oursMenus.removeAll(roleMenus);
+        menuLists.addAll(oursMenus);
+
+        return menuLists;
     }
 
     @Cacheable(value = "appBaseCache" , key = "#p0")

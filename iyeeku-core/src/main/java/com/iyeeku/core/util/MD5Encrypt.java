@@ -1,4 +1,4 @@
-package com.iyeeku.core.utils;
+package com.iyeeku.core.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

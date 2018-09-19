@@ -115,5 +115,45 @@
         where CDBH = #{cdbh,jdbcType=CHAR}
     </update>
 
+    <!-- 获取角色拥有的菜单权限 -->
+    <select id="findRoleMenu" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO" resultMap="resMenuBaseResultMap">
+      select menu.*,resurl.urlbh cdurlbh from
+      (select * from PF_RESMENU where cdbh in
+        (select sqzybm from PF_ARCGRANT arc where jlzt = #{jlzt} AND sqzylx = 'CD' and sqdxbh = #{sqdxbh}) ) menu
+      left join PF_RESURL resurl on menu.cdurl = resurl.urllj
+      ORDER BY menu.cdsxh,menu.cdmc
+      --START WITH menu.SJCDBH = 'DEFAULT_MENUTREE_ROOT' CONNECT BY PRIOR menu.CDBH = menu.SJCDBH ORDER SIBLINGS BY menu.CDSXH ASC
+    </select>
+
+    <!-- 获取角色拥有的父节点菜单权限 -->
+    <select id="findPerParentMenu" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO" resultMap="resMenuBaseResultMap">
+      select menu.*,resurl.urlbh cdurlbh from
+      (select * from PF_RESMENU where cdbh in
+        (select sqzybm from PF_ARCGRANT arc where jlzt = #{jlzt} AND sqzylx = #{sqzylx} and sqdxbh = #{sqdxbh})) menu
+      left join PF_RESURL resurl on menu.cdurl = resurl.urllj where cdbh in (select sjcdbh from PF_RESMENU)
+    </select>
+
+    <!-- 获取角色拥有子节点菜单权限 -->
+    <select id="findPerLeafMenu" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO" resultMap="resMenuBaseResultMap">
+      select menu.*,resurl.urlbh cdurlbh from
+      (select * from PF_RESMENU where cdbh in
+        (select sqzybm from PF_ARCGRANT arc where jlzt = #{jlzt} AND sqzylx = #{sqzylx} and sqdxbh = #{sqdxbh})) menu
+      left join PF_RESURL resurl on menu.cdurl = resurl.urllj where cdbh NOT IN (select sjcdbh from PF_RESMENU)
+    </select>
+
+    <select id="findGrantedMenu" parameterType="java.util.HashMap" resultMap="resMenuBaseResultMap">
+      select distinct m.cdbh,m.cdmc,m.sjcdbh,m.cdurl,m.cdsxh,m.cdtp,m.cdsfkj,m.cdsfky,m.cddkfs
+      from PF_RESMENU m , PF_ARCGRANT g
+      where m.cdbh = g.sqzybm and g.sqzylx = 'CD' and g.jlzt = '1' and m.cdsfkj = '1'
+      and g.sqdxbh in
+      <foreach collection="list" item="id" index="index" open="(" separator="," close=")">
+          #{id}
+      </foreach>
+      <if test="pid != null"> AND pid=#{pid}</if>
+      <if test="cdlx != null and cdlx == '1'.toString()"> AND (m.CDLX IN ('0','1') OR m.CDLX IS NULL )</if>
+      <if test="cdlx != null and cdlx == '2'.toString()"> AND (m.CDLX IN ('0','2') OR m.CDLX IS NULL )</if>
+      ORDER BY m.cdsxh,m.cdmc
+    </select>
+
 
 </mapper>

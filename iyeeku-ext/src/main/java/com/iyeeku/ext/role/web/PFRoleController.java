@@ -2,7 +2,7 @@ package com.iyeeku.ext.role.web;
 
 import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.role.service.PFRoleService;
-import com.iyeeku.ext.role.vo.PFRole;
+import com.iyeeku.ext.role.vo.PFRoleVO;
 import com.iyeeku.ext.rolestaff.service.PFRoleStaffService;
 import com.iyeeku.ext.rolestaff.vo.PFRoleStaffVO;
 import org.slf4j.Logger;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,8 +23,8 @@ public class PFRoleController {
 
     private final Logger logger  = LoggerFactory.getLogger(PFRoleController.class);
 
-    @Resource(name = "iPFRoleService")
-    private PFRoleService iPFRoleService;
+    @Autowired
+    private PFRoleService pfRoleService;
     @Autowired
     private PFRoleStaffService pfRoleStaffService;
 
@@ -36,9 +35,9 @@ public class PFRoleController {
 
     @RequestMapping(value = "add" , method = RequestMethod.POST , name = "角色添加")
     @ResponseBody
-    public void add(PFRole role){
+    public void add(PFRoleVO role){
         this.logger.info("PFRoleController addRole");
-        this.iPFRoleService.saveRole(role);
+        this.pfRoleService.saveRole(role);
     }
 
     @RequestMapping(value = "commonPermissionList" , method = RequestMethod.POST , name = "查找公共权限")
@@ -49,30 +48,30 @@ public class PFRoleController {
 
     @RequestMapping(value = "update" , method = RequestMethod.POST , name = "角色更新")
     @ResponseBody
-    public void update(PFRole role){
+    public void update(PFRoleVO role){
         this.logger.info("PFRoleController update");
-        this.iPFRoleService.updateRole(role);
+        this.pfRoleService.updateRole(role);
     }
 
     @RequestMapping(value = "delete" , method = RequestMethod.POST , name = "角色删除")
     @ResponseBody
     public void delete(String jsbh){
         this.logger.info("PFRoleController delete");
-        this.iPFRoleService.deleteRole(jsbh);
+        this.pfRoleService.deleteRole(jsbh);
     }
 
     @RequestMapping(value = "getRoleByJsbh" , method = RequestMethod.POST , name = "根据JSBH查找角色信息")
     @ResponseBody
-    public PFRole detail(String jsbh){
+    public PFRoleVO detail(String jsbh){
         this.logger.info("PFRoleController detail");
-        return this.iPFRoleService.findRoleByJsbh(jsbh);
+        return this.pfRoleService.findRoleByJsbh(jsbh);
     }
 
     @RequestMapping(value = "findAllRoleInfos" , method = RequestMethod.POST)
     @ResponseBody
-    public Map<String , Object> findAllRoleInfos(PFRole role, Pagination pagination){
+    public Map<String , Object> findAllRoleInfos(PFRoleVO role, Pagination pagination){
         this.logger.info("PFRoleController findAllRoleInfos");
-        return this.iPFRoleService.findAllRoleInfos(role,pagination);
+        return this.pfRoleService.findAllRoleInfos(role,pagination);
     }
 
     @RequestMapping(value = "roleForm" , method = RequestMethod.GET , name = "跳转到角色表单")
@@ -92,7 +91,7 @@ public class PFRoleController {
     @RequestMapping(value = "listStaff" , method = RequestMethod.POST , name = "角色用户列表查询list")
     @ResponseBody
     public Map<String,Object> listStaff(String jsbh,Pagination pagination){
-        return this.iPFRoleService.findAllRoleStaffInfos(jsbh,pagination);
+        return this.pfRoleService.findAllRoleStaffInfos(jsbh,pagination);
     }
 
     @RequestMapping(value = "listNotAddedStaff" , method = RequestMethod.POST , name = "查询未分配给角色的用户信息")
@@ -103,7 +102,7 @@ public class PFRoleController {
         param.put("yhmc" , yhmc);
         //param.put("ssjg" , ssjg);
         //param.put("bhzjg" , bhzjg);
-        return this.iPFRoleService.getListNotAddedStaff(param,pagination);
+        return this.pfRoleService.getListNotAddedStaff(param,pagination);
     }
 
     @RequestMapping(value = "comfirmAddStaff" , method = RequestMethod.POST , name = "为用户添加角色")

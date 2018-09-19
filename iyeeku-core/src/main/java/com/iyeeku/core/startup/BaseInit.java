@@ -2,8 +2,8 @@ package com.iyeeku.core.startup;
 
 import com.iyeeku.core.cache.AppBaseCacheUtil;
 import com.iyeeku.core.cache.DirectoryCacheUtil;
-import com.iyeeku.core.utils.ContextUtil;
-import com.iyeeku.core.utils.PropertyMgr;
+import com.iyeeku.core.util.ContextUtil;
+import com.iyeeku.core.util.PropertyMgr;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 

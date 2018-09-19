@@ -48,6 +48,7 @@ public class IyeekuSecurityMetadataSource implements FilterInvocationSecurityMet
         Collection<ConfigAttribute> urlNeedRoles = null;
         if (this.loginCheck){
             if (ContextUtil.getLoginUser() == null){
+                this.logger.error("用户未登陆!!!");
                 throw new AccessDeniedException("Access reject");
             }
 
@@ -60,7 +61,6 @@ public class IyeekuSecurityMetadataSource implements FilterInvocationSecurityMet
             if (this.urlCheck){
                 urlNeedRoles = getNeedRoleList(url);
                 if (urlNeedRoles == null){
-
 
                 }
 
@@ -79,9 +79,6 @@ public class IyeekuSecurityMetadataSource implements FilterInvocationSecurityMet
             this.logger.info("urlNeedRoles is null");
         }
         return urlNeedRoles;
-
-        //urlNeedRoles.add()
-        //return "R99999998";
     }
 
     @Override

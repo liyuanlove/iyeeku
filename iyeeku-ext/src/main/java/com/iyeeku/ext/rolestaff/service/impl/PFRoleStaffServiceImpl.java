@@ -1,6 +1,6 @@
 package com.iyeeku.ext.rolestaff.service.impl;
 
-import com.iyeeku.core.utils.UUIDGenerator;
+import com.iyeeku.core.util.UUIDGenerator;
 import com.iyeeku.ext.rolestaff.dao.PFRoleStaffDao;
 import com.iyeeku.ext.rolestaff.service.PFRoleStaffService;
 import com.iyeeku.ext.rolestaff.vo.PFRoleStaffVO;

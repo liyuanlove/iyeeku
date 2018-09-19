@@ -26,7 +26,7 @@
 
 <div class="mini-fit">
     <input class="mini-hidden" name="pageType" id="pageType" value="query">
-    <form id="codeInfoForm" method="post" style="padding-left: 8px;">
+    <form id="form1" method="post" style="padding-left: 8px;">
         <div style="padding-left: 8px;padding-bottom: 5px;padding-right: 10px;">
             <table style="table-layout: fixed;width: 100%;">
                 <colgroup>
@@ -81,19 +81,40 @@
 </div>
 
 <div class="mini-toolbar" style="text-align:center;padding-top:8px;padding-bottom:8px;" borderStyle="border-left:0;border-bottom:0;border-right:0;">
-    <a class="mini-button" style="width:60px;" onclick="onOk()">确定</a>
-    <span style="display:inline-block;width:25px;"></span>
     <a class="mini-button" style="width:60px;" onclick="onCancel()">取消</a>
+    <span style="display:inline-block;width:25px;"></span>
+    <a class="mini-button" style="width:60px;" id="okBtn" enabled="false" onclick="onOk()">确定</a>
 </div>
 
 </body>
 <script type="text/javascript">
     mini.parse();
 
-    var form = new mini.Form("#codeInfoForm");
+    var form = new mini.Form("#form1");
+
+    var oldFormData;
+    if(!oldFormData){
+        oldFormData = form.getData();
+    }
 
     function onOk() {
         SaveData();
+    }
+
+    $("#form1 :input.mini-textbox-input").keyup(ctrlOkBtn);
+    $("#form1 :input.mini-textbox-input").change(ctrlOkBtn);
+
+    function ctrlOkBtn() {
+        var oldData = mini.encode(oldFormData);
+        var formData = form.getData();
+        var name = $(this).attr("name");
+        formData[name] = $(this).val();
+        var newData = mini.encode(formData);
+        if ( oldData == newData ){
+            mini.get("okBtn").disable();
+        }else{
+            mini.get("okBtn").enable();
+        }
     }
 
     function SaveData() {
@@ -137,9 +158,9 @@
                 cache: false,
                 success: function (text) {
                     var o = mini.decode(text);
-                    console.info(o);
                     form.setData(o);
                     form.setChanged(false);
+                    oldFormData = form.getData();
                 }
             });
         }
@@ -156,7 +177,14 @@
         }
         newData[name] = value;
         var newDataJson = mini.encode(newData);
+        var oldData = mini.encode(oldFormData);
+        if ( oldData == newDataJson ){
+            mini.get("okBtn").disable();
+        }else{
+            mini.get("okBtn").enable();
+        }
     }
+
 
 </script>
 
