@@ -117,6 +117,13 @@ public class PFResMenuController {
         return this.pfResMenuService.findMenuByCdbh(cdbh);
     }
 
+    @RequestMapping(value = "addMenuRelationUrl" , method = RequestMethod.POST , name = "")
+    @ResponseBody
+    public void addMenuRelationUrl(String cdbh , String cdxbm){
+        String[] cdxbms = cdxbm.split(",");
+        this.pfResMenuService.addMenuRelationUrl(cdbh,cdxbms);
+    }
+
     @RequestMapping(value = "/navMenu" , name = "查询导航菜单")
     @ResponseBody
     public List<Map<String,Object>> navMenu(){

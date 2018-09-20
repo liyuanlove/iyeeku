@@ -63,7 +63,6 @@
         <div id="mainTabs" class="mini-tabs main-tabs" activeIndex="0" style="height:100%;" plain="false"
              buttons="#tabsButtons" arrowPosition="side" >
             <div name="index" iconCls="fa-android" title="首页" url="/page/list">
-                MiniUI导航框架
             </div>
         </div>
         <div id="tabsButtons">

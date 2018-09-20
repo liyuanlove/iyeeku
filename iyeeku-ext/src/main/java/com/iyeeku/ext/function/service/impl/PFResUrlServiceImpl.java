@@ -1,10 +1,12 @@
 package com.iyeeku.ext.function.service.impl;
 
+import com.iyeeku.core.util.StringUtil;
 import com.iyeeku.core.util.UUIDGenerator;
 import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.dao.PFResUrlDao;
 import com.iyeeku.ext.function.service.PFResUrlService;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
+import com.iyeeku.ext.function.vo.PFResRelationVO;
 import com.iyeeku.ext.function.vo.PFResUrlVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,55 @@ public class PFResUrlServiceImpl implements PFResUrlService {
         }
         return this.pfResUrlDao.findNotMenuUrl(map);
     }
+
+    @Override
+    public List<PFResUrlVO> findMenuRelationUrl(String cdbh) {
+        PFResRelationVO relationVO = new PFResRelationVO();
+        relationVO.setZdxbm(cdbh);
+        relationVO.setCdxlx("LJ");
+        return this.pfResUrlDao.findMenuRelationUrl(relationVO);
+    }
+
+    @Override
+    public List<PFResUrlVO> findNotMenuRelationUrl(String cdbh, String cdurl, String key) {
+        Map<String,Object> paramMap = new HashMap<>();
+        paramMap.put("cdbh" , cdbh);
+        paramMap.put("gnssmk" , StringUtil.formatDbNoEscapeLeftLikeValue(StringUtil.getSSMK(cdurl)));
+        paramMap.put("key" , StringUtil.formatDbNoEscapeLikeValue(key));
+        PFResRelationVO relationVO = new PFResRelationVO();
+        relationVO.setZdxbm(cdbh);
+        relationVO.setCdxlx("LJ");
+        List<PFResUrlVO> list = this.pfResUrlDao.findMenuRelationUrl(relationVO);
+        List<PFResUrlVO> listUrl = new ArrayList<>();
+        if (list!= null && list.size() == 0){
+            paramMap.put("relationurl" , null);
+            listUrl = this.pfResUrlDao.findNotMenuRelationUrl(paramMap);
+        }else{
+            List<String> urlList = new ArrayList<>();
+            for (PFResUrlVO urlVO : list){
+                urlList.add(urlVO.getUrlbh());
+            }
+            int size = 1000;
+            int length = urlList.size() / size;
+            List<PFResUrlVO> list2 = new ArrayList<>();
+            for (int i = 0 ; i < length ; i++){
+                List<String> urlLists = urlList.subList( i * size , (i + 1) * size);
+                paramMap.put("relationurl" , urlLists);
+                list2 = this.pfResUrlDao.findNotMenuRelationUrl(paramMap);
+                listUrl.addAll(list2);
+            }
+            int syLength = urlList.size() % size;
+            if (syLength > 0){
+                List<String> urlLists = urlList.subList( length * size , urlList.size());
+                paramMap.put("relationurl" , urlLists);
+                list2 = this.pfResUrlDao.findNotMenuRelationUrl(paramMap);
+                listUrl.addAll(list2);
+            }
+        }
+        return listUrl;
+    }
+
+
 
     @Override
     public void reloadAllUrlData(Map<String, String> initUrlData) {
@@ -167,6 +218,8 @@ public class PFResUrlServiceImpl implements PFResUrlService {
         return processData;
     }
 
-
-
+    @Override
+    public List<PFResUrlVO> findMKRalationUrl(Map<String, String> map) {
+        return this.pfResUrlDao.findMKRelationUrl(map);
+    }
 }

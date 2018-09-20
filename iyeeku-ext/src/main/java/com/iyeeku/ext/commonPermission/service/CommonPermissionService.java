@@ -16,7 +16,22 @@ public interface CommonPermissionService {
 
     public abstract List<PFResMenuVO> findPerParentMenu(String sqdxbh);
 
+    /**
+     * 获取某一模块的授权信息
+     * @param map
+     * @return
+     */
+    public abstract List<PFArcGrantVO> findSSmkGrantInfo(Map<String,String> map);
+
     public abstract Boolean isExist(PFArcGrantVO arcGrantVO);
+
+    public abstract void updateMenuOrUrlRolePer(PFArcGrantVO arcGrantVO);
+
+    public abstract void addCommonPer(PFArcGrantVO arcGrantVO);
+
+    public abstract void delMenuPer(PFArcGrantVO arcGrantVO);
+
+    public abstract void delCommonPer(PFArcGrantVO arcGrantVO);
 
 
 

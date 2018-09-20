@@ -48,17 +48,11 @@ public class RoleRelationPermissionController {
     @RequestMapping(value = "addRoleMenuPer" , method = RequestMethod.POST , name = "角色授予菜单权限")
     @ResponseBody
     public void addRoleMenuPer(String jsbh , String addCdbh , String addCdurl , String delCdbh , String delCdurl , String sqzylx){
-        System.out.println("jsbh ==>> " + jsbh);
-        System.out.println("addCdbh ==>> " + addCdbh);
-        System.out.println("addCdurl ==>> " + addCdurl);
-        System.out.println("delCdbh ==>> " + delCdbh);
-        System.out.println("delCdurl ==>> " + delCdurl);
-        System.out.println("sqzylx ==>> " + sqzylx);
 
-        String[] addZybms = addCdbh.split(",");
+        String[] addSqzybms = addCdbh.split(",");
         String[] addGnssmks = addCdurl.split(",");
 
-
+        this.roleRelationPermissionService.addRoleMenuPer(jsbh , addSqzybms , addGnssmks , delCdbh , delCdurl , sqzylx);
 
 
     }

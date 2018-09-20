@@ -3,6 +3,7 @@ package com.iyeeku.ext.function.dao.impl;
 import com.iyeeku.core.orm.impl.BaseDaoImpl;
 import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
+import com.iyeeku.ext.function.vo.PFResRelationVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -39,5 +40,15 @@ public class PFResResMenuDaoImpl extends BaseDaoImpl implements PFResMenuDao {
     @Override
     public void update(PFResMenuVO menuVO) {
         this.update_myBatis("com.iyeeku.ext.function.dao.PFResMenuDao.update",menuVO);
+    }
+
+    @Override
+    public void addMenuRelationUrl(PFResRelationVO relationVO) {
+        this.save_myBatis("com.iyeeku.ext.function.dao.PFResRelationDao.addMenuRelationUrl" , relationVO);
+    }
+
+    @Override
+    public void delMenuRelationUrl(PFResRelationVO relationVO) {
+        this.delete_myBatis("com.iyeeku.ext.function.dao.PFResRelationDao.delMenuRelationUrl" , relationVO);
     }
 }

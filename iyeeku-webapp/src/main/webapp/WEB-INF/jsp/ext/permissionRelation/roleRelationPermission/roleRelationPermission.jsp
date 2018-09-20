@@ -27,6 +27,7 @@
                     <div id="role_datagrid" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" borderStyle="border-top:0px;border-bottom:0px"
                          allowMoveColumn="false" url="${pageContext.request.contextPath}/roleRelationPer/listRole"
                          onselectionchanged="onSelectionChanged" onrowclick="typeRowClick(this);" allowUnselect="false" selectOnLoad="true"
+                         showPager="false" pager="#pager1"
                     >
                         <div property="columns" allowMove="false" allowResize="false">
                             <div type="indexcolumn" width="30px">序号</div>
@@ -35,6 +36,9 @@
                             <div field="jsmc" width="120" headerAlign="center" allowSort="true">角色名称</div>
                         </div>
                     </div>
+                </div>
+                <div id="pager1" class="mini-pager" style="width:100%;" showPageSize="false" showPageInfo="false"
+                     sizeList="[5,10,20,100]">
                 </div>
             </div>
             <!-- 公共权限区 -->
@@ -65,11 +69,12 @@
                             <ul id="menuTree" class="mini-tree" style="width: 100%;height: 100%;"
                                 textField="text" idField="id" parentField="pid"
                                 dataField="treeNodes" resultAsTree="false"
-                                autoCheckParent="true" expandOnLoad="true">
+                                autoCheckParent="true" expandOnLoad="true"
+                                onnodeselect="onNodeSelect" onload="onLoad">
                             </ul>
                             <div property="footer" class="custom_footer" style="text-align: right;padding: 2px;">
-                                <a id="refreshMenu" iconCls="icon-reload" class="mini-button" onClick="">刷新缓存</a>
-                                <a id="chooseMenu" iconCls="icon-goto" class="mini-button" onClick="chooseMenu()">选择菜单</a>
+                                <a id="refreshMenu" iconCls="icon-reload" class="mini-button" onClick="refreshMenuCache()">刷新缓存</a>
+                                <a id="chooseMenu" iconCls="icon-goto" class="mini-button" enabled="false" onClick="chooseMenu()">选择菜单</a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +82,7 @@
                     <div id="urldiv" style="height: 100%;margin-top: 0px;margin-left: 302px;margin-bottom: 0px;margin-right: 0px;">
                         <div class="mini-panel" title="URL" iconCls="" style="width: 100%;height: 100%;"
                             showToolbar="false" showCloseButton="false" showFooter="true">
-                            <div id="urldatagrid" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" multiSelect="false" allowCellSelect="false"
+                            <div id="url_datagrid" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" multiSelect="false" allowCellSelect="false"
                                  url="${pageContext.request.contextPath}/menu/findNotMenuUrl" showPager="false" allowUnselect="false"
                                  onrowdblclick="" onselectionchanged=""
                             >
@@ -89,7 +94,7 @@
                                 </div>
                             </div>
                             <div property="footer" class="custom_footer" style="text-align: right;padding: 2px;">
-                                <a id="chooseUrl" iconCls="icon-goto" class="mini-button" onClick="" enabled="false">选择URL</a>
+                                <a id="chooseUrl" iconCls="icon-goto" class="mini-button" enabled="false" onClick="chooseURL()" enabled="false">选择URL</a>
                             </div>
                         </div>
                     </div>
@@ -111,10 +116,16 @@
     mini.parse();
 
     var roleGrid = mini.get("role_datagrid");
+    var urlGrid = mini.get("url_datagrid");
     roleGrid.load(); //加载角色列表
     
     function typeRowClick(e) {
         
+    }
+
+    function search() {
+        var jsmc = mini.get("jsmc").getValue();
+        roleGrid.load({jsmc:jsmc});
     }
 
     function onSelectionChanged(e) {
@@ -124,10 +135,66 @@
             jsbh = record.jsbh;
             var tree = mini.get("menuTree"); //加载角色菜单树
             tree.load("/commonPer/findRoleMenuPer?jsbh="+jsbh);
-            
+
+            //加载角色的数据权限
+
+            //加载角色的功能权限
+
+            mini.get("chooseMenu").enable();
+
+        }else{
+            mini.get("chooseMenu").disable();
+        }
+    }
+    
+    function onNodeSelect(e) {
+        var row = roleGrid.getSelected();
+        if (!row){
 
         }
+        if (row){
+            var jsbh = row.jsbh;
+            var cdbh = e.node.id;
+            var cdurl = e.node.cdurl;
+            //用户选择角色拥有的菜单节点，并选择的是 子节点
+            if(e.select && e.isLeaf){
+                urlGrid.load({cdbh:cdbh,jsbh:jsbh,gnssmk:cdurl});
+                if (e.node.cdurl == ""){
+                    mini.get("chooseUrl").disable();
+                }else{
+                    mini.get("chooseUrl").enable();
+                }
+            }else{
+                urlGrid.load({cdbh:cdbh,jsbh:jsbh,gnssmk:cdurl});
+                mini.get("chooseUrl").disable();
+            }
+        }else{
+            mini.alert("请选择一条角色信息！");
+            mini.get("chooseMenu").disable();
+            mini.get("chooseUrl").disable();
+        }
+    }
 
+    //菜单树加载的时候判断有无节点选中，没有选中节点则置为“灰色”
+    function onLoad(e) {
+        var tree = mini.get("menuTree");
+        var rootNode = tree.getRootNode().children[0];
+        if(rootNode){
+            //选中根节点
+            tree.selectNode(rootNode);
+        }else{
+            //清空urlGrid
+            urlGrid.removeRows(urlGrid.data);
+        }
+        var selectNode = tree.getSelectedNode();
+        if (selectNode && tree.isLeaf(selectNode)){
+            mini.get("chooseUrl").enable();
+        }else{
+            mini.get("chooseUrl").disable();
+        }
+        if(selectNode && selectNode.cdurl == ""){
+            mini.get("chooseUrl").disable();  //设置选择URL按钮不可用
+        }
     }
     
 
@@ -153,16 +220,55 @@
                     ondestroy: function (action) {
                         if( action == "ok") {
                             tree.load("/commonPer/findRoleMenuPer?jsbh="+jsbh);
+                            urlGrid.load();
                             showTips("菜单选择成功!!","success");
                         }
                     }
                 });
-
             }
         }else{
             mini.alert("请先选中一条角色数据");
         }
+    }
+    
+    function chooseURL() {
+        var row = roleGrid.getSelected(); //获取角色列表选中行对象
+        if(row){
+            var jszt = row.jszt;
+            if (jszt == "2"){
+                mini.alert("角色状态为无效，不可用分配URL权限");
+            }else{
+                var jsbh = row.jsbh;
+                var tree = mini.get("menuTree");
+                var treenode = tree.getSelectedNode();
+                var cdurl = treenode.cdurl;
+                var cdbh = treenode.id;
 
+                var url = "/roleRelationPer/roleAssignUrl";
+                mini.open({
+                    url: url,
+                    title: "URL选择", width: 650, height: 450,
+                    onload: function () {
+                        var iframe = this.getIFrameEl();
+                        var data = { action: "chooseURLList" , jsbh:jsbh , cdurl:cdurl , cdbh:cdbh };
+                        iframe.contentWindow.SetData(data);
+                    },
+                    ondestroy: function (action) {
+                        if( action == "ok") {
+
+                        }
+                    }
+                });
+            }
+        }else{
+            mini.alert("请先选中一条角色数据");
+        }
+    }
+    
+    function refreshMenuCache() {
+        var ajaxConf = new IyeekuAjaxConf();
+        ajaxConf.setIsShowSuccMsg(false);
+        $J.postByAjax({jsmc:"超级管理员"} , "/roleRelationPer/listRole" , ajaxConf);
     }
 
 

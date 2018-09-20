@@ -138,19 +138,19 @@
                                                 <table style="width: 80%;height: 100%;">
                                                     <tr>
                                                         <td>
-                                                            <a class="mini-button" id="relationUrl" iconCls="" onclick="">关联URL</a>
+                                                            <a class="mini-button" id="relationUrl" iconCls="" onclick="relationUrl()">关联URL</a>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="height: 210px;width: 100%;">
                                                             <div id="datagrid1" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" allowResize="true"
-                                                                 url="${pageContext.request.contextPath}/codetype/findAllTypes" allowUnselect="false" sortMode="client"
+                                                                 url="${pageContext.request.contextPath}/url/listMenuRelationUrl" allowUnselect="false" sortMode="client"
                                                             >
                                                                 <div property="columns">
                                                                     <div type="indexcolumn">序号</div>
                                                                     <div field="urlbh" width="120" headerAlign="center" allowSort="false" visible="false">URL编号</div>
                                                                     <div field="urllj" width="120" headerAlign="left" allowSort="true">URL路径</div>
-                                                                    <div field="url描述" width="120" headerAlign="left" allowSort="true">URL描述</div>
+                                                                    <div field="urlms" width="120" headerAlign="left" allowSort="true">URL描述</div>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -214,7 +214,7 @@
         }
 
         var ralationgrid = mini.get("datagrid1");
-        //ralationgrid.load({cdbh:node.id});
+        ralationgrid.load({cdbh:node.id});
         if(node.id == "DEFAULT_MENUTREE_ROOT"){
             setReadOnly();
         }
@@ -420,6 +420,26 @@
             if(c.setIsValid) c.setIsValid(true);  //去除错误提示
             if(c.addCls) c.addCls("asLable");  //增加 asLable 样式外观
         }
+    }
+    
+    function relationUrl() {
+        var node = tree.getSelectedNode();
+        var urlStr = "/menu/menuRelationUrlForm";
+        mini.open({
+            url: urlStr,
+            title: "关联URL选择", width: 900, height: 510,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { action: "menuRelationUrl" , cdbh:node.id , cdurl:node.cdurl };
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+                if( action == "ok") {
+                    var urlgrid = mini.get("datagrid1");
+                    urlgrid.load({cdbh:node.id});
+                }
+            }
+        });
     }
     
     function refreshUrl() {

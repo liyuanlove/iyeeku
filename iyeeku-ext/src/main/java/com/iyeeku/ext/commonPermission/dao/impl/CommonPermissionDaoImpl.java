@@ -7,6 +7,7 @@ import com.iyeeku.ext.grant.vo.PFArcGrantVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CommonPermissionDaoImpl extends BaseDaoImpl implements CommonPermissionDao {
@@ -27,13 +28,28 @@ public class CommonPermissionDaoImpl extends BaseDaoImpl implements CommonPermis
     }
 
     @Override
+    public List<PFArcGrantVO> findSSmkGrantInfo(Map<String, String> map) {
+        return this.queryAll_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.findSSmkGrantInfo" ,map);
+    }
+
+    @Override
     public void updateMenuOrUrlRolePer(PFArcGrantVO arcGrantVO) {
-        this.update_myBatis("" , arcGrantVO);
+        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateMenuOrUrlRolePer" , arcGrantVO);
     }
 
     @Override
     public void addCommonPer(PFArcGrantVO arcGrantVO) {
-        this.save_myBatis("" , arcGrantVO);
+        this.save_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.saveGrant" , arcGrantVO);
+    }
+
+    @Override
+    public void delMenuPer(PFArcGrantVO arcGrantVO) {
+        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateGrant" ,arcGrantVO);
+    }
+
+    @Override
+    public void delCommonPer(PFArcGrantVO arcGrantVO) {
+        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateMenuPer" , arcGrantVO);
     }
 
 }

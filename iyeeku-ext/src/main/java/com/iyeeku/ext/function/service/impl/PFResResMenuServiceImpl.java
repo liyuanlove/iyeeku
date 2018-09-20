@@ -1,24 +1,27 @@
 package com.iyeeku.ext.function.service.impl;
 
+import com.iyeeku.core.context.ContextUtil;
 import com.iyeeku.core.util.UUIDGenerator;
 import com.iyeeku.ext.common.util.IyeekuExtConstants;
 import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.service.PFResMenuService;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
+import com.iyeeku.ext.function.vo.PFResRelationVO;
+import com.iyeeku.ext.grant.dao.PFArcGrantDao;
+import com.iyeeku.ext.grant.vo.PFArcGrantVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PFResResMenuServiceImpl implements PFResMenuService {
 
     @Autowired
     private PFResMenuDao pfResMenuDao;
+    @Autowired
+    private PFArcGrantDao pfArcGrantDao;
 
     @Override
     public List<PFResMenuVO> findAllMenu() {
@@ -44,6 +47,60 @@ public class PFResResMenuServiceImpl implements PFResMenuService {
             this.pfResMenuDao.update(menuVO);
         }
     }
+
+    @Override
+    public void addMenuRelationUrl(String cdbh, String[] cdxbms) {
+        PFResRelationVO relationVO = new PFResRelationVO();
+        relationVO.setZdxbm(cdbh);
+        relationVO.setZdxlx("CD");
+        this.pfResMenuDao.delMenuRelationUrl(relationVO);
+        for (String cdxbm : cdxbms){
+            relationVO.setCdxbm(cdxbm);
+            relationVO.setCdyzygxzj(UUIDGenerator.generate(""));
+            relationVO.setCdxlx("LJ");
+
+            this.pfResMenuDao.addMenuRelationUrl(relationVO);
+            addMenuArcGrantUrl(cdbh , cdxbm);
+        }
+    }
+
+    private void addMenuArcGrantUrl(String cdbh , String cdxbm){
+        PFArcGrantVO dxbhVo = new PFArcGrantVO();
+        dxbhVo.setSqdxbh(cdbh);
+        dxbhVo.setJlzt("1");
+
+        PFArcGrantVO zybmVo = new PFArcGrantVO();
+        zybmVo.setSqzybm(cdxbm);
+
+        List<PFArcGrantVO> dxbhVoList = this.pfArcGrantDao.findGrantByZdxbm(dxbhVo);
+        List<PFArcGrantVO> zybmVoList = this.pfArcGrantDao.findGrantByZdxbm(zybmVo);
+
+        for (PFArcGrantVO dxvo : dxbhVoList){
+            boolean isArcGant = false;
+
+            for (PFArcGrantVO zyvo : zybmVoList){
+                if (dxvo.getSqdxbh().equals(zyvo.getSqdxbh())){
+                    if (zyvo.getJlzt().equals("0")){
+                        zyvo.setZhxgr(ContextUtil.getLoginUser().getUserId());
+                        zyvo.setZhxgsj(new Date());
+                        this.pfArcGrantDao.updateGrant(zyvo);
+                    }
+                    isArcGant = true;
+                }
+            }
+
+            if (!isArcGant){
+                dxvo.setSqbzj(UUIDGenerator.generate(""));
+                dxvo.setSqzybm(cdxbm);
+                dxvo.setSqzylx("LJ");
+                dxvo.setCjr(ContextUtil.getLoginUser().getUserId());
+                dxvo.setCjsj(new Date());
+                this.pfArcGrantDao.saveGrant(dxvo);
+            }
+        }
+
+    }
+
 
     @Override
     public List<PFResMenuVO> findGrantedMenu(Map<String, Object> map) {

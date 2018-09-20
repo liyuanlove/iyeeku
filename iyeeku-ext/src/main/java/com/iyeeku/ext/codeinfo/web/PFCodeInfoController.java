@@ -23,34 +23,34 @@ public class PFCodeInfoController {
     @Autowired
     private PFCodeInfoService pfCodeInfoService;
 
-    @RequestMapping(value = "/form1")
+    @RequestMapping(value = "/form1" , method = RequestMethod.GET , name = "码值条目编辑表单")
     public ModelAndView form1(){
         this.logger.info("PFCodeInfoController form1");
         return new ModelAndView("ext/codeinfo/codeInfoForm");
     }
 
-    @RequestMapping(value = "/findAllInfos" , method = RequestMethod.POST)
+    @RequestMapping(value = "/findAllInfos" , method = RequestMethod.POST , name = "码值条目列表查询")
     @ResponseBody
     public Map<String,Object> findAllInfosByCodeType(String codetype , Pagination pagination){
         this.logger.info("PFCodeInfoController findAllInfosByCodeType");
         return this.pfCodeInfoService.findAllInfosByCodeType(codetype,null ,pagination);
     }
 
-    @RequestMapping(value = "/add" , method = RequestMethod.POST)
+    @RequestMapping(value = "/add" , method = RequestMethod.POST , name = "码值条目新增")
     @ResponseBody
     public void add(PFCodeInfoVO codeInfoVO){
         this.logger.info("PFCodeInfoController add");
         this.pfCodeInfoService.save(codeInfoVO);
     }
 
-    @RequestMapping(value = "/update" , method = RequestMethod.POST)
+    @RequestMapping(value = "/update" , method = RequestMethod.POST , name = "码值条目修改")
     @ResponseBody
     public void update(PFCodeInfoVO codeInfoVO){
         this.logger.info("PFCodeInfoController update");
         this.pfCodeInfoService.update(codeInfoVO);
     }
 
-    @RequestMapping(value = "/delete" , method = RequestMethod.POST)
+    @RequestMapping(value = "/delete" , method = RequestMethod.POST , name = "码值条目删除")
     @ResponseBody
     public void delete(PFCodeInfoVO codeInfoVO){
         this.logger.info("PFCodeInfoController delete");

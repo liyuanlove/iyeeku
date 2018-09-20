@@ -53,7 +53,7 @@
     <div id="mainTabs" class="mini-tabs" activeIndex="0" style="height:100%;" plain="false"
          buttons="#tabsButtons" arrowPosition="side">
         <div name="index" iconCls="fa-android" title="控制台">
-            MiniUI
+
         </div>
     </div>
     <div id="tabsButtons">

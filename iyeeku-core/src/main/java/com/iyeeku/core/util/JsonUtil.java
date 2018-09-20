@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
 
 public class JsonUtil {
 
@@ -36,6 +37,10 @@ public class JsonUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void main(String[] args){
+        JsonUtil.json2Bean("", HashMap.class);
     }
 
 }

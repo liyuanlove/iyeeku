@@ -132,7 +132,6 @@
         var data = form.getData();      //获取表单多个控件的数据
         $.ajax({
             url: url,
-            type: "post",
             data: data ,
             success: function (text) {
                 CloseWindow("ok");
@@ -172,7 +171,6 @@
         if (data.action == "edit") {
             $.ajax({
                 url: "${pageContext.request.contextPath}/codetype/getCodeTypeByZj?zj="+data.id,
-                cache: false,
                 success: function (text) {
                     var o = mini.decode(text);
                     form.setData(o);

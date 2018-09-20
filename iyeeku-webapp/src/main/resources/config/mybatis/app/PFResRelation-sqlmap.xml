@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.function.dao.PFResRelationDao">
+	
+	<insert id="addMenuRelationUrl" parameterType="com.iyeeku.ext.function.vo.PFResRelationVO">
+		insert into PF_RESRELATION (CDYZYGXZJ, ZDXBM, ZDXLX, CDXBM, CDXLX)
+    	values (#{cdyzygxzj,jdbcType=CHAR}, #{zdxbm,jdbcType=VARCHAR}, #{zdxlx,jdbcType=VARCHAR},
+      	#{cdxbm,jdbcType=VARCHAR}, #{cdxlx,jdbcType=VARCHAR})
+	</insert>
+	
+	<delete id="delMenuRelationUrl" parameterType="com.iyeeku.ext.function.vo.PFResRelationVO">
+		DELETE FROM PF_RESRELATION WHERE ZDXBM = #{zdxbm,jdbcType=VARCHAR} AND ZDXLX = #{zdxlx,jdbcType=VARCHAR}
+	</delete>
+	
+</mapper>

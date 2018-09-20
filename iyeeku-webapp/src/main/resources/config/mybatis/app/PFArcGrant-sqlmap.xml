@@ -1,5 +1,111 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="aa">
+<mapper namespace="com.iyeeku.ext.grant.dao.PFArcGrantDao">
+
+    <resultMap id="BaseResultMap" type="com.iyeeku.ext.grant.vo.PFArcGrantVO" >
+        <id column="SQBZJ" property="sqbzj" jdbcType="CHAR" />
+        <result column="SQDXBH" property="sqdxbh" jdbcType="VARCHAR" />
+        <result column="SQZYBM" property="sqzybm" jdbcType="VARCHAR" />
+        <result column="SQZYLX" property="sqzylx" jdbcType="CHAR" />
+        <result column="QXYXDTDBH" property="qxyxdtdbh" jdbcType="VARCHAR" />
+        <result column="QXSXSJ" property="qxsxsj" jdbcType="TIMESTAMP" />
+        <result column="QXGQSJ" property="qxgqsj" jdbcType="TIMESTAMP" />
+        <result column="CJR" property="cjr" jdbcType="CHAR" />
+        <result column="CJSJ" property="cjsj" jdbcType="TIMESTAMP" />
+        <result column="ZHXGR" property="zhxgr" jdbcType="CHAR" />
+        <result column="ZHXGSJ" property="zhxgsj" jdbcType="TIMESTAMP" />
+        <result column="JLZT" property="jlzt" jdbcType="CHAR" />
+    </resultMap>
+
+    <select id="findGrantBySqdxbh" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO" resultMap="BaseResultMap">
+        SELECT SQBZJ, SQDXBH, SQZYBM, SQZYLX, QXYXDTDBH, QXSXSJ, QXGQSJ, CJR, CJSJ, ZHXGR, ZHXGSJ, JLZT
+        FROM PF_ARCGRANT WHERE SQDXBH = #{sqdxbh,jdbcType=VARCHAR} AND SQZYBM = #{sqzybm,jdbcType=VARCHAR}
+        AND SQZYLX = #{sqzylx,jdbcType=CHAR} AND JLZT = '0'
+    </select>
+
+    <update id="updateMenuOrUrlRolePer" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+        UPDATE PF_ARCGRANT SET JLZT = '1' WHERE SQDXBH = #{sqdxbh,jdbcType=VARCHAR} AND SQZYBM = #{sqzybm,jdbcType=VARCHAR}
+        AND SQZYLX = #{sqzylx,jdbcType=CHAR} AND JLZT = '0'
+    </update>
+
+<!--    <insert id="saveGrant" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+      insert into PF_ARCGRANT (SQBZJ, SQDXBH, SQZYBM, SQZYLX, QXYXDTDBH, QXSXSJ,
+      QXGQSJ, CJR, CJSJ, ZHXGR, ZHXGSJ, JLZT)
+      values (#{sqbzj,jdbcType=CHAR}, #{sqdxbh,jdbcType=VARCHAR}, #{sqzybm,jdbcType=VARCHAR},
+      #{sqzylx,jdbcType=CHAR}, #{qxyxdtdbh,jdbcType=VARCHAR}, #{qxsxsj,jdbcType=TIMESTAMP},
+      #{qxgqsj,jdbcType=TIMESTAMP}, #{cjr,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP},
+      #{zhxgr,jdbcType=CHAR}, #{zhxgsj,jdbcType=TIMESTAMP}, #{jlzt,jdbcType=CHAR})
+    </insert>
+
+    <update id="updateGrant" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+        UPDATE PF_ARCGRANT SET JLZT = '0' WHERE SQDXBH = #{sqdxbh,jdbcType=VARCHAR} AND SQZYBM = #{sqzybm,jdbcType=VARCHAR}
+        AND SQZYLX = #{sqzylx,jdbcType=CHAR} AND JLZT = '1'
+    </update>-->
+
+    <!-- 更新菜单权限 -->
+    <update id="updateMenuPer" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+        UPDATE PF_ARCGRANT SET JLZT = '0'
+        WHERE SQDXBH = #{sqdxbh,jdbcType=VARCHAR} AND SQZYBM = #{sqzybm,jdbcType=VARCHAR} AND JLZT = '1'
+    </update>
+
+    <!-- 获取某一模块的授权信息 -->
+    <select id="findSSmkGrantInfo" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT * FROM PF_ARCGRANT
+        WHERE sqdxbh = #{sqdxbh}
+        AND jlzt = '1'
+        <if test="gnssmk != null and gnssmk != 'other'">
+            AND sqzybm in
+            (select urlbh from PF_RESURL
+                WHERE URLLJ like #{gnssmk}
+                UNION
+                  select cdxbm as urlbh FROM PF_RESRELATION
+                  WHERE ZDXBM = (select cdbh from PF_RESMENU WHERE cdurl = #{cdurl})
+                  AND ZDXLX = 'CD'
+                  AND CDXLX = 'LJ'
+            )
+        </if>
+        <if test="gnssmk != null and gnssmk == 'other'">
+            AND sqzybm IN
+            <foreach collection="sqzybms" item="id" index="index" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="findGrantByZdxbm" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO" resultMap="BaseResultMap">
+        SELECT * FROM PF_ARCGRANT WHERE 1=1
+        <if test="sqdxbh != null and sqdxbh != ''"> AND SQDXBH = #{sqdxbh,jdbcType=VARCHAR}</if>
+        <if test="sqzybm != null and sqzybm != ''"> AND SQZYBM = #{sqzybm,jdbcType=VARCHAR}</if>
+        <if test="sqzylx != null and sqzylx != ''"> AND SQZYLX = #{sqzylx,jdbcType=CHAR}</if>
+        <if test="jlzt != null and jlzt != ''"> AND JLZT = #{jlzt,jdbcType=CHAR}</if>
+    </select>
+
+
+    <insert id="saveGrant" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+      insert into PF_ARCGRANT (SQBZJ, SQDXBH, SQZYBM,SQZYLX, QXYXDTDBH, QXSXSJ,QXGQSJ, CJR, CJSJ,ZHXGR, ZHXGSJ, JLZT)
+      values (#{sqbzj,jdbcType=CHAR}, #{sqdxbh,jdbcType=VARCHAR}, #{sqzybm,jdbcType=VARCHAR},
+      #{sqzylx,jdbcType=CHAR}, #{qxyxdtdbh,jdbcType=VARCHAR}, #{qxsxsj,jdbcType=TIMESTAMP},
+      #{qxgqsj,jdbcType=TIMESTAMP}, #{cjr,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP},
+      #{zhxgr,jdbcType=CHAR}, #{zhxgsj,jdbcType=TIMESTAMP}, #{jlzt,jdbcType=CHAR})
+    </insert>
+
+    <update id="updateGrant" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+        update PF_ARCGRANT
+        <set>
+            <if test="sqdxbh != null">SQDXBH = #{sqdxbh,jdbcType=VARCHAR},</if>
+            <if test="sqzybm != null">SQZYBM = #{sqzybm,jdbcType=VARCHAR},</if>
+            <if test="sqzylx != null">SQZYLX = #{sqzylx,jdbcType=CHAR},</if>
+            <if test="qxyxdtdbh != null">QXYXDTDBH = #{qxyxdtdbh,jdbcType=VARCHAR},</if>
+            <if test="qxsxsj != null">QXSXSJ = #{qxsxsj,jdbcType=TIMESTAMP},</if>
+            <if test="qxgqsj != null">QXGQSJ = #{qxgqsj,jdbcType=TIMESTAMP},</if>
+            <if test="cjr != null">CJR = #{cjr,jdbcType=CHAR},</if>
+            <if test="cjsj != null">CJSJ = #{cjsj,jdbcType=TIMESTAMP},</if>
+            <if test="zhxgr != null">ZHXGR = #{zhxgr,jdbcType=CHAR},</if>
+            <if test="zhxgsj != null">ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP},</if>
+            <if test="jlzt != null">JLZT = #{jlzt,jdbcType=CHAR},</if>
+        </set>
+        where SQBZJ = #{sqbzj,jdbcType=CHAR}
+    </update>
+
 	
 </mapper>

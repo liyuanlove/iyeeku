@@ -1,18 +1,17 @@
 package com.iyeeku.ext.commonPermission.service.impl;
 
+import com.iyeeku.core.context.ContextUtil;
 import com.iyeeku.ext.commonPermission.dao.CommonPermissionDao;
 import com.iyeeku.ext.commonPermission.service.CommonPermissionService;
 import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
+import com.iyeeku.ext.grant.dao.PFArcGrantDao;
 import com.iyeeku.ext.grant.vo.PFArcGrantVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CommonPermissionServiceImpl implements CommonPermissionService {
@@ -21,6 +20,8 @@ public class CommonPermissionServiceImpl implements CommonPermissionService {
     private CommonPermissionDao commonPermissionDao;
     @Autowired
     private PFResMenuDao pfResMenuDao;
+    @Autowired
+    private PFArcGrantDao pfArcGrantDao;
 
     @Override
     public List<PFResMenuVO> findRoleMenu(String sqdxbh) {
@@ -85,7 +86,44 @@ public class CommonPermissionServiceImpl implements CommonPermissionService {
     }
 
     @Override
+    public List<PFArcGrantVO> findSSmkGrantInfo(Map<String, String> map) {
+        return this.commonPermissionDao.findSSmkGrantInfo(map);
+    }
+
+    @Override
     public Boolean isExist(PFArcGrantVO arcGrantVO) {
-        return null;
+        List<PFArcGrantVO> list = this.pfArcGrantDao.findGrantBySqdxbh(arcGrantVO);
+        if (list != null && list.size() > 0){
+            return Boolean.valueOf(true);
+        }
+        return Boolean.valueOf(false);
+    }
+
+    @Override
+    public void updateMenuOrUrlRolePer(PFArcGrantVO arcGrantVO) {
+        arcGrantVO.setZhxgr(ContextUtil.getLoginUser().getUserId());
+        arcGrantVO.setZhxgsj(new Date());
+        this.commonPermissionDao.updateMenuOrUrlRolePer(arcGrantVO);
+    }
+
+    @Override
+    public void addCommonPer(PFArcGrantVO arcGrantVO) {
+        arcGrantVO.setCjr(ContextUtil.getLoginUser().getUserId());
+        arcGrantVO.setCjsj(new Date());
+        this.commonPermissionDao.addCommonPer(arcGrantVO);
+    }
+
+    @Override
+    public void delMenuPer(PFArcGrantVO arcGrantVO) {
+        arcGrantVO.setZhxgr(ContextUtil.getLoginUser().getUserId());
+        arcGrantVO.setZhxgsj(new Date());
+        this.commonPermissionDao.delMenuPer(arcGrantVO);
+    }
+
+    @Override
+    public void delCommonPer(PFArcGrantVO arcGrantVO) {
+        arcGrantVO.setZhxgr(ContextUtil.getLoginUser().getUserId());
+        arcGrantVO.setZhxgsj(new Date());
+        this.commonPermissionDao.delCommonPer(arcGrantVO);
     }
 }

@@ -41,5 +41,66 @@
 		DELETE FROM PF_RESURL WHERE URLLJ=#{urllj,jdbcType=VARCHAR} AND URLLX=#{urllx,jdbcType=CHAR}
 	</delete>
 
+	<!-- 获取模块的URL信息和模块关联的url -->
+	<select id="findMKRelationUrl" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+		select * from PF_RESURL
+		WHERE URLLJ like #{ssmkLj}
+		OR URLBH in (select cdxbm from PF_RESRELATION
+			WHERE ZDXBM = (select CDBH FROM PF_RESMENU WHERE CDURL = #{cdurl})
+			AND ZDXLX = #{zdxlx} AND CDXLX = 'LJ')
+		ORDER BY URLLJ
+	</select>
+
+	<select id="findAssignedUrlByYhbh" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+		select * from PF_RESURL
+		where urlbh in (
+      	select distinct sqzybm
+      		from (
+           		select sqzybm from PF_ARCGRANT
+           		WHERE jlzt = #{jlzt}
+           		and sqzylx = #{sqzylx}
+           		and sqdxbh in ( select r.jsbh from PF_ROLE r , PF_ROLE_STAFF rs
+           		where r.jsbh = rs.jsbh and rs.yhbh = #{yhbh} and r.jszt = '1')
+           		union all
+           		select sqzybm from PF_ARCGRANT arc
+           		where jlzt = #{jlzt}
+           		and sqzylx = #{sqzylx}
+           		and sqdxbh = 'R99999999'
+      		) t_view
+		)
+	</select>
+
+	<!-- 根据菜单编号获取关联URL信息 -->
+	<select id="findMenuRelationUrl" resultMap="BaseResultMap" parameterType="com.iyeeku.ext.function.vo.PFResRelationVO">
+		select * from PF_RESURL
+		where urlbh in (
+      	select cdxbm from PF_RESRELATION
+      	where zdxbm = #{zdxbm}
+      	and cdxlx = #{cdxlx}
+		) order by urllj
+	</select>
+
+	<!-- 获取菜单可选择关联的URL信息 -->
+	<select id="findNotMenuRelationUrl" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+		select * from PF_RESURL
+	  	where urlbh NOT IN (
+      	select urlbh from PF_RESURL
+      	where urllj like '%/**/*'
+		<if test="gnssmk != null">
+			OR urllj like #{gnssmk}
+		</if>
+		)
+		AND urllj NOT IN (select cdurl from PF_RESMENU where cdurl is not null)
+		<if test="relationurl != null">
+			and urlbh not in
+			<foreach collection="relationurl" item="id" index="index" open="(" separator="," close=")">
+				#{id}
+			</foreach>
+		</if>
+		<if test="key != null and key != ''">
+			and urllj like #{key}
+		</if>
+		order by urllj
+	</select>
 
 </mapper>
