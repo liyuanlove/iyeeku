@@ -22,6 +22,11 @@ public class PFResUrlDaoImpl extends BaseDaoImpl implements PFResUrlDao {
     }
 
     @Override
+    public List<PFResUrlVO> findMKRelationUrl(Map<String, String> map) {
+        return this.queryAll_myBatis("com.iyeeku.ext.function.dao.PFResUrlDao.findMKRelationUrl" , map);
+    }
+
+    @Override
     public void addUrl(PFResUrlVO resUrlVO) {
         this.save_myBatis("com.iyeeku.ext.function.dao.PFResUrlDao.addUrl" , resUrlVO);
     }

@@ -17,5 +17,7 @@ public interface CommonPermissionDao {
 
     public abstract void addCommonPer(PFArcGrantVO arcGrantVO);
 
+    public abstract void delMenuPer(PFArcGrantVO arcGrantVO);
+
 
 }

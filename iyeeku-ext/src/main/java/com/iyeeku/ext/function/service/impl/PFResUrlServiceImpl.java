@@ -167,6 +167,8 @@ public class PFResUrlServiceImpl implements PFResUrlService {
         return processData;
     }
 
-
-
+    @Override
+    public List<PFResUrlVO> findMKRalationUrl(Map<String, String> map) {
+        return this.pfResUrlDao.findMKRelationUrl(map);
+    }
 }

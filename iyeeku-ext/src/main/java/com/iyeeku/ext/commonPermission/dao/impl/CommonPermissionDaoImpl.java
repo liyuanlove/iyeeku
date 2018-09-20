@@ -28,12 +28,16 @@ public class CommonPermissionDaoImpl extends BaseDaoImpl implements CommonPermis
 
     @Override
     public void updateMenuOrUrlRolePer(PFArcGrantVO arcGrantVO) {
-        this.update_myBatis("" , arcGrantVO);
+        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateMenuOrUrlRolePer" , arcGrantVO);
     }
 
     @Override
     public void addCommonPer(PFArcGrantVO arcGrantVO) {
-        this.save_myBatis("" , arcGrantVO);
+        this.save_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.saveGrant" , arcGrantVO);
     }
 
+    @Override
+    public void delMenuPer(PFArcGrantVO arcGrantVO) {
+        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateGrant" ,arcGrantVO);
+    }
 }

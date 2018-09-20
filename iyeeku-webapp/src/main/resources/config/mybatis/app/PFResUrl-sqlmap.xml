@@ -41,5 +41,15 @@
 		DELETE FROM PF_RESURL WHERE URLLJ=#{urllj,jdbcType=VARCHAR} AND URLLX=#{urllx,jdbcType=CHAR}
 	</delete>
 
+	<!-- 获取模块的URL信息和模块关联的url -->
+	<select id="findMKRelationUrl" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+		select * from PF_RESURL
+		WHERE URLLJ like #{ssmkLj}
+		OR URLBH in (select cdxbm from PF_RESRELATION
+			WHERE ZDXBM = (select CDBH FROM PF_RESMENU WHERE CDURL = #{cdurl})
+			AND ZDXLX = #{zdxlx} AND CDXLX = 'LJ')
+		ORDER BY URLLJ
+	</select>
+
 
 </mapper>

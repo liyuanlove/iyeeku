@@ -1,6 +1,6 @@
 ﻿var bootPATH = __CreateJSPath("boot.js");
 
-mini_debugger = true;                                           //
+mini_debugger = false;                                            // true / false
 
 var skin = getCookie("miniuiSkin") || 'cupertino';             //skin cookie   cupertino
 var mode = getCookie("miniuiMode") || 'medium';                 //mode cookie     medium     

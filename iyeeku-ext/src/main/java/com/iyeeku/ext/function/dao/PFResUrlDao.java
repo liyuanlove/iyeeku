@@ -11,6 +11,8 @@ public interface PFResUrlDao {
 
     public abstract List<PFResUrlVO> findNotMenuUrl(Map<String,String> map);
 
+    public abstract List<PFResUrlVO> findMKRelationUrl(Map<String,String> map);
+
     public abstract void addUrl(PFResUrlVO resUrlVO);
 
     public abstract void updateUrlByLj(PFResUrlVO resUrlVO);

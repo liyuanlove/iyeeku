@@ -18,6 +18,12 @@ public interface CommonPermissionService {
 
     public abstract Boolean isExist(PFArcGrantVO arcGrantVO);
 
+    public abstract void updateMenuOrUrlRolePer(PFArcGrantVO arcGrantVO);
+
+    public abstract void addCommonPer(PFArcGrantVO arcGrantVO);
+
+    public abstract void delMenuPer(PFArcGrantVO arcGrantVO);
+
 
 
 }

@@ -68,7 +68,7 @@
                                 autoCheckParent="true" expandOnLoad="true">
                             </ul>
                             <div property="footer" class="custom_footer" style="text-align: right;padding: 2px;">
-                                <a id="refreshMenu" iconCls="icon-reload" class="mini-button" onClick="">刷新缓存</a>
+                                <a id="refreshMenu" iconCls="icon-reload" class="mini-button" onClick="refreshMenuCache()">刷新缓存</a>
                                 <a id="chooseMenu" iconCls="icon-goto" class="mini-button" onClick="chooseMenu()">选择菜单</a>
                             </div>
                         </div>
@@ -163,6 +163,12 @@
             mini.alert("请先选中一条角色数据");
         }
 
+    }
+    
+    function refreshMenuCache() {
+        var ajaxConf = new IyeekuAjaxConf();
+        ajaxConf.setIsShowSuccMsg(false);
+        $J.postByAjax({jsmc:"超级管理员"} , "/roleRelationPer/listRole" , ajaxConf);
     }
 
 

@@ -30,6 +30,7 @@
 	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>-->
 	<!-- Spring MVC扫描 -->
+	<context:component-scan base-package="com.iyeeku.core.mvc.web"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.controller.*"></context:component-scan>
 	<context:component-scan base-package="com.iyeeku.ext.**.web"></context:component-scan>
 
@@ -113,6 +114,9 @@
 				</bean>
 			</list>
 		</property>
+	</bean>
+
+	<bean id="handlerMethodExceptionResolver" class="com.iyeeku.core.exception.AnnotationHandlerMethodExceptionResolver">
 	</bean>
 
 	<!-- 文件上传配置 -->

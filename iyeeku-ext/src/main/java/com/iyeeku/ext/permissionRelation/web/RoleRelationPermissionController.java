@@ -55,10 +55,10 @@ public class RoleRelationPermissionController {
         System.out.println("delCdurl ==>> " + delCdurl);
         System.out.println("sqzylx ==>> " + sqzylx);
 
-        String[] addZybms = addCdbh.split(",");
+        String[] addSqzybms = addCdbh.split(",");
         String[] addGnssmks = addCdurl.split(",");
 
-
+        this.roleRelationPermissionService.addRoleMenuPer(jsbh , addSqzybms , addGnssmks , delCdbh , delCdurl , sqzylx);
 
 
     }
