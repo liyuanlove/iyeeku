@@ -167,7 +167,7 @@
         mini.open({
             //targetWindow: window,
             url: "${pageContext.request.contextPath}/codetype/form1",
-            title: "新增码表", width: 600, height: 240,
+            title: "新增码表", width: 600, height: 260,
             onload: function () {
                 var iframe = this.getIFrameEl();
                 var data = { action: "new" };
@@ -189,7 +189,7 @@
             mini.open({
                 // targetWindow: window,
                 url: "${pageContext.request.contextPath}/codetype/form1",
-                title: "修改码表", width: 600, height: 240,
+                title: "修改码表", width: 600, height: 260,
                 onload: function () {
                     var iframe = this.getIFrameEl();
                     var data = { action: "edit" , id : row.zj };

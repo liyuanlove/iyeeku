@@ -123,6 +123,9 @@
         var delCdbh = delCdbhs.join(",");
         var delCdurl = delCdurls.join(",");
 
+        console.info(delCdbh);
+        console.info(delCdurl);
+
         var jsbh = mini.get("jsbh").getValue();
         var sqzylx = 'CD';
 

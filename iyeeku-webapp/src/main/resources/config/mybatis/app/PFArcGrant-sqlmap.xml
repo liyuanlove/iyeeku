@@ -35,12 +35,13 @@
       #{sqzylx,jdbcType=CHAR}, #{qxyxdtdbh,jdbcType=VARCHAR}, #{qxsxsj,jdbcType=TIMESTAMP},
       #{qxgqsj,jdbcType=TIMESTAMP}, #{cjr,jdbcType=CHAR}, #{cjsj,jdbcType=TIMESTAMP},
       #{zhxgr,jdbcType=CHAR}, #{zhxgsj,jdbcType=TIMESTAMP}, #{jlzt,jdbcType=CHAR})
-    </insert>
+    </insert>-->
 
-    <update id="updateGrant" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
-        UPDATE PF_ARCGRANT SET JLZT = '0' WHERE SQDXBH = #{sqdxbh,jdbcType=VARCHAR} AND SQZYBM = #{sqzybm,jdbcType=VARCHAR}
+    <update id="delMenuPer" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+        UPDATE PF_ARCGRANT SET JLZT = '0' , ZHXGR = #{zhxgr,jdbcType=CHAR} , ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP}
+        WHERE SQDXBH = #{sqdxbh,jdbcType=VARCHAR} AND SQZYBM = #{sqzybm,jdbcType=VARCHAR}
         AND SQZYLX = #{sqzylx,jdbcType=CHAR} AND JLZT = '1'
-    </update>-->
+    </update>
 
     <!-- 更新菜单权限 -->
     <update id="updateMenuPer" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">

@@ -44,7 +44,7 @@ public class CommonPermissionDaoImpl extends BaseDaoImpl implements CommonPermis
 
     @Override
     public void delMenuPer(PFArcGrantVO arcGrantVO) {
-        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateGrant" ,arcGrantVO);
+        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.delMenuPer" ,arcGrantVO);
     }
 
     @Override

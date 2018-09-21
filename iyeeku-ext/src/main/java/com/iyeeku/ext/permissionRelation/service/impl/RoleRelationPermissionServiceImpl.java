@@ -7,6 +7,7 @@ import com.iyeeku.ext.commonPermission.service.CommonPermissionService;
 import com.iyeeku.ext.function.service.PFResUrlService;
 import com.iyeeku.ext.function.vo.PFResUrlVO;
 import com.iyeeku.ext.grant.vo.PFArcGrantVO;
+import com.iyeeku.ext.permissionRelation.dao.RoleRelationPermissionDao;
 import com.iyeeku.ext.permissionRelation.service.RoleRelationPermissionService;
 import com.iyeeku.ext.role.dao.PFRoleDao;
 import com.iyeeku.ext.role.vo.PFRoleVO;
@@ -21,6 +22,8 @@ import java.util.Map;
 @Service
 public class RoleRelationPermissionServiceImpl implements RoleRelationPermissionService{
 
+    @Autowired
+    private RoleRelationPermissionDao roleRelationPermissionDao;
     @Autowired
     private PFRoleDao pfRoleDao;
     @Autowired
@@ -39,6 +42,29 @@ public class RoleRelationPermissionServiceImpl implements RoleRelationPermission
         rtn.put("data" , list);
         rtn.put("total" , count);
         return rtn;
+    }
+
+    @Override
+    public List<PFResUrlVO> findRoleMenunodeUrl(String cdbh, String sqdxbh, String gnssmk) {
+        Map<String,String> map = new HashMap<>();
+        map.put("sqdxbh" , sqdxbh);
+        map.put("jlzt" , "1");
+        map.put("gnssmk" , StringUtil.formatDbNoEscapeLeftLikeValue(gnssmk));
+        map.put("cdbh" , cdbh);
+        return roleRelationPermissionDao.findRoleMenunodeUrl(map);
+    }
+
+    @Override
+    public List<PFResUrlVO> findSsmkUrl(String key, String cdbh, String sqdxbh, String gnssmk) {
+        Map<String,String> map = new HashMap<>();
+        map.put("sqdxbh" , sqdxbh);
+        map.put("gnssmk" , StringUtil.formatDbNoEscapeLeftLikeValue(gnssmk));
+        map.put("cdbh" , cdbh);
+        if (!StringUtil.isEmpty(key)){
+            map.put("key" , StringUtil.formatDbNoEscapeLikeValue(key));
+        }
+
+        return this.roleRelationPermissionDao.findSsmkUrl(map);
     }
 
     @Override

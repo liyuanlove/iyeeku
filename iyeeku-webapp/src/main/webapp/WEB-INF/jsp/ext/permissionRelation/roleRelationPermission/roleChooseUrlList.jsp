@@ -29,9 +29,9 @@
                 </table>
             </div>
 
-            <div id="datagrid1" datafld="data" class="mini-datagrid" style="width:100%;height: 90%;" borderStyle="border-left:0;border-bottom:0;border-right:0;"
-                 sortMode="client" url="${pageContext.request.contextPath}/roleRelationPer/listSSmkUrl" multiSelect="true"
-                 onselectionchanged="onSelectionChanged" showPager="false"
+            <div id="datagrid1" dataField="data" class="mini-datagrid" style="width:100%;height: 90%;" borderStyle="border-left:0;border-bottom:0;border-right:0;"
+                 url="${pageContext.request.contextPath}/roleRelationPer/listSSmkUrl" multiSelect="true"
+                 ondrawcell="onDrawCell" onselectionchanged="" showPager="false"
             >
                 <div property="columns">
                     <div type="checkcolumn" name="select"></div>
@@ -52,6 +52,43 @@
 </body>
 <script type="text/javascript">
     mini.parse();
+
+    var yxzMap = new Map();
+    var grid = mini.get("datagrid1");
+
+    function SetData(data) {
+        data = mini.clone(data);
+        var jsbh = data.jsbh;
+        var cdurl = data.cdurl;
+        var cdbh = data.cdbh;
+        grid.load({cdbh:cdbh , jsbh:jsbh , gnssmk:cdurl});
+        findRoleUrl(cdbh , jsbh , cdurl);
+    }
+
+    function findRoleUrl(cdbh,jsbh,cdurl) {
+        var urlStr = "/roleRelationPer/listRoleMenunodeUrl";
+        $.ajax({
+            url: urlStr,
+            data : {cdbh:cdbh,jsbh:jsbh,gnssmk:cdurl},
+            success: function (text) {
+                var o = mini.decode(text);
+                for (var i = 0 ; i < o.total ; i++){
+                    yxzMap.put(o.data[i].urlbh , o.data[i].urlbh);
+                }
+            }
+        });
+    }
+
+    var index = 1;
+    
+    function onDrawCell(e) {
+        var row = e.row;
+        if ((yxzMap.containsKey(row.urlbh))){
+            grid.setSelected ( row );
+        }
+    }
+
+
 
 </script>
 

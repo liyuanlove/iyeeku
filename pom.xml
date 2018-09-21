@@ -413,11 +413,11 @@
         </dependency>
 
         <!-- ActiveMQ -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-all</artifactId>
             <version>5.9.0</version>
-        </dependency>
+        </dependency>-->
 
         <!-- ************************ excel 相关操作 ************************** -->
         <!-- 解析excel的jar包，用于2003版 excel -->

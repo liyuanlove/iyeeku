@@ -1,5 +1,6 @@
 package com.iyeeku.ext.rolestaff.service.impl;
 
+import com.iyeeku.core.context.ContextUtil;
 import com.iyeeku.core.util.UUIDGenerator;
 import com.iyeeku.ext.rolestaff.dao.PFRoleStaffDao;
 import com.iyeeku.ext.rolestaff.service.PFRoleStaffService;
@@ -23,8 +24,9 @@ public class PFRoleStaffServiceImpl implements PFRoleStaffService {
     @Override
     public void saveRoleStaff(PFRoleStaffVO roleStaff) {
         roleStaff.setZj(UUIDGenerator.generate(""));
-        roleStaff.setJlzt("1");
+        roleStaff.setCjr(ContextUtil.getLoginUser().getUserId());
         roleStaff.setCjsj(new Date());
+        roleStaff.setJlzt("1");
         this.pfRoleStaffDao.insert(roleStaff);
     }
 

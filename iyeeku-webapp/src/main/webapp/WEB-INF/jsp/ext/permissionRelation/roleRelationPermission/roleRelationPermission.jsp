@@ -83,7 +83,7 @@
                         <div class="mini-panel" title="URL" iconCls="" style="width: 100%;height: 100%;"
                             showToolbar="false" showCloseButton="false" showFooter="true">
                             <div id="url_datagrid" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" multiSelect="false" allowCellSelect="false"
-                                 url="${pageContext.request.contextPath}/menu/findNotMenuUrl" showPager="false" allowUnselect="false"
+                                 url="${pageContext.request.contextPath}/roleRelationPer/listRoleMenunodeUrl" showPager="false" allowUnselect="false"
                                  onrowdblclick="" onselectionchanged=""
                             >
                                 <div property="columns">

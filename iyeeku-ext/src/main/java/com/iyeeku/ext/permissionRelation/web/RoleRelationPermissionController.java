@@ -1,6 +1,8 @@
 package com.iyeeku.ext.permissionRelation.web;
 
+import com.iyeeku.core.util.StringUtil;
 import com.iyeeku.core.vo.Pagination;
+import com.iyeeku.ext.function.vo.PFResUrlVO;
 import com.iyeeku.ext.permissionRelation.service.RoleRelationPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,11 +44,49 @@ public class RoleRelationPermissionController {
         return roleRelationPermissionService.listRole(jsmc,pagination);
     }
 
-    @RequestMapping(value = "findRoleMenunodeUrl" , method = RequestMethod.POST , name = "获取角色拥有某个菜单节点的URL权限")
+    @RequestMapping(value = "listRoleMenunodeUrl" , method = RequestMethod.POST , name = "获取角色拥有某个菜单节点的URL权限")
     @ResponseBody
-    public Map<String,Object> findRoleMenunodeUrl(String cdbh , String jsbh , String gnssmk){
-        return null;
+    public Map<String,Object> listRoleMenunodeUrl(String cdbh , String jsbh , String gnssmk){
+
+        String newGnssmk = "";
+        Map<String,Object> rtnMap = new HashMap<>();
+
+        if (!StringUtil.isEmpty(gnssmk)){
+            List<PFResUrlVO> list = new ArrayList<>();
+            if ("other".equals(gnssmk)){
+                //TODO
+            }else{
+                newGnssmk = StringUtil.getSSMK(gnssmk);
+                list = this.roleRelationPermissionService.findRoleMenunodeUrl(cdbh , jsbh , newGnssmk);
+            }
+            rtnMap.put("data" , list);
+            rtnMap.put("total" , Integer.valueOf(list.size()));
+        }
+
+        return rtnMap;
     }
+
+    @RequestMapping(value = "listSSmkUrl" , method = RequestMethod.POST , name = "获取所属模块可分配的所有url")
+    @ResponseBody
+    public Map<String,Object> listSSmkUrl(String key , String cdbh , String jsbh , String gnssmk){
+        String newGnssmk = "";
+        Map<String,Object> rtnMap = new HashMap<>();
+        if (!StringUtil.isEmpty(gnssmk)){
+            List<PFResUrlVO> list = new ArrayList<>();
+            if ("other".equals(gnssmk)){
+                //TODO
+            }else{
+                newGnssmk = StringUtil.getSSMK(gnssmk);
+                list = this.roleRelationPermissionService.findSsmkUrl(key , cdbh , jsbh , newGnssmk);
+            }
+            rtnMap.put("data" , list);
+            rtnMap.put("total" , Integer.valueOf(list.size()));
+        }
+
+        return rtnMap;
+    }
+
+
 
     @RequestMapping(value = "addRoleMenuPer" , method = RequestMethod.POST , name = "角色授予菜单权限")
     @ResponseBody

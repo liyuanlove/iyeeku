@@ -41,6 +41,35 @@
 		DELETE FROM PF_RESURL WHERE URLLJ=#{urllj,jdbcType=VARCHAR} AND URLLX=#{urllx,jdbcType=CHAR}
 	</delete>
 
+	<!-- 获取角色所拥有的菜单url权限 -->
+	<select id="findRoleMenunodeUrl" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+		select * from PF_RESURL u
+		where u.urlbh in (
+      	select arc.sqzybm from PF_ARCGRANT arc where arc.sqdxbh = #{sqdxbh}
+      	and arc.jlzt = #{jlzt}
+      	and arc.sqzylx = 'LJ'
+      	and arc.sqzybm in (select urlbh from PF_RESURL WHERE urllj like #{gnssmk}
+      	union all
+      	select cdxbm as urlbh
+      	from PF_RESRELATION where zdxbm = #{cdbh}
+      	and zdxlx = 'CD'
+      	and cdxlx = 'LJ'
+      	))
+      	order by urllj
+	</select>
+
+	<!-- 获取所属模块可分配的所有url -->
+	<select id="findSsmkUrl" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+		select * from PF_RESURL
+ 		where ( urllj like #{gnssmk}
+ 		or urlbh in (
+ 			select cdxbm from PF_RESRELATION where zdxbm = #{cdbh}
+ 			and zdxlx = 'CD' and cdxlx = 'LJ'
+ 		))
+ 		<if test="key != null and key != ''"> and urllj like #{key} </if>
+ 		order by urllj
+	</select>
+
 	<!-- 获取模块的URL信息和模块关联的url -->
 	<select id="findMKRelationUrl" resultMap="BaseResultMap" parameterType="java.util.HashMap">
 		select * from PF_RESURL
