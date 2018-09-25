@@ -23,4 +23,7 @@ public interface PFResMenuDao {
     public abstract void insert(PFResMenuVO menuVO);
 
     public abstract void update(PFResMenuVO menuVO);
+
+    public abstract void delete(PFResMenuVO menuVO);
+
 }

@@ -97,7 +97,7 @@
 
     <update id="update" parameterType="com.iyeeku.ext.function.vo.PFResMenuVO" >
         update PF_RESMENU
-        <set >
+        <set>
             <if test="cdbm != null" >CDBM = #{cdbm,jdbcType=VARCHAR},</if>
             <if test="cdmc != null" >CDMC = #{cdmc,jdbcType=VARCHAR},</if>
             <if test="cdurl != null" >CDURL = #{cdurl,jdbcType=VARCHAR},</if>
@@ -114,6 +114,11 @@
         </set>
         where CDBH = #{cdbh,jdbcType=CHAR}
     </update>
+
+    <!-- 根据菜单编号删除菜单信息 -->
+    <delete id="delMenu" parameterType="com.iyeeku.ext.function.vo.PFResMenuVO">
+        DELETE FROM PF_RESMENU WHERE CDBH = #{cdbh}
+    </delete>
 
     <!-- 获取角色拥有的菜单权限 -->
     <select id="findRoleMenu" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO" resultMap="resMenuBaseResultMap">

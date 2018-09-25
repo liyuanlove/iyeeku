@@ -1,6 +1,10 @@
 package com.iyeeku.ext.role.web;
 
+import com.iyeeku.core.context.ContextUtil;
+import com.iyeeku.core.security.IyeekuUserInfo;
+import com.iyeeku.core.util.JsonUtil;
 import com.iyeeku.core.vo.Pagination;
+import com.iyeeku.ext.auditlog.service.PFAuditLogService;
 import com.iyeeku.ext.role.service.PFRoleService;
 import com.iyeeku.ext.role.vo.PFRoleVO;
 import com.iyeeku.ext.rolestaff.service.PFRoleStaffService;
@@ -27,6 +31,8 @@ public class PFRoleController {
     private PFRoleService pfRoleService;
     @Autowired
     private PFRoleStaffService pfRoleStaffService;
+    @Autowired
+    private PFAuditLogService pfAuditLogService;
 
     @RequestMapping(value = "list" , method = RequestMethod.GET , name = "角色管理主页面")
     public ModelAndView roleList(){
@@ -36,8 +42,13 @@ public class PFRoleController {
     @RequestMapping(value = "add" , method = RequestMethod.POST , name = "角色添加")
     @ResponseBody
     public void add(PFRoleVO role){
-        this.logger.info("PFRoleController addRole");
+        this.logger.info("新增角色信息：{}" , role);
         this.pfRoleService.saveRole(role);
+
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("role_management" , "03" , userInfo.getUserId() ,
+                userInfo.getUserIP() , userInfo.getUserId() , true , "保存角色信息" , JsonUtil.bean2Json(role));
+
     }
 
     @RequestMapping(value = "commonPermissionList" , method = RequestMethod.POST , name = "查找公共权限")
@@ -46,11 +57,15 @@ public class PFRoleController {
         return null;
     }
 
-    @RequestMapping(value = "update" , method = RequestMethod.POST , name = "角色更新")
+    @RequestMapping(value = "update" , method = RequestMethod.POST , name = "更新角色信息")
     @ResponseBody
     public void update(PFRoleVO role){
-        this.logger.info("PFRoleController update");
+        this.logger.info("更新角色信息：{}" , role);
         this.pfRoleService.updateRole(role);
+
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("role_management" , "04" , userInfo.getUserId() ,
+                userInfo.getUserIP() , userInfo.getUserId() , true , "更新角色信息" , JsonUtil.bean2Json(role));
     }
 
     @RequestMapping(value = "delete" , method = RequestMethod.POST , name = "角色删除")
@@ -118,6 +133,10 @@ public class PFRoleController {
                 this.pfRoleStaffService.saveRoleStaff(roleStaffVO);
             }
         }
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("role_management" , "03" , userInfo.getUserId() , userInfo.getUserIP() ,
+                userInfo.getUserId() , true , "为角色添加用户" , "角色编号：" + jsbh + "\n用户编号：" + yhbhList);
+
     }
 
     @RequestMapping(value = "comfirmRemoveStaff" , method = RequestMethod.POST , name = "移除用户拥有的角色")
@@ -132,7 +151,10 @@ public class PFRoleController {
                 this.pfRoleStaffService.deleteRoleStaff(roleStaffVO);
             }
         }
-    }
 
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("role_management" , "05" , userInfo.getUserId() , userInfo.getUserIP() ,
+                userInfo.getUserId() , true , "删除分配给角色的用户" , "角色编号：" + jsbh + "\n用户编号：" + yhbhList);
+    }
 
 }

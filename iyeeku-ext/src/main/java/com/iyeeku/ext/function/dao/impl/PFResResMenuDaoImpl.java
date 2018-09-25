@@ -51,4 +51,10 @@ public class PFResResMenuDaoImpl extends BaseDaoImpl implements PFResMenuDao {
     public void delMenuRelationUrl(PFResRelationVO relationVO) {
         this.delete_myBatis("com.iyeeku.ext.function.dao.PFResRelationDao.delMenuRelationUrl" , relationVO);
     }
+
+    @Override
+    public void delete(PFResMenuVO menuVO) {
+        this.delete_myBatis("com.iyeeku.ext.function.dao.PFResMenuDao.delMenu" , menuVO);
+    }
+
 }

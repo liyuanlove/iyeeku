@@ -15,6 +15,8 @@ public interface PFResMenuService {
 
     public abstract void saveOrUpdate(PFResMenuVO menuVO);
 
+    public abstract void deleteMenu(String cdbh);
+
     public abstract void addMenuRelationUrl(String cdbh , String[] cdxbms);
 
     public abstract List<Map<String,Object>> getNavMenuDataFromCache(String key);

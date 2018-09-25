@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class BaseVO implements Serializable {
 
-    private String createdtime;
+/*    private String createdtime;
     private String createduser;
     private String createdchannel;
     private String updatedtime;
@@ -57,5 +57,6 @@ public class BaseVO implements Serializable {
 
     public void setUpdatechannel(String updatechannel) {
         this.updatechannel = updatechannel;
-    }
+    }*/
+
 }

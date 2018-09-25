@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.common.arcuserauth.dao.PFArcUserAuthDao">
+
+	<resultMap id="BaseResultMap" type="com.iyeeku.ext.common.arcuserauth.vo.PFArcUserAuthVO">
+		<id column="YHDLXXZJ" jdbcType="CHAR" property="yhdlxxzj" />
+		<result column="YHBH" jdbcType="CHAR" property="yhbh" />
+		<result column="DLM" jdbcType="VARCHAR" property="dlm" />
+		<result column="DLMM" jdbcType="VARCHAR" property="dlmm" />
+		<result column="MMSBCS" jdbcType="DECIMAL" property="mmsbcs" />
+		<result column="MMGQSJ" jdbcType="TIMESTAMP" property="mmgqsj" />
+		<result column="MMYXQ" jdbcType="DECIMAL" property="mmyxq" />
+		<result column="ZHGQSJ" jdbcType="TIMESTAMP" property="zhgqsj" />
+		<result column="ZHYCDLIP" jdbcType="VARCHAR" property="zhycdlip" />
+		<result column="ZHYCDLSJ" jdbcType="TIMESTAMP" property="zhycdlsj" />
+		<result column="SCDLIP" jdbcType="VARCHAR" property="scdlip" />
+		<result column="SCDLSJ" jdbcType="TIMESTAMP" property="scdlsj" />
+		<result column="CJR" jdbcType="CHAR" property="cjr" />
+		<result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+		<result column="ZHXGR" jdbcType="CHAR" property="zhxgr" />
+		<result column="ZHXGSJ" jdbcType="TIMESTAMP" property="zhxgsj" />
+		<result column="JLZT" jdbcType="CHAR" property="jlzt" />
+		<result column="SFTB" jdbcType="CHAR" property="sftb" />
+		<result column="YXQQSJ" jdbcType="TIMESTAMP" property="yxqqsj" />
+		<result column="ZHYCXTQQSJ" jdbcType="TIMESTAMP" property="zhycxtqqsj" />
+		<result column="YHZXZT" jdbcType="CHAR" property="yhzxzt" />
+		<result column="MMYZ" jdbcType="VARCHAR" property="mmyz" />
+	</resultMap>
+
+	<select id="findUserByYhbh" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT YHDLXXZJ, YHBH, DLM, DLMM, MMSBCS, MMGQSJ, MMYXQ, ZHGQSJ, ZHYCDLIP, ZHYCDLSJ, SCDLIP,
+		SCDLSJ, CJR, CJSJ, ZHXGR, ZHXGSJ, JLZT, SFTB, YXQQSJ, ZHYCXTQQSJ, YHZXZT, MMYZ
+		FROM PF_ARCUSERAUTH WHERE YHBH = #{VALUE,jdbcType=CHAR}
+	</select>
+
+	<update id="update" parameterType="com.iyeeku.ext.common.arcuserauth.vo.PFArcUserAuthVO">
+		update PF_ARCUSERAUTH
+		<set>
+			<if test="yhbh != null">YHBH = #{yhbh,jdbcType=CHAR},</if>
+			<if test="dlm != null">DLM = #{dlm,jdbcType=VARCHAR},</if>
+			<if test="dlmm != null">DLMM = #{dlmm,jdbcType=VARCHAR},</if>
+			<if test="mmsbcs != null">MMSBCS = #{mmsbcs,jdbcType=DECIMAL},</if>
+			<if test="mmgqsj != null">MMGQSJ = #{mmgqsj,jdbcType=TIMESTAMP},</if>
+			<if test="mmyxq != null">MMYXQ = #{mmyxq,jdbcType=DECIMAL},</if>
+			<if test="zhgqsj != null">ZHGQSJ = #{zhgqsj,jdbcType=TIMESTAMP},</if>
+			<if test="zhycdlip != null">ZHYCDLIP = #{zhycdlip,jdbcType=VARCHAR},</if>
+			<if test="zhycdlsj != null">ZHYCDLSJ = #{zhycdlsj,jdbcType=TIMESTAMP},</if>
+			<if test="scdlip != null">SCDLIP = #{scdlip,jdbcType=VARCHAR},</if>
+			<if test="scdlsj != null">SCDLSJ = #{scdlsj,jdbcType=TIMESTAMP},</if>
+			<if test="cjr != null">CJR = #{cjr,jdbcType=CHAR},</if>
+			<if test="cjsj != null">CJSJ = #{cjsj,jdbcType=TIMESTAMP},</if>
+			<if test="zhxgr != null">ZHXGR = #{zhxgr,jdbcType=CHAR},</if>
+			<if test="zhxgsj != null">ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP},</if>
+			<if test="jlzt != null">JLZT = #{jlzt,jdbcType=CHAR},</if>
+			<if test="sftb != null">SFTB = #{sftb,jdbcType=CHAR},</if>
+			<if test="yxqqsj != null">YXQQSJ = #{yxqqsj,jdbcType=TIMESTAMP},</if>
+			<if test="zhycxtqqsj != null">ZHYCXTQQSJ = #{zhycxtqqsj,jdbcType=TIMESTAMP},</if>
+			<if test="yhzxzt != null">YHZXZT = #{yhzxzt,jdbcType=CHAR},</if>
+			<if test="mmyz != null">MMYZ = #{mmyz,jdbcType=VARCHAR},</if>
+		</set>
+		where YHDLXXZJ = #{yhdlxxzj,jdbcType=CHAR}
+	</update>
+	
+</mapper>

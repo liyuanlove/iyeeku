@@ -31,7 +31,7 @@
                         <h4 style="margin: 0;line-height: 22px;font-size: 13px;">URL列表：</h4>
                             <div id="selectGrid" datafld="data" class="mini-datagrid" style="width:95%;height:80%;" showPager="false"
                                  showPageSize="false" showPageIndex="false" showPageInfo="false" pagerStyle="padding:2px;" multiSelect="true"
-                                allowMoveColumn="false" url="${pageContext.request.contextPath}/url/listNotMenuRelationUrl"
+                                allowMoveColumn="false" url="${pageContext.request.contextPath}/url/listNotMenuRelationUrl" idField="urlbh"
                             >
                                 <div property="columns">
                                     <div type="checkcolumn" name="select" width="15"></div>
@@ -87,7 +87,6 @@
         var items = grid.getSelecteds();
         // 根据id属性，来甄别要加入选中的记录
         var idField = grid.getIdField();
-
         //把已选中的数据，用key-value缓存，以便进一步快速匹配
         var idMaps = {};
         var selects = selectedList.getData();
@@ -111,7 +110,9 @@
     }
     
     function removeSelected() {
-        
+        var  items = selectedList.getSelecteds();
+        selectedList.removeItems(items);
+        grid.addRows( items , 0);
     }
     
     function GetData() {

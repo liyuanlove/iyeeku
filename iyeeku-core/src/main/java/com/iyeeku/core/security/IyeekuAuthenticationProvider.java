@@ -41,12 +41,30 @@ public class IyeekuAuthenticationProvider extends AbstractUserDetailsAuthenticat
             }
 
             String presentedPassword = authentication.getCredentials().toString();
+            System.out.println(presentedPassword);    //7c4a8d09ca3762af61e59520943dc26494f8941b
+            System.out.println(userDetails.getPassword());  //e10adc3949ba59abbe56e057f20f883e
 
+            this.passwordEncoder.isPasswordValid(userDetails.getPassword() , presentedPassword , ((IyeekuUserInfo)userDetails).getMmyz());
 
 
         }
 
     }
+
+
+    private void passwordCheck(IyeekuUsernamePasswordAuthenticationToken authenticationToken , UserDetails userDetails , String presentedPassword){
+        if (this.passwordEncoder != null){
+            if (!this.passwordEncoder.isPasswordValid(userDetails.getPassword() , presentedPassword , ((IyeekuUserInfo)userDetails).getMmyz())){
+                this.logger.debug("AuthenticationToken failed : password does not match stored value");
+                throw new BadCredentialsException("bad Credentials");
+            }
+        }
+        else if ((presentedPassword == null) || (!authenticationToken.getCredentials().equals(userDetails.getPassword())) ){
+            this.logger.debug("AuthenticationToken failed : password does not match stored value");
+            throw new BadCredentialsException("bad Credentials");
+        }
+    }
+
 
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {

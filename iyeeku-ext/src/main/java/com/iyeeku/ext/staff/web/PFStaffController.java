@@ -1,6 +1,10 @@
 package com.iyeeku.ext.staff.web;
 
+import com.iyeeku.core.context.ContextUtil;
+import com.iyeeku.core.security.IyeekuUserInfo;
+import com.iyeeku.core.util.JsonUtil;
 import com.iyeeku.core.vo.Pagination;
+import com.iyeeku.ext.auditlog.service.PFAuditLogService;
 import com.iyeeku.ext.role.service.PFRoleService;
 import com.iyeeku.ext.staff.service.PFStaffService;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
@@ -43,6 +47,8 @@ public class PFStaffController {
     private PFStaffService pfStaffService;
     @Autowired
     private PFRoleService pfRoleService;
+    @Autowired
+    private PFAuditLogService pfAuditLogService;
 
     @RequestMapping(value = "/main" , method = RequestMethod.GET , name = "用户管理主页面")
     public ModelAndView list(){
@@ -74,23 +80,31 @@ public class PFStaffController {
         return new ModelAndView("ext/staff/newPassword");
     }
 
-    @RequestMapping(value = "/form1" , name = "员工信息录取Form表单")
+    @RequestMapping(value = "/form1" , name = "用户信息录取Form表单")
     public ModelAndView form1(){
         return new ModelAndView("ext/staff/staffForm");
     }
 
-    @RequestMapping(value = "/add" , method = RequestMethod.POST , name = "员工新增")
+    @RequestMapping(value = "/add" , method = RequestMethod.POST , name = "新增用户信息")
     @ResponseBody
     public void add(PFStaffVO staffVO){
-        this.logger.info("PFStaffController add");
+        this.logger.info("新增用户信息：{}" , staffVO);
         this.pfStaffService.save(staffVO);
+
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("user_management" , "03" , userInfo.getUserId() , userInfo.getUserIP() ,
+                userInfo.getUserId() , true , "新增用户信息" , "新增用户：" + JsonUtil.bean2Json(staffVO));
     }
 
-    @RequestMapping(value = "/update" , method = RequestMethod.POST , name = "员工修改")
+    @RequestMapping(value = "/update" , method = RequestMethod.POST , name = "更新用户信息")
     @ResponseBody
     public void update(PFStaffVO staffVO){
-        this.logger.info("PFStaffController update");
+        this.logger.info("更新用户信息：" , staffVO);
         this.pfStaffService.update(staffVO);
+
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("user_management" , "04" , userInfo.getUserId() , userInfo.getUserIP() ,
+                userInfo.getUserId() , true , "更新用户信息" , JsonUtil.bean2Json(staffVO));
     }
 
     @RequestMapping(value = "/list" , method = RequestMethod.POST , name = "查询用户列表信息")

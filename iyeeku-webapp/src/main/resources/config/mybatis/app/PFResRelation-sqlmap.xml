@@ -11,5 +11,6 @@
 	<delete id="delMenuRelationUrl" parameterType="com.iyeeku.ext.function.vo.PFResRelationVO">
 		DELETE FROM PF_RESRELATION WHERE ZDXBM = #{zdxbm,jdbcType=VARCHAR} AND ZDXLX = #{zdxlx,jdbcType=VARCHAR}
 	</delete>
+
 	
 </mapper>

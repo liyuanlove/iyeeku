@@ -38,7 +38,7 @@
                     <tr>
                         <td style="width:100%;">
                             <a class="mini-button" iconCls="icon-addnew" onclick="addMenu()">新增</a>
-                            <a class="mini-button" iconCls="icon-edit" onclick="edit()" enabled="false" id="delBtn">删除</a>
+                            <a class="mini-button" iconCls="icon-edit" onclick="remove()" enabled="false" id="delBtn">删除</a>
                             <a class="mini-button" iconCls="icon-remove" onclick="submitForm()" enabled="false" id="saveBtn">保存</a>
                         </td>
                         <td style="white-space:nowrap;">
@@ -101,7 +101,7 @@
                                             <tr>
                                                 <td align="right">上级菜单名称：</td>
                                                 <td align="left">
-                                                    <input id="sjcdbh" name="sjcdbh" class="mini-buttonedit" style="width: 180px;" onbuttonclick="" selectOnFocus="true" allowInput="false">
+                                                    <input id="sjcdbh" name="sjcdbh" class="mini-buttonedit" style="width: 180px;" onbuttonclick="onButtonEdit" selectOnFocus="true" allowInput="false" required="true">
                                                 </td>
                                                 <td align="right">是否启用：</td>
                                                 <td align="left">
@@ -179,6 +179,7 @@
     var tree = mini.get("tree1");
     var form = new mini.Form("#form1");
 
+
     // 页面初始化加载时，菜单表单控件全部设置为只读，不可以操作
     setReadOnly();
     // 设置按钮不可用
@@ -220,21 +221,36 @@
         }
 
     }
-    
+
+    function ctrlOkBtn() {
+        var oldData  = mini.encode(oldFormData);
+        var formData = form.getData();
+        var name = $(this).attr("name");
+        formData[name] = $(this).val();
+        var newData = mini.encode(formData);
+        if (oldData == newData){
+            mini.get("saveBtn").disable();
+        }else{
+            mini.get("saveBtn").enable();
+        }
+    }
+
+    $("#form1 :input.mini-textbox-input").keyup(ctrlOkBtn);
+    $("#form1 :input.mini-textbox-input").change(ctrlOkBtn);
     
     function addMenu() {
         var tree = mini.get("tree1");
         var tNode = tree.getSelectedNode();
         if(tNode == null){
-            alert("请选择节点");
+            mini.alert("请选择节点");
             return;
         }
         if((tree.getValue(false) == null) || (tree.getValue(false) == "")){
-            alert("请先保存");
+            mini.alert("请先保存");
             return;
         }
         if(tNode.cdurl != null){
-            alert("该菜单有对应的菜单路径，不能添加子菜单！");
+            mini.alert("该菜单有对应的菜单路径，不能添加子菜单！");
             return;
         }
         var newNode = {};
@@ -247,7 +263,6 @@
         var parentNode = tree.getParentNode(newNode);
         changeCDURL("cddkfs","0",null);
         mini.get("relationUrl").disable();
-
 
     }
 
@@ -369,6 +384,30 @@
             }
         });
     }
+    
+    function onButtonEdit(e) {
+        var btnEdit = this;
+        mini.open({
+            url: "${pageContext.request.contextPath}/menu/menuTree",
+            title: "上级菜单选择", width: 400, height: 350,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { action: "menuTree", parent : "1"};
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+                if (action == "ok") {
+                    var iframe = this.getIFrameEl();
+                    var data = iframe.contentWindow.GetData();
+                    data = mini.clone(data);
+                    if (data) {
+                        btnEdit.setValue(data.id);
+                        btnEdit.setText(data.text);
+                    }
+                }
+            }
+        });
+    }
 
     // 设置按钮不可用
     function controlBtnState() {
@@ -397,6 +436,24 @@
             }
         });
 
+    }
+    
+    function remove() {
+        mini.confirm("确定删除该菜单？", "确定？",
+            function (action) {
+                if (action == "ok"){
+                    var node = tree.getSelectedNode();
+                    $.ajax({
+                        url:"/menu/del",
+                        data:{ cdbh : node.id },
+                        success:function () {
+                            tree.removeNode(node);
+                            location.reload();
+                        }
+                    });
+                }
+            }
+        );
     }
     
     //设置可编辑

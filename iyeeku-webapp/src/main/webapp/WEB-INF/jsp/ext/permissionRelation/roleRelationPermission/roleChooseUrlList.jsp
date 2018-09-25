@@ -84,7 +84,7 @@
     function onDrawCell(e) {
         var row = e.row;
         if ((yxzMap.containsKey(row.urlbh))){
-            grid.setSelected ( row );
+            grid.setSelected(row);
         }
     }
 

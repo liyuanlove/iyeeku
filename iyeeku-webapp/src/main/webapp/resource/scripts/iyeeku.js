@@ -348,8 +348,14 @@ function showTips(Msg,state) {
     var x = "center";
     var y = "top";
     var state = state;
+
+    var TiMsg = "成功";
+    if (state == "danger"){
+        TiMsg = "失败";
+    }
+
     mini.showTips({
-        content: "<b>成功</b> <br/>"+Msg,
+        content: "<b>" + TiMsg + "</b> <br/>"+Msg,
         state: state,
         x: x,
         y: y,

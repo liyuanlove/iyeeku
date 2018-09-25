@@ -49,6 +49,19 @@ public class PFResResMenuServiceImpl implements PFResMenuService {
     }
 
     @Override
+    public void deleteMenu(String cdbh) {
+        PFResMenuVO menuVO = new PFResMenuVO();
+        menuVO.setCdbh(cdbh);
+        this.pfResMenuDao.delete(menuVO);
+
+        PFResRelationVO relationVO = new PFResRelationVO();
+        relationVO.setZdxbm(cdbh);
+        relationVO.setZdxlx("CD");
+        this.pfResMenuDao.delMenuRelationUrl(relationVO);
+
+    }
+
+    @Override
     public void addMenuRelationUrl(String cdbh, String[] cdxbms) {
         PFResRelationVO relationVO = new PFResRelationVO();
         relationVO.setZdxbm(cdbh);

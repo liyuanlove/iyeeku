@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.auditlog.dao.PFAuditLogDao">
+
+	<insert id="insert" parameterType="com.iyeeku.ext.auditlog.vo.PFAuditLogVO">
+		insert into PF_AUDITLOG (RZBH, CZBM, CZKHJQIP,YWLXBM, RZLX, CZRZXX,RZJB, RZJLSJ, JLZT,YHBH, CZJG, YWDXBZ, RZXXXX)
+		values (#{rzbh,jdbcType=CHAR}, #{czbm,jdbcType=VARCHAR}, #{czkhjqip,jdbcType=VARCHAR},
+		#{ywlxbm,jdbcType=VARCHAR}, #{rzlx,jdbcType=VARCHAR}, #{czrzxx,jdbcType=VARCHAR},
+		#{rzjb,jdbcType=VARCHAR}, #{rzjlsj,jdbcType=TIMESTAMP}, #{jlzt,jdbcType=CHAR},
+		#{yhbh,jdbcType=CHAR}, #{czjg,jdbcType=CHAR}, #{ywdxbz,jdbcType=VARCHAR}, #{rzxxxx,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+</mapper>

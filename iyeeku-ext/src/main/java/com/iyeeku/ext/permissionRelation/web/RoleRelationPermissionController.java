@@ -1,7 +1,10 @@
 package com.iyeeku.ext.permissionRelation.web;
 
+import com.iyeeku.core.context.ContextUtil;
+import com.iyeeku.core.security.IyeekuUserInfo;
 import com.iyeeku.core.util.StringUtil;
 import com.iyeeku.core.vo.Pagination;
+import com.iyeeku.ext.auditlog.service.PFAuditLogService;
 import com.iyeeku.ext.function.vo.PFResUrlVO;
 import com.iyeeku.ext.permissionRelation.service.RoleRelationPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class RoleRelationPermissionController {
 
     @Autowired
     private RoleRelationPermissionService roleRelationPermissionService;
+    @Autowired
+    private PFAuditLogService pfAuditLogService;
 
     @RequestMapping(value = "roleRelationPerMain" , method = RequestMethod.GET , name = "角色分配权限主界面")
     public ModelAndView roleRelationPer(){
@@ -87,7 +92,6 @@ public class RoleRelationPermissionController {
     }
 
 
-
     @RequestMapping(value = "addRoleMenuPer" , method = RequestMethod.POST , name = "角色授予菜单权限")
     @ResponseBody
     public void addRoleMenuPer(String jsbh , String addCdbh , String addCdurl , String delCdbh , String delCdurl , String sqzylx){
@@ -97,6 +101,13 @@ public class RoleRelationPermissionController {
 
         this.roleRelationPermissionService.addRoleMenuPer(jsbh , addSqzybms , addGnssmks , delCdbh , delCdurl , sqzylx);
 
+        StringBuffer sb = new StringBuffer();
+        sb.append("角色编号：" + jsbh + "\n");
+        if ( (!"".equals(addCdurl)) && (addGnssmks.length > 0)) sb.append("添加菜单URL：" + addCdurl + "\n");
+        if ( (!"".equals(delCdurl)) && (delCdurl.length() > 0)) sb.append("删除菜单URL：" + delCdurl + "\n");
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("access_permissions" , "10" , userInfo.getUserId() ,
+                userInfo.getUserIP() , userInfo.getUserId() , true , "用户访问授权" , sb.toString());
 
     }
 

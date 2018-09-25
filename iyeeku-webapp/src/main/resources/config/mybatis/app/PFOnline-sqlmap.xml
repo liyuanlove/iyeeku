@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.ext.online.dao.PFOnlineDao">
+
+	<insert id="insertOnline" parameterType="com.iyeeku.ext.online.vo.PFOnlineVO">
+		insert into PF_ONLINE (YHJLZJ, YHBH, YHZXZT,YHHHBH, YHDLSJ, ZZJGLJ,YHDLJQDZ, HHSFGQ)
+		values (#{yhjlzj,jdbcType=VARCHAR}, #{yhbh,jdbcType=CHAR}, #{yhzxzt,jdbcType=CHAR},
+		#{yhhhbh,jdbcType=VARCHAR}, #{yhdlsj,jdbcType=TIMESTAMP}, #{zzjglj,jdbcType=VARCHAR},
+		#{yhdljqdz,jdbcType=VARCHAR}, #{hhsfgq,jdbcType=CHAR})
+	</insert>
+	
+</mapper>

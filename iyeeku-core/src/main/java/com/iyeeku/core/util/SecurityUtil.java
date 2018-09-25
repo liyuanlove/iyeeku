@@ -62,6 +62,9 @@ public class SecurityUtil {
         String decryptedMsg = decrypt(encryptMsg, key);
         System.out.println("decrypted message is below :");
         System.out.println(decryptedMsg);
+
+        System.out.println(encrypt("123456" , ""));
+
     }
 
 }
