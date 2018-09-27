@@ -3,11 +3,9 @@ package com.iyeeku.ext.grant.dao.impl;
 import com.iyeeku.core.orm.impl.BaseDaoImpl;
 import com.iyeeku.ext.grant.dao.PFArcGrantDao;
 import com.iyeeku.ext.grant.vo.PFArcGrantVO;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public class PFArcGrantDaoImpl extends BaseDaoImpl implements PFArcGrantDao {
 
     @Override

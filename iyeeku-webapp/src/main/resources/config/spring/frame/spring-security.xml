@@ -44,6 +44,7 @@
         <sec:session-management invalid-session-url="/login/sessionTimeout"/>
         <sec:custom-filter ref="iyeekuLoginProcessingFilter" before="FORM_LOGIN_FILTER"/>
         <sec:custom-filter ref="iyeekuFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
+        <sec:custom-filter ref="iyeekuSessionFilter" before="CONCURRENT_SESSION_FILTER"/>
         <sec:csrf request-matcher-ref="defaultRequiresCsrfMatches" token-repository-ref="csrfTokenReposity"/>
 
         <!-- 1、注释此过滤器，不再验证是否有访问权限(访问所有资源不再判断是否具有权限)
@@ -58,7 +59,34 @@
 
     <beans:bean id="iyeekuLoginProcessingFilter" class="com.iyeeku.core.security.IyeekuLoginProcessingFilter">
         <beans:property name="authenticationManager" ref="authenticationManager"/>
+        <!--<beans:property name="authenticationFailureHandler" ref=""/>-->
+        <beans:property name="sessionAuthenticationStrategy" ref="sas"/>
         <beans:property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"/>
+    </beans:bean>
+
+    <beans:bean id="iyeekuSessionFilter" class="com.iyeeku.core.security.session.IyeekuConcurrentSessionFilter">
+        <beans:property name="sessionRegistry" ref="sessionRegistry"/>
+        <beans:property name="expireUrl" value="/login/login?error=true"/>
+    </beans:bean>
+
+    <beans:bean id="sessionRegistry" class="com.iyeeku.core.security.session.IyeekuSessionRegistryImpl">
+        <beans:property name="sessionService" ref="iyeekuSessionServiceImpl"/>
+    </beans:bean>
+
+    <beans:bean id="sas" class="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy">
+        <beans:constructor-arg>
+            <beans:list>
+                <beans:bean class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy">
+                    <beans:constructor-arg ref="sessionRegistry"/>
+                    <beans:property name="maximumSessions" value="#{iyeekuSessionServiceImpl.getAllowedMaxSession()}"/>
+                    <beans:property name="exceptionIfMaximumExceeded" value="#{iyeekuSessionServiceImpl.isRejectLoginMaxSession()}"/>
+                </beans:bean>
+                <beans:bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy"/>
+                <beans:bean class="org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy">
+                    <beans:constructor-arg ref="sessionRegistry"/>
+                </beans:bean>
+            </beans:list>
+        </beans:constructor-arg>
     </beans:bean>
 
     <beans:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">

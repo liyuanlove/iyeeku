@@ -5,11 +5,10 @@ import com.iyeeku.ext.codetype.dao.PFCodeTypeDao;
 import com.iyeeku.ext.codetype.vo.PFCodeTypeVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 public class PFCodeTypeDaoImpl extends BaseDaoImpl implements PFCodeTypeDao {
 
     private final Logger logger = LoggerFactory.getLogger(PFCodeTypeDaoImpl.class);

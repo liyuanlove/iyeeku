@@ -1,5 +1,6 @@
 package com.iyeeku.ext.staff.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.iyeeku.core.vo.BaseVO;
 
 import java.util.Date;
@@ -226,6 +227,7 @@ public class PFStaffVO extends BaseVO {
         this.glyjb = glyjb == null ? null : glyjb.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd" , timezone = "GMT+8")
     public Date getRzrq() {
         return rzrq;
     }
@@ -242,6 +244,7 @@ public class PFStaffVO extends BaseVO {
         this.jycd = jycd == null ? null : jycd.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd" , timezone = "GMT+8")
     public Date getSdsj() {
         return sdsj;
     }
@@ -266,6 +269,7 @@ public class PFStaffVO extends BaseVO {
         this.sfzh = sfzh == null ? null : sfzh.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd" , timezone = "GMT+8")
     public Date getSr() {
         return sr;
     }

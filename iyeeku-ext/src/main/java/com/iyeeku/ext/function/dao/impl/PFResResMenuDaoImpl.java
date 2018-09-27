@@ -4,12 +4,10 @@ import com.iyeeku.core.orm.impl.BaseDaoImpl;
 import com.iyeeku.ext.function.dao.PFResMenuDao;
 import com.iyeeku.ext.function.vo.PFResMenuVO;
 import com.iyeeku.ext.function.vo.PFResRelationVO;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
-@Repository
 public class PFResResMenuDaoImpl extends BaseDaoImpl implements PFResMenuDao {
 
     @Override

@@ -9,18 +9,13 @@ import com.iyeeku.ext.function.vo.PFResMenuVO;
 import com.iyeeku.ext.function.vo.PFResRelationVO;
 import com.iyeeku.ext.grant.dao.PFArcGrantDao;
 import com.iyeeku.ext.grant.vo.PFArcGrantVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service
 public class PFResResMenuServiceImpl implements PFResMenuService {
 
-    @Autowired
     private PFResMenuDao pfResMenuDao;
-    @Autowired
     private PFArcGrantDao pfArcGrantDao;
 
     @Override
@@ -161,5 +156,13 @@ public class PFResResMenuServiceImpl implements PFResMenuService {
         return rtnList;
     }
 
+
+    public void setPfResMenuDao(PFResMenuDao pfResMenuDao) {
+        this.pfResMenuDao = pfResMenuDao;
+    }
+
+    public void setPfArcGrantDao(PFArcGrantDao pfArcGrantDao) {
+        this.pfArcGrantDao = pfArcGrantDao;
+    }
 
 }

@@ -167,7 +167,7 @@
                         </td>
                         <td align="right">入职日期：</td>
                         <td align="left">
-                            <input name="sdrerw" class="mini-datepicker" style="width: 160px;" allowInput="false"  onvaluechanged="checkValueChanged(this);">
+                            <input name="rzrq" class="mini-datepicker" style="width: 160px;" allowInput="false"  onvaluechanged="checkValueChanged(this);">
                         </td>
                     </tr>
                     <tr>
@@ -283,6 +283,11 @@
         if( pageType == "edit" ){
             url = "${pageContext.request.contextPath}/staff/update";
         }
+
+        //console.info(mini.get("sr").getValue());
+
+        //console.info(mini.formatDate(mini.get("sr").getValue(),"yyyy-MM-dd"));
+        //mini.get("sr").setValue(mini.formatDate(mini.get("sr").getValue(),"yyyy-MM-dd"));
 
         //var sr = mini.get("sr").getValue() + "";
         //if (sr != null && sr.length > 0){

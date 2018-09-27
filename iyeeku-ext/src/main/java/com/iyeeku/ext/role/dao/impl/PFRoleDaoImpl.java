@@ -6,14 +6,12 @@ import com.iyeeku.ext.role.vo.PFRoleVO;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
 public class PFRoleDaoImpl extends BaseDaoImpl implements PFRoleDao {
 
     private final Logger logger = LoggerFactory.getLogger(PFRoleDaoImpl.class);

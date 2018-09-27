@@ -4,13 +4,11 @@ import com.iyeeku.core.orm.impl.BaseDaoImpl;
 import com.iyeeku.ext.function.dao.PFResUrlDao;
 import com.iyeeku.ext.function.vo.PFResRelationVO;
 import com.iyeeku.ext.function.vo.PFResUrlVO;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
 public class PFResUrlDaoImpl extends BaseDaoImpl implements PFResUrlDao {
 
     @Override

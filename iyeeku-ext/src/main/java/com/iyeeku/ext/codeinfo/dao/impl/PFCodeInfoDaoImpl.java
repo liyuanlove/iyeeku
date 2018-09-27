@@ -6,13 +6,12 @@ import com.iyeeku.ext.codeinfo.vo.PFCodeInfoVO;
 import com.iyeeku.ext.directory.vo.DirectoryVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+
 public class PFCodeInfoDaoImpl extends BaseDaoImpl implements PFCodeInfoDao {
 
     private final Logger logger = LoggerFactory.getLogger(PFCodeInfoDaoImpl.class);

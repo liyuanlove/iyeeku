@@ -8,5 +8,17 @@
 		#{yhhhbh,jdbcType=VARCHAR}, #{yhdlsj,jdbcType=TIMESTAMP}, #{zzjglj,jdbcType=VARCHAR},
 		#{yhdljqdz,jdbcType=VARCHAR}, #{hhsfgq,jdbcType=CHAR})
 	</insert>
+
+	<delete id="deleteOnlineBySessionId" parameterType="java.lang.String">
+		DELETE FROM PF_ONLINE WHERE YHHHBH = #{VALUE,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="getOnlineVOBySessionId" parameterType="java.lang.String" resultType="com.iyeeku.ext.online.vo.PFOnlineVO">
+		SELECT * FROM PF_ONLINE WHERE YHHHBH = #{VALUE,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getOnlineUsersByYhbh" parameterType="java.lang.String" resultType="com.iyeeku.ext.online.vo.PFOnlineVO">
+		SELECT * FROM PF_ONLINE WHERE YHBH = #{VALUE,jdbcType=VARCHAR}
+	</select>
 	
 </mapper>

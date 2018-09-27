@@ -7,8 +7,6 @@ import com.iyeeku.ext.auditlog.service.PFAuditLogService;
 import com.iyeeku.ext.auditlog.vo.PFAuditLogVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -16,12 +14,10 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import java.util.Arrays;
 import java.util.Date;
 
-@Service
 public class PFAuditLogServiceImpl implements PFAuditLogService {
 
     private Logger logger = LoggerFactory.getLogger(PFAuditLogServiceImpl.class);
 
-    @Autowired
     private PFAuditLogDao pfAuditLogDao;
 
     @Override
@@ -79,4 +75,11 @@ public class PFAuditLogServiceImpl implements PFAuditLogService {
     }
 
 
+    public PFAuditLogDao getPfAuditLogDao() {
+        return pfAuditLogDao;
+    }
+
+    public void setPfAuditLogDao(PFAuditLogDao pfAuditLogDao) {
+        this.pfAuditLogDao = pfAuditLogDao;
+    }
 }

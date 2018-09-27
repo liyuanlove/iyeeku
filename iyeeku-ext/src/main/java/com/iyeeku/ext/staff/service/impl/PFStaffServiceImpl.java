@@ -8,20 +8,16 @@ import com.iyeeku.ext.staff.service.PFStaffService;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
 public class PFStaffServiceImpl implements PFStaffService {
 
     private final Logger logger = LoggerFactory.getLogger(PFStaffServiceImpl.class);
 
-    @Autowired
     private PFStaffDao pfStaffDao;
 
     @Override
@@ -89,6 +85,11 @@ public class PFStaffServiceImpl implements PFStaffService {
     public void delete(PFStaffVO staffVO) {
         this.logger.info("PFStaffServiceImpl delete");
         this.pfStaffDao.delete(staffVO);
+    }
+
+
+    public void setPfStaffDao(PFStaffDao pfStaffDao) {
+        this.pfStaffDao = pfStaffDao;
     }
 
 }

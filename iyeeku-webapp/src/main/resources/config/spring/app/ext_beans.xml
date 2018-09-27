@@ -8,5 +8,93 @@
 
 	<bean id="iyeekuSecurityMetadataSourceDao" class="com.iyeeku.ext.security.dao.impl.IyeekuExtSecurityMetadataSourceDaoImpl"/>
 
+	<bean id="iyeekuSessionServiceImpl" class="com.iyeeku.ext.security.session.impl.IyeekuSessionServiceImpl">
+		<property name="pfOnlineService" ref="pfOnlineServiceImpl"/>
+		<property name="pfArcUserAuthService" ref="pfArcUserAuthServiceImpl"/>
+		<property name="pfAuditLogService" ref="pfAuditLogServiceImpl"/>
+		<property name="pfArcSecurityStrategyService" ref="pfArcSecurityStrategyServiceImpl"/>
+	</bean>
+
+
+	<!-- 用户信息管理Service -->
+	<bean id="pfStaffServiceImpl" class="com.iyeeku.ext.staff.service.impl.PFStaffServiceImpl">
+		<property name="pfStaffDao" ref="pfStaffDaoImpl"/>
+	</bean>
+	<bean id="pfStaffDaoImpl" class="com.iyeeku.ext.staff.dao.impl.PFStaffDaoImpl"/>
+
+
+	<!-- 菜单管理Service -->
+	<bean id="pfResResMenuServiceImpl" class="com.iyeeku.ext.function.service.impl.PFResResMenuServiceImpl">
+		<property name="pfResMenuDao" ref="pfResResMenuDaoImpl"/>
+		<property name="pfArcGrantDao" ref="pfArcGrantDaoImpl"/>
+	</bean>
+	<bean id="pfResResMenuDaoImpl" class="com.iyeeku.ext.function.dao.impl.PFResResMenuDaoImpl"/>
+
+
+
+	<!-- URL管理Service -->
+	<bean id="pfResUrlServiceImpl" class="com.iyeeku.ext.function.service.impl.PFResUrlServiceImpl">
+		<property name="pfResMenuDao" ref="pfResResMenuDaoImpl"/>
+		<property name="pfResUrlDao" ref="pfResUrlDaoImpl"/>
+	</bean>
+	<bean id="pfResUrlDaoImpl" class="com.iyeeku.ext.function.dao.impl.PFResUrlDaoImpl"/>
+
+
+
+	<!-- 角色管理Service -->
+	<bean id="pfRoleServiceImpl" class="com.iyeeku.ext.role.service.impl.PFRoleServiceImpl">
+		<property name="pfRoleDao" ref="pfRoleDaoImpl"/>
+		<property name="pfStaffService" ref="pfStaffServiceImpl"/>
+	</bean>
+	<bean id="pfRoleDaoImpl" class="com.iyeeku.ext.role.dao.impl.PFRoleDaoImpl"/>
+
+
+	<!-- 在线用户监控Service -->
+	<bean id="pfOnlineServiceImpl" class="com.iyeeku.ext.online.service.impl.PFOnlineServiceImpl">
+		<property name="pfOnlineDao" ref="pfOnlineDaoImpl"/>
+	</bean>
+	<bean id="pfOnlineDaoImpl" class="com.iyeeku.ext.online.dao.impl.PFOnlineDaoImpl"/>
+
+
+	<!-- 用户登陆Service -->
+	<bean id="pfArcUserAuthServiceImpl" class="com.iyeeku.ext.common.arcuserauth.service.impl.PFArcUserAuthServiceImpl">
+		<property name="pfArcUserAuthDao" ref="pfArcUserAuthDaoImpl"/>
+	</bean>
+	<bean id="pfArcUserAuthDaoImpl" class="com.iyeeku.ext.common.arcuserauth.dao.impl.PFArcUserAuthDaoImpl"/>
+
+
+	<!-- 审计日志Service -->
+	<bean id="pfAuditLogServiceImpl" class="com.iyeeku.ext.auditlog.service.impl.PFAuditLogServiceImpl">
+		<property name="pfAuditLogDao" ref="pfAuditLogDaoImpl"/>
+	</bean>
+	<bean id="pfAuditLogDaoImpl" class="com.iyeeku.ext.auditlog.dao.impl.PFAuditLogDaoImpl"/>
+
+
+	<!-- 码表Service -->
+	<bean id="pfCodeTypeServiceImpl" class="com.iyeeku.ext.codetype.service.impl.PFCodeTypeServiceImpl">
+		<property name="pfCodeTypeDao" ref="pfCodeTypeDaoImpl"/>
+		<property name="pfCodeInfoDao" ref="pfCodeInfoDaoImpl"/>
+	</bean>
+	<bean id="pfCodeTypeDaoImpl" class="com.iyeeku.ext.codetype.dao.impl.PFCodeTypeDaoImpl"/>
+	<!-- 码表条目Service -->
+	<bean id="pfCodeInfoServiceImpl" class="com.iyeeku.ext.codeinfo.service.impl.PFCodeInfoServiceImpl">
+		<property name="pfCodeInfoDao" ref="pfCodeInfoDaoImpl"/>
+	</bean>
+	<bean id="pfCodeInfoDaoImpl" class="com.iyeeku.ext.codeinfo.dao.impl.PFCodeInfoDaoImpl"/>
+
+
+	<!-- 用户授权管理Service -->
+	<bean id="pfArcGrantServiceImpl" class="com.iyeeku.ext.grant.service.impl.PFArcGrantServiceImpl">
+		<property name="pfArcGrantDao" ref="pfArcGrantDaoImpl"/>
+	</bean>
+	<bean id="pfArcGrantDaoImpl" class="com.iyeeku.ext.grant.dao.impl.PFArcGrantDaoImpl"/>
+
+
+	<!-- 安全策略组 -->
+	<bean id="pfArcSecurityStrategyServiceImpl" class="com.iyeeku.ext.safeStrategy.service.impl.PFArcSecurityStrategyServiceImpl">
+		<property name="pfArcSecurityStrategyDao" ref="pfArcSecurityStrategyDaoImpl"/>
+	</bean>
+	<bean id="pfArcSecurityStrategyDaoImpl" class="com.iyeeku.ext.safeStrategy.dao.impl.PFArcSecurityStrategyDaoImpl"/>
+
 
 </beans>

@@ -9,6 +9,7 @@ import com.iyeeku.ext.common.arcuserauth.service.PFArcUserAuthService;
 import com.iyeeku.ext.common.arcuserauth.vo.PFArcUserAuthVO;
 import com.iyeeku.ext.online.service.PFOnlineService;
 import com.iyeeku.ext.online.vo.PFOnlineVO;
+import com.iyeeku.ext.safeStrategy.service.PFArcSecurityStrategyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,7 @@ public class IyeekuSessionServiceImpl implements IyeekuSessionService {
     private PFAuditLogService pfAuditLogService;
     private PFOnlineService pfOnlineService;
     private PFArcUserAuthService pfArcUserAuthService;
+    private PFArcSecurityStrategyService pfArcSecurityStrategyService;
 
     @Override
     public void createSessionInfo(String sessionId, IyeekuUserInfo userInfo) {
@@ -127,12 +129,12 @@ public class IyeekuSessionServiceImpl implements IyeekuSessionService {
 
     @Override
     public int getAllowedMaxSession() {
-        return 99999;
+        return 2;      //现在设置最大允许登陆会话为 2
     }
 
     @Override
     public boolean isRejectLoginMaxSession() {
-        return false;
+        return true;  // 默认开始限制
     }
 
     @Override
@@ -148,6 +150,28 @@ public class IyeekuSessionServiceImpl implements IyeekuSessionService {
     @Override
     public boolean existSessionInformation(String paramString) {
         return false;
+    }
+
+
+
+
+    //************** setter *********************
+
+
+    public void setPfAuditLogService(PFAuditLogService pfAuditLogService) {
+        this.pfAuditLogService = pfAuditLogService;
+    }
+
+    public void setPfOnlineService(PFOnlineService pfOnlineService) {
+        this.pfOnlineService = pfOnlineService;
+    }
+
+    public void setPfArcUserAuthService(PFArcUserAuthService pfArcUserAuthService) {
+        this.pfArcUserAuthService = pfArcUserAuthService;
+    }
+
+    public void setPfArcSecurityStrategyService(PFArcSecurityStrategyService pfArcSecurityStrategyService) {
+        this.pfArcSecurityStrategyService = pfArcSecurityStrategyService;
     }
 
 }

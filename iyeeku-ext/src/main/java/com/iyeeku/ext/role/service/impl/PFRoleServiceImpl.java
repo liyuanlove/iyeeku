@@ -10,23 +10,18 @@ import com.iyeeku.ext.staff.service.PFStaffService;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
 public class PFRoleServiceImpl implements PFRoleService {
 
     private final Logger logger = LoggerFactory.getLogger(PFRoleServiceImpl.class);
 
-    @Autowired
     private PFRoleDao pfRoleDao;
 
-    @Autowired
     private PFStaffService pfStaffService;
 
     @Override
@@ -90,4 +85,13 @@ public class PFRoleServiceImpl implements PFRoleService {
         this.logger.info("PFRoleServiceImpl deleteRole");
         this.pfRoleDao.deleteRole(jsbh);
     }
+
+    public void setPfRoleDao(PFRoleDao pfRoleDao) {
+        this.pfRoleDao = pfRoleDao;
+    }
+
+    public void setPfStaffService(PFStaffService pfStaffService) {
+        this.pfStaffService = pfStaffService;
+    }
+
 }

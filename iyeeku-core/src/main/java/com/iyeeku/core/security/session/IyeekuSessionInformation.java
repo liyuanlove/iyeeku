@@ -17,6 +17,7 @@ public class IyeekuSessionInformation extends SessionInformation {
     public void expireNow() {
         if (this.sessionRegistry == null){
             this.sessionRegistry = (IyeekuSessionRegistryImpl)ContextUtil.getBean("sessionRegistry");
+            this.sessionRegistry.setSessionToExpired(super.getSessionId());
         }
         super.expireNow();
     }

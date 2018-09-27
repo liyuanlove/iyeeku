@@ -10,20 +10,15 @@ import com.iyeeku.ext.function.vo.PFResRelationVO;
 import com.iyeeku.ext.function.vo.PFResUrlVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service
 public class PFResUrlServiceImpl implements PFResUrlService {
 
     private Logger logger = LoggerFactory.getLogger(PFResUrlServiceImpl.class);
 
-    @Autowired
     private PFResUrlDao pfResUrlDao;
 
-    @Autowired
     private PFResMenuDao pfResMenuDao;
 
     @Override
@@ -222,4 +217,14 @@ public class PFResUrlServiceImpl implements PFResUrlService {
     public List<PFResUrlVO> findMKRalationUrl(Map<String, String> map) {
         return this.pfResUrlDao.findMKRelationUrl(map);
     }
+
+
+    public void setPfResUrlDao(PFResUrlDao pfResUrlDao) {
+        this.pfResUrlDao = pfResUrlDao;
+    }
+
+    public void setPfResMenuDao(PFResMenuDao pfResMenuDao) {
+        this.pfResMenuDao = pfResMenuDao;
+    }
+
 }
