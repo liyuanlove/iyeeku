@@ -23,7 +23,7 @@
 
 <form name="loginForm" id="form1" method="post">
     <p>j_username: <input id="username" class="mini-textbox" name="j_username" /></p>
-    <p>j_password:  <input id="password" class="mini-password" name="j_password" /></p>
+    <p>j_password:  <input id="password" class="mini-password" name="j_password" onenter="Button_submit_onClick()" /></p>
     <input class="mini-hidden" name="j_usertype" value="StaffCode"/><!-- StaffCode , NotesID -->
 <%--    <input type="submit" value="Submit" />--%>
     <a class="mini-button" style="width: 228px;cursor: hand;" onclick="Button_submit_onClick(this)">登陆</a>

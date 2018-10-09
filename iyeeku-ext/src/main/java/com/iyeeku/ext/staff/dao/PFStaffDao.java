@@ -24,4 +24,6 @@ public interface PFStaffDao {
     public abstract void update(PFStaffVO staffVO);
 
     public abstract void delete(PFStaffVO staffVO);
+
+    public abstract List<Map> getStaffExportData();
 }

@@ -39,6 +39,10 @@ public class ContextUtil implements ApplicationContextAware {
     public static IyeekuUserInfo getLoginUser(){
         Object userInfo = null;
         SecurityContext securityContext = SecurityContextHolder.getContext();
+
+        securityContext.getAuthentication();
+        System.out.println(securityContext.getAuthentication());
+
         if ((securityContext != null) && (securityContext.getAuthentication() != null)){
             userInfo = securityContext.getAuthentication().getPrincipal();
             if ((userInfo instanceof IyeekuUserInfo)){

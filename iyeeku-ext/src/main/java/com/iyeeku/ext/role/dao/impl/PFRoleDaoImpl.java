@@ -30,6 +30,22 @@ public class PFRoleDaoImpl extends BaseDaoImpl implements PFRoleDao {
     }
 
     @Override
+    public List<PFRoleVO> findListAddedRole(String yhbh, String jsmc, int offSet, int pageSize) {
+        Map<String,String> map = new HashMap<>();
+        map.put("yhbh" , yhbh);
+        map.put("jsmc" , jsmc);
+        return this.queryAll_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findListAddedRole" ,map , offSet , pageSize);
+    }
+
+    @Override
+    public int findListAddedRoleCount(String yhbh, String jsmc) {
+        Map<String,String> map = new HashMap<>();
+        map.put("yhbh" , yhbh);
+        map.put("jsmc" , jsmc);
+        return this.queryOne_myBatis("com.iyeeku.ext.role.dao.IPFRoleDao.findListAddedRoleCount" , (Serializable) map);
+    }
+
+    @Override
     public List<PFRoleVO> findListNotAddedRole(String yhbh, String jsmc, int offSet, int pageSize) {
         Map<String,String> map = new HashMap<>();
         map.put("yhbh" , yhbh);

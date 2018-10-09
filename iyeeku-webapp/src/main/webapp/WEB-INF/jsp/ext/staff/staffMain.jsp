@@ -111,7 +111,7 @@
         </div>
 
         <div class="mini-fit">
-            <div id="datagrid_staff" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" borderStyle="border:0px" allowResize="true" multiSelect="false"
+            <div id="datagrid_staff" datafld="data" class="mini-datagrid" style="width:100%;height:100%;" borderStyle="border-left:0px;border-right:0px;" allowResize="true" multiSelect="false"
                  url="${pageContext.request.contextPath}/staff/list" onselectionchanged="onSelectionChanged()" onload="controlBtnState()" allowUnselect="false" sortMode="client"
                  allowResize="true" pageSize="10"
             >
@@ -398,6 +398,11 @@
             mini.alert("请先选择一条记录");
         }
     }
+    
+    function exportStaff() {
+        window.location = "/staff/exportStaffExcel";
+    }
+    
 
     var staffStates;
     $.getJSON("/directory/loadDict/staffState",null,function (data) {staffStates = data;});

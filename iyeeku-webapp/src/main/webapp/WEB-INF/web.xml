@@ -133,10 +133,12 @@
 
 
   <!-- 配置session超时时间，单位分钟 -->
+  <listener>
+    <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+  </listener>
   <session-config>
-    <session-timeout>20</session-timeout>
+    <session-timeout>10</session-timeout>
   </session-config>
-
 
 
 

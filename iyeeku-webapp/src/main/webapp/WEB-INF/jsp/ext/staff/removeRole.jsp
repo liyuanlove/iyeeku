@@ -16,7 +16,7 @@
 <body>
     <div class="mini-toolbar" style="text-align:left;padding-left: 10px;">
         <input id="yhbh" name="yhbh" class="mini-hidden">
-        <input id="jsmc" name="jsmc" width="160" class="mini-textbox" emptyText="请输入角色名称" onenter="" maxlength="64">
+        <input id="jsmc" name="jsmc" width="160" class="mini-textbox" emptyText="请输入角色名称" onenter="search()" maxlength="64">
         <a class="mini-button" iconCls="icon-search" id="searchBtn" style="margin-right: 10px;" onclick="search()">搜索</a>
     </div>
 
@@ -55,8 +55,54 @@
         grid.load({yhbh:data.yhbh});
     }
 
+    function search() {
+        var yhbh = mini.get("yhbh").getValue();
+        var jsmc = mini.get("jsmc").getValue();
+        grid.load({"yhbh":yhbh , "jsmc":jsmc});
+    }
+
     function turnPage() {
         mini.get("btnOk").disable();
+    }
+
+    function onSelectionChanged() {
+        var rows = grid.getSelecteds();
+        if(rows.length > 0){
+            mini.get("btnOk").enable();
+        }else{
+            mini.get("btnOk").disable();
+        }
+    }
+
+    function onOk() {
+        var rows = grid.getSelecteds();
+        var yhbh = mini.get("yhbh").getValue();
+
+        var jsbhList = [];
+        for ( var i = 0 , l = rows.length ; i < l ; i++){
+            var r = rows[i];
+            jsbhList.push(r.jsbh);
+        }
+        jsbhList = jsbhList.join(",");
+
+        mini.confirm("确定是否删除所选用户已拥有角色？", "确定？",
+            function (action) {
+                if (action == "ok") {
+                    $.ajax({
+                        url: "${pageContext.request.contextPath}/staff/comfirmRemoveRole",
+                        type: "post",
+                        data: { "jsbhList" : jsbhList , "yhbh" : yhbh } ,
+                        success: function (text) {
+                            CloseWindow("ok");
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR.responseText);
+                        }
+                    });
+                }
+            }
+        );
+
     }
 
 </script>
