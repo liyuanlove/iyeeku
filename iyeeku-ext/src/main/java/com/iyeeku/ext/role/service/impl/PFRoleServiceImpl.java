@@ -42,8 +42,13 @@ public class PFRoleServiceImpl implements PFRoleService {
 
     @Override
     public Map<String, Object> getListNotAddedRole(String yhbh, String jsmc, Pagination pagination) {
-        
-        return null;
+        List<PFRoleVO> list = this.pfRoleDao.findListNotAddedRole(yhbh , jsmc ,
+                pagination.getPageIndex() * pagination.getPageSize() , pagination.getPageSize());
+        int total = this.pfRoleDao.findListNotAddedRoleCount(yhbh , jsmc);
+        Map<String , Object> rtnMap = new HashMap<>();
+        rtnMap.put("data" , list);
+        rtnMap.put("total" , total);
+        return rtnMap;
     }
 
     @Override

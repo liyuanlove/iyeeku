@@ -13,6 +13,9 @@
           <element id="archive" name="iyeeku-ext-1.0-SNAPSHOT.jar">
             <element id="module-output" name="iyeeku-ext" />
           </element>
+          <element id="archive" name="iyeeku-monitor-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="iyeeku-monitor" />
+          </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.10.RELEASE" />

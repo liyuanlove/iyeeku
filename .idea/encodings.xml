@@ -4,7 +4,8 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iyeeku-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iyeeku-ext" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iyeeku-monitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iyeeku-test" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iyeeku-webapp" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iyeeku-webapp/src/main/webapp/WEB-INF/syndata.bat" charset="US-ASCII" />
   </component>
 </project>

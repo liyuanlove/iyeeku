@@ -126,6 +126,33 @@
 		WHERE rs.JSBH = #{VALUE} AND rs.JLZT = '1' AND s.JLZT = '1'
 	</select>
 
+	<select id="findListAddedRole" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
+		from PF_ROLE WHERE JLZT = '1' AND
+		JSBH IN ( select jsbh from PF_ROLE_STAFF where yhbh = #{yhbh,jdbcType=CHAR} and jlzt = '1')
+		<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc}||'%'</if>
+	</select>
+
+	<select id="findListAddedRoleCount" parameterType="java.util.HashMap" resultType="int">
+		select count(JSBH)
+		from PF_ROLE WHERE JLZT = '1' AND
+		JSBH IN ( select jsbh from PF_ROLE_STAFF where yhbh = #{yhbh,jdbcType=CHAR} and jlzt = '1')
+		<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc}||'%'</if>
+	</select>
+
+	<select id="findListNotAddedRole" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    	select JSBH, JSMC, JSLX, JSZT, JSMS, CJR, CJSJ, ZHXGR, ZHXGSJ, JSQZ, JLZT, KZZD1, KZZD2, KZZD3, KZZD4, KZZD5, KZZD6
+		from PF_ROLE WHERE JLZT = '1' AND
+    	JSBH NOT IN ( select jsbh from PF_ROLE_STAFF where yhbh = #{yhbh,jdbcType=CHAR} and jlzt = '1')
+    	<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc}||'%'</if>
+	</select>
+
+	<select id="findListNotAddedRoleCount" parameterType="java.util.HashMap" resultType="int">
+		select count(JSBH)
+		from PF_ROLE WHERE JLZT = '1' AND
+		JSBH NOT IN ( select jsbh from PF_ROLE_STAFF where yhbh = #{yhbh,jdbcType=CHAR} and jlzt = '1')
+		<if test="jsmc != null and jsmc != ''"> AND JSMC LIKE '%'||#{jsmc}||'%'</if>
+	</select>
 
 	
 </mapper>

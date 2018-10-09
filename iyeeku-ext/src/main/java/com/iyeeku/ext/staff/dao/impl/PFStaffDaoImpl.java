@@ -65,4 +65,9 @@ public class PFStaffDaoImpl extends BaseDaoImpl implements PFStaffDao {
         this.logger.info("PFStaffDaoImpl delete");
         this.delete_myBatis("com.iyeeku.ext.staff.dao.PFStaffDao.delete",staffVO);
     }
+
+    @Override
+    public List<Map> getStaffExportData() {
+        return this.queryAll_myBatis("com.iyeeku.ext.staff.dao.PFStaffDao.getStaffExportData");
+    }
 }

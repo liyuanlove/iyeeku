@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="iyeeku-core" />
         <module name="iyeeku-ext" />
+        <module name="iyeeku-monitor" />
         <module name="iyeeku-webapp" />
       </profile>
     </annotationProcessing>
@@ -17,6 +18,7 @@
       <module name="iyeeku-blog" target="1.8" />
       <module name="iyeeku-core" target="1.8" />
       <module name="iyeeku-ext" target="1.8" />
+      <module name="iyeeku-monitor" target="1.8" />
       <module name="iyeeku-test" target="1.8" />
       <module name="iyeeku-user" target="1.8" />
       <module name="iyeeku-webapp" target="1.8" />

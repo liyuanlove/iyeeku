@@ -20,6 +20,7 @@
     <sec:http pattern="/frame1/**/*.*" security="none"/>
     <sec:http pattern="/directory/**/*" security="none"/>
     <sec:http pattern="/favicon.ico" security="none"/>
+    <sec:http pattern="/iyeeku/api/*" security="none"/> <!-- 远程手机控制接口不设权限控制 -->
     <sec:http pattern="/WEB-INF/jsp/login" security="none"/>
     <!-- 登陆页面，登陆重定向页面，忘记密码页面不过滤 -->
     <sec:http pattern="/login/login" security="none"/>

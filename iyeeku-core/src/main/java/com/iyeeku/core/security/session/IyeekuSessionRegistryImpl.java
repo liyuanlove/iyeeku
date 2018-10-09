@@ -91,7 +91,6 @@ public class IyeekuSessionRegistryImpl implements SessionRegistry , ApplicationL
         if (this.logger.isTraceEnabled()){
             this.logger.debug("Removing session " + sessionId + " from set of registered sessions");
         }
-
         this.sessionService.removeSessionInformation(sessionId);
     }
 

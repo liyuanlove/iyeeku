@@ -19,6 +19,7 @@
 	<!-- 用户信息管理Service -->
 	<bean id="pfStaffServiceImpl" class="com.iyeeku.ext.staff.service.impl.PFStaffServiceImpl">
 		<property name="pfStaffDao" ref="pfStaffDaoImpl"/>
+		<property name="pfRoleDao" ref="pfRoleDaoImpl"/>
 	</bean>
 	<bean id="pfStaffDaoImpl" class="com.iyeeku.ext.staff.dao.impl.PFStaffDaoImpl"/>
 

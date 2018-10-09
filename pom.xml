@@ -12,6 +12,7 @@
         <module>iyeeku-webapp</module>
         <module>iyeeku-ext</module>
         <module>iyeeku-core</module>
+        <module>iyeeku-monitor</module>
     </modules>
 
     <properties>

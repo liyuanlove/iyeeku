@@ -108,7 +108,10 @@ public class IyeekuSessionServiceImpl implements IyeekuSessionService {
 
     @Override
     public void removeSessionInformation(String sessionId) {
+        //TODO  奇怪这里为什么取不到userInfo  , 为什么 securityContext.getAuthentication() 取值为 null
         IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+
+        //SecurityContextImpl securityContext = sess
 
         this.logger.info("session 销毁！\nsessionId : {}" , sessionId);
 
@@ -127,11 +130,19 @@ public class IyeekuSessionServiceImpl implements IyeekuSessionService {
         }
     }
 
+    /**
+     * 获取最大允许在线个数
+     * @return
+     */
     @Override
     public int getAllowedMaxSession() {
         return 2;      //现在设置最大允许登陆会话为 2
     }
 
+    /**
+     * 是否开启最大在线个数限制
+     * @return
+     */
     @Override
     public boolean isRejectLoginMaxSession() {
         return true;  // 默认开始限制

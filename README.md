@@ -38,6 +38,10 @@
 │ ├── /src/           # 代码夹
 │ │ ├── /java         # 源代码
 │ │ └── /resources    # 资源文件
+├── /iyeeku-monitor/  # 提供APP客户端远程监控服务器，个人电脑PC相关功能，以及系统相关监控信息
+│ ├── /src/           # 代码夹
+│ │ ├── /java         # 源代码
+│ │ └── /resources    # 资源文件
 ├── /iyeeku-webapp/   # web功能模块代码包
 │ ├── /src/           # 代码夹
 │ │ ├── /java         # 源代码

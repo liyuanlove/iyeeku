@@ -205,4 +205,15 @@
 		DELETE FROM PF_STAFF WHERE YHBH = #{yhbh,jdbcType=CHAR}
 	</delete>
 
+	<select id="getStaffExportData" resultType="java.util.HashMap">
+    	select s.RYBH,s.YHDLM,s.NOTESID,s.GYH,s.YHMC,s.XMQP,s.SSJG,s.SSJGDY,s.XB XBMZ,c1.mbtmz XB,
+    	s.YHLX YHLXMZ,c2.mbtmz YHLX,to_char(s.RZRQ,'YYYY-MM-DD') RZRQ,s.GRZJLX GRZJLXMZ,c4.mbtmz GRZJLX,s.SFZH,
+    	to_char(s.SR,'YYYY-MM-DD') SR,s.DHHM,s.YJ,s.DZ,s.YGZT YGZTMZ,c3.mbtmz YGZT,s.ZW
+    	FROM PF_STAFF s
+    	LEFT JOIN PF_CODEINFO c1 ON c1.mblxbh = s.xb and c1.sjlx = 'D09986B9A9FE65760E88455186CEA643'
+    	LEFT JOIN PF_CODEINFO c2 ON c2.mblxbh = s.yhlx and c2.sjlx = 'A2D66875A9FE657646138089B3EE0270'
+    	LEFT JOIN PF_CODEINFO c3 ON c3.mblxbh = s.ygzt and c3.sjlx = 'D095CD71A9FE65760E884551113B28C7'
+    	LEFT JOIN PF_CODEINFO c4 ON c4.mblxbh = s.grzjlx and c4.sjlx = 'A3F8CCB4A9FE657672325CF00704BE1C'
+	</select>
+
 </mapper>

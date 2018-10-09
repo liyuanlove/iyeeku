@@ -63,6 +63,13 @@
 	<aop:config>
 		<aop:pointcut id="serviceOperation" expression="execution(* *..*Service.*(..))" />
 		<aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" />
+
+		<!-- ref引用的切面类 -->
+<!--	<aop:aspect ref="pfRoleDaoImpl">
+			<aop:pointcut id="" expression="execution(* *..*Service.*(..))"/>
+			<aop:after-returning method=""/>
+		</aop:aspect>-->
+
 	</aop:config>
 
 </beans>

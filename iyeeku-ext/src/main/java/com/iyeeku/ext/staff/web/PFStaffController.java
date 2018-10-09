@@ -6,6 +6,8 @@ import com.iyeeku.core.util.JsonUtil;
 import com.iyeeku.core.vo.Pagination;
 import com.iyeeku.ext.auditlog.service.PFAuditLogService;
 import com.iyeeku.ext.role.service.PFRoleService;
+import com.iyeeku.ext.rolestaff.service.PFRoleStaffService;
+import com.iyeeku.ext.rolestaff.vo.PFRoleStaffVO;
 import com.iyeeku.ext.staff.service.PFStaffService;
 import com.iyeeku.ext.staff.vo.PFStaffVO;
 import org.slf4j.Logger;
@@ -20,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -50,6 +54,8 @@ public class PFStaffController {
     private PFStaffService pfStaffService;
     @Autowired
     private PFRoleService pfRoleService;
+    @Autowired
+    private PFRoleStaffService pfRoleStaffService;
     @Autowired
     private PFAuditLogService pfAuditLogService;
 
@@ -125,7 +131,7 @@ public class PFStaffController {
     @RequestMapping(value = "/listRole" , method = RequestMethod.POST , name = "用户查看角色信息列表查询")
     @ResponseBody
     public Map<String,Object> listRole(String yhbh,String jsmc,Pagination pagination){
-        return null;
+        return this.pfStaffService.getListAddedRole(yhbh,jsmc,pagination);
     }
 
     @RequestMapping(value = "/listNotAddedRole" , method = RequestMethod.POST , name = "用户未分配角色信息列表查询")
@@ -136,14 +142,38 @@ public class PFStaffController {
 
     @RequestMapping(value = "/comfirmAddRole" , method = RequestMethod.POST , name = "为用户分配角色")
     @ResponseBody
-    public void comfirmAddRole(){
-
+    public void comfirmAddRole(String jsbhList , String yhbh){
+        this.logger.info("为用户添加角色，角色编号：{ " + jsbhList + " }");
+        String[] ids = jsbhList.split(",");
+        for (String jsbh : ids){
+            if (!this.pfRoleStaffService.hasUnverifidRecord(yhbh,jsbh)){
+                PFRoleStaffVO roleStaffVO = new PFRoleStaffVO();
+                roleStaffVO.setJsbh(jsbh);
+                roleStaffVO.setYhbh(yhbh);
+                this.pfRoleStaffService.saveRoleStaff(roleStaffVO);
+            }
+        }
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("staff_management" , "03" , userInfo.getUserId() , userInfo.getUserIP() ,
+                userInfo.getUserId() , true , "为用户添加角色" , "用户编号：" + yhbh + "\n角色编号：" + jsbhList);
     }
 
     @RequestMapping(value = "/comfirmRemoveRole" , method = RequestMethod.POST , name = "删除给用户分配的角色")
     @ResponseBody
-    public void comfirmRemoveRole(){
-
+    public void comfirmRemoveRole(String jsbhList , String yhbh){
+        this.logger.info("删除用户已拥有的角色，角色编号：{ " + jsbhList + " }");
+        String[] ids = jsbhList.split(",");
+        for (String jsbh : ids){
+            if (this.pfRoleStaffService.hasUnverifidRecord(yhbh,jsbh)){
+                PFRoleStaffVO roleStaffVO = new PFRoleStaffVO();
+                roleStaffVO.setJsbh(jsbh);
+                roleStaffVO.setYhbh(yhbh);
+                this.pfRoleStaffService.deleteRoleStaff(roleStaffVO);
+            }
+        }
+        IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
+        this.pfAuditLogService.saveAuditLog("staff_management" , "04" , userInfo.getUserId() , userInfo.getUserIP() ,
+                userInfo.getUserId() , true , "删除用户角色" , "用户编号：" + yhbh + "\n角色编号：" + jsbhList);
     }
 
     @RequestMapping(value = "/enabledStaff" , method = RequestMethod.POST , name = "启用用户")
@@ -170,9 +200,38 @@ public class PFStaffController {
 
     }
 
-    @RequestMapping(value = "exportExcel" , method = RequestMethod.GET , name = "用户导出excel")
+    @RequestMapping(value = "exportStaffExcel" , method = RequestMethod.GET , name = "用户导出excel")
     @ResponseBody
-    public void exportExcel(HttpServletRequest request , HttpServletResponse response){
+    public void exportStaffExcel(HttpServletRequest request , HttpServletResponse response){
+
+        ServletOutputStream out = null;
+        String filedisplay = "用户基本信息.xlsx";
+
+        try {
+            filedisplay = URLEncoder.encode(filedisplay, "UTF-8");
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.debug(e.getMessage());
+        }
+
+        response.addHeader("Content-Disposition" , "attachment;filename=" + filedisplay);
+
+        try {
+            out = response.getOutputStream();
+            this.pfStaffService.exportStaffExcel(out);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.debug(e.getMessage());
+        }finally {
+            if (out != null){
+                try {
+                    out.close();
+                }catch (Exception e){
+                    e.printStackTrace();
+                    logger.debug(e.getMessage());
+                }
+            }
+        }
 
     }
     
