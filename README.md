@@ -14,6 +14,7 @@
 -   前端框架 [jQuery MiniUI](http://www.miniui.com/demo/#src=datagrid/celledit.html)
 -   服务器 [Apache](https://www.apache.org/) + [WebLogic](https://www.oracle.com/middleware/weblogic/index.html) 集群
 -   安全权限控制框架 [Spring-Security](http://spring.io/projects/spring-security)
+-   [CAS](https://www.apereo.org/projects/cas)单点登录
 
 ## 更新日志
 
