@@ -99,8 +99,17 @@ public class MobileRemoteController {
 
     }
 
+    @RequestMapping(value = "demo4" , method = { RequestMethod.POST , RequestMethod.GET } , name = "手机远程链接测试接口3")
+    @ResponseBody
     public ResponseMsg demo4(){
         return getTestResponseMsg();
     }
-    
+
+
+    @ResponseBody
+    public ResponseMsg demo5(@RequestBody(required = false) Map<String , Object> map){
+        return new ResponseMsg();
+    }
+
+
 }

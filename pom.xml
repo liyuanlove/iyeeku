@@ -13,6 +13,7 @@
         <module>iyeeku-ext</module>
         <module>iyeeku-core</module>
         <module>iyeeku-monitor</module>
+        <module>iyeeku-monitor-server</module>
     </modules>
 
     <properties>

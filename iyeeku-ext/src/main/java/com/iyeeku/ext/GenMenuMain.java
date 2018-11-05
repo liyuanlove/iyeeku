@@ -3,7 +3,7 @@ package com.iyeeku.ext;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test {
+public class GenMenuMain {
 
     /**
      * 开机总时长 （s）

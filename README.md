@@ -29,29 +29,33 @@
 ### 目录结构
 
 ```bash
-├── /dist/            # 项目打包输出目录 (github过滤)
-├── /build/           # 项目编译过程文件输出目录 (github过滤)
-├── /iyeeku-core/     # 项目搭建核心模块代码包
-│ ├── /src/           # 代码夹
-│ │ ├── /java         # 源代码
-│ │ └── /resources    # 资源文件
-├── /iyeeku-ext/      # 项目基础功能模块代码包（用户，角色，菜单，系统配置等基础功能）
-│ ├── /src/           # 代码夹
-│ │ ├── /java         # 源代码
-│ │ └── /resources    # 资源文件
-├── /iyeeku-monitor/  # 提供APP客户端远程监控服务器，个人电脑PC相关功能，以及系统相关监控信息
-│ ├── /src/           # 代码夹
-│ │ ├── /java         # 源代码
-│ │ └── /resources    # 资源文件
-├── /iyeeku-webapp/   # web功能模块代码包
-│ ├── /src/           # 代码夹
-│ │ ├── /java         # 源代码
-│ │ ├── /resources    # 资源文件
-│ │ ├── /webapp       # web根目录
-├── .build.xml        # Ant打包build.xml文件
-├── .init.sql         # 数据脚本
-├── .README.md        # README.md
-└── .pom.xml          # maven依赖配置文件
+├── /dist/                  # 项目打包输出目录 (github过滤)
+├── /build/                 # 项目编译过程文件输出目录 (github过滤)
+├── /iyeeku-core/           # 项目搭建核心模块代码包
+│ ├── /src/                 # 代码夹
+│ │ ├── /java               # 源代码
+│ │ └── /resources          # 资源文件
+├── /iyeeku-ext/            # 项目基础功能模块代码包（用户，角色，菜单，系统配置等基础功能）
+│ ├── /src/                 # 代码夹
+│ │ ├── /java               # 源代码
+│ │ └── /resources          # 资源文件
+├── /iyeeku-monitor/        # 提供APP客户端远程监控服务器，个人电脑PC相关功能，以及系统相关监控信息
+│ ├── /src/                 # 代码夹
+│ │ ├── /java               # 源代码
+│ │ └── /resources          # 资源文件
+├── /iyeeku-monitor-server  # 远程监控服务端java项目
+│ ├── /src/                 # 代码夹
+│ │ ├── /java               # 源代码
+│ │ └── /resources          # 资源文件
+├── /iyeeku-webapp/         # web功能模块代码包
+│ ├── /src/                 # 代码夹
+│ │ ├── /java               # 源代码
+│ │ ├── /resources          # 资源文件
+│ │ ├── /webapp             # web根目录
+├── .build.xml              # Ant打包build.xml文件
+├── .init.sql               # 数据脚本
+├── .README.md              # README.md
+└── .pom.xml                # maven依赖配置文件
 ```
 
 文件命名说明
