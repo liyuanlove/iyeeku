@@ -1,7 +1,11 @@
 package com.iyeeku.remote.api;
 
+import com.iyeeku.remote.service.IMobileRemoteService;
 import com.iyeeku.remote.vo.ResponseMsg;
 import com.iyeeku.remote.vo.TestVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/iyeeku/api")
+@RequestMapping(value = "/remoctr/")
 public class MobileRemoteController {
+
+    private Logger logger = LoggerFactory.getLogger(MobileRemoteController.class);
+
+    @Autowired
+    private IMobileRemoteService iMobileRemoteService;
 
     private ResponseMsg getTestResponseMsg(){
         ResponseMsg respMsg = new ResponseMsg();
@@ -32,6 +41,54 @@ public class MobileRemoteController {
         respMsg.setData(rtnMap);
         return respMsg;
     }
+
+    @RequestMapping(value = "getMonitoredMachineList" , method = {RequestMethod.POST , RequestMethod.GET} , name = "获取被监控机器列表信息")
+    @ResponseBody
+    public ResponseMsg getMonitoredMachineList(@RequestBody(required = false) Map<String , Object> param){
+        ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
+        if ("1".equals(respMsg.getCode())){ //参数合法
+            return respMsg;
+        }else{
+            String deviceId = String.valueOf(param.get("deviceId"));
+            this.logger.info("查询参数：设备ID：{} ==>> " + deviceId);
+            List<Map<String,Object>> list = this.iMobileRemoteService.findMonitoredMachineListByDeviceId(deviceId);
+            respMsg.formatSuccMsg();
+            Map<String,Object> rtnMap = new HashMap<>();
+            rtnMap.put("list" , list);
+            respMsg.setData(rtnMap);
+            return respMsg;
+        }
+    }
+
+    @RequestMapping(value = "getMonitoredMachineInfo" , method = {RequestMethod.POST , RequestMethod.GET} , name = "获取被监控的机器信息")
+    @ResponseBody
+    public ResponseMsg getMonitoredMachineInfo(@RequestBody(required = false) Map<String , Object> param){
+        ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
+        if ("1".equals(respMsg.getCode())){ //参数合法
+            return respMsg;
+        }else{
+            String deviceId = String.valueOf(param.get("deviceId"));
+            String zj = String.valueOf(param.get("zj"));
+
+            Map<String,Object> dataMap = this.iMobileRemoteService.findMonitoredMachineInfoByZj(zj);
+            respMsg.formatSuccMsg();
+            respMsg.setData(dataMap);
+
+            return respMsg;
+        }
+    }
+
+    @RequestMapping(value = "sendTaskToMachine" , method = {RequestMethod.POST , RequestMethod.GET} , name = "发送命令给机器")
+    @ResponseBody
+    public ResponseMsg sendTaskToMachine(@RequestBody(required = false) Map<String , Object> param){
+        ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
+        if ("1".equals(respMsg.getCode())){ //参数合法
+            return respMsg;
+        }else{
+            return respMsg;
+        }
+    }
+
 
     @RequestMapping(value = "demo0" , method = { RequestMethod.POST , RequestMethod.GET } , name = "手机远程链接测试接口0")
     @ResponseBody
@@ -111,5 +168,19 @@ public class MobileRemoteController {
         return new ResponseMsg();
     }
 
+
+    private ResponseMsg generateRespMsgAndCheckReqParam(Map<String,Object> param){
+        ResponseMsg respMsg = new ResponseMsg();
+        if (param == null || param.size() == 0){
+            respMsg.setCode("1");
+            respMsg.setMsg("参数错误，请求参数不能为空！");
+        }else{
+            if (param.get("deviceId") == null){
+                respMsg.setCode("1");
+                respMsg.setMsg("参数错误，设备ID不能为空！");
+            }
+        }
+        return respMsg;
+    }
 
 }

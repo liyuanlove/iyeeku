@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/iyeeku.iml" filepath="$PROJECT_DIR$/iyeeku.iml" />
       <module fileurl="file://$PROJECT_DIR$/iyeeku-core/iyeeku-core.iml" filepath="$PROJECT_DIR$/iyeeku-core/iyeeku-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iyeeku-develop/iyeeku-develop.iml" filepath="$PROJECT_DIR$/iyeeku-develop/iyeeku-develop.iml" />
       <module fileurl="file://$PROJECT_DIR$/iyeeku-ext/iyeeku-ext.iml" filepath="$PROJECT_DIR$/iyeeku-ext/iyeeku-ext.iml" />
       <module fileurl="file://$PROJECT_DIR$/iyeeku-monitor/iyeeku-monitor.iml" filepath="$PROJECT_DIR$/iyeeku-monitor/iyeeku-monitor.iml" />
       <module fileurl="file://$PROJECT_DIR$/iyeeku-monitor-server/iyeeku-monitor-server.iml" filepath="$PROJECT_DIR$/iyeeku-monitor-server/iyeeku-monitor-server.iml" />

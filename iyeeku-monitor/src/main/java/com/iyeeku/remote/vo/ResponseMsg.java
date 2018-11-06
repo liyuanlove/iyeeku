@@ -32,4 +32,9 @@ public class ResponseMsg {
         this.data = data;
     }
 
+    public void formatSuccMsg(){
+        this.code = "0";
+        this.msg = "请求成功";
+    }
+
 }

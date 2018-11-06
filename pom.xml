@@ -14,6 +14,7 @@
         <module>iyeeku-core</module>
         <module>iyeeku-monitor</module>
         <module>iyeeku-monitor-server</module>
+        <module>iyeeku-develop</module>
     </modules>
 
     <properties>

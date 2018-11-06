@@ -13,6 +13,9 @@
           <element id="archive" name="iyeeku-ext-1.0-SNAPSHOT.jar">
             <element id="module-output" name="iyeeku-ext" />
           </element>
+          <element id="archive" name="iyeeku-develop-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="iyeeku-develop" />
+          </element>
           <element id="archive" name="iyeeku-monitor-1.0-SNAPSHOT.jar">
             <element id="module-output" name="iyeeku-monitor" />
           </element>
