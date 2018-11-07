@@ -28,8 +28,12 @@ public class TestMain implements MachineStatusListener {
         return mss;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         TestMain aa = new TestMain();
+
+        aa.machineStatusEvent(null);
+
+        Thread.sleep(3000);
 
         MachineStatusService bb = aa.getMachineStatusService();
         System.out.println(bb);

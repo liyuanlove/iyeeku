@@ -134,6 +134,43 @@
 </div>
 
 <script type="text/javascript">
+
+    var websocket = null;
+
+    var url = 'ws://' + window.location.host + '/echo';  //配置文件中配的path有关
+
+    if(typeof(WebSocket) == "undefined"){
+        alert("您的浏览器不支持WebSocket");
+    }else {
+        websocket = new WebSocket(url);
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function (ev) {
+        console.info("WebSocket连接发生错误");
+    }
+
+    //连接成功建立的回调方法
+    websocket.onopen = function (ev) {
+        websocket.send("start talk...");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function (ev) {
+        console.info("服务器返回的消息：== >> " + ev.data);
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function (ev) {
+        console.info("WebSocket链接关闭");
+    }
+
+    function send() {
+        var message = "测试数据....";
+        websocket.send(message);
+    }
+
+
     mini.parse();
 
     var grid = mini.get("datagrid_staff");
@@ -282,28 +319,8 @@
     }
 
     function addStaff() {
-
-        var url = 'ws://' + window.location.host + '/echo';  //配置文件中配的path有关
-
-        if(typeof(WebSocket) == "undefined"){
-            console.info("您的浏览器不支持WebSocket");
-        }else {
-            var socket = new WebSocket(url);
-            socket.onopen = function () {
-                console.log("open...");
-                socket.send("start talk...")
-            }
-            socket.onmessage = function (e) {
-                console.log("服务器发来：" + e.data);
-                document.write("" + e.data + "<br/>");
-            }
-            socket.onclose = function () {
-                console.log("close...");
-            }
-        }
-
+        send();
         return;
-
         mini.open({
             url: "${pageContext.request.contextPath}/staff/form1",
             title: "新增员工", width: 620, height: 530,
