@@ -1,4 +1,4 @@
-package com.iyeeku.remote.dao;
+package com.iyeeku.monitor.remote.dao;
 
 import java.util.List;
 import java.util.Map;

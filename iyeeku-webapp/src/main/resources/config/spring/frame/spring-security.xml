@@ -19,6 +19,7 @@
     <sec:http pattern="/frame/**/*.*" security="none"/>
     <sec:http pattern="/frame1/**/*.*" security="none"/>
     <sec:http pattern="/directory/**/*" security="none"/>
+    <sec:http pattern="/echo" security="none"/>
     <sec:http pattern="/develop/**/*" security="none"/>
     <sec:http pattern="/favicon.ico" security="none"/>
     <sec:http pattern="/remoctr/*" security="none"/> <!-- 远程手机控制接口不设权限控制 -->

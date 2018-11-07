@@ -1,7 +1,7 @@
-package com.iyeeku.remote.dao.impl;
+package com.iyeeku.monitor.remote.dao.impl;
 
 import com.iyeeku.core.orm.impl.BaseDaoImpl;
-import com.iyeeku.remote.dao.IMobileRemoteDao;
+import com.iyeeku.monitor.remote.dao.IMobileRemoteDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -17,12 +17,12 @@ public class MobileRemoteDaoImpl extends BaseDaoImpl implements IMobileRemoteDao
     @Override
     public List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId) {
         this.logger.info("MobileRemoteDaoImpl findMonitoredMachineListByDeviceId");
-        return this.queryAll_myBatis("com.iyeeku.remote.dao.IMobileRemoteDao.findMonitoredMachineListByDeviceId",deviceId);
+        return this.queryAll_myBatis("com.iyeeku.monitor.remote.dao.IMobileRemoteDao.findMonitoredMachineListByDeviceId",deviceId);
     }
 
     @Override
     public Map<String, Object> findMonitoredMachineInfoByZj(String key) {
         this.logger.info("MobileRemoteDaoImpl findMonitoredMachineInfoByZj");
-        return this.queryOne_myBatis("com.iyeeku.remote.dao.IMobileRemoteDao.findMonitoredMachineInfoByZj",key);
+        return this.queryOne_myBatis("com.iyeeku.monitor.remote.dao.IMobileRemoteDao.findMonitoredMachineInfoByZj",key);
     }
 }

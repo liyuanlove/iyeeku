@@ -1,8 +1,8 @@
-package com.iyeeku.remote.api;
+package com.iyeeku.monitor.remote.api;
 
-import com.iyeeku.remote.service.IMobileRemoteService;
-import com.iyeeku.remote.vo.ResponseMsg;
-import com.iyeeku.remote.vo.TestVO;
+import com.iyeeku.monitor.remote.service.IMobileRemoteService;
+import com.iyeeku.monitor.remote.vo.ResponseMsg;
+import com.iyeeku.monitor.remote.vo.TestVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

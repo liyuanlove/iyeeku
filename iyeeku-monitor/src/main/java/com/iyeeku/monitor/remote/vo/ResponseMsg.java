@@ -1,4 +1,4 @@
-package com.iyeeku.remote.vo;
+package com.iyeeku.monitor.remote.vo;
 
 import java.util.Map;
 

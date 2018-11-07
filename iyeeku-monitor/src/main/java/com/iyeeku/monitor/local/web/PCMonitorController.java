@@ -1,4 +1,4 @@
-package com.iyeeku.monitor.web;
+package com.iyeeku.monitor.local.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

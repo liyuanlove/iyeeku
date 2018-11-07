@@ -282,6 +282,28 @@
     }
 
     function addStaff() {
+
+        var url = 'ws://' + window.location.host + '/echo';  //配置文件中配的path有关
+
+        if(typeof(WebSocket) == "undefined"){
+            console.info("您的浏览器不支持WebSocket");
+        }else {
+            var socket = new WebSocket(url);
+            socket.onopen = function () {
+                console.log("open...");
+                socket.send("start talk...")
+            }
+            socket.onmessage = function (e) {
+                console.log("服务器发来：" + e.data);
+                document.write("" + e.data + "<br/>");
+            }
+            socket.onclose = function () {
+                console.log("close...");
+            }
+        }
+
+        return;
+
         mini.open({
             url: "${pageContext.request.contextPath}/staff/form1",
             title: "新增员工", width: 620, height: 530,

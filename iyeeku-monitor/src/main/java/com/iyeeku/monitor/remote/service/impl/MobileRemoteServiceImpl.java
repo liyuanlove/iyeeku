@@ -1,7 +1,7 @@
-package com.iyeeku.remote.service.impl;
+package com.iyeeku.monitor.remote.service.impl;
 
-import com.iyeeku.remote.dao.IMobileRemoteDao;
-import com.iyeeku.remote.service.IMobileRemoteService;
+import com.iyeeku.monitor.remote.dao.IMobileRemoteDao;
+import com.iyeeku.monitor.remote.service.IMobileRemoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class MobileRemoteServiceImpl implements IMobileRemoteService{
+public class MobileRemoteServiceImpl implements IMobileRemoteService {
 
     private Logger logger = LoggerFactory.getLogger(MobileRemoteServiceImpl.class);
 

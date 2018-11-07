@@ -1,4 +1,4 @@
-package com.iyeeku.monitor.vo;
+package com.iyeeku.monitor.local.vo;
 
 import com.iyeeku.core.vo.BaseVO;
 

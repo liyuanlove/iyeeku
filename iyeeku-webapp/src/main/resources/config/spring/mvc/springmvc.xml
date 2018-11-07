@@ -35,8 +35,8 @@
 	<context:component-scan base-package="com.iyeeku.ext.**.web"></context:component-scan>
 
 	<context:component-scan base-package="com.iyeeku.develop.web"></context:component-scan>
-	<context:component-scan base-package="com.iyeeku.monitor.web"></context:component-scan>
-	<context:component-scan base-package="com.iyeeku.remote.api"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.monitor.local.web"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.monitor.remote.api"></context:component-scan>
 
 
 	<!--
