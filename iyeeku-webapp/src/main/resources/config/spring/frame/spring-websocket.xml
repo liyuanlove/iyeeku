@@ -8,10 +8,12 @@
        http://www.springframework.org/schema/websocket
        http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd">
 
-    <bean id="remoteMsgNotifWebsocket" class="com.iyeeku.monitor.websocket.RemoteMsgNotificationHandler" />
+    <bean id="remoteMsgNotifWebsocket" class="com.iyeeku.monitor.websocket.RemoteMsgNotificationHandler">
+        <!--<property name="iNotificationMsgService" ref="notificationMsgServiceImpl"/>-->
+    </bean>
 
     <websocket:handlers>
-        <websocket:mapping path="/echo" handler="remoteMsgNotifWebsocket"/>
+        <websocket:mapping path="/machineStatus/listener" handler="remoteMsgNotifWebsocket"/>
         <websocket:handshake-interceptors>
             <bean class="com.iyeeku.monitor.websocket.RemoteMsgNotificationInterceptor" />
         </websocket:handshake-interceptors>

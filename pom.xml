@@ -422,6 +422,19 @@
             <version>5.9.0</version>
         </dependency>-->
 
+        <!-- activemq -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+            <version>5.12.1</version>
+        </dependency>
+
+
         <!-- ************************ excel 相关操作 ************************** -->
         <!-- 解析excel的jar包，用于2003版 excel -->
         <dependency>

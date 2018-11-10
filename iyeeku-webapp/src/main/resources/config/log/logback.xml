@@ -81,8 +81,11 @@
         <!--<appender-ref ref="STDOUT"/>-->
     </logger>
 
-    <logger name="com.mchange.v2.c3p0" level="ERROR"></logger>
-    <logger name="com.mchange.v2.resourcepool" level="ERROR"></logger>
+    <!-- 一些检测日志，总是循环打印，烦人，先屏蔽掉 -->
+    <logger name="com.mchange.v2.c3p0" level="ERROR"/>
+    <logger name="com.mchange.v2.resourcepool" level="ERROR"/>
+    <logger name="org.apache.activemq.transport" level="ERROR"/>
+
 
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>

@@ -12,6 +12,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-co
 		value=".*Page$" /> </properties> -->
 	
 	<settings>
+
+		<!--解决，查询返回结果含null没有对应字段值问题-->
+		<setting name="callSettersOnNulls" value="true"/>
+
 		<!-- 设置超时时间，它决定驱动等待一个数据库响应的时间 -->
 		<setting name="defaultStatementTimeout" value="60000" />
 		<!-- 启用或禁用 缓存 , 如果这里禁用了缓存，则整合好的ehcache 将会失效!!!!!! -->

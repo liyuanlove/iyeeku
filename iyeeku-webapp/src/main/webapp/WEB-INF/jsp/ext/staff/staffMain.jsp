@@ -137,7 +137,8 @@
 
     var websocket = null;
 
-    var url = 'ws://' + window.location.host + '/echo';  //配置文件中配的path有关
+    var url = 'ws://' + window.location.host + '/machineStatus/listener';  //配置文件中配的path有关
+    console.info(url);
 
     if(typeof(WebSocket) == "undefined"){
         alert("您的浏览器不支持WebSocket");
@@ -152,21 +153,23 @@
 
     //连接成功建立的回调方法
     websocket.onopen = function (ev) {
-        websocket.send("start talk...");
+        websocket.send("Listener");
     }
 
     //接收到消息的回调方法
     websocket.onmessage = function (ev) {
         console.info("服务器返回的消息：== >> " + ev.data);
+        //websocket.send("Listener");
     }
 
     //连接关闭的回调方法
     websocket.onclose = function (ev) {
         console.info("WebSocket链接关闭");
+        //websocket.close();
     }
 
     function send() {
-        var message = "测试数据....";
+        var message = "\nhello iyeeku websocket....\n";
         websocket.send(message);
     }
 
@@ -339,6 +342,8 @@
     }
 
     function editStaff() {
+        websocket.close();
+        return;
         var row = grid.getSelected();
         if (row){
             mini.open({

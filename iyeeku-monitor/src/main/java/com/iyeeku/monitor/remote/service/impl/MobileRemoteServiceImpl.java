@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,19 @@ public class MobileRemoteServiceImpl implements IMobileRemoteService {
     }
 
     @Override
-    public Map<String, Object> findMonitoredMachineInfoByZj(String key) {
-        return this.iMobileRemoteDao.findMonitoredMachineInfoByZj(key);
+    public Map<String, Object> findMonitoredMachineInfoByZj(String zj,String deviceId) {
+        Map<String,String> param = new HashMap<>();
+        param.put("zj" , zj);
+        param.put("sbbh" , deviceId);
+        return this.iMobileRemoteDao.findMonitoredMachineInfoByMap(param);
     }
+
+    @Override
+    public void updateMachineStatus(String zj, String zt) {
+        Map<String,String> param = new HashMap<>();
+        param.put("zj" , zj);
+        param.put("zt",zt);
+        this.iMobileRemoteDao.updateMachineStatus(param);
+    }
+
 }

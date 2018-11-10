@@ -3,11 +3,19 @@
 <mapper namespace="com.iyeeku.monitor.remote.dao.IMobileRemoteDao">
 
     <select id="findMonitoredMachineListByDeviceId" parameterType="java.lang.String" resultType="java.util.HashMap">
-        select zj,jqbh,macdz,dnmc,czxt,jqzxzt from PC_MONITOR
+        select a.zj,a.jqbh,a.macdz,a.dnmc,a.czxt,a.jbpz,a.ip,a.zt,a.lb from IYEEKU_MACHINE_INFO a
+        left join IYEEKU_MACHINE_ACCESS_MONITOR b on a.zj = b.sqjqbh
+        where b.sbbh = #{VALUE}  and b.sfyxjk = '1'
     </select>
 
-    <select id="findMonitoredMachineInfoByZj" parameterType="java.lang.String" resultType="java.util.HashMap">
-        select zj,jqbh,macdz,dnmc,czxt,jqzxzt from PC_MONITOR WHERE zj = #{VALUE}
+    <select id="findMonitoredMachineInfoByMap" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+      select a.zj,a.jqbh,a.macdz,a.dnmc,a.czxt,a.jbpz,a.ip,a.zt,a.lb from IYEEKU_MACHINE_INFO a
+      left join IYEEKU_MACHINE_ACCESS_MONITOR b on a.zj = b.sqjqbh
+      where a.zj = #{zj} and b.sbbh = #{sbbh} and b.sfyxjk = '1'
     </select>
+
+    <update id="updateMachineStatus" parameterType="java.util.HashMap">
+        UPDATE IYEEKU_MACHINE_INFO SET zt = #{zt} WHERE zj = #{zj}
+    </update>
 
 </mapper>

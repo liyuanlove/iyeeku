@@ -14,7 +14,7 @@ import java.util.Map;
 public class RemoteMsgNotificationInterceptor implements IyeekuHandshakeInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(RemoteMsgNotificationInterceptor.class);
-
+    
     /**
      *初次握手前
      */

@@ -30,6 +30,10 @@ public class BaseInit {
                 //加载系统基础缓存
                 AppBaseCacheUtil.initAppBaseCache();
 
+                // 清除在线列表
+                AppBaseCacheUtil.clearOnline();
+
+
                 //加载缓存jdbcTemplate
                 //IBaseDao baseDao = ctx.getBean(BaseDaoImpl.class);
                 //CacheManager cacheManager = (CacheManager)ctx.getBean("ehCacheManager");

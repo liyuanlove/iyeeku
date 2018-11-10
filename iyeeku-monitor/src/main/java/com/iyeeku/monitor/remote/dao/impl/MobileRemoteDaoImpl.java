@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,14 @@ public class MobileRemoteDaoImpl extends BaseDaoImpl implements IMobileRemoteDao
     }
 
     @Override
-    public Map<String, Object> findMonitoredMachineInfoByZj(String key) {
-        this.logger.info("MobileRemoteDaoImpl findMonitoredMachineInfoByZj");
-        return this.queryOne_myBatis("com.iyeeku.monitor.remote.dao.IMobileRemoteDao.findMonitoredMachineInfoByZj",key);
+    public Map<String, Object> findMonitoredMachineInfoByMap(Map<String,String> map){
+        this.logger.info("MobileRemoteDaoImpl findMonitoredMachineInfoByMap");
+        return this.queryOne_myBatis("com.iyeeku.monitor.remote.dao.IMobileRemoteDao.findMonitoredMachineInfoByMap",(Serializable) map);
+    }
+
+    @Override
+    public void updateMachineStatus(Map<String, String> map) {
+        this.logger.info("MobileRemoteDaoImpl updateMachineStatus");
+        this.update_myBatis("com.iyeeku.monitor.remote.dao.IMobileRemoteDao.updateMachineStatus",(Serializable) map);
     }
 }

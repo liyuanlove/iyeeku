@@ -51,6 +51,14 @@ public class AppBaseCacheUtil {
         logger.info("基础缓存初始化结束...");
     }
 
+
+    public static void clearOnline() throws Exception{
+        logger.info("清除用户在线列表");
+        String sql = "delete FROM pf_online";
+        jdbcTemplate.execute(sql);
+        logger.info("用户在线列表清除成功....");
+    }
+
     private static List<Map<String,Object>> walkMenuTreeData(List<Map<String , Object>> list){
         String sql = "SELECT cdbh,cdmc,cdtp,cdurl FROM PF_RESMENU WHERE sjcdbh = ? order by cdsxh asc";
         List<Map<String,Object>> rtnList = new ArrayList<>();

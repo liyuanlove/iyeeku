@@ -7,10 +7,11 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<context:component-scan base-package="com.iyeeku.core.orm.impl"></context:component-scan>
-	<context:component-scan base-package="com.iyeeku.**.dao.impl"></context:component-scan>
-	<context:component-scan base-package="com.iyeeku.**.service.impl"></context:component-scan>
-	<context:component-scan base-package="com.iyeeku.core.cache"></context:component-scan>
+	<context:component-scan base-package="com.iyeeku.core.orm.impl"/>
+	<context:component-scan base-package="com.iyeeku.**.dao.impl"/>
+	<context:component-scan base-package="com.iyeeku.**.service.impl"/>
+	<context:component-scan base-package="com.iyeeku.core.cache"/>
+	<context:component-scan base-package="com.iyeeku.monitor.util"/>
 
 	<bean class="com.iyeeku.core.context.ContextUtil"/>
 

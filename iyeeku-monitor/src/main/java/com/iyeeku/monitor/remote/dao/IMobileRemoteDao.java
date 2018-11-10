@@ -7,6 +7,8 @@ public interface IMobileRemoteDao {
 
     public abstract List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId);
 
-    public Map<String, Object> findMonitoredMachineInfoByZj(String key);
+    public abstract Map<String, Object> findMonitoredMachineInfoByMap(Map<String,String> map);
+
+    public abstract void updateMachineStatus(Map<String,String> map);
 
 }
